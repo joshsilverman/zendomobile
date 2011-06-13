@@ -1,9 +1,9 @@
-var explore = {
-	tests_enabled:false
-};
+//var explore = {
+//	tests_enabled:false
+//};
 
 Ti.UI.setBackgroundColor('#fff');
-var explore_win = Ti.UI.currentWindow;
+var win = Ti.UI.currentWindow;
 
 folders = [];
 
@@ -23,12 +23,14 @@ function getFolders() {
 			alert(E);
 		}
 		
-		if (explore.tests_enabled == false) {
-			start();
-		}
+		//if (explore_win.tests_enabled == false) {
+		//	
+		//}
+		start();
 		
 	}
 	xhr.send();
+
 }
 
 function createFolderRow(name){
@@ -69,7 +71,7 @@ function start(){
 		});
 
 		new_win.open();
-		explore_win.visible = false;
+		win.visible = false;
 	});
 	
 	var settings = Ti.UI.createButton({
@@ -79,8 +81,8 @@ function start(){
 		height:40
 	});
 
-	explore_win.add(lists);
-	explore_win.add(settings);
+	win.add(lists);
+	win.add(settings);
 }
 
-Ti.include('/test/tests.js');
+//Ti.include('/test/tests.js');

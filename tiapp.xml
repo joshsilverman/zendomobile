@@ -7,7 +7,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-<id>com.jason.summer.test</id>
+<id>com.mobile.reviewer</id>
 <name>Zen.do</name>
 <version>1.0</version>
 <publisher>jasonurton</publisher>

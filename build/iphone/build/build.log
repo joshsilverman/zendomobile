@@ -5,7 +5,7 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 06/10/11 15:58
+Starting build at 06/13/11 09:50
 
 Build details:
 
@@ -19,7 +19,7 @@ Script arguments:
    simulator
    4.2
    /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do
-   com.jason.summer.test
+   com.mobile.reviewer
    Zen.do
    iphone
    iphone
@@ -36,7 +36,7 @@ writing contents of /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/
 
 TI_VERSION=1.6.2
 TI_SDK_DIR=/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
-TI_APPID=com.jason.summer.test
+TI_APPID=com.mobile.reviewer
 OTHER_LDFLAGS[sdk=iphoneos4*]=$(inherited) -weak_framework iAd
 OTHER_LDFLAGS[sdk=iphonesimulator4*]=$(inherited) -weak_framework iAd
 #include "module"

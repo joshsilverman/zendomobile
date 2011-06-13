@@ -237,9 +237,10 @@ function reviewComplete() {
 }
 
 function snapBack(){
-	Ti.API.debug("Width:" + prompt.width);
+	Ti.API.debug("Width: " + prompt.width);
 	prompt.left = Math.round((( Ti.Platform.displayCaps.platformWidth - prompt.width ) / 2 ))
 	card.left = 10;
+	//card.
 	flip.left = 110;
 }
 
@@ -261,11 +262,18 @@ function start(){
 	});
 	
 	win.addEventListener('touchmove', function(e){
-		//Ti.API.debug(e.x);
-		//card.left = e.x - x_start;
-		//prompt.left = e.x - x_start;
-		//answer.left = e.x - x_start;
-		//flip.left =  e.x - x_start;
+		Ti.API.debug(e.x);
+		var deltax = e.x - x_start;
+	    olt = olt.translate(deltaX,0,0);
+	    card.animate({transform: olt, duration: 100}); 
+
+		//cardx = e.x + card.animatedCenter.x - card.width/2;   //card.card.left + (e.x - x_start);
+		//promptx = e.x + prompt.animatedCenter.x - prompt.width/2; //prompt.left + (e.x - x_start);
+		//answerx = e.x + answer.animatedCenter.x - answer.width/2; //answer.left + (e.x - x_start);
+		//flipx =  e.x + flip.animatedCenter.x - flip.width/2; //flip.left + (e.x - x_start);
+		
+		//card.animate({center:{x:cardx}, duration:1});
+		
 	});
 	
 	win.addEventListener('touchend', function(e){
@@ -278,7 +286,10 @@ function start(){
 				//card.animate({transition:Ti.UI.iPhone.AnimationStyle.CURL_UP});
 
 			}
+			
 		}
+		
+		snapBack();
 	});
 	
 	showCurrentCard();
