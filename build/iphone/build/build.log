@@ -69,3 +69,15 @@ Generated the following stylecode code:
 	</dict>
 </plist>
 Finishing build
+
+Exception detected in script:
+Traceback (most recent call last):
+  File "/Library/Application Support/Titanium/mobilesdk/osx/1.6.2/iphone/builder.py", line 1201, in main
+    os.waitpid(sim.pid,0)
+  File "/Library/Application Support/Titanium/mobilesdk/osx/1.6.2/iphone/builder.py", line 1149, in handler
+    kill_simulator()
+  File "/Library/Application Support/Titanium/mobilesdk/osx/1.6.2/iphone/builder.py", line 74, in kill_simulator
+    run.run(['/usr/bin/killall',"iPhone Simulator"],True)
+  File "/Library/Application Support/Titanium/mobilesdk/osx/1.6.2/iphone/run.py", line 6, in run
+    sys.stdout.flush()
+IOError: [Errno 32] Broken pipe
