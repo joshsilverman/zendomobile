@@ -5,7 +5,7 @@ var win = Ti.UI.createWindow({
 
 win.open();
 
-
+Ti.API.debug('YOOOOOOOO');
 //Ti.include('urbanairship.js');
  
 //UrbanAirship.key='JRVif0K0RRCPk6sytmkMcQ';
