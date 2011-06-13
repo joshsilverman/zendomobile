@@ -29,7 +29,7 @@ function createFolderRow(name){
 	var row = Ti.UI.createTableViewRow({}); 
 
     var image = Ti.UI.createImageView({
-    	image:'unchecked.png',
+    	image:'images/unchecked.png',
     	left: 10,
     	touchEnabled:true,
     	height:25,
@@ -40,10 +40,10 @@ function createFolderRow(name){
     image.addEventListener('click', function(e){
     	if (image.id == 'unchecked') {
     		image.id = 'checked';
-    		image.image = 'checked.png';
+    		image.image = 'images/checked.png';
     	} else {
     		image.id = 'unchecked';
-    		image.image = 'unchecked.png';
+    		image.image = 'images/unchecked.png';
     	}
     	
     });

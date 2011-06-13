@@ -37,7 +37,7 @@ function createFolderRow(name){
 	var row = Ti.UI.createTableViewRow({}); 
 
 	var image = Ti.UI.createImageView({
-		image:'folder.png', 
+		image:'images/folder.png', 
 		left: 10,
 		width:50,
 		height:50

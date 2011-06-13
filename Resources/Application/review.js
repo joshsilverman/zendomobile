@@ -41,74 +41,26 @@ function getCards(){
 }
 
 cards = [];
-cardViews = [];
 getCards();
 index = 0;
 
-function createCard(prompt, answer) {
-	
-	var cardView = Ti.UI.createView({
-		width:300,
-		height:300
-	});
-	
-	var cardBackground = Ti.UI.createImageView({
-		image: 'images/card.png',
-		width:300,
-		height:300,
-		top:0
-	});
-	
-	var promptLabel = Ti.UI.createLabel({
-		text:"",
-		top:62,
-		height:50,
-		textAlign:'center'
-	});
-	
-	var answerLabel = Ti.UI.createLabel({
-		text:"",
-		top:175,
-		height:75,
-		width:275,
-		textAlign:'center',
-		opacity:0
-	});
-	
-	var flipButton = Ti.UI.createButton({
-		title:'Show',
-		width:100,
-		height:50,
-		top:185,
-		index:0
-	});
-	
-	cardView.add(cardBackground);
-	cardView.add(promptLabel);
-	cardView.add(answerLabel);
-	cardView.add(flipButton);
-	
-	return cardView;
-}
-
 function createUI() {
-	//scrollView = Ti.UI.createScrollableView({});
 	
-	cardBackground = Ti.UI.createImageView({
-		image: 'images/card.png',
+	card = Ti.UI.createImageView({
+		image: 'card.png',
 		width:300,
 		height:300,
 		top:0
 	});
 	
-	promptLabel = Ti.UI.createLabel({
+	prompt = Ti.UI.createLabel({
 		text:"",
 		top:62,
 		height:50,
 		textAlign:'center'
 	});
 	
-	answerLabel = Ti.UI.createLabel({
+	answer = Ti.UI.createLabel({
 		text:"",
 		top:175,
 		height:75,
@@ -117,18 +69,13 @@ function createUI() {
 		opacity:0
 	});
 	
-	flipButton = Ti.UI.createButton({
+	flip = Ti.UI.createButton({
 		title:'Show',
 		width:100,
 		height:50,
 		top:185,
 		index:0
 	});
-	
-	//for (i in cards) {
-	//	cardViews.push(createCard(cards[i].prompt, cards[i].answer));
-	//	scrollView.add(cardViews[i]);
-	//}
 	
 	button_animation = Titanium.UI.createAnimation({
 		curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
@@ -180,7 +127,7 @@ function createUI() {
 	
 	for (i in buttons) { buttons[i].addEventListener('click', grade_click); }
 	
-	flipButton.addEventListener('click', fadeInOnFlip);
+	flip.addEventListener('click', fadeInOnFlip);
 	
 }
 
@@ -200,10 +147,10 @@ function grade_click(e) {
 	
 function fadeInOnFlip(e) {
 	cards[index].flipped = true;
-	flipButton.hide();
+	flip.hide();
 	for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
-	answerLabel.show();
-	answerLabel.animate(button_animation);
+	answer.show();
+	answer.animate(button_animation);
 }
 
 function showCurrentCard(){
@@ -212,8 +159,8 @@ function showCurrentCard(){
 	if (cards[index] != null) {
 		
 		if (cards[index].flipped == false) {
-			answerLabel.opacity = 0;
-			answerLabel.hide();
+			answer.opacity = 0;
+			answer.hide();
 						
 			for (i in buttons) { 
 				buttons[i].backgroundColor = 'fff'; 
@@ -221,21 +168,21 @@ function showCurrentCard(){
 				buttons[i].hide(); 
 			}
 			
-			promptLabel.text = cards[index].prompt;
-			answerLabel.text = cards[index].answer;
+			prompt.text = cards[index].prompt;
+			answer.text = cards[index].answer;
 			
-			flipButton.show();
-			promptLabel.show();
+			flip.show();
+			prompt.show();
 			
 		} else {
-			promptLabel.text = cards[index].prompt;
-			answerLabel.text = cards[index].answer;
+			prompt.text = cards[index].prompt;
+			answer.text = cards[index].answer;
 			
-			flipButton.hide();
+			flip.hide();
 			
-			promptLabel.show();
-			answerLabel.opacity = 1;
-			answerLabel.show();
+			prompt.show();
+			answer.opacity = 1;
+			answer.show();
 			
 			for (i in buttons) { 
 				buttons[i].opacity = 1; 
@@ -282,19 +229,19 @@ function swipe(e){
 }
 
 function reviewComplete() {
-	cardBackground.hide();
-	promptLabel.hide();
-	answerLabel.hide();
-	flipButton.hide();
+	card.hide();
+	prompt.hide();
+	answer.hide();
+	flip.hide();
 	for (i in buttons) { buttons[i].hide(); }
 }
 
 function snapBack(){
-	Ti.API.debug("Width: " + promptLabel.width);
-	promptLabel.left = Math.round((( Ti.Platform.displayCaps.platformWidth - promptLabel.width ) / 2 ))
-	cardBackground.left = 10;
+	Ti.API.debug("Width: " + prompt.width);
+	prompt.left = Math.round((( Ti.Platform.displayCaps.platformWidth - prompt.width ) / 2 ))
+	card.left = 10;
 	//card.
-	flipButton.left = 110;
+	flip.left = 110;
 }
 
 function start(){
@@ -305,13 +252,11 @@ function start(){
 		buttons[i].hide();	
 	}
 	
-	win.add(cardBackground);
-	win.add(promptLabel);
-	win.add(answerLabel);
-	win.add(flipButton);
+	win.add(card);
+	win.add(prompt);
+	win.add(answer);
+	win.add(flip);
 	
-	//win.add(scrollView);
-		
 	win.addEventListener('touchstart', function (e){
 		x_start = e.x;
 	});
@@ -320,7 +265,7 @@ function start(){
 		Ti.API.debug(e.x);
 		var deltax = e.x - x_start;
 	    olt = olt.translate(deltaX,0,0);
-	    cardBackground.animate({transform: olt, duration: 100}); 
+	    card.animate({transform: olt, duration: 100}); 
 
 		//cardx = e.x + card.animatedCenter.x - card.width/2;   //card.card.left + (e.x - x_start);
 		//promptx = e.x + prompt.animatedCenter.x - prompt.width/2; //prompt.left + (e.x - x_start);
