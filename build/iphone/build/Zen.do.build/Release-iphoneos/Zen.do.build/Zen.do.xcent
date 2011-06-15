@@ -3,12 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>LJ56FLDQXB.com.jason.summer.test</string>
+	<string>2WV29Y95K7.zen.do.mobile</string>
+	<key>aps-environment</key>
+	<string>development</string>
 	<key>get-task-allow</key>
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>LJ56FLDQXB.*</string>
+		<string>2WV29Y95K7.*</string>
 	</array>
 </dict>
 </plist>
