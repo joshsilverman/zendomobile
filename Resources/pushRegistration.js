@@ -21,15 +21,19 @@ function register() {
     	error:function(e) {
       	Ti.API.warn("push notifications disabled: "+e);
     	},
+    	
     	callback:function(e) {
-      	var a = Ti.UI.createAlertDialog({
-        	title:'New Message',
-        	message:e.data.alert
-      	});
-      	a.show();
+      		var a = Ti.UI.createAlertDialog({
+        		title:'New Message',
+        		message:e.data.alert
+      		});
+      		a.show();
     	}
-  	});  
+    	
+  	});
+  	
   	Ti.API.info('registered urban airship');
+  	
 };
  
 

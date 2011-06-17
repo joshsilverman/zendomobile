@@ -61,14 +61,14 @@ function createCard(prompt, answer) {
 	
 	var promptLabel = Ti.UI.createLabel({
 		text:"",
-		top:62,
+		top:82,
 		height:50,
 		textAlign:'center'
 	});
 	
 	var answerLabel = Ti.UI.createLabel({
 		text:"",
-		top:175,
+		top:195,
 		height:75,
 		width:275,
 		textAlign:'center',
@@ -92,25 +92,32 @@ function createCard(prompt, answer) {
 }
 
 function createUI() {
-	//scrollView = Ti.UI.createScrollableView({});
+	
+	cardNumber = Ti.UI.createLabel({
+		text : (index + 1) + " / " + cards.length, 
+		top : 0,
+		left : win.width - 50,
+		height : 50,
+		width : 275
+	});
 	
 	cardBackground = Ti.UI.createImageView({
 		image: 'images/card.png',
 		width:300,
 		height:300,
-		top:0
+		top:20
 	});
 	
 	promptLabel = Ti.UI.createLabel({
 		text:"",
-		top:62,
+		top:82,
 		height:50,
 		textAlign:'center'
 	});
 	
 	answerLabel = Ti.UI.createLabel({
 		text:"",
-		top:175,
+		top:195,
 		height:75,
 		width:275,
 		textAlign:'center',
@@ -121,7 +128,7 @@ function createUI() {
 		title:'Show',
 		width:100,
 		height:50,
-		top:185,
+		top:205,
 		index:0
 	});
 	
@@ -184,7 +191,6 @@ function createUI() {
 	
 }
 
-
 function grade_click(e) {
 	//Ti.API.debug("Card " + cards[index].prompt + " set to: " + e.source.value);
 	cards[index].grade = e.source.value;		
@@ -208,6 +214,7 @@ function fadeInOnFlip(e) {
 
 function showCurrentCard(){
 	snapBack();
+	cardNumber.text = (index + 1) + " / " + cards.length
 
 	if (cards[index] != null) {
 		
@@ -216,7 +223,7 @@ function showCurrentCard(){
 			answerLabel.hide();
 						
 			for (i in buttons) { 
-				buttons[i].backgroundColor = 'fff'; 
+				buttons[i].color = 'gray'; 
 				buttons[i].opacity = 0;
 				buttons[i].hide(); 
 			}
@@ -240,23 +247,23 @@ function showCurrentCard(){
 			for (i in buttons) { 
 				buttons[i].opacity = 1; 
 				buttons[i].show(); 
-				buttons[i].backgroundColor = '#fff'
+				buttons[i].color = 'gray'
 			}
 			
 			if (cards[index].grade != 0) {
 				
 				switch (cards[index].grade) {
 					case 1:
-						button_1.backgroundColor = 'blue'
+						button_1.color = '395CA8';
 						break;
 					case 2:
-						button_2.backgroundColor = 'blue'
+						button_2.color = '395CA8';
 						break;
 					case 3:
-						button_3.backgroundColor = 'blue'
+						button_3.color = '395CA8';
 						break;
 					case 4:
-						button_4.backgroundColor = 'blue'
+						button_4.color = '395CA8';
 						break;
 				}
 			}
@@ -293,7 +300,6 @@ function snapBack(){
 	Ti.API.debug("Width: " + promptLabel.width);
 	promptLabel.left = Math.round((( Ti.Platform.displayCaps.platformWidth - promptLabel.width ) / 2 ))
 	cardBackground.left = 10;
-	//card.
 	flipButton.left = 110;
 }
 
@@ -302,9 +308,10 @@ function start(){
 
 	for (i in buttons) {
 		win.add(buttons[i]);
-		buttons[i].hide();	
+		buttons[i].hide();
 	}
 	
+	win.add(cardNumber);
 	win.add(cardBackground);
 	win.add(promptLabel);
 	win.add(answerLabel);
@@ -333,7 +340,7 @@ function start(){
 	
 	win.addEventListener('touchend', function(e){
 		//Ti.API.debug("Dist: " + (e.x - x_start));
-		if ((e.x - x_start) > 40 || (e.x - x_start) < -40) {
+		if ((e.x - x_start) > 30 || (e.x - x_start) < -30) {
 			if (e.x > x_start){
 				swipe({direction:'left'});
 			} else {

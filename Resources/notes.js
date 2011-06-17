@@ -1,9 +1,9 @@
 Ti.UI.setBackgroundColor('#fff');
-var notes_win = Ti.UI.currentWindow;
+var win = Ti.UI.currentWindow;
 
 folders = [];
 
-Ti.API.debug("Folder clicked: " + notes_win.selection.row.children[1].text + " ( index = " + notes_win.selection.index + " )");
+Ti.API.debug("Folder clicked: " + win.selection.row.children[1].text + " ( index = " + win.selection.index + " )");
 
 getFolders();
 
@@ -60,18 +60,32 @@ function createFolderRow(name){
 }
 
 function start(){
-	
+
+	var toolbar = Ti.UI.createToolbar({
+		top : 0
+	});
+		
 	var lists = Titanium.UI.createTableView({
-		bottom:60,
-		rowHeight:60,
-		data:folders
+		top : toolbar.height,
+		rowHeight : 60,
+		data : folders
+	});
+	
+	lists.addEventListener('click', function(e){
+		Ti.API.debug(e.row.children[0].id);
+		if (e.row.children[0].id == 'unchecked') {
+    		e.row.children[0].id = 'checked';
+    		e.row.children[0].image = 'images/checked.png';
+    	} else {
+    		e.row.children[0].id = 'unchecked';
+    		e.row.children[0].image = 'images/unchecked.png';
+    	}
 	});
 	
 	var back = Ti.UI.createButton({
-		bottom:10,
 		title:'Back',
 		width:100,
-		height:40,
+		height:35,
 		left:30
 	});
 	
@@ -81,14 +95,13 @@ function start(){
 			navBarHidden : false
 		}); 
 		new_win.open();
-		notes_win.visible = false;
+		win.visible = false;
 	});
 	
 	var review = Ti.UI.createButton({
-		bottom:10,
 		title:'Review',
 		width:100,
-		height:40, 
+		height:35, 
 		right:30
 	});
 
@@ -101,9 +114,11 @@ function start(){
 		
 	});
 
-	notes_win.add(lists);
-	notes_win.add(back);
-	notes_win.add(review);
+	toolbar.add(back);
+	toolbar.add(review);
+
+	win.add(lists);
+	win.add(toolbar);
 }
 
 

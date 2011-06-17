@@ -32,10 +32,6 @@
 		<data>
 		Pugdnmi5U02W0WuW4wrcBhYtKs4=
 		</data>
-		<key>default_app_logo.png</key>
-		<data>
-		KFlQoJWJ07jwAB6IQgZDetdisD4=
-		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		uYQez9hl2suipAHm+bKfLS37RSE=
@@ -60,9 +56,17 @@
 		<data>
 		5BHJWZl8ByXu4HOhGLBU6zNHGyI=
 		</data>
+		<key>images/default_app_logo.png</key>
+		<data>
+		KFlQoJWJ07jwAB6IQgZDetdisD4=
+		</data>
 		<key>images/folder.png</key>
 		<data>
 		0lHeghsapHqkR1Unwn/W8Dw4JdA=
+		</data>
+		<key>images/headLogo.png</key>
+		<data>
+		1F4NXT+ke441lGbyH3IJtu5jPug=
 		</data>
 		<key>images/unchecked.png</key>
 		<data>

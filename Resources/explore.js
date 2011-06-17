@@ -56,33 +56,55 @@ function createFolderRow(name){
 
 function start(){
 	
+	var toolbar = Ti.UI.createToolbar({
+		top : 0
+	});
+	
 	var lists = Titanium.UI.createTableView({
-		bottom:60,
-		rowHeight:80,
-		data:folders
+		top : toolbar.height,
+		rowHeight : 80,
+		data : folders
 	});
 	
 	lists.addEventListener('click', function(e) {
 		Ti.API.debug(e.index);
 		var new_win = Ti.UI.createWindow({
-			url:"notes.js",
+			url : "notes.js",
 			navBarHidden : true,
-			selection:e
+			selection : e
 		});
-
+		new_win.open();
+		win.visible = false;
+	});
+		
+	var settingsButton = Ti.UI.createButton({
+		title : 'Settings',
+		width : 100,
+		height : 35, 
+		right : 30
+	});
+	
+	var signOutButton = Ti.UI.createButton({
+		title : 'Sign Out',
+		width : 100,
+		height : 35, 
+		left : 30
+	});
+	
+	signOutButton.addEventListener('click', function(){
+		var new_win = Ti.UI.createWindow({
+			url:"login.js",
+			navBarHidden : true
+		}); 
 		new_win.open();
 		win.visible = false;
 	});
 	
-	var settings = Ti.UI.createButton({
-		bottom:10,
-		title:'Settings',
-		width:100,
-		height:40
-	});
-
+	toolbar.add(settingsButton);
+	toolbar.add(signOutButton);
+		
 	win.add(lists);
-	win.add(settings);
+	win.add(toolbar);
 }
 
 //Ti.include('/test/tests.js');
