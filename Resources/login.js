@@ -1,5 +1,16 @@
 Ti.UI.setBackgroundColor('#fff');
-var win = Ti.UI.currentWindow;
+
+container = Ti.UI.currentWindow;
+
+var win = Titanium.UI.createWindow({
+	navBarHidden : true
+});
+
+var nav = Titanium.UI.iPhone.createNavigationGroup({
+   window : win
+});
+
+container.add(nav);
 
 var logo = Ti.UI.createImageView({
 	image : 'images/headLogo.png',
@@ -37,10 +48,11 @@ var confirmButton = Ti.UI.createButton({
 confirmButton.addEventListener('click', function(){
 	var newWin = Ti.UI.createWindow({
 		url : 'explore.js',
-		navBarHidden : false
+		navBarHidden : true
 	})
-	newWin.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
-	win.visible = false;
+	nav.open(newWin);
+	//newWin.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+	//win.visible = false;
 });
 
 win.add(logo);

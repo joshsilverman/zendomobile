@@ -205,9 +205,7 @@ function grade_click(e) {
 		alert("No more cards!");
 	}		
 }
-
-
-			
+	
 function fadeInOnFlip(e) {
 
 	win.animate(animation);

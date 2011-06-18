@@ -1,13 +1,23 @@
 Ti.UI.setBackgroundColor('#fff');
-var win = Ti.UI.currentWindow;
+container = Ti.UI.currentWindow;
+
+var win = Titanium.UI.createWindow({
+	navBarHidden : true
+});
+
+var nav = Titanium.UI.iPhone.createNavigationGroup({
+   window : win
+});
+
+container.add(nav);
+
+//Ti.API.debug("Folder clicked: " + win.selection.row.children[1].text + " ( index = " + win.selection.index + " )");
 
 folders = [];
+getNotes();
 
-Ti.API.debug("Folder clicked: " + win.selection.row.children[1].text + " ( index = " + win.selection.index + " )");
-
-getFolders();
-
-function getFolders() {
+//Retrieves the user's notes
+function getNotes() {
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.timeout = 1000000;
 	xhr.open("GET","http://grocerygenie.heroku.com/users?format=json");
@@ -26,6 +36,7 @@ function getFolders() {
 	xhr.send();
 }
 
+//Creates folder UI elements
 function createFolderRow(name){
 	var row = Ti.UI.createTableViewRow({}); 
 
@@ -49,6 +60,7 @@ function createFolderRow(name){
 	return row;
 }
 
+//Builds notes browser UI
 function start(){
 
 	var toolbar = Ti.UI.createToolbar({
@@ -80,13 +92,13 @@ function start(){
 	});
 	
 	back.addEventListener('click', function() {
-		var new_win = Ti.UI.createWindow({
+		var newWin = Ti.UI.createWindow({
 			url:"explore.js",
-			navBarHidden : false
-			
+			navBarHidden : true
 		}); 
-		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
-		win.visible = false;
+		nav.open(newWin);
+		//new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
+		//win.visible = false;
 	});
 	
 	var review = Ti.UI.createButton({

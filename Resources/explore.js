@@ -1,9 +1,15 @@
-//var explore = {
-//	tests_enabled:false
-//};
-
 Ti.UI.setBackgroundColor('#fff');
-var win = Ti.UI.currentWindow;
+container = Ti.UI.currentWindow;
+
+var win = Titanium.UI.createWindow({
+	navBarHidden : true
+});
+
+var nav = Titanium.UI.iPhone.createNavigationGroup({
+   window : win
+});
+
+container.add(nav);
 
 var activityIndicator = Titanium.UI.createActivityIndicator({
 	height:50,
@@ -25,10 +31,23 @@ win.add(activityIndicator);
 
 folders = [];
 
-getFolders();
+authenticate();
 
-//THIS SHOULD ONLY HAPPEN ON FIRST LOAD?
-//
+//Authenticates with Zendo
+function authenticate() {
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.timeout = 1000000;
+	xhr.open("POST","http://localhost:3000/tags/json");
+	xhr.setRequestHeader("content-type", "application/json");
+	var param = {"user[email]" : "jason.urton@gmail.com", "user[password]" : "jason123"};
+	xhr.send(param);
+	xhr.onerror = function(e){
+		alert(e);
+	}
+	xhr.onComplete = getFolders();
+}
+
+//Retrieves the user's folders
 function getFolders() {
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.timeout = 1000000;
@@ -36,6 +55,7 @@ function getFolders() {
 	xhr.onload = function(){
 		try {
 			var data = eval(this.responseText);
+			Ti.API.debug(this.responseText);
 			for ( var i = 0; i < data.length; i ++ ) {
 				folders.push(createFolderRow(data[i].user.password));
 			}
@@ -47,13 +67,14 @@ function getFolders() {
 		
 	}
 	
-	xhr.onerror = function() {
-		//var 
+	xhr.onerror = function(e) {
+		alert(e); 
 	};
 	
 	xhr.send();
 }
 
+//Creates folder UI elements
 function createFolderRow(name){
 	var row = Ti.UI.createTableViewRow({}); 
 
@@ -75,6 +96,7 @@ function createFolderRow(name){
 	return row;
 }
 
+//Build explore UI
 function start(){
 	
 	loadingLabel.hide();
@@ -93,14 +115,14 @@ function start(){
 	
 	lists.addEventListener('click', function(e) {
 		Ti.API.debug(e.index);
-		var new_win = Ti.UI.createWindow({
+		var newWin = Ti.UI.createWindow({
 			url : "notes.js",
 			navBarHidden : true,
 			selection : e
-			
 		});
-		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
-		win.visible = false;
+		nav.open(newWin);
+		//new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+		//win.visible = false;
 	});
 		
 	var settingsButton = Ti.UI.createButton({
@@ -118,12 +140,13 @@ function start(){
 	});
 	
 	signOutButton.addEventListener('click', function(){
-		var new_win = Ti.UI.createWindow({
+		var newWin = Ti.UI.createWindow({
 			url:"login.js",
 			navBarHidden : true
 		}); 
-		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
-		win.visible = false;
+		nav.open(newWin);
+		//new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
+		//win.visible = false;
 	});
 	
 	toolbar.add(settingsButton);

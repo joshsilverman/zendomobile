@@ -1,6 +1,6 @@
 var win = Ti.UI.createWindow({
 	url:"login.js",
-	navBarHidden : false
+	navBarHidden : true
 });
 
 //USER OPENS THE APP MANUALLY:
