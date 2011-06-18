@@ -16,10 +16,7 @@
 #import "TiFile.h"
 #import "TiBlob.h"
 
-#define DEBUG_IMAGEVIEW
-
 @implementation TiUIImageViewProxy
-@synthesize imageURL;
 
 static NSArray* imageKeySequence;
 
@@ -106,13 +103,9 @@ static NSArray* imageKeySequence;
 - (void) dealloc
 {
 	RELEASE_TO_NIL(urlRequest);
-    [self replaceValue:nil forKey:@"image" notification:NO];
-    
-    // Purge needs to happen AFTER we've released the ref to 'image', so that the cache knows it can unload the information
-    BOOL released = [[ImageLoader sharedLoader] purgeEntry:imageURL];
-    RELEASE_TO_NIL(imageURL);
 	[super dealloc];
 }
+
 
 -(id)toBlob:(id)args
 {
@@ -135,7 +128,7 @@ static NSArray* imageKeySequence;
 
 	if (imageValue!=nil)
 	{
-		NSURL *url_ = [TiUtils toURL:[TiUtils stringValue:imageValue] proxy:self];
+		NSURL *url_ = [TiUtils toURL:imageValue proxy:self];
 		UIImage *image = [[ImageLoader sharedLoader] loadImmediateImage:url_];
 		
 		if (image!=nil)
@@ -199,11 +192,10 @@ USE_VIEW_FOR_AUTO_HEIGHT
 		return;
 	}
 	
-	if (view != nil)
+	if ([self viewAttached])
 	{
 		[(TiUIImageView *)[self view] imageLoadSuccess:request image:image];
 	}
-    [self setImageURL:[urlRequest url]];
 	RELEASE_TO_NIL(urlRequest);
 }
 

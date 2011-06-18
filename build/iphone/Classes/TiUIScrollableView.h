@@ -14,23 +14,14 @@
 @private
 	UIScrollView *scrollview;
 	UIPageControl *pageControl;
-	int currentPage; // Duplicate some info, just in case we're not showing the page control
+	NSMutableArray *views;
+	int currentPage;
 	BOOL showPageControl;
 	CGFloat pageControlHeight;
 	BOOL handlingPageControlEvent;
 	CGFloat maxScale;
 	CGFloat minScale;
-        
-    // Have to correct for an apple goof; rotation stops scrolling, AND doesn't move to the next page.
-    BOOL rotatedWhileScrolling;
-
-    // See the code for why we need this...
-    int lastPage;
-    
-    int cacheSize;
 }
-
--(void)manageRotation;
 
 @end
 

@@ -28,7 +28,6 @@
 -(void)setString:(id)args;
 -(void)setList:(id)args;
 -(void)removeProperty:(id)args;
--(void)removeAllProperties;
 -(id)hasProperty:(id)args;
 -(id)listProperties:(id)args;
 

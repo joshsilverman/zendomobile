@@ -20,6 +20,7 @@ typedef enum {
 }	TiImageScalingStyle;
 
 
+
 @class ImageLoaderRequest;
 
 @protocol ImageLoaderDelegate
@@ -76,8 +77,6 @@ typedef enum {
 -(ImageLoaderRequest*)loadImage:(NSURL*)url 
 					   delegate:(NSObject<ImageLoaderDelegate>*)delegate 
 					   userInfo:(NSDictionary*)userInfo;
-
--(BOOL)purgeEntry:(NSURL*)url;
 
 -(void)suspend;
 -(void)resume;

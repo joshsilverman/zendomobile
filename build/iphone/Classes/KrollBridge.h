@@ -23,7 +23,6 @@
 	id<TiEvaluator> pageContext;
 	NSMutableDictionary *dynprops;
 }
-
 -(id)initWithContext:(KrollContext*)context_ host:(TiHost*)host_ context:(id<TiEvaluator>)context baseURL:(NSURL*)baseURL_;
 -(KrollObject*)addModule:(NSString*)name module:(TiModule*)module;
 -(TiModule*)moduleNamed:(NSString*)name context:(id<TiEvaluator>)context;
@@ -32,17 +31,12 @@
 
 @interface KrollBridge : Bridge<TiEvaluator,KrollDelegate> {
 @private
-	NSURL * currentURL;
-
 	KrollContext *context;
 	NSDictionary *preload;
 	NSMutableDictionary *modules;
 	ZendoObject *_zendo;
 	BOOL shutdown;
 	NSMutableArray *proxies;
-	//NOTE: Do NOT treat registeredProxies like a mutableDictionary; mutable dictionaries copy keys,
-	//CFMutableDictionaryRefs only retain keys, which lets them work with proxies properly.
-	CFMutableDictionaryRef registeredProxies;
 	NSCondition *shutdownCondition;
 	NSLock *proxyLock;
 }
@@ -53,17 +47,6 @@
 - (void)fireEvent:(id)listener withObject:(id)obj remove:(BOOL)yn thisObject:(TiProxy*)thisObject;
 - (id)preloadForKey:(id)key name:(id)name;
 - (KrollContext*)krollContext;
-
-+ (NSArray *)krollBridgesUsingProxy:(id)proxy;
-+ (int)countOfKrollBridgesUsingProxy:(id)proxy;
-
-+ (BOOL)krollBridgeExists:(KrollBridge *)bridge;
-
--(void)enqueueEvent:(NSString*)type forProxy:(TiProxy *)proxy withObject:(id)obj withSource:(id)source;
-
--(void)registerProxy:(id)proxy krollObject:(KrollObject *)ourKrollObject;
-
--(int)forceGarbageCollectNow;
 
 @end
 

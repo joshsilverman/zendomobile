@@ -358,7 +358,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 - (void)runLoopAddSource:(CFRunLoopSourceRef)source
 {
-	NSUInteger i, count = [theRunLoopModes count];
+	unsigned i, count = [theRunLoopModes count];
 	for(i = 0; i < count; i++)
 	{
 		CFStringRef runLoopMode = (CFStringRef)[theRunLoopModes objectAtIndex:i];
@@ -368,7 +368,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 - (void)runLoopRemoveSource:(CFRunLoopSourceRef)source
 {
-	NSUInteger i, count = [theRunLoopModes count];
+	unsigned i, count = [theRunLoopModes count];
 	for(i = 0; i < count; i++)
 	{
 		CFStringRef runLoopMode = (CFStringRef)[theRunLoopModes objectAtIndex:i];
@@ -378,7 +378,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 - (void)runLoopAddTimer:(NSTimer *)timer
 {
-	NSUInteger i, count = [theRunLoopModes count];
+	unsigned i, count = [theRunLoopModes count];
 	for(i = 0; i < count; i++)
 	{
 		CFStringRef runLoopMode = (CFStringRef)[theRunLoopModes objectAtIndex:i];
@@ -388,7 +388,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 - (void)runLoopRemoveTimer:(NSTimer *)timer
 {
-	NSUInteger i, count = [theRunLoopModes count];
+	unsigned i, count = [theRunLoopModes count];
 	for(i = 0; i < count; i++)		
 	{
 		CFStringRef runLoopMode = (CFStringRef)[theRunLoopModes objectAtIndex:i];
@@ -1878,22 +1878,22 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		
 		if([self canAcceptBytes:theSocket])
 		{
-			ssize_t result;
+			int result;
 			CFSocketNativeHandle theNativeSocket = CFSocketGetNative(theSocket);
 			
 			const void *buf  = [theCurrentSend->buffer bytes];
-			NSUInteger bufSize = [theCurrentSend->buffer length];
+			unsigned bufSize = [theCurrentSend->buffer length];
 			
 			if([self isConnected])
 			{
-				result = send(theNativeSocket, buf, (size_t)bufSize, 0);
+				result = send(theNativeSocket, buf, bufSize, 0);
 			}
 			else
 			{
 				const void *dst  = [theCurrentSend->address bytes];
-				NSUInteger dstSize = [theCurrentSend->address length];
+				unsigned dstSize = [theCurrentSend->address length];
 				
-				result = sendto(theNativeSocket, buf, (size_t)bufSize, 0, dst, (socklen_t)dstSize);
+				result = sendto(theNativeSocket, buf, bufSize, 0, dst, dstSize);
 			}
 			
 			if(theSocket == theSocket4)
@@ -2118,7 +2118,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		
 			if([self hasBytesAvailable:theSocket])
 			{
-				ssize_t result;
+				int result;
 				CFSocketNativeHandle theNativeSocket = CFSocketGetNative(theSocket);
 				
 				// Allocate buffer for recvfrom operation.
@@ -2321,7 +2321,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 			[self doSend:sock];
 			break;
 		default:
-			NSLog (@"AsyncUdpSocket %p received unexpected CFSocketCallBackType %lu.", self, (unsigned long)type);
+			NSLog (@"AsyncUdpSocket %p received unexpected CFSocketCallBackType %d.", self, type);
 			break;
 	}
 }

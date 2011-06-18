@@ -189,6 +189,8 @@ function createUI() {
 	
 	flipButton.addEventListener('click', fadeInOnFlip);
 	
+	graphView = Ti.UI.createImageView({url:'http://chart.apis.google.com/chart?cht=p3&chs=450x200&chd=t:73,13,10,3,1&chco=80C65A,224499,FF0000&chl=Chocolate|Puff+Pastry|Cookies|Muffins|Gelato'});
+	
 }
 
 function grade_click(e) {
@@ -203,8 +205,12 @@ function grade_click(e) {
 		alert("No more cards!");
 	}		
 }
-	
+
+
+			
 function fadeInOnFlip(e) {
+
+	win.animate(animation);
 	cards[index].flipped = true;
 	flipButton.hide();
 	for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
@@ -213,7 +219,7 @@ function fadeInOnFlip(e) {
 }
 
 function showCurrentCard(){
-	snapBack();
+	//snapBack();
 	cardNumber.text = (index + 1) + " / " + cards.length
 
 	if (cards[index] != null) {
@@ -282,8 +288,8 @@ function swipe(e){
 			index++;
 			showCurrentCard();			
 		} else {
-			//reviewComplete();
-			alert("No more cards!");
+			reviewComplete();
+			win.add(graphView);
 		}
 	}
 }
@@ -297,7 +303,6 @@ function reviewComplete() {
 }
 
 function snapBack(){
-	Ti.API.debug("Width: " + promptLabel.width);
 	promptLabel.left = Math.round((( Ti.Platform.displayCaps.platformWidth - promptLabel.width ) / 2 ))
 	cardBackground.left = 10;
 	flipButton.left = 110;
@@ -306,6 +311,12 @@ function snapBack(){
 function start(){
 	createUI();
 
+	animation = Ti.UI.createAnimation({
+		view : cardBackground, 
+		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT,
+		duration : 250
+	});
+	
 	for (i in buttons) {
 		win.add(buttons[i]);
 		buttons[i].hide();
@@ -318,16 +329,20 @@ function start(){
 	win.add(flipButton);
 	
 	//win.add(scrollView);
+	
+	//win.addEventListener('swipe', function(e){
 		
+	//})
+	
 	win.addEventListener('touchstart', function (e){
 		x_start = e.x;
 	});
 	
-	win.addEventListener('touchmove', function(e){
-		Ti.API.debug(e.x);
-		var deltax = e.x - x_start;
-	    olt = olt.translate(deltaX,0,0);
-	    cardBackground.animate({transform: olt, duration: 100}); 
+	//win.addEventListener('touchmove', function(e){
+		//Ti.API.debug(e.x);
+		//var deltax = e.x - x_start;
+	    //olt = olt.translate(deltaX,0,0);
+	   // cardBackground.animate({transform: olt, duration: 100}); 
 
 		//cardx = e.x + card.animatedCenter.x - card.width/2;   //card.card.left + (e.x - x_start);
 		//promptx = e.x + prompt.animatedCenter.x - prompt.width/2; //prompt.left + (e.x - x_start);
@@ -336,7 +351,7 @@ function start(){
 		
 		//card.animate({center:{x:cardx}, duration:1});
 		
-	});
+	//});
 	
 	win.addEventListener('touchend', function(e){
 		//Ti.API.debug("Dist: " + (e.x - x_start));

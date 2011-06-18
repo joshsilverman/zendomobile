@@ -312,6 +312,15 @@ NSString * const TI_DB_VERSION = @"1";
 
 -(void)queueEvent:(NSString*)type name:(NSString*)name data:(NSDictionary*)data immediate:(BOOL)immediate
 {
+	[lock lock];
+	
+	if (database==nil)
+	{
+		// doh, no database???
+		[lock unlock];
+		return;
+	}
+	
 	static int sequence = 0;
 	
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -350,23 +359,14 @@ NSString * const TI_DB_VERSION = @"1";
 	NSError *error = nil;
 	PLSqlitePreparedStatement * statement = (PLSqlitePreparedStatement *) [database prepareStatement:sql error:&error];
 	[statement bindParameters:[NSArray arrayWithObjects:value,nil]];
-    
-    // Don't lock until we need to
-    [lock lock];
-    if (database==nil)
-	{
-		// doh, no database???
-		[lock unlock];
-		return;
-	}
-    
+	
 	[database beginTransaction];
 	[statement executeUpdate];
 	[database commitTransaction];
-	[lock unlock];
 	
 	[statement close];
-
+	
+	[lock unlock];
 	
 	if (immediate)
 	{	

@@ -28,9 +28,8 @@
 -(id)initWithStyle:(UITableViewCellStyle)style_ reuseIdentifier:(NSString *)reuseIdentifier_ row:(TiUITableViewRowProxy *)row_
 {
 	if (self = [super initWithStyle:style_ reuseIdentifier:reuseIdentifier_]) {
-		proxy = row_;
+		proxy = [row_ retain];
 		[proxy setCallbackCell:self];
-		self.exclusiveTouch = YES;
 	}
 	
 	return self;
@@ -38,6 +37,7 @@
 
 -(void)dealloc
 {
+	RELEASE_TO_NIL(proxy);
 	RELEASE_TO_NIL(gradientLayer);
 	RELEASE_TO_NIL(backgroundGradient);
 	RELEASE_TO_NIL(selectedBackgroundGradient);
@@ -140,7 +140,6 @@
 
 -(void)setSelected:(BOOL)yn
 {
-    [super setSelected:yn];
 	[super setHighlighted:yn];
 	[self updateGradientLayer:yn|[self isHighlighted]];
 }
@@ -194,7 +193,6 @@
 
 -(void)dealloc
 {
-    [self detachContents];
 	if (searchField!=nil)
 	{
 		[searchField setDelegate:nil];
@@ -202,7 +200,6 @@
 	}
 	RELEASE_TO_NIL(tableController);
 	RELEASE_TO_NIL(searchController);
-	[sections makeObjectsPerformSelector:@selector(setParent:) withObject:nil];
 	RELEASE_TO_NIL(sections);
 	RELEASE_TO_NIL(tableview);
 	RELEASE_TO_NIL(sectionIndex);
@@ -215,16 +212,6 @@
 	RELEASE_TO_NIL(initialSelection);
 	RELEASE_TO_NIL(tableHeaderPullView);
 	[super dealloc];
-}
-
--(void)detachContents
-{
-    for (TiUITableViewSectionProxy* section in sections) {
-        for (TiUITableViewRowProxy* row in [section rows]) {
-            [row detachView];
-        }
-        [section detachView];
-    }
 }
 
 -(BOOL)isScrollable
@@ -446,7 +433,6 @@
 		{
 			[section setTable:nil];
 			[section setParent:nil];
-			[self.proxy forgetProxy:section];
 		}
 	}
 	RELEASE_TO_NIL(sections);
@@ -466,8 +452,6 @@
 			row.section = section;
 			row.parent = section;
 		}
-		[self.proxy rememberProxy:section];
-
 	}
 
 	[self reloadDataFromCount:oldCount toCount:newCount animation:animation];
@@ -476,20 +460,8 @@
 -(void)updateRow:(TiUITableViewRowProxy*)row
 {
 	NSAssert(sections!=nil,@"sections was nil");
-	
 	row.table = self;
 	NSMutableArray *rows = [row.section rows];
-	
-	if ([rows count] > row.row) {
-		TiUITableViewRowProxy* oldRow = [rows objectAtIndex:row.row];
-		[oldRow retain];
-		oldRow.table = nil;
-		oldRow.section = nil;
-		oldRow.parent = nil;
-		[row.section forgetProxy:oldRow];
-		[oldRow release];
-	}	
-	[row.section rememberProxy:row];
 	[rows replaceObjectAtIndex:row.row withObject:row];
 	[row.section reorderRows];
 }
@@ -501,7 +473,6 @@
 	row.section = before.section;
 	NSMutableArray *rows = [row.section rows];
 	[rows insertObject:row atIndex:row.row];
-	[row.section rememberProxy:row];
 	[row.section reorderRows];
 }
 
@@ -519,7 +490,6 @@
 	{
 		[rows insertObject:row atIndex:after.row+1];
 	}
-	[row.section rememberProxy:row];
 	[row.section reorderRows];
 }
 
@@ -532,7 +502,6 @@
 	ENSURE_VALUE_CONSISTENCY([rows containsObject:row],YES);
 #endif
 	[rows removeObject:row];
-	[row.section forgetProxy:row];
 	[row.section reorderRows];
 }
 
@@ -542,7 +511,6 @@
 	row.table = self;
 	TiUITableViewSectionProxy *section = row.section;
     [section add:row];
-	[row.section rememberProxy:row];
 	[row.section reorderRows];
 }
 
@@ -854,17 +822,6 @@
 }
 
 #pragma mark Overloaded view handling
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-	UIView * result = [super hitTest:point withEvent:event];
-	if(result == self)
-	{	//There is no valid reason why the TiUITableView will get an
-		//touch event; it should ALWAYS be a child view.
-		return nil;
-	}
-	return result;
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
 {
 	// iOS idiom seems to indicate that you should never be able to interact with a table
@@ -1175,7 +1132,7 @@
 	if([searchText length]==0)
 	{
 		// Redraw visible cells
-        [tableview reloadRowsAtIndexPaths:[tableview indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+		[tableview reloadRowsAtIndexPaths:[tableview indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 		[searchTableView removeFromSuperview];
 		return;
 	}
@@ -1370,11 +1327,6 @@
 		[self.proxy replaceValue:NUMBOOL(NO) forKey:@"searchHidden" notification:NO];
 		[self updateSearchView];
 	}
-}
-
--(void)setShowVerticalScrollIndicator_:(id)value
-{
-	[[self tableView] setShowsVerticalScrollIndicator:[TiUtils boolValue:value]];
 }
 
 -(void)configurationSet
@@ -1594,7 +1546,6 @@ if(ourTableView != tableview)	\
 	if (cell == nil)
 	{
 		cell = [[[TiUITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:row.tableClass row:row] autorelease];
-		[cell setBounds:CGRectMake(0, 0, [tableview bounds].size.width,44)];
 	}
 	else
 	{

@@ -8,7 +8,6 @@
  */
 #ifdef USE_TI_DATABASE
 
-#import "DatabaseModule.h"
 #import "TiDatabaseResultSetProxy.h"
 #import "TiDatabaseProxy.h"
 #import "TiUtils.h"
@@ -52,36 +51,6 @@
 	return self;
 }
 
--(id) _transformObject:(id) obj toType:(DatabaseFieldType) type {
-	
-	if(FieldTypeString == type) {
-		return [TiUtils stringValue:obj];		
-	}
-	
-	if(FieldTypeInt == type) {
-		int value = [TiUtils intValue:obj def:NSNotFound];
-		if(NSNotFound != value) {
-			return NUMINT(value);
-		}
-		[self throwException:TiExceptionInvalidType subreason:[NSString stringWithFormat:@"Couldn't cast from %@ to int", [obj class]] location:CODELOCATION];
-	}
-	
-	id result = nil;
-	
-	if(FieldTypeFloat == type ||
-	   FieldTypeDouble == type) {
-		BOOL valid = NO;
-		result = (FieldTypeFloat == type) ? NUMFLOAT([TiUtils floatValue:obj def:0.0 valid:&valid]) 
-		                                  : NUMDOUBLE([TiUtils doubleValue:obj def:0.0 valid:&valid]);
-		if(!valid) {
-			[self throwException:TiExceptionInvalidType subreason:[NSString stringWithFormat:@"Couldn't cast from %@ to %@", [obj class], (FieldTypeFloat == type) ? @"float" : @"double"] location:CODELOCATION];
-		}		
-	}
-	return result;
-}
-
-#pragma mark Public API
-
 -(void)close:(id)args
 {
 	if (database!=nil && results!=nil)
@@ -114,18 +83,12 @@
 
 -(id)field:(id)args
 {
-	ENSURE_ARRAY(args);
+	ENSURE_SINGLE_ARG(args,NSObject);
 	if (results!=nil)
 	{
-	    id result = [results objectForColumnIndex:[TiUtils intValue:[args objectAtIndex:0]]];
+		id result = [results objectForColumnIndex:[TiUtils intValue:args]];
 		if ([result isKindOfClass:[NSData class]]) {
 			result = [[[TiBlob alloc] initWithData:result mimetype:@"application/octet-stream"] autorelease];
-		}
-
-		if([args count] > 1) {
-			//cast result on the way out if type constant was passed
-			NSNumber *type = (NSNumber *) [args objectAtIndex:1];
-			result = [self _transformObject:result toType:[type intValue]];
 		}
 		return result;
 	}
@@ -134,18 +97,13 @@
 
 -(id)fieldByName:(id)args
 {
-	ENSURE_ARRAY(args);
+	ENSURE_SINGLE_ARG(args,NSObject);
 	if (results!=nil)
 	{
-		id result = [results objectForColumn:[TiUtils stringValue:[args objectAtIndex:0]]];
+		id result = [results objectForColumn:[TiUtils stringValue:args]];
 		if ([result isKindOfClass:[NSData class]]) {
 			result = [[[TiBlob alloc] initWithData:result mimetype:@"application/octet-stream"] autorelease];
 		}
- 	    if([args count] > 1) {
-		   //cast result on the way out if type constant was passed
-		   NSNumber *type = (NSNumber *) [args objectAtIndex:1];
-		   result = [self _transformObject:result toType:[type intValue]];
-	    } 
 		return result;
 	}
 	return nil;

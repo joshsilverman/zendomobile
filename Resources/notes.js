@@ -14,11 +14,12 @@ function getFolders() {
 	xhr.onload = function(){
 		try {
 			var data = eval(this.responseText);
+			Ti.API.debug(data);
 			for ( var i = 0; i < data.length; i ++ ) {
 				folders.push(createFolderRow(data[i].user.email));
 			}
 		} catch(E) {
-			alert(E);
+			Ti.API.debug(E);
 		}
 		start();
 	}
@@ -35,17 +36,6 @@ function createFolderRow(name){
     	height:25,
     	width:25,
     	id:'unchecked'
-    });
-    
-    image.addEventListener('click', function(e){
-    	if (image.id == 'unchecked') {
-    		image.id = 'checked';
-    		image.image = 'images/checked.png';
-    	} else {
-    		image.id = 'unchecked';
-    		image.image = 'images/unchecked.png';
-    	}
-    	
     });
 	
 	var label= Ti.UI.createLabel({
@@ -93,8 +83,9 @@ function start(){
 		var new_win = Ti.UI.createWindow({
 			url:"explore.js",
 			navBarHidden : false
+			
 		}); 
-		new_win.open();
+		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
 		win.visible = false;
 	});
 	
@@ -110,7 +101,7 @@ function start(){
 			url:"review.js",
 			modal:true
 		}); 
-		new_win.open();
+		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 		
 	});
 

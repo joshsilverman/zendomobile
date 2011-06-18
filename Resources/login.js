@@ -39,7 +39,7 @@ confirmButton.addEventListener('click', function(){
 		url : 'explore.js',
 		navBarHidden : false
 	})
-	newWin.open();
+	newWin.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 	win.visible = false;
 });
 

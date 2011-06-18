@@ -39,53 +39,36 @@
 	[self fireEvent:@"orientationchange" withObject:event];
 }
 
--(void)registerForShake
-{
-	WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
-	[[NSNotificationCenter defaultCenter] addObserver:self
-			selector:@selector(shakeEvent:) name:kTiGestureShakeNotification object:nil];
-}
-
--(void)registerForOrientation
-{
-	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-	WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
-	[[NSNotificationCenter defaultCenter] addObserver:self
-			selector:@selector(rotateEvent:) name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
 -(void)_listenerAdded:(NSString *)type count:(int)count
 {
 	if (count == 1 && [type isEqualToString:@"shake"])
 	{
+		WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shakeEvent:) name:kTiGestureShakeNotification object:nil];
 		lastShakeTime = 0;
-		[self performSelectorOnMainThread:@selector(registerForShake)
-				withObject:nil waitUntilDone:NO];
 	}
 	else if (count == 1 && [type isEqualToString:@"orientationchange"])
 	{
-		[self performSelectorOnMainThread:@selector(registerForOrientation)
-				withObject:nil waitUntilDone:NO];
+		[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+		WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(rotateEvent:)
+													 name:UIDeviceOrientationDidChangeNotification object:nil];
 	}
-}
-
--(void)unregisterForNotificationNamed:(NSString *)oldNotification
-{
-	WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:oldNotification object:nil];
 }
 
 -(void)_listenerRemoved:(NSString *)type count:(int)count
 {
 	if (count == 0 && [type isEqualToString:@"shake"])
 	{
-		[self performSelectorOnMainThread:@selector(unregisterForNotificationNamed:)
-				withObject:kTiGestureShakeNotification waitUntilDone:NO];
+		WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:kTiGestureShakeNotification object:nil];
 	}
 	else if (count == 0 && [type isEqualToString:@"orientationchange"])
 	{
-		[self performSelectorOnMainThread:@selector(unregisterForNotificationNamed:)
-				withObject:UIDeviceOrientationDidChangeNotification waitUntilDone:NO];
+		// don't stop device orientation against current device since that's used by Platform module too
+		WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	}
 }
 

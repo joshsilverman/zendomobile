@@ -9,15 +9,13 @@
 #import "TiBase.h"
 
 @interface TiStylesheet : NSObject {
-	NSDictionary* tagsDict;
-	NSDictionary* tagsDictByDensity;
 	NSDictionary* classesDict;
 	NSDictionary* classesDictByDensity;
 	NSDictionary* idsDict;
 	NSDictionary* idsDictByDensity;
 }
 
--(BOOL)basename:(NSString*)basename density:(NSString*)density hasTag:(NSString*)tagName;
--(id)stylesheet:(NSString*)objectId density:(NSString*)density basename:(NSString*)basename classes:(NSArray*)classes tags:(NSArray*) tags;
+-(BOOL)basename:(NSString*)basename density:(NSString*)density hasClass:(NSString*)className;
+-(id)stylesheet:(NSString*)objectId density:(NSString*)density basename:(NSString*)basename classes:(NSArray*)classes;
 
 @end

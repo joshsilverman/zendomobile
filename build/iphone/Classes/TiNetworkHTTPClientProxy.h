@@ -38,22 +38,22 @@ typedef enum {
 	BOOL validatesSecureCertificate;
     NSNumber* timeout;
 	
-	// callbacks are now in the JS object
-	BOOL hasOnload;
-	BOOL hasOnerror;
-	BOOL hasOnreadystatechange;
-	BOOL hasOndatastream;
-	BOOL hasOnsendstream;
+	// callbacks
+	KrollCallback *onload;
+	KrollCallback *onerror;
+	KrollCallback *onreadystatechange;
+	KrollCallback *ondatastream;
+	KrollCallback *onsendstream;
 }
 // Internal
 -(NSDictionary*)responseHeaders;
 
 // event callbacks
--(void)setOnload:(KrollCallback *)callback;
--(void)setOnerror:(KrollCallback *)callback;
--(void)setOnreadystatechange:(KrollCallback *)callback;
--(void)setOndatastream:(KrollCallback *)callback;
--(void)setOnsendstream:(KrollCallback *)callback;
+@property(nonatomic,retain) KrollCallback* onload;
+@property(nonatomic,retain) KrollCallback* onerror;
+@property(nonatomic,retain) KrollCallback* onreadystatechange;
+@property(nonatomic,retain) KrollCallback* ondatastream;
+@property(nonatomic,retain) KrollCallback* onsendstream;
 
 // state information
 @property(nonatomic,readonly) NSInteger status;

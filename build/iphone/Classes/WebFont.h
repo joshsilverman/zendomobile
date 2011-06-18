@@ -13,7 +13,6 @@
 @interface WebFont : NSObject {
 	NSString* family;
 	CGFloat size;
-    BOOL isSemiboldWeight;
 	BOOL isBoldWeight;
 	BOOL isNormalWeight;
     BOOL isItalicStyle;
@@ -27,7 +26,6 @@
 @property(nonatomic) BOOL isNormalWeight;
 @property(nonatomic) BOOL isItalicStyle;
 @property(nonatomic) BOOL isNormalStyle;
-@property(nonatomic) BOOL isSemiboldWeight;
 
 -(UIFont*)font;
 

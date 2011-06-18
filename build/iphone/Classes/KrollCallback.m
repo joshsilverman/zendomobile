@@ -67,19 +67,9 @@ static NSLock *callbackLock;
 
 	[type release];
 	[contextLock release];
-	if ([context isKJSThread])
-	{
-		TiValueUnprotect(jsContext, function);
-		TiValueUnprotect(jsContext, thisObj);
-	}
-	else
-	{
-		KrollUnprotectOperation * delayedUnprotect = [[KrollUnprotectOperation alloc]
-				initWithContext:jsContext withJsobject:function andJsobject:thisObj];
-		[context enqueue:delayedUnprotect];
-		[delayedUnprotect release];
-	}
-
+	
+	TiValueUnprotect(jsContext, function);
+	TiValueUnprotect(jsContext, thisObj);
 	function = NULL;
 	thisObj = NULL;
 	context = NULL;
@@ -98,11 +88,24 @@ static NSLock *callbackLock;
 	}
 	KrollCallback *otherCallback = (KrollCallback*)anObject;
 	if (function!=NULL)
-	{	//TODO: Is there ever two functions with diffent memory pointers
-	// that represent the exact same function? I'm thinking not.
+	{	//TODO: Is this threadsafe? (IE, what if one's marked for GC?)
+		//If it is, then ref2 can't be == ref1, because ref1 is owned by us
+		//And therefore, protected from GC.
 		TiObjectRef ref1 = function;
 		TiObjectRef ref2 = [otherCallback function];
-		return (ref2 == ref1);
+		if (ref2 == ref1)
+		{
+			return YES;
+		}
+#ifdef VERBOSE
+		BOOL result = TiValueIsStrictEqual(jsContext,ref1,ref2);
+		if (result)
+		{
+			NSLog(@"%X and %X were found to be equal despite different pointers!",ref1,ref2);
+		}
+#else
+		return TiValueIsStrictEqual(jsContext,ref1,ref2);
+#endif
 	}
 	return NO;
 }

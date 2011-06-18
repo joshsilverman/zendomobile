@@ -424,9 +424,6 @@ What this does mean is that any
 {
 	if (!isCurrentlyVisible || (focusedViewController != [viewControllerStack lastObject]))
 	{
-		if([viewControllerStack containsObject:focusedViewController]){
-			[viewControllerStack removeObject:focusedViewController];
-		}
 		return;
 	}
 	

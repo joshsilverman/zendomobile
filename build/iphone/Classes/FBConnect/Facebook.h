@@ -35,7 +35,6 @@
   FBDialog2* _fbDialog;
   NSString* _appId;
   NSArray* _permissions;
-  BOOL appSupportsBackgrounding;
 }
 
 @property(nonatomic, copy) NSString* accessToken;
@@ -47,7 +46,6 @@
 
 - (void)authorize:(NSString *)application_id
       permissions:(NSArray *)permissions
-      forceDialog:(BOOL)forceDialog
          delegate:(id<FBSessionDelegate2>)delegate;
 
 - (BOOL)handleOpenURL:(NSURL *)url;

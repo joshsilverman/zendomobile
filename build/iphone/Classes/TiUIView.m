@@ -92,7 +92,7 @@ void OffsetScrollViewForRect(UIScrollView * scrollView,CGFloat keyboardTop,CGFlo
 	
 	if(maxOffset < offsetPoint.y)
 	{
-		offsetPoint.y = MAX(0,maxOffset);
+		offsetPoint.y = maxOffset;
 	}
 
 	[scrollView setContentOffset:offsetPoint animated:YES];
@@ -290,6 +290,14 @@ DEFINE_EXCEPTIONS
 
 #pragma mark Layout 
 
+-(BOOL)animationFromArgument:(id)args
+{
+	// should happen already in completed callback but in case it didn't complete or was implicitly cancelled
+	RELEASE_TO_NIL(animation);
+	animation = [[TiAnimation animationFromArg:args context:[self.proxy pageContext] create:NO] retain];
+	return (animation!=nil);
+}
+
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
 	// for subclasses to do crap
@@ -472,14 +480,16 @@ DEFINE_EXCEPTIONS
 	}
 }
 
+-(void)setAnimation_:(id)arg
+{
+	[self.proxy replaceValue:nil forKey:@"animation" notification:NO];
+	[self animate:arg];
+}
+
 -(void)setTouchEnabled_:(id)arg
 {
 	self.userInteractionEnabled = [TiUtils boolValue:arg];
     changedInteraction = YES;
-}
-
--(BOOL) touchEnabled {
-	return touchEnabled;
 }
 
 -(UIView *)gradientWrapperView
@@ -519,8 +529,9 @@ DEFINE_EXCEPTIONS
 	}
 }
 
--(void)animate:(TiAnimation *)newAnimation
+-(void)animate:(id)arg
 {
+	ENSURE_UI_THREAD(animate,arg);
 	RELEASE_TO_NIL(animation);
 	
 	if ([self.proxy isKindOfClass:[TiViewProxy class]] && [(TiViewProxy*)self.proxy viewReady]==NO)
@@ -535,22 +546,20 @@ DEFINE_EXCEPTIONS
 #endif		
 			return;
 		}
-		[self performSelector:@selector(animate:) withObject:newAnimation afterDelay:0.01];
+		[self performSelector:@selector(animate:) withObject:arg afterDelay:0.01];
 		return;
 	}
 	
 	animationDelayGuard = 0;
 
-	if (newAnimation != nil)
+	if ([self animationFromArgument:arg])
 	{
-		RELEASE_TO_NIL(animation);
-		animation = [newAnimation retain];
 		animating = YES;
 		[animation animate:self];
 	}	
 	else
 	{
-		NSLog(@"[WARN] animate called with %@ but couldn't make an animation object",newAnimation);
+		NSLog(@"[WARN] animate called with %@ but couldn't make an animation object",arg);
 	}
 }
 

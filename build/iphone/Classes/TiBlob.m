@@ -212,12 +212,7 @@
 // For Android compatibility
 -(NSString*)nativePath
 {
-	return [[NSURL fileURLWithPath:path] absoluteString];
-}
-
--(NSNumber*)length
-{
-    return NUMLONGLONG([[self data] length]);
+	return path;
 }
 
 -(void)setMimeType:(NSString*)mime type:(TiBlobType)type_

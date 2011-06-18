@@ -153,11 +153,7 @@ USE_VIEW_FOR_AUTO_WIDTH
 
 -(void)setPageToken:(NSString*)pageToken_
 {
-	if (pageToken != nil)
-	{
-		[[self host] unregisterContext:(id<TiEvaluator>)self forToken:pageToken];
-		RELEASE_TO_NIL(pageToken);
-	}
+	RELEASE_TO_NIL(pageToken);
 	pageToken = [pageToken_ retain];
 	[[self host] registerContext:self forToken:pageToken];
 }
@@ -194,25 +190,12 @@ USE_VIEW_FOR_AUTO_WIDTH
 	return nil;
 }
 
-- (id)registerProxy:(id)proxy
+- (void)registerProxy:(id)proxy
 {
-	return nil;
 }
 
 - (void)unregisterProxy:(id)proxy
 {
-}
-
-//TODO: Is this correct?
-- (BOOL)usesProxy:(id)proxy;
-{
-	return NO;
-}
-
-//TODO: Is this correct?
-- (id)krollObjectForProxy:(id)proxy
-{
-	return nil;
 }
 
 -(void)evalJSWithoutResult:(NSString*)code
@@ -225,15 +208,6 @@ USE_VIEW_FOR_AUTO_WIDTH
 	return nil;
 }
 
-- (NSURL *)currentURL
-{
-	return nil;
-}
-
--(void)setCurrentURL:(NSURL *)unused
-{
-
-}
 
 @end
 

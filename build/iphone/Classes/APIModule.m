@@ -11,31 +11,8 @@
 #import "APIModule.h"
 #import "TiUtils.h"
 #import "TiBase.h"
-#import "TiApp.h"
-#import "TiDebugger.h"
 
 @implementation APIModule
-
--(void)logMessage:(NSString*)message severity:(NSString*)severity
-{
-    if ([[TiApp app] debugMode]) {
-        NSString* lcSeverity = [severity lowercaseString];
-        DebuggerLogLevel level = OUT;
-        if ([lcSeverity isEqualToString:@"warn"]) {
-            level = WARN;
-        }
-        else if ([lcSeverity isEqualToString:@"error"] ||
-                 [lcSeverity isEqualToString:@"critical"] ||
-                 [lcSeverity isEqualToString:@"fatal"]) {
-            level = ERR;
-        }
-        TiDebuggerLogMessage(level, message);
-    }
-    else {
-        NSLog(@"[%@] %@", [severity uppercaseString], message);
-        fflush(stderr);
-    }
-}
 
 -(id)transform:(id)arg
 {
@@ -44,27 +21,32 @@
 
 -(void)debug:(NSArray*)args
 {
-    [self logMessage:[self transform:[args objectAtIndex:0]] severity:@"debug"];
+	NSLog(@"[DEBUG] %@", [self transform:[args objectAtIndex:0]]);
+	fflush(stderr);
 }
 
 -(void)info:(NSArray*)args
 {
-    [self logMessage:[self transform:[args objectAtIndex:0]] severity:@"info"];    
+	NSLog(@"[INFO] %@", [self transform:[args objectAtIndex:0]]);
+	fflush(stderr);
 }
 
 -(void)warn:(NSArray*)args
 {
-    [self logMessage:[self transform:[args objectAtIndex:0]] severity:@"warn"];        
+	NSLog(@"[WARN] %@", [self transform:[args objectAtIndex:0]]);
+	fflush(stderr);
 }
 
 -(void)error:(NSArray*)args
 {
-    [self logMessage:[self transform:[args objectAtIndex:0]] severity:@"error"];            
+	NSLog(@"[ERROR] %@", [self transform:[args objectAtIndex:0]]);
+	fflush(stderr);
 }
 
 -(void)trace:(NSArray*)args
 {
-    [self logMessage:[self transform:[args objectAtIndex:0]] severity:@"trace"];
+	NSLog(@"[TRACE] %@", [self transform:[args objectAtIndex:0]]);
+	fflush(stderr);
 }
 
 -(void)timestamp:(NSArray*)args
@@ -75,12 +57,14 @@
 
 -(void)notice:(NSArray*)args
 {
-    [self logMessage:[args objectAtIndex:0] severity:@"info"];
+	NSLog(@"[INFO] %@", [args objectAtIndex:0]);
+	fflush(stderr);
 }
 
 -(void)critical:(NSArray*)args
 {
-    [self logMessage:[args objectAtIndex:0] severity:@"error"];
+	NSLog(@"[ERROR] %@", [args objectAtIndex:0]);
+	fflush(stderr);
 }
 
 -(void)log:(NSArray*)args
@@ -92,7 +76,8 @@
 		loggedObject = severityString;
 		severityString = @"info";
 	}
-    [self logMessage:loggedObject severity:severityString];
+	NSLog(@"[%@] %@",[severityString uppercaseString],loggedObject);
+	fflush(stderr);
 }
 
 -(void)reportUnhandledException:(NSArray*)args

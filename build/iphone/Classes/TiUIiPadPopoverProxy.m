@@ -21,7 +21,6 @@
 #pragma mark Setup
 -(void)dealloc
 {
-	[viewController setProxy:nil];
 	RELEASE_TO_NIL(viewController);
 	RELEASE_TO_NIL(navigationController);
 	RELEASE_TO_NIL(popoverController);
@@ -182,14 +181,13 @@
 -(void)show:(id)args
 {
 	ENSURE_SINGLE_ARG_OR_NIL(args,NSDictionary);
-	[self rememberSelf];
 	ENSURE_UI_THREAD_1_ARG(args);
 	
 	NSDictionary *rectProps = [args objectForKey:@"rect"];
 	animated = [TiUtils boolValue:@"animated" properties:args def:YES];
 	directions = [TiUtils intValue:[self valueForKey:@"arrowDirection"] def:UIPopoverArrowDirectionAny];
 	[self setPopoverView:[args objectForKey:@"view"]];
-	
+
 	if (rectProps!=nil)
 	{
 		popoverRect = [TiUtils rectValue:rectProps];
@@ -224,11 +222,6 @@
 	else
 	{
 		UIView *view_ = [popoverView view];
-		if ([view_ window] == nil) {
-			// No window, so we can't display the popover...
-			NSLog(@"[WARN] Unable to display popover; view is not attached to the current window");
-            return;
-		}
 		
 		CGRect rect;
 		if (CGRectIsEmpty(popoverRect))
@@ -257,20 +250,6 @@
 	[self performSelector:@selector(popoverControllerDidDismissPopover:) withObject:popoverController afterDelay:0.5];
 }
 
--(void)setPassthroughViews:(id)args
-{
-    NSMutableArray* views = [NSMutableArray arrayWithCapacity:[args count]];
-    for (TiViewProxy* proxy in args) {
-        if (![proxy isKindOfClass:[TiViewProxy class]]) {
-            [self throwException:[NSString stringWithFormat:@"Passed non-view object %@ as passthrough view",proxy] 
-					   subreason:nil
-						location:CODELOCATION];
-        }
-        [views addObject:[proxy view]];
-    }
-    [[self popoverController] setPassthroughViews:views];
-}
-
 #pragma mark Delegate methods
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)thisPopoverController
 {
@@ -286,7 +265,6 @@
 	[self fireEvent:@"hide" withObject:nil]; //Checking for listeners are done by fireEvent anyways.
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
 	[self windowDidClose];
-	[self forgetSelf];
 	RELEASE_TO_NIL(viewController);
 	RELEASE_TO_NIL_AUTORELEASE(popoverController);
 	RELEASE_TO_NIL(navigationController);

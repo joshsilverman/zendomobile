@@ -56,7 +56,7 @@
 
 #import "Reachability.h"
 
-#define kShouldPrintReachabilityFlags 0
+#define kShouldPrintReachabilityFlags 1
 
 static void PrintReachabilityFlags(SCNetworkReachabilityFlags    flags, const char* comment)
 {

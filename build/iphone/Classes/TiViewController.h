@@ -30,5 +30,5 @@
 	TiViewProxy<TiUIViewController> *proxy;
 }
 -(id)initWithViewProxy:(TiViewProxy<TiUIViewController>*)window;
-@property(nonatomic,readwrite,assign)	TiViewProxy<TiUIViewController> *proxy;
+@property(nonatomic,readonly)	TiViewProxy<TiUIViewController> *proxy;
 @end

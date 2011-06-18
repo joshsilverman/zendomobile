@@ -176,7 +176,7 @@ NSArray* moviePlayerKeys = nil;
 	// properties in certain cases and when we go to create it again after setting
 	// url we will need to set the new controller to the already created view
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-	if ([TiUtils isiPhoneOS3_2OrGreater] && [self viewAttached]) {
+	if ([TiUtils isiPhoneOS3_2OrGreater]) {
 		TiMediaVideoPlayer *vp = (TiMediaVideoPlayer*)[self view];
 		[vp setMovie:movie];
 	}
@@ -208,7 +208,7 @@ NSArray* moviePlayerKeys = nil;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
 		if ([TiUtils isiPhoneOS3_2OrGreater]) {
 			// override since we're constructing ourselfs
-			TiUIView *v = [[TiMediaVideoPlayer alloc] initWithPlayer:[self player] proxy:self loaded:loaded];
+			TiUIView *v = [[TiMediaVideoPlayer alloc] initWithPlayer:[self player] proxy:self];
 			return v;
 		}
 		else {
@@ -219,6 +219,15 @@ NSArray* moviePlayerKeys = nil;
 #endif
 	}
 	return nil;
+}
+
+// TODO: Placing this in TiViewProxy would be better, but right now it screws up tableview.
+// So... move it there and fix tableview, when we have the time.
+-(void)relayout
+{
+	if (!CGRectEqualToRect(sandboxBounds, CGRectZero)) {
+		[super relayout];
+	}
 }
 
 -(void)viewWillAttach
@@ -310,36 +319,6 @@ NSArray* moviePlayerKeys = nil;
 	else {
 		RETURN_FROM_LOAD_PROPERTIES(@"scalingMode", NUMINT(MPMovieScalingModeNone));
 	}
-}
-
--(void)setAllowsAirPlay:(NSNumber*)value
-{
-    if (movie != nil) {
-        if ([movie respondsToSelector:@selector(setAllowsAirPlay:)]) {
-            [movie setAllowsAirPlay:[value boolValue]];
-        }
-        else {
-            NSLog(@"[WARN] Canot use airplay; using pre-4.3 iOS");
-        }
-    }
-    else {
-        [loadProperties setValue:value forKey:@"allowsAirPlay"];
-    }
-}
-
--(NSNumber*)allowsAirPlay
-{
-    if (movie != nil) {
-        if ([movie respondsToSelector:@selector(allowsAirPlay)]) {
-            return NUMBOOL([movie allowsAirPlay]);
-        }
-        else {
-            return NUMBOOL(NO);
-        }
-    }
-    else {
-        RETURN_FROM_LOAD_PROPERTIES(@"allowsAirPlay", NUMBOOL(NO));
-    }
 }
 
 // < 3.2 functions for controls
@@ -466,7 +445,7 @@ NSArray* moviePlayerKeys = nil;
 	RELEASE_TO_NIL_AUTORELEASE(movie);
 	
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-	if ([TiUtils isiPhoneOS3_2OrGreater] && [self viewAttached]) {
+	if ([TiUtils isiPhoneOS3_2OrGreater]) {
 		TiMediaVideoPlayer *video = (TiMediaVideoPlayer*)[self view];
 		[video setMovie:[self player]];
 		[video frameSizeChanged:[video frame] bounds:[video bounds]];
@@ -484,7 +463,6 @@ NSArray* moviePlayerKeys = nil;
 	ENSURE_UI_THREAD(setUrl,url_);
 	RELEASE_TO_NIL(url);
 	url = [[TiUtils toURL:url_ proxy:self] retain];
-    loaded = NO;
 	
 	if (movie!=nil)
 	{
@@ -606,7 +584,7 @@ NSArray* moviePlayerKeys = nil;
 
 -(void)setBackgroundColor:(id)color
 {
-	[self replaceValue:color forKey:@"backgroundColor" notification:NO];
+	[self replaceValue:color forKey:color notification:NO];
 	
 	RELEASE_TO_NIL(backgroundColor);
 	backgroundColor = [[TiUtils colorValue:color] retain];
@@ -621,20 +599,18 @@ NSArray* moviePlayerKeys = nil;
 				return;
 			}
 		}
-        else {
-#endif
-            // Have to make sure the view is created on the main thread, and that all properties are set there.
-            [self makeViewPerformSelector:@selector(setBackgroundColor:) 
-                               withObject:[backgroundColor _color] 
-                           createIfNeeded:YES
-                            waitUntilDone:NO];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-        }
 #endif
 	}
 	else {
 		[loadProperties setValue:color forKey:@"backgroundColor"];
 	}
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
+	// Have to make sure the view is created on the main thread, and that all properties are set there.
+	[self makeViewPerformSelector:@selector(setBackgroundColor:) 
+					   withObject:[backgroundColor _color] 
+				   createIfNeeded:YES
+					waitUntilDone:NO];
+#endif
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
@@ -763,7 +739,6 @@ NSArray* moviePlayerKeys = nil;
 	if (movie != nil) {
 		return NUMINT([[self player] playbackState]);
 	}
-    return NUMINT(MPMoviePlaybackStateStopped);
 }
 
 -(void)setRepeatMode:(id)value
@@ -844,8 +819,16 @@ NSArray* moviePlayerKeys = nil;
 -(void)stop:(id)args
 {
 	ENSURE_UI_THREAD(stop, args);
+	
+	if (!playing) {
+		return;
+	}
+	
 	playing = NO;
-	[movie stop];
+	if (movie!=nil)
+	{
+		[movie stop];
+	}
 	RELEASE_TO_NIL_AUTORELEASE(movie);
 }
 
@@ -864,14 +847,13 @@ NSArray* moviePlayerKeys = nil;
 				location:CODELOCATION];
 	}
 	
+	if (playing)
+	{
+		[self stop:nil];
+	}
+	
 	playing = YES;
 	[[self player] play];
-}
-
-// Synonym for 'play' from the docs
--(void)start:(id)args
-{
-    [self play:args];
 }
 
 -(void)pause:(id)args
@@ -881,8 +863,9 @@ NSArray* moviePlayerKeys = nil;
 		return;
 	}
 	
-	if ([[self player] respondsToSelector:@selector(pause)]) {
-		playing = NO;
+	// For the purposes of cleanup, we're still playing, so don't toggle that.
+	if ([[self player] respondsToSelector:@selector(pause)])
+	{
 		[[self player] performSelector:@selector(pause)];
 	}
 }
@@ -1129,13 +1112,10 @@ NSArray* moviePlayerKeys = nil;
 		(player.playbackState == MPMoviePlaybackStateStopped||
 		player.playbackState == MPMoviePlaybackStatePlaying)) 
 	{
-		if ([TiUtils isiPhoneOS3_2OrGreater] && [self viewAttached]) {
+		if ([TiUtils isiPhoneOS3_2OrGreater]) {
 			TiMediaVideoPlayer *vp = (TiMediaVideoPlayer*)[self view];
 			[vp movieLoaded];
 		}
-        else {
-            loaded = YES;
-        }
 	}
 	if ([self _hasListeners:@"loadstate"])
 	{
@@ -1161,7 +1141,6 @@ NSArray* moviePlayerKeys = nil;
 		[self fireEvent:@"playbackState" withObject:event];
 	}
 	switch ([movie playbackState]) {
-		case MPMoviePlaybackStatePaused:
 		case MPMoviePlaybackStateStopped:
 			playing = NO;
 			break;

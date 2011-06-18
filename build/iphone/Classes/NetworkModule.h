@@ -26,8 +26,6 @@ typedef enum {
 	KrollCallback *pushNotificationError;
 	KrollCallback *pushNotificationSuccess;
 	Reachability *reachability;
-    
-    TiProxy* socketProxy;
 }
 
 @property(nonatomic,readonly) NSNumber* online;
@@ -51,6 +49,7 @@ typedef enum {
 @property(readonly, nonatomic) NSNumber* WRITE_MODE;
 @property(readonly, nonatomic) NSNumber* READ_WRITE_MODE;
 @property(readonly, nonatomic) NSString* INADDR_ANY;
+
 
 -(id)encodeURIComponent:(id)args;
 -(id)decodeURIComponent:(id)args;

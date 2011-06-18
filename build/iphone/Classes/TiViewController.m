@@ -18,14 +18,14 @@
 {
 	if (self = [super init])
 	{
-		proxy = window_;
+		proxy = [window_ retain];
 	}
 	return self;
 }
 
 -(void)dealloc
 {
-//    RELEASE_TO_NIL(proxy);
+    RELEASE_TO_NIL(proxy);
     [super dealloc];
 }
 
@@ -34,7 +34,26 @@
 	self.view = [proxy view];
 }
 
-@synthesize proxy;
+//-(UIView*)view
+//{
+//	return [proxy view];
+//}
+//
+//- (void)viewDidUnload
+//{
+////TODO: The if is commented out for now since this check is not pushed yet and I want to keep it consistent with HEAD. Remove the comment when pushing.
+//	if ([proxy shouldDetachViewOnUnload])
+//	{
+//		[proxy detachView];
+//	}
+//	[super viewDidUnload];
+//}
+
+
+-(id)proxy
+{
+	return proxy;
+}
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {

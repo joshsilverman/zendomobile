@@ -96,50 +96,39 @@ NSArray* pickerKeySequence;
 	return column;
 }
 
-#pragma mark support methods for add: 
+#pragma mark Public APIs 
 
--(void)addPickerRow:(NSDictionary*)params {
-	ENSURE_UI_THREAD(addPickerRow,params);
-	TiUIPickerRowProxy *row = [params objectForKey:@"row"];
-	TiUIPickerColumnProxy *column = [params objectForKey:@"column"];
-	NSNumber* rowIndex = [column addRow:row];
+-(void)add:(id)args
+{
+	// TODO: Probably take advantage of Jeff's performance improvements in ordinary views.
+	// But DO NOT do this until after release!
+	ENSURE_UI_THREAD(add,args);
 	
-	if (windowOpened) {
-		[row windowWillOpen];
-		[row windowDidOpen];
-	}
-	
-	[self reloadColumn:column];
-	if ([TiUtils boolValue:[row valueForUndefinedKey:@"selected"] def:NO])
+	id data = [args objectAtIndex:0];
+		
+	if ([data isKindOfClass:[TiUIPickerRowProxy class]])
 	{
-		TiUIPicker *picker = [self picker];
-		[picker performSelectorOnMainThread:@selector(selectRow:) withObject:[NSArray arrayWithObjects:NUMINT(0),rowIndex,nil] waitUntilDone:NO];
-	}
-}
-
--(void)addPickerColumn:(NSDictionary*)params {
-	ENSURE_UI_THREAD_1_ARG(params);
-	NSMutableArray *columns = [params objectForKey:@"columns"];
-	TiUIPickerColumnProxy *column = [params objectForKey:@"column"];
-	if (windowOpened) {
-		for (NSInteger i=0; i < [column rowCount]; i++) {
-			TiUIPickerRowProxy* row = [column rowAt:i];
-			
+		TiUIPickerRowProxy *row = (TiUIPickerRowProxy*)data;
+		TiUIPickerColumnProxy *column = [self columnAt:0];
+		NSNumber* rowIndex = [column addRow:row];
+		
+		if (windowOpened) {
 			[row windowWillOpen];
 			[row windowDidOpen];
 		}
+		
+		[self reloadColumn:column];
+		if ([TiUtils boolValue:[row valueForUndefinedKey:@"selected"] def:NO])
+		{
+			TiUIPicker *picker = [self picker];
+			[picker performSelectorOnMainThread:@selector(selectRow:) withObject:[NSArray arrayWithObjects:NUMINT(0),rowIndex,nil] waitUntilDone:NO];
+		}
 	}
-	
-	[columns addObject:column];
-	[self reloadColumn:column];
-}
-
--(void)addRowOfColumns:(NSDictionary*)params {
-	ENSURE_UI_THREAD_1_ARG(params);
-	NSMutableArray *columns = [params objectForKey:@"columns"];
-	NSArray *data = [params objectForKey:@"data"];
-	for (id column in data)
+	else if ([data isKindOfClass:[TiUIPickerColumnProxy class]])
 	{
+		NSMutableArray *columns = [self columns];
+		TiUIPickerColumnProxy* column = (TiUIPickerColumnProxy*)data;
+		
 		if (windowOpened) {
 			for (NSInteger i=0; i < [column rowCount]; i++) {
 				TiUIPickerRowProxy* row = [column rowAt:i];
@@ -150,64 +139,7 @@ NSArray* pickerKeySequence;
 		}
 		
 		[columns addObject:column];
-	}
-}
-
--(void)addRowOfDicts:(NSDictionary*)params {
-	ENSURE_UI_THREAD_1_ARG(params);
-	TiUIPickerRowProxy *row = [params objectForKey:@"row"];
-	TiUIPickerColumnProxy *column = [params objectForKey:@"column"];
-	NSNumber* rowIndex = [params objectForKey:@"rowIndex"];
-	if (windowOpened) {
-		[row windowWillOpen];
-		[row windowDidOpen];
-	}
-	[self reloadColumn:column];
-	if ([TiUtils boolValue:[row valueForUndefinedKey:@"selected"] def:NO])
-	{
-		[self setSelectedRow:[NSArray arrayWithObjects:NUMINT(0),rowIndex,NUMBOOL(NO),nil]];
-	}
-}
-
--(void)addDefault:(NSDictionary*)params {
-	ENSURE_UI_THREAD_1_ARG(params);
-	TiUIPickerColumnProxy *column = [params objectForKey:@"column"];
-	NSArray *data = [params objectForKey:@"data"];
-	for (id item in data)
-	{
-		ENSURE_TYPE(item,TiUIPickerRowProxy);
-		
-		if (windowOpened) {
-			[item windowWillOpen];
-			[item windowDidOpen];
-		}
-		
-		[column addRow:item];
-	}
-	[self reloadColumn:column];
-}
-
-#pragma mark Public APIs 
-
--(void)add:(id)args
-{
-	// TODO: Probably take advantage of Jeff's performance improvements in ordinary views.
-	// But DO NOT do this until after release!
-	id data = [args objectAtIndex:0];
-	
-	if ([data isKindOfClass:[TiUIPickerRowProxy class]])
-	{
-		TiUIPickerRowProxy *row = (TiUIPickerRowProxy*)data;
-		TiUIPickerColumnProxy *column = [self columnAt:0];
-		NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:row, @"row", column, @"column", nil];
-		[self addPickerRow:params];
-	}
-	else if ([data isKindOfClass:[TiUIPickerColumnProxy class]])
-	{
-		NSMutableArray *columns = [self columns];
-		TiUIPickerColumnProxy* column = (TiUIPickerColumnProxy*)data;
-		NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:columns, @"columns", column, @"column", nil];
-		[self addPickerColumn:params];
+		[self reloadColumn:data];
 	}
 	else if ([data isKindOfClass:[NSArray class]])
 	{
@@ -218,27 +150,58 @@ NSArray* pickerKeySequence;
 		if ([firstRow isKindOfClass:[TiUIPickerColumnProxy class]])
 		{
 			NSMutableArray *columns = [self columns];
-			NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:columns, @"columns", data, @"data", nil];
-			[self addRowOfColumns:params];
+			for (id column in data)
+			{
+				if (windowOpened) {
+					for (NSInteger i=0; i < [column rowCount]; i++) {
+						TiUIPickerRowProxy* row = [column rowAt:i];
+						
+						[row windowWillOpen];
+						[row windowDidOpen];
+					}
+				}
+				
+				[columns addObject:column];
+			}
 		}
 		else if ([firstRow isKindOfClass:[NSDictionary class]])
 		{
 			for (id rowdata in data)
 			{
 				TiUIPickerRowProxy *row = [[TiUIPickerRowProxy alloc] _initWithPageContext:[self executionContext] args:[NSArray arrayWithObject:rowdata]];
+								
 				TiUIPickerColumnProxy *column = [self columnAt:0];
 				NSNumber* rowIndex = [column addRow:row];
+				
+				if (windowOpened) {
+					[row windowWillOpen];
+					[row windowDidOpen];
+				}
+				
 				[row release];
-
-				NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:row, @"row", column, @"column", rowIndex, @"rowIndex", nil];
-				[self addRowOfDicts:params];
+				
+				[self reloadColumn:column];
+				if ([TiUtils boolValue:[row valueForUndefinedKey:@"selected"] def:NO])
+				{
+					[self setSelectedRow:[NSArray arrayWithObjects:NUMINT(0),rowIndex,NUMBOOL(NO),nil]];
+				}
 			}
 		}
 		else
 		{
 			TiUIPickerColumnProxy *column = [self columnAt:0];
-			NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:column, @"column", data, @"data", nil];
-			[self addDefault:params];
+			for (id item in data)
+			{
+				ENSURE_TYPE(item,TiUIPickerRowProxy);
+				
+				if (windowOpened) {
+					[item windowWillOpen];
+					[item windowDidOpen];
+				}
+				
+				[column addRow:item];
+			}
+			[self reloadColumn:column];
 		}
 	}
 }

@@ -28,9 +28,6 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <QuartzCore/QuartzCore.h>
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-#import <UIKit/UIPopoverController.h>
-#endif
 // by default, we want to make the camera fullscreen and 
 // these transform values will scale it when we have our own overlay
 
@@ -167,16 +164,6 @@ enum
 	}
 }
 
--(void)displayCamera:(UIViewController*)picker_
-{
-	TiApp * tiApp = [TiApp app];
-	if ([TiUtils isIPad]==NO)
-	{
-		[[tiApp controller] manuallyRotateToOrientation:UIInterfaceOrientationPortrait];
-	}
-	[tiApp showModalController:picker_ animated:animatedPicker];
-}
-
 -(void)displayModalPicker:(UIViewController*)picker_ settings:(NSDictionary*)args
 {
 	TiApp * tiApp = [TiApp app];
@@ -197,7 +184,6 @@ enum
 		}
 		UIPopoverArrowDirection arrow = [TiUtils intValue:@"arrowDirection" properties:args def:UIPopoverArrowDirectionAny];
 		popover = [[UIPopoverController alloc] initWithContentViewController:picker_];
-		[popover setDelegate:self];
 		[popover presentPopoverFromRect:poView.frame inView:poView permittedArrowDirections:arrow animated:animatedPicker];
 	}
 #endif
@@ -206,10 +192,9 @@ enum
 -(void)closeModalPicker:(UIViewController*)picker_
 {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
-	if (popover)
+	if ([TiUtils isIPad]==YES)
 	{
 		[(UIPopoverController*)popover dismissPopoverAnimated:animatedPicker];
-		RELEASE_TO_NIL(popover);
 	}
 	else
 	{
@@ -218,11 +203,6 @@ enum
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
 	}
 #endif	
-}
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-	RELEASE_TO_NIL(popover);
 }
 
 -(void)showPicker:(NSDictionary*)args isCamera:(BOOL)isCamera
@@ -358,11 +338,7 @@ enum
 		}
 	}
 	
-	if (isCamera) {
-		[self displayCamera:picker];
-	} else {
-		[self displayModalPicker:picker settings:args];
-	}
+	[self displayModalPicker:picker settings:args];
 }
 
 -(void)saveCompletedForImage:(UIImage*)image error:(NSError*)error contextInfo:(void*)contextInfo

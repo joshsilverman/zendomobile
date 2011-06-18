@@ -9,7 +9,6 @@
 #ifdef USE_TI_MEDIA
 
 #import "TiMediaVideoPlayer.h"
-#import "TiViewProxy.h"
 #import "TiUtils.h"
 #import "Webcolor.h"
 
@@ -17,11 +16,10 @@
 
 @implementation TiMediaVideoPlayer
 
--(id)initWithPlayer:(MPMoviePlayerController*)controller_ proxy:(TiProxy*)proxy_ loaded:(BOOL)loaded_
+-(id)initWithPlayer:(MPMoviePlayerController*)controller_ proxy:(TiProxy*)proxy_
 {
-	if (self = [super init])
+	if (self = [super initWithFrame:CGRectZero])
 	{
-        loaded = loaded_;
 		[self setProxy:proxy_];
 		[self setMovie:controller_];
 	}

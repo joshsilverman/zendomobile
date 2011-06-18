@@ -18,13 +18,13 @@
 #import <mach/mach.h>
 #endif
 
+
+
 @interface ImageCacheEntry : NSObject
 {
 	UIImage * fullImage;
 	UIImage * stretchableImage;
 	UIImage * recentlyResizedImage;
-	NSString * fullPath;
-	
     TiDimension leftCap;
     TiDimension topCap;
     BOOL recapStretchableImage;
@@ -32,7 +32,6 @@
 	BOOL hires;
 }
 
-@property (nonatomic,readonly,copy) NSString * fullPath;
 @property(nonatomic,readwrite,retain) UIImage * fullImage;
 @property(nonatomic,readwrite,retain) UIImage * recentlyResizedImage;
 @property(nonatomic,readwrite) TiDimension leftCap;
@@ -47,52 +46,75 @@
 @end
 
 @implementation ImageCacheEntry
-
 @synthesize fullImage, recentlyResizedImage, leftCap, topCap, isLocalImage, hires;
-@synthesize fullPath;
 
-- (UIImage *) fullImage {
-	if(fullImage == nil) {
-		if(fullPath == nil) {
-			return nil;
-		}
-		VerboseLog(@"retrieving image from local file: %@", fullPath);
-		fullImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+-(void)ensureFullImageForUrl:(NSURL *)url
+{
+	if (isLocalImage && (fullImage == nil))
+	{
+		[self setFullImage:[UIImage imageWithContentsOfFile:[url path]]];
 	}
-	return fullImage;
 }
 
-- (void) setFullURL:(NSURL *) url {
-	VerboseLog(@"setting new URL for image cache entry: %@", [url absoluteString]);
-	if([url isFileURL]) {
-		fullPath = [[url absoluteString] retain];
-	} else {
-		fullPath = [[NSString alloc] initWithFormat:@"%@%x.%@", NSTemporaryDirectory(), self, [[url absoluteString] pathExtension]];
-		NSFileManager *fm = [[NSFileManager alloc] init];
-		NSError *error = nil;
-		if([fm fileExistsAtPath:fullPath]) {
-			[fm removeItemAtPath:fullPath error:&error];
-			if(error != nil) {
-				NSLog(@"[ERROR] problem deleting cache file %@: %@", fullPath, error);
+-(UIImage *)imageForSize:(CGSize)imageSize scalingStyle:(TiImageScalingStyle)scalingStyle
+{
+	if (scalingStyle == TiImageScalingStretch)
+	{
+		return [self stretchableImage];
+	}
+
+	CGSize fullImageSize = [fullImage size];
+
+	if (scalingStyle != TiImageScalingNonProportional)
+	{
+		BOOL validScale = NO;
+		CGFloat scale = 1.0;
+		
+		if (imageSize.height > 1.0)
+		{
+			scale = imageSize.height/fullImageSize.height;
+			validScale = YES;
+		}
+		if (imageSize.width > 1.0)
+		{
+			CGFloat widthScale = imageSize.width/fullImageSize.width;
+			if (!validScale || (widthScale<scale))
+			{
+				scale = widthScale;
+				validScale = YES;
 			}
 		}
-		[fm release];
-	}
-}
-
-- (void) setData:(NSData *) newData {	
-	NSFileManager *fm = [[NSFileManager alloc] init];
-	if(![fm fileExistsAtPath:fullPath]) {
-		NSError *error = nil;
-		VerboseLog(@"saving image data to file: %@", fullPath);
 		
-		[newData writeToFile:fullPath options:0 error:&error];
-
-		if(error != nil) {
-			NSLog(@"[ERROR] Problem saving image data to file: %@\n%@", fullPath, error);
+		if (validScale && ((scalingStyle != TiImageScalingThumbnail) || (scale < 1.0)))
+		{
+			imageSize = CGSizeMake(ceilf(scale*fullImageSize.width),
+					ceilf(scale*fullImageSize.height));
+		}
+		else
+		{
+			imageSize = fullImageSize;
 		}
 	}
-	[fm release];
+
+	if (CGSizeEqualToSize(imageSize, fullImageSize))
+	{
+		return fullImage;
+	}
+	
+	if (CGSizeEqualToSize(imageSize, [recentlyResizedImage size]))
+	{
+		return recentlyResizedImage;
+	}
+
+//TODO: Tweak quality depending on how large the result will be.
+	CGInterpolationQuality quality = kCGInterpolationDefault;
+
+	[self setRecentlyResizedImage:[UIImageResize
+								   resizedImage:imageSize
+								   interpolationQuality:quality
+								   image:fullImage
+								   hires:hires]];
+	return recentlyResizedImage;
 }
 
 -(void)setLeftCap:(TiDimension)cap
@@ -116,7 +138,7 @@
     if (stretchableImage == nil || recapStretchableImage) {
         [stretchableImage release];
         
-        CGSize imageSize = [[self fullImage] size];
+        CGSize imageSize = [fullImage size];
 		
         NSInteger left = (TiDimensionIsAuto(leftCap) || TiDimensionIsUndefined(leftCap) || leftCap.value == 0) ?
                                 imageSize.width/2  : 
@@ -125,75 +147,12 @@
                                 imageSize.height/2  : 
                                 TiDimensionCalculateValue(topCap, imageSize.height);
         
-        stretchableImage = [[[self fullImage] stretchableImageWithLeftCapWidth:left
+        stretchableImage = [[fullImage stretchableImageWithLeftCapWidth:left
                                                            topCapHeight:top] retain];
         recapStretchableImage = NO;
     }
 	return stretchableImage;
 }
-
--(UIImage *)imageForSize:(CGSize)imageSize scalingStyle:(TiImageScalingStyle)scalingStyle
-{
-	
-	if (scalingStyle == TiImageScalingStretch)
-	{
-	   return [self stretchableImage];
-	}
-	
-	CGSize fullImageSize = [[self fullImage] size];
-	
-	if (scalingStyle != TiImageScalingNonProportional)
-	 {
-		BOOL validScale = NO;
-		CGFloat scale = 1.0;
-		
-		if (imageSize.height > 1.0)
-		 {
-			scale = imageSize.height/fullImageSize.height;
-			validScale = YES;
-		 }
-		if (imageSize.width > 1.0)
-		 {
-			CGFloat widthScale = imageSize.width/fullImageSize.width;
-			if (!validScale || (widthScale<scale))
-			 {
-				scale = widthScale;
-				validScale = YES;
-			 }
-		 }
-		
-		if (validScale && ((scalingStyle != TiImageScalingThumbnail) || (scale < 1.0)))
-		 {
-			imageSize = CGSizeMake(ceilf(scale*fullImageSize.width),
-								   ceilf(scale*fullImageSize.height));
-		 }
-		else
-		 {
-			imageSize = fullImageSize;
-		 }
-	 }
-	
-	if (CGSizeEqualToSize(imageSize, fullImageSize))
-	 {
-		return fullImage;
-	 }
-	
-	if (CGSizeEqualToSize(imageSize, [recentlyResizedImage size]))
-	 {
-		return recentlyResizedImage;
-	 }
-	
-	//TODO: Tweak quality depending on how large the result will be.
-	CGInterpolationQuality quality = kCGInterpolationDefault;
-	
-	[self setRecentlyResizedImage:[UIImageResize
-								   resizedImage:imageSize
-								   interpolationQuality:quality
-								   image:fullImage
-								   hires:hires]];
-	return recentlyResizedImage;
-}
-
 
 -(UIImage *)imageForSize:(CGSize)imageSize
 {
@@ -220,17 +179,22 @@
 	{
 		canPurge = NO;
 	}
-	
-	if([fullImage retainCount]<2)
+
+	if (canPurge && [fullImage retainCount]<2)
+	{
+		RELEASE_TO_NIL(fullImage);
+		return YES;
+	}
+	else if(isLocalImage && [fullImage retainCount]<2)
 	{
 		RELEASE_TO_NIL(fullImage);
 	}
-	return canPurge;
+
+	return NO;
 }
 
 - (void) dealloc
 {
-	RELEASE_TO_NIL(fullPath);
 	RELEASE_TO_NIL(recentlyResizedImage);
 	RELEASE_TO_NIL(stretchableImage);
 	RELEASE_TO_NIL(fullImage);
@@ -239,6 +203,12 @@
 
 
 @end
+
+
+
+
+
+
 
 
 
@@ -312,7 +282,7 @@ DEFINE_EXCEPTIONS
 }
 
 -(void)dealloc
-{	
+{
 	WARN_IF_BACKGROUND_THREAD_OBJ;	//NSNotificationCenter is not threadsafe!
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:UIApplicationDidReceiveMemoryWarningNotification  
@@ -336,7 +306,7 @@ DEFINE_EXCEPTIONS
 	NSLog(@"[INFO] %d pages free before clearing image cache.",vmStats.free_count);
 #endif
 
-    // TODO: Replace this logic with some that doesn't remove the cache entry completely, just purges what it can
+
 	do
 	{
 		doomedKey = nil;
@@ -360,7 +330,7 @@ DEFINE_EXCEPTIONS
 	NSLog(@"[INFO] %d of %d images remain in cache, %d pages now free.",[cache count],cacheCount,vmStats.free_count);
 #else
 	int newCacheCount = [cache count];
-	NSLog(@"[INFO] Due to memory conditions, %d of %d image cache entries were unloaded from cache.",cacheCount - newCacheCount,cacheCount);
+	NSLog(@"[INFO] Due to memory conditions, %d of %d images were unloaded from cache.",cacheCount - newCacheCount,cacheCount);
 #endif
 
 
@@ -375,9 +345,8 @@ DEFINE_EXCEPTIONS
 	return sharedLoader;
 }
 
--(ImageCacheEntry *)setImage:(UIImage *)image forKey:(NSURL *)url cache:(BOOL)doCache
+-(ImageCacheEntry *)setImage:(UIImage *)image forKey:(NSString *)urlString cache:(BOOL)doCache
 {
-	NSString *urlString = [url absoluteString];
 	if (image==nil)
 	{
 		return nil;
@@ -388,19 +357,18 @@ DEFINE_EXCEPTIONS
 	}
 	ImageCacheEntry * newEntry = [[[ImageCacheEntry alloc] init] autorelease];
 	[newEntry setFullImage:image];
-	[newEntry setFullURL:url];
 	
 	if (doCache)
 	{
-		VerboseLog(@"Caching image %@: %@",urlString,image);
+		VerboseLog(@"[DEBUG] Caching image %@: %@",urlString,image);
 		[cache setObject:newEntry forKey:urlString];
 	}
 	return newEntry;
 }
 
--(ImageCacheEntry *)setImage:(UIImage *)image forKey:(NSURL *)url
+-(ImageCacheEntry *)setImage:(UIImage *)image forKey:(NSString *)urlString
 {
-	return [self setImage:image forKey:url cache:YES];
+	return [self setImage:image forKey:urlString cache:YES];
 }
 
 -(CGFloat)imageScale:(UIImage*)image
@@ -454,8 +422,12 @@ DEFINE_EXCEPTIONS
 				}
 			}
 #endif
-		    result = [self setImage:resultImage forKey:url cache:NO];
+			result = [self setImage:resultImage forKey:urlString cache:NO];
 			[result setIsLocalImage:YES];
+		}
+		else
+		{
+			[result ensureFullImageForUrl:url];
 		}
 	}
 	
@@ -466,7 +438,7 @@ DEFINE_EXCEPTIONS
 
 -(id)cache:(UIImage*)image forURL:(NSURL*)url size:(CGSize)imageSize
 {
-	return [[self setImage:image forKey:url] imageForSize:imageSize];
+	return [[self setImage:image forKey:[url absoluteString]] imageForSize:imageSize];
 }
 
 -(id)cache:(UIImage*)image forURL:(NSURL*)url
@@ -492,11 +464,8 @@ DEFINE_EXCEPTIONS
 	
 	if (req!=nil && [req error]==nil)
 	{
-	   NSData *data = [req responseData];
-	   UIImage *resultImage = [UIImage imageWithData:data];
-	   ImageCacheEntry *result = [self setImage:resultImage forKey:url];
-	   [result setData:data];
-	   return [result imageForSize:CGSizeZero];
+		UIImage * resultImage = [UIImage imageWithData:[req responseData]];
+		return [[self setImage:resultImage forKey:[url absoluteString]] imageForSize:CGSizeZero];
 	}
 	
 	return nil;
@@ -607,12 +576,6 @@ DEFINE_EXCEPTIONS
 	[self doImageLoader:request];
 	
 	return request;
-}
-
--(BOOL)purgeEntry:(NSURL*)url
-{
-    NSString* key = [url absoluteString];
-    return [[cache objectForKey:[url absoluteString]] purgable];
 }
 
 -(void)suspend
@@ -734,10 +697,8 @@ DEFINE_EXCEPTIONS
 		if (cacheable)
 		{
 			BOOL hires = [TiUtils boolValue:[[req userInfo] valueForKey:@"hires"] def:NO];
-		    [self cache:image forURL:[req url]];
-			ImageCacheEntry *entry = [self entryForKey:[req url]];
-		    [entry setData:data];
-			[entry setHires:hires];
+			[self cache:image forURL:[request url]];
+			[[self entryForKey:[request url]] setHires:hires];
 		}
 		
 		[self notifyImageCompleted:[NSArray arrayWithObjects:req,image,nil]];

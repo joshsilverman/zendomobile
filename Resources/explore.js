@@ -5,10 +5,30 @@
 Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
 
+var activityIndicator = Titanium.UI.createActivityIndicator({
+	height:50,
+	width:10,
+	top : 150,
+	style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+});
+
+var loadingLabel = Ti.UI.createLabel({
+	text : 'Connecting to your account...',
+	textAlign : 'center'
+});
+
+activityIndicator.show();
+activityIndicator.show();
+	
+win.add(loadingLabel);
+win.add(activityIndicator);
+
 folders = [];
 
 getFolders();
 
+//THIS SHOULD ONLY HAPPEN ON FIRST LOAD?
+//
 function getFolders() {
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.timeout = 1000000;
@@ -20,17 +40,18 @@ function getFolders() {
 				folders.push(createFolderRow(data[i].user.password));
 			}
 		} catch(E) {
-			alert(E);
-		}
+			Ti.API.debug(E);
+		};
 		
-		//if (explore_win.tests_enabled == false) {
-		//	
-		//}
 		start();
 		
 	}
+	
+	xhr.onerror = function() {
+		//var 
+	};
+	
 	xhr.send();
-
 }
 
 function createFolderRow(name){
@@ -56,6 +77,10 @@ function createFolderRow(name){
 
 function start(){
 	
+	loadingLabel.hide();
+	activityIndicator.hide();
+	
+	
 	var toolbar = Ti.UI.createToolbar({
 		top : 0
 	});
@@ -72,8 +97,9 @@ function start(){
 			url : "notes.js",
 			navBarHidden : true,
 			selection : e
+			
 		});
-		new_win.open();
+		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 		win.visible = false;
 	});
 		
@@ -96,7 +122,7 @@ function start(){
 			url:"login.js",
 			navBarHidden : true
 		}); 
-		new_win.open();
+		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
 		win.visible = false;
 	});
 	
