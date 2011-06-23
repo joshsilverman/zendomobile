@@ -1,3 +1,5 @@
+Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
+
 var win = Ti.UI.createWindow({
 	url:"login.js",
 	navBarHidden : true

@@ -110,7 +110,7 @@ function start(){
 
 	review.addEventListener('click', function() {
 		var new_win = Ti.UI.createWindow({
-			url:"review.js",
+			url:"review3.js",
 			modal:true
 		}); 
 		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});

@@ -75,18 +75,18 @@ function createCard(prompt, answer) {
 		opacity:0
 	});
 	
-	var flipButton = Ti.UI.createButton({
-		title:'Show',
-		width:100,
-		height:50,
-		top:185,
-		index:0
-	});
+	// var flipButton = Ti.UI.createButton({
+		// title:'Show',
+		// width:100,
+		// height:50,
+		// top:185,
+		// index:0
+	// });
 	
 	cardView.add(cardBackground);
 	cardView.add(promptLabel);
 	cardView.add(answerLabel);
-	cardView.add(flipButton);
+	//cardView.add(flipButton);
 	
 	return cardView;
 }
@@ -124,13 +124,13 @@ function createUI() {
 		opacity:0
 	});
 	
-	flipButton = Ti.UI.createButton({
-		title:'Show',
-		width:100,
-		height:50,
-		top:205,
-		index:0
-	});
+	// flipButton = Ti.UI.createButton({
+		// title:'Show',
+		// width:100,
+		// height:50,
+		// top:205,
+		// index:0
+	// });
 	
 	//for (i in cards) {
 	//	cardViews.push(createCard(cards[i].prompt, cards[i].answer));
@@ -187,7 +187,7 @@ function createUI() {
 	
 	for (i in buttons) { buttons[i].addEventListener('click', grade_click); }
 	
-	flipButton.addEventListener('click', fadeInOnFlip);
+	cardBackground.addEventListener('click', fadeInOnFlip);
 	
 	graphView = Ti.UI.createImageView({url:'http://chart.apis.google.com/chart?cht=p3&chs=450x200&chd=t:73,13,10,3,1&chco=80C65A,224499,FF0000&chl=Chocolate|Puff+Pastry|Cookies|Muffins|Gelato'});
 	
@@ -207,13 +207,20 @@ function grade_click(e) {
 }
 	
 function fadeInOnFlip(e) {
+	if (cards[index].flipped == false) {
+		cards[index].flipped = true;
+		//cardBackground.animate(animation);
+		for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
+		answerLabel.show();
+		answerLabel.animate(button_animation);
+	} else {
+		for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
+		answerLabel.show();
+		answerLabel.animate(button_animation);		
+	}
+	
+	//flipButton.hide();
 
-	win.animate(animation);
-	cards[index].flipped = true;
-	flipButton.hide();
-	for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
-	answerLabel.show();
-	answerLabel.animate(button_animation);
 }
 
 function showCurrentCard(){
@@ -223,6 +230,7 @@ function showCurrentCard(){
 	if (cards[index] != null) {
 		
 		if (cards[index].flipped == false) {
+			cardBackground.animate(animation);
 			answerLabel.opacity = 0;
 			answerLabel.hide();
 						
@@ -235,14 +243,14 @@ function showCurrentCard(){
 			promptLabel.text = cards[index].prompt;
 			answerLabel.text = cards[index].answer;
 			
-			flipButton.show();
+			//flipButton.show();
 			promptLabel.show();
 			
 		} else {
 			promptLabel.text = cards[index].prompt;
 			answerLabel.text = cards[index].answer;
 			
-			flipButton.hide();
+			//flipButton.hide();
 			
 			promptLabel.show();
 			answerLabel.opacity = 1;
@@ -296,21 +304,20 @@ function reviewComplete() {
 	cardBackground.hide();
 	promptLabel.hide();
 	answerLabel.hide();
-	flipButton.hide();
+	//flipButton.hide();
 	for (i in buttons) { buttons[i].hide(); }
 }
 
 function snapBack(){
 	promptLabel.left = Math.round((( Ti.Platform.displayCaps.platformWidth - promptLabel.width ) / 2 ))
 	cardBackground.left = 10;
-	flipButton.left = 110;
+	//flipButton.left = 110;
 }
 
 function start(){
 	createUI();
 
 	animation = Ti.UI.createAnimation({
-		view : cardBackground, 
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT,
 		duration : 250
 	});
@@ -324,7 +331,7 @@ function start(){
 	win.add(cardBackground);
 	win.add(promptLabel);
 	win.add(answerLabel);
-	win.add(flipButton);
+	//win.add(flipButton);
 	
 	//win.add(scrollView);
 	

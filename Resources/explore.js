@@ -31,20 +31,84 @@ win.add(activityIndicator);
 
 folders = [];
 
-authenticate();
+// authenticate();
+getFolders();
+
+function extractToken(){
+	
+}
 
 //Authenticates with Zendo
 function authenticate() {
-	var xhr = Ti.Network.createHTTPClient();
+	
+	var email = 'jason.urton@gmail.com';
+	var password = 'jason123';
+	var authToken = '';
+	var cookie;
+	
+	xhr = Ti.Network.createHTTPClient();
 	xhr.timeout = 1000000;
-	xhr.open("POST","http://localhost:3000/tags/json");
-	xhr.setRequestHeader("content-type", "application/json");
-	var param = {"user[email]" : "jason.urton@gmail.com", "user[password]" : "jason123"};
-	xhr.send(param);
-	xhr.onerror = function(e){
-		alert(e);
+	xhr.task = 1;
+
+	xhr.onerror = function(e) {
+		
+		alert("Error: " + e.error);
 	}
-	xhr.onComplete = getFolders();
+	// xhr.open("GET", "http://localhost:3000/tags/json");
+	// xhr.open("GET", "http://localhost:3000/users/sign_in");
+	xhr.onload = function(e) {
+		
+		switch (xhr.task) {
+			case 1:
+				// rawCookie = xhr.getResponseHeader("Set-Cookie").replace("; path=/; HttpOnly", "");
+				//cookie = xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", "");
+				xhr.task = 2;
+				// token = this.responseText.match("authenticity_token\" type=\"hidden\" value=\"[A-Za-z0-9/+=]*").toString().replace('authenticity_token" type="hidden" value="', '').toString();
+				var params = {
+					'user[password]' : password,
+					'user[email]' : email//, 
+					// 'authenticity_token' : token	
+				}
+				
+				alert(xhr.getResponseHeader("Test"));
+				
+				xhr.open("POST", "http://localhost:3000/users/sign_in");
+				//xhr.setRequestHeader('Content-Type', 'text/html');
+				xhr.setRequestHeader("Cookie", "cookie=kjhgh;");// + cookie);
+				xhr.send(params); //send params
+				// Ti.API.debug("Got response: " + this.responseText);
+				
+				break;
+				
+			case 2:
+			
+				// alert(xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", ""));
+				// alert(xhr.responseData);
+				// alert(xhr.getResponse());
+				alert(xhr.getResponseHeader("Test"));
+				// alert(xhr.getResponseHeader("Cookie"));
+				// alert(xhr.getResponseHeader("HTTP_COOKIE"));
+				//cookie = xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", "");		
+				xhr.task = 3;
+				xhr.open("GET", "http://localhost:3000/tags/json");//
+				xhr.setRequestHeader('Content-Type', 'text/json');
+				xhr.setRequestHeader('accept', '*/*');
+				xhr.setRequestHeader("Cookie", "cookie=kjhgh;");
+				// Ti.API.debug("Got response: " + this.responseText);
+				xhr.send();
+				// Ti.API.debug("Got response: " + this.responseText);
+
+				// Ti.API.debug("Got response: " + this.responseText);
+				break;
+				
+			case 3:
+				
+				break;
+		}
+	}	
+	// xhr.setRequestHeader('Content-Type', 'text/html');
+	// xhr.send();
+	xhr.onload();
 }
 
 //Retrieves the user's folders
