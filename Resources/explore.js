@@ -1,145 +1,77 @@
 Ti.UI.setBackgroundColor('#fff');
-container = Ti.UI.currentWindow;
+var container = Ti.UI.currentWindow;
 
-var win = Titanium.UI.createWindow({
-	navBarHidden : true
-});
 
-var nav = Titanium.UI.iPhone.createNavigationGroup({
-   window : win
-});
-
+var win = Titanium.UI.createWindow({navBarHidden : true});
+var nav = Titanium.UI.iPhone.createNavigationGroup({window : win});
 container.add(nav);
-
-var activityIndicator = Titanium.UI.createActivityIndicator({
-	height:50,
-	width:10,
-	top : 150,
-	style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
-});
-
-var loadingLabel = Ti.UI.createLabel({
-	text : 'Connecting to your account...',
-	textAlign : 'center'
-});
-
-activityIndicator.show();
-activityIndicator.show();
-	
-win.add(loadingLabel);
-win.add(activityIndicator);
-
 folders = [];
+var xhr = Ti.Network.createHTTPClient();
+xhr.onerror = function(e) { alert("Error: " + e.error);}
 
-// authenticate();
-getFolders();
+function initialize() {
 
-function extractToken(){
+	activityIndicator = Titanium.UI.createActivityIndicator({
+		height:50,
+		width:10,
+		top : 150,
+		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+	});
 	
+	loadingLabel = Ti.UI.createLabel({
+		text : 'Connecting to your account...',
+		textAlign : 'center'
+	});
+	
+	activityIndicator.show();
+		
+	win.add(loadingLabel);
+	win.add(activityIndicator);
+	
+	xhr.onload = getFolders;
+	authenticate();
 }
 
-//Authenticates with Zendo
 function authenticate() {
 	
-	var email = 'jason.urton@gmail.com';
-	var password = 'jason123';
-	var authToken = '';
-	var cookie;
-	
-	xhr = Ti.Network.createHTTPClient();
-	xhr.timeout = 1000000;
-	xhr.task = 1;
-
-	xhr.onerror = function(e) {
-		
-		alert("Error: " + e.error);
+	var params = {
+		'user[email]' : 'jason.urton@gmail.com',
+		'user[password]' : 'jason123'
 	}
-	// xhr.open("GET", "http://localhost:3000/tags/json");
-	// xhr.open("GET", "http://localhost:3000/users/sign_in");
-	xhr.onload = function(e) {
-		
-		switch (xhr.task) {
-			case 1:
-				// rawCookie = xhr.getResponseHeader("Set-Cookie").replace("; path=/; HttpOnly", "");
-				//cookie = xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", "");
-				xhr.task = 2;
-				// token = this.responseText.match("authenticity_token\" type=\"hidden\" value=\"[A-Za-z0-9/+=]*").toString().replace('authenticity_token" type="hidden" value="', '').toString();
-				var params = {
-					'user[password]' : password,
-					'user[email]' : email//, 
-					// 'authenticity_token' : token	
-				}
-				
-				alert(xhr.getResponseHeader("Test"));
-				
-				xhr.open("POST", "http://localhost:3000/users/sign_in");
-				//xhr.setRequestHeader('Content-Type', 'text/html');
-				xhr.setRequestHeader("Cookie", "cookie=kjhgh;");// + cookie);
-				xhr.send(params); //send params
-				// Ti.API.debug("Got response: " + this.responseText);
-				
-				break;
-				
-			case 2:
-			
-				// alert(xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", ""));
-				// alert(xhr.responseData);
-				// alert(xhr.getResponse());
-				alert(xhr.getResponseHeader("Test"));
-				// alert(xhr.getResponseHeader("Cookie"));
-				// alert(xhr.getResponseHeader("HTTP_COOKIE"));
-				//cookie = xhr.getResponseHeader("Set-Cookie").replace("_dougie_session=", "").replace("; path=/; HttpOnly", "");		
-				xhr.task = 3;
-				xhr.open("GET", "http://localhost:3000/tags/json");//
-				xhr.setRequestHeader('Content-Type', 'text/json');
-				xhr.setRequestHeader('accept', '*/*');
-				xhr.setRequestHeader("Cookie", "cookie=kjhgh;");
-				// Ti.API.debug("Got response: " + this.responseText);
-				xhr.send();
-				// Ti.API.debug("Got response: " + this.responseText);
 
-				// Ti.API.debug("Got response: " + this.responseText);
-				break;
-				
-			case 3:
-				
-				break;
-		}
-	}	
-	// xhr.setRequestHeader('Content-Type', 'text/html');
-	// xhr.send();
-	xhr.onload();
+	xhr.open("POST", "http://localhost:3000/users/sign_in");
+	xhr.send(params);
 }
 
-//Retrieves the user's folders
 function getFolders() {
-	var xhr = Ti.Network.createHTTPClient();
-	xhr.timeout = 1000000;
-	xhr.open("GET","http://grocerygenie.heroku.com/users?format=json");
-	xhr.onload = function(){
-		try {
-			var data = eval(this.responseText);
-			Ti.API.debug(this.responseText);
-			for ( var i = 0; i < data.length; i ++ ) {
-				folders.push(createFolderRow(data[i].user.password));
-			}
-		} catch(E) {
-			Ti.API.debug(E);
-		};
+	//xhr.open("GET", "http://localhost:3000/tags/get_tags_json");//
+	xhr.open("GET", "http://localhost:3000/review/4094");//
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	//xhr.setRequestHeader('Content-Type', 'text/json');
+	xhr.send();
+	xhr.onload = function() {
 		
-		start();
-		
+		//alert('yooo');
+		//responseXML = (new DOMParser()).parseFromString(this.responseText, "text/xml");
+		//var result = this.responseText;
+		//alert(typeof(result));
+		// var xml = Ti.XML.parseString(result);
+		//var xml = Ti.XML.parseString(this.responseText);
+		var resonseXML = (new DOMParser()).parseFromString(this.responseText, "text/xml");
+		alert(resonseXML);
+		// foldersData = eval(this.responseText);		
+		// for (i in foldersData) {
+			// folders.push(createFolderRow(foldersData[i].tag.name));
+		// }
+		render();
+
 	}
 	
-	xhr.onerror = function(e) {
-		alert(e); 
-	};
-	
-	xhr.send();
 }
 
 //Creates folder UI elements
 function createFolderRow(name){
+
 	var row = Ti.UI.createTableViewRow({}); 
 
 	var image = Ti.UI.createImageView({
@@ -150,8 +82,8 @@ function createFolderRow(name){
 	});
 	
 	var label= Ti.UI.createLabel({
-		text:name, 
-		left:70
+		text : name, 
+		left : 70
 	});
 	
 	row.add(image);
@@ -160,12 +92,10 @@ function createFolderRow(name){
 	return row;
 }
 
-//Build explore UI
-function start(){
-	
+function render() {
+		
 	loadingLabel.hide();
 	activityIndicator.hide();
-	
 	
 	var toolbar = Ti.UI.createToolbar({
 		top : 0
@@ -192,14 +122,14 @@ function start(){
 	var settingsButton = Ti.UI.createButton({
 		title : 'Settings',
 		width : 100,
-		height : 35, 
+		height : toolbar.height - 10, 
 		right : 30
 	});
 	
 	var signOutButton = Ti.UI.createButton({
 		title : 'Sign Out',
 		width : 100,
-		height : 35, 
+		height : toolbar.height - 10, 
 		left : 30
 	});
 	
@@ -221,3 +151,4 @@ function start(){
 }
 
 //Ti.include('/test/tests.js');
+initialize();

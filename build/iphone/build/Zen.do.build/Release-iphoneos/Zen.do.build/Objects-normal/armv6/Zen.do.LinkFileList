@@ -207,8 +207,11 @@
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiMediaMusicPlayer.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiMediaItem.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiLayoutQueue.o
+/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiDebuggerContext.o
+/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiDebugger.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/AsyncSocket.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/AsyncUdpSocket.o
+/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiDebuggerCallFrame.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiContactsGroup.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/ApplicationMods.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiUIiOSAdViewProxy.o
@@ -251,11 +254,3 @@
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/FBLoginButton.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/FBLoginDialog.o
 /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/FBRequest.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiNetworkSocketTCPProxy.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiBuffer.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/StreamModule.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiStreamProxy.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/CodecModule.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiNetworkSocketProxy.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiDataStream.o
-/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Release-iphoneos/Zen.do.build/Objects-normal/armv6/TiFilesystemFileStreamProxy.o
