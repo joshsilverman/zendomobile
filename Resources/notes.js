@@ -50,7 +50,6 @@ function render(){
 	});
 	
 	lists.addEventListener('click', function(e){
-		Ti.API.debug(e.row.children[0].status);
 		if (e.row.children[0].status == 'unchecked') {
     		e.row.children[0].status = 'checked';
     		e.row.children[0].image = 'images/checked.png';

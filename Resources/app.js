@@ -1,7 +1,5 @@
 //Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
 
-Ti.API.debug("Console working!");
-
 var win = Ti.UI.createWindow({
 	url:"login.js",
 	navBarHidden : true
@@ -49,7 +47,7 @@ Titanium.Network.registerForPushNotifications({
 		Ti.API.info("Push notification enabled: "+Titanium.Network.remoteNotificationsEnabled);
 	},
 	error:function(e) {
-		label.text = "Error during registration: "+e.error;
+		//label.text = "Error during registration: "+e.error;
 	},
 	callback:function(e) {
 		var newWin = Ti.UI.createWindow({

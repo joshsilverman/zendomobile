@@ -5,7 +5,7 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 06/27/11 13:42
+Starting build at 06/27/11 19:32
 
 Build details:
 
@@ -17,7 +17,7 @@ Build details:
 Script arguments:
    /Library/Application Support/Titanium/mobilesdk/osx/1.6.2/iphone/builder.py
    simulator
-   4.3
+   4.2
    /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
    zen.do.mobile
    Zen.do

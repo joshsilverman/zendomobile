@@ -1,9 +1,16 @@
-// Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
-// Titanium.UI.currentWindow.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
+Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
+Titanium.UI.currentWindow.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
 Titanium.UI.setBackgroundColor('#171717');
 var win = Ti.UI.currentWindow;
-Ti.API.info("ITS WORKING");
 
+
+//var xml = Ti.XML.parseString(xmlstr);
+//
+// Ti.API.debug(xmlstr);
+// var xml = Ti.XML.parseString(xmlstr);
+// Ti.API.debug(xml);
+// var fooBarList = xml.documentElement.getElementsByTagName("FooBar");
+// Ti.API.debug(fooBarList);
 // var win = Titanium.UI.createWindow({
 	// navBarHidden : true
 // });
@@ -56,8 +63,8 @@ card5 = createCard('Water', 'Bottle');
 card6 = createCard('Benefit', 'Street');
 card7 = createCard('ATP', 'Adenosine Triphosphate');
 card8 = createCard('Ultra long monologue on the importance of being prompt to any and all social gatherings', 'Insert long winded answer');
-
 cards = [card1, card2, card3, card4, card5, card6, card7, card8];
+// cards = [card1];
 cardViews = []
 
 Ti.include('getLines.js');
@@ -90,29 +97,41 @@ function processData(data) {
 			reviewLineIDs.push(data["lines"][i].line.mems[0].line_id);			
 		}
 	}
-	alert("Review: " + reviewLineIDs);
-	//data["document"].document.html
-	var xmlstr = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"+
-	"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">"+
-	"<soap:Body>"+
-	"<FooBarResponse xmlns=\"http://foo.com/2010\">"+
-	"<FooBarResult>"+
-	"<ResponseStatus>"+
-	"<Status>"+
-	"<PassFail>Pass</PassFail>"+
-	"<ErrorCode />"+
-	"<MessageDetail />"+
-	"</Status>"+
-	"</ResponseStatus>"+
-	"<FooBar>true</FooBar>"+
-	"</FooBarResult>"+
-	"</FooBarResponse>"+
-	"</soap:Body></soap:Envelope>";
+	// Ti.API.debug("Review: " + reviewLineIDs);
 	
-
-	var xml = Ti.XML.parseString(xmlstr);
-	var fooBarList = xml.documentElement.getElementsByTagName("FooBar");
-	alert(fooBarList);
+	// var xml = Ti.XML.parseString("<wrapper>" + data["document"].document.html + "</wrapper>");
+	// Ti.API.debug("<wrapper>" + data["document"].document.html + "</wrapper>");
+	//var nodes = xml.XMLDocument.selectNodes("li");
+	// var nodes = xml.getChildNodes()
+	// var nodes = xml.getElementsByTagName("*");
+	// Ti.API.debug(nodes);
+	
+	
+	// Ti.API.debug(nodes.length);
+	
+	
+	// Ti.API.debug("<wrapper>" + data["document"].document.html + "</wrapper>");
+	// Ti.API.debug(nodes);
+	//Ti.API.debug(nodes.length);
+	// for ( var i = 0; i < nodes.length; i ++ ) {
+		// var line = nodes.item(i).text;
+		// Ti.API.debug("Node: " + line);
+		// // while ( nodes.item(i).hasChildNodes() == 1 ){
+// // 			
+		// // }
+		// // Ti.API.debug(nodes.item(i).getChildNodes());
+		// // for ( var j = 0; j < nodes.item(i).getChildNodes().length; j ++) {
+			// // Ti.API.debug(nodes.item(i).item(j));
+		// // }
+// 		
+		// //Ti.API.debug(line);
+		// // Ti.API.debug(nodes.item(i).text);
+	// }
+	
+	// for (i in nodes) {
+// 		
+	// }
+	
 	// docXML = Ti.XML.parseString("<wrapper><text>Some text!</text></wrapper>");
 	// alert(docXML);
 	
@@ -239,7 +258,7 @@ function initialize() {
 
 	
 	for (i in cards) { cardViews.push(createCardView(cards[i])); }
-	//cardViews.push(getStats);
+	
 	
 	fadeInAnimation = Titanium.UI.createAnimation({
 		curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
@@ -255,15 +274,6 @@ function initialize() {
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT,
 		duration : 250
 	});
-}
-
-function getStats() {
-	var statView = Ti.UI.createView({});
-	var graph = Ti.UI.createWebView({
-		url:'http://chart.apis.google.com/chart?cht=p3&chs=450x200&chd=t:73,13,10,3,1&chco=80C65A,224499,FF0000&chl=Chocolate|Puff+Pastry|Cookies|Muffins|Gelato'
-	});
-	statView.add(graph);
-	return statView;
 }
 
 function createCard(prompt, answer) {
@@ -322,18 +332,14 @@ function createCardView(cardObject) {
 			cardView.add(answer);
 			answer.show();
 			Ti.API.debug('Showing answer! ' + answer.visible);
-
 		} else {
 			cardView.add(prompt);
 			prompt.show();
 			answer.hide();			
 		}
-		
 		cards[cardScrollableView.currentPage].flipped = true;
 	});	
-	
 	return cardView;
-	
 }
 
 function showGradeButtons(){
@@ -358,7 +364,15 @@ function buttonClicked(button) {
 	if ( (cardViews.length - 1) >= (cardScrollableView.currentPage + 1) ) {
 		cardScrollableView.scrollToView(cardScrollableView.currentPage + 1);
 	} else {
-		alert('This is where the stats page goes!');
+		var newWin = Ti.UI.createWindow({
+			url : "stats.js",
+			navBarHidden : true,
+			nav : win.nav,
+			data : cards
+		});	
+		//TODO this is not ideal!
+		win.hide();
+		win.nav.open(newWin);
 	}
 }
 
