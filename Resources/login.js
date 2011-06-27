@@ -1,4 +1,5 @@
 Ti.UI.setBackgroundColor('#fff');
+Ti.UI.orientation = Ti.UI.PORTAIT;
 
 container = Ti.UI.currentWindow;
 
@@ -12,6 +13,8 @@ var nav = Titanium.UI.iPhone.createNavigationGroup({
 
 container.add(nav);
 
+Ti.include('authenticate.js');
+
 var logo = Ti.UI.createImageView({
 	image : 'images/headLogo.png',
 	height : 300,
@@ -20,22 +23,22 @@ var logo = Ti.UI.createImageView({
 });
 
 var passwordField = Ti.UI.createTextField({
-    autocapitalization:Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-    width:300,
-    top:90,
-    height: 35,
-    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    width : 300,
+    top : 90,
+    height : 35,
+    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
     passwordMask : true,
-    hintText:'Password'
+    hintText : 'Password'
 });
 
 var emailField = Ti.UI.createTextField({
-    autocapitalization:Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-    width:300,
-    top:30,
-    height: 35,
-    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-    hintText:'Username'
+    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    width : 300,
+    top : 30,
+    height : 35,
+    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+    hintText : 'Username'
 });
 
 var confirmButton = Ti.UI.createButton({
@@ -46,18 +49,12 @@ var confirmButton = Ti.UI.createButton({
 });
 
 confirmButton.addEventListener('click', function(){
-	var newWin = Ti.UI.createWindow({
-		url : 'explore.js',
-		navBarHidden : true
-	})
-	nav.open(newWin);
-	//newWin.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
-	//win.visible = false;
+	var email = emailField.value; 
+	var password = passwordField.value;
+	authenticate(email, password);
 });
 
-win.add(logo);
-//win.add(username);
+//win.add(logo);
 win.add(emailField);
-//win.add(passwordLabel);
 win.add(passwordField);
 win.add(confirmButton);

@@ -38,7 +38,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1308860026</string>
+	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
         <key>UISupportedInterfaceOrientations~ipad</key>
@@ -51,6 +51,7 @@
         <key>UISupportedInterfaceOrientations</key>
         <array>
 	<string>UIInterfaceOrientationPortrait</string>
+	<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
         <key>UIStatusBarStyle</key>
         <string>UIStatusBarStyleDefault</string>

@@ -1,8 +1,9 @@
 //Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
+
 Ti.API.debug("Console working!");
 
 var win = Ti.UI.createWindow({
-	url:"newReview.js",
+	url:"login.js",
 	navBarHidden : true
 });
 

@@ -1,52 +1,30 @@
 Ti.UI.setBackgroundColor('#fff');
-container = Ti.UI.currentWindow;
+Ti.UI.orientation = Ti.UI.PORTAIT;
 
-var win = Titanium.UI.createWindow({
-	navBarHidden : true
-});
+// var container = Ti.UI.currentWindow;
+// var win = Titanium.UI.createWindow({navBarHidden : true});
+// var nav = Titanium.UI.iPhone.createNavigationGroup({window : win});
+// container.add(nav);
 
-var nav = Titanium.UI.iPhone.createNavigationGroup({
-   window : win
-});
+var win = Ti.UI.currentWindow;
 
-container.add(nav);
+Ti.include('getNotes.js');
 
-//Ti.API.debug("Folder clicked: " + win.selection.row.children[1].text + " ( index = " + win.selection.index + " )");
-
-folders = [];
-getNotes();
-
-//Retrieves the user's notes
-function getNotes() {
-	var xhr = Ti.Network.createHTTPClient();
-	xhr.timeout = 1000000;
-	xhr.open("GET","http://grocerygenie.heroku.com/users?format=json");
-	xhr.onload = function(){
-		try {
-			var data = eval(this.responseText);
-			Ti.API.debug(data);
-			for ( var i = 0; i < data.length; i ++ ) {
-				folders.push(createFolderRow(data[i].user.email));
-			}
-		} catch(E) {
-			Ti.API.debug(E);
-		}
-		start();
-	}
-	xhr.send();
+function initialize() {
+	notesRows = []
+	notesData = getNotes(win.data);
 }
 
-//Creates folder UI elements
-function createFolderRow(name){
-	var row = Ti.UI.createTableViewRow({}); 
-
+function createNoteRow(name, docid){
+	var row = Ti.UI.createTableViewRow({ id : docid}); 
+	
     var image = Ti.UI.createImageView({
     	image:'images/unchecked.png',
     	left: 10,
     	touchEnabled:true,
     	height:25,
     	width:25,
-    	id:'unchecked'
+    	status:'unchecked'
     });
 	
 	var label= Ti.UI.createLabel({
@@ -56,12 +34,10 @@ function createFolderRow(name){
 	
 	row.add(image);
 	row.add(label);
-	
 	return row;
 }
 
-//Builds notes browser UI
-function start(){
+function render(){
 
 	var toolbar = Ti.UI.createToolbar({
 		top : 0
@@ -70,16 +46,16 @@ function start(){
 	var lists = Titanium.UI.createTableView({
 		top : toolbar.height,
 		rowHeight : 60,
-		data : folders
+		data : notesRows
 	});
 	
 	lists.addEventListener('click', function(e){
-		Ti.API.debug(e.row.children[0].id);
-		if (e.row.children[0].id == 'unchecked') {
-    		e.row.children[0].id = 'checked';
+		Ti.API.debug(e.row.children[0].status);
+		if (e.row.children[0].status == 'unchecked') {
+    		e.row.children[0].status = 'checked';
     		e.row.children[0].image = 'images/checked.png';
     	} else {
-    		e.row.children[0].id = 'unchecked';
+    		e.row.children[0].status = 'unchecked';
     		e.row.children[0].image = 'images/unchecked.png';
     	}
 	});
@@ -94,11 +70,11 @@ function start(){
 	back.addEventListener('click', function() {
 		var newWin = Ti.UI.createWindow({
 			url:"explore.js",
-			navBarHidden : true
+			navBarHidden : true, 
+			data : win.data,
+			nav : win.nav
 		}); 
-		nav.open(newWin);
-		//new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_DOWN});
-		//win.visible = false;
+		win.nav.open(newWin);
 	});
 	
 	var review = Ti.UI.createButton({
@@ -109,12 +85,25 @@ function start(){
 	});
 
 	review.addEventListener('click', function() {
-		var new_win = Ti.UI.createWindow({
-			url:"review3.js",
-			modal:true
-		}); 
-		new_win.open({transition : Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+		var reviewList = [];
+		for ( i in notesRows ) {
+			if ( notesRows[i].children[0].status == 'checked' ) {
+				reviewList.push(notesRows[i].id);
+			}
+		}
 		
+		if ( reviewList.length < 1 ) {
+			alert("Select a document to start reviewing!");
+		} else {
+			var new_win = Ti.UI.createWindow({
+				url:"newReview.js",
+				navBarHidden:true,
+				list : reviewList,
+				nav : win.nav, 
+				folder : win.data
+			}); 
+			win.nav.open(new_win);	
+		}
 	});
 
 	toolbar.add(back);
@@ -124,4 +113,4 @@ function start(){
 	win.add(toolbar);
 }
 
-
+initialize();
