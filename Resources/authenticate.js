@@ -13,7 +13,7 @@ function authenticate(email, password) {
 			} else {
 				activityIndicator.hide();
 				loadingLabel.hide();
-				alert("Invalid email or password!");
+				alert("Could not connect to your account!");
 			}
 		}
 	}	
@@ -27,32 +27,32 @@ function authenticate(email, password) {
 }
 
 function renderLogin() {
-	loadingLabel = Ti.UI.createLabel({
-		text : 'Connecting to your account...',
-		textAlign : 'center'
-	});
+	// loadingLabel = Ti.UI.createLabel({
+		// text : 'Connecting to your account...',
+		// textAlign : 'center'
+	// });
 	activityIndicator = Titanium.UI.createActivityIndicator({
 		height:50,
 		width:10,
-		top : 150,
+		top : 190,
 		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
 	});
 	activityIndicator.show();
 	win.add(activityIndicator);	
-	win.add(loadingLabel);	
+	// win.add(loadingLabel);	
 }
 
 function authSuccess(email, password) {
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	var newWin = Ti.UI.createWindow({
-		url : 'explore.js',
+		url : 'folders.js',
 		navBarHidden : true,
 		nav : nav
 	});
 	nav.open(newWin);	
 	activityIndicator.hide();
-	loadingLabel.hide();
+	// loadingLabel.hide();
 }
 
 

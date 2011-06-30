@@ -1,9 +1,9 @@
-//Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
-
 var win = Ti.UI.createWindow({
 	url:"login.js",
 	navBarHidden : true
 });
+
+win.open();
 
 //USER OPENS THE APP MANUALLY:
 //if new user:
@@ -33,29 +33,32 @@ var win = Ti.UI.createWindow({
 //If disabled:
 //	unregister();
 
-Titanium.Network.registerForPushNotifications({
-	types: [
-		Titanium.Network.NOTIFICATION_TYPE_BADGE,
-		Titanium.Network.NOTIFICATION_TYPE_ALERT,
-		Titanium.Network.NOTIFICATION_TYPE_SOUND
-	],
-	success:function(e) {
-		var deviceToken = e.deviceToken;
-		label.text = "Device registered. Device token: \n\n"+deviceToken;
-		Ti.API.info("Push notification device token is: "+deviceToken);
-		Ti.API.info("Push notification types: "+Titanium.Network.remoteNotificationTypes);
-		Ti.API.info("Push notification enabled: "+Titanium.Network.remoteNotificationsEnabled);
-	},
-	error:function(e) {
-		//label.text = "Error during registration: "+e.error;
-	},
-	callback:function(e) {
-		var newWin = Ti.UI.createWindow({
-			url:"review.js",
-			modal:true
-		}); 
-		newWin.open();
-	}
-});	
 
-win.open();
+
+//TODO uncomment for push notifications
+
+// Titanium.Network.registerForPushNotifications({
+	// types: [
+		// Titanium.Network.NOTIFICATION_TYPE_BADGE,
+		// Titanium.Network.NOTIFICATION_TYPE_ALERT,
+		// Titanium.Network.NOTIFICATION_TYPE_SOUND
+	// ],
+	// success:function(e) {
+		// var deviceToken = e.deviceToken;
+		// label.text = "Device registered. Device token: \n\n"+deviceToken;
+		// Ti.API.info("Push notification device token is: "+deviceToken);
+		// Ti.API.info("Push notification types: "+Titanium.Network.remoteNotificationTypes);
+		// Ti.API.info("Push notification enabled: "+Titanium.Network.remoteNotificationsEnabled);
+	// },
+	// error:function(e) {
+		// //label.text = "Error during registration: "+e.error;
+	// },
+	// callback:function(e) {
+		// var newWin = Ti.UI.createWindow({
+			// url:"review.js",
+			// modal:true
+		// }); 
+		// newWin.open();
+	// }
+// });	
+

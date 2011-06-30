@@ -5,14 +5,12 @@ var win = Ti.UI.currentWindow;
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
-
 var gradeValues = {
-	1 : 1,
-	2 : 4, 
-	3 : 6, 
-	4 : 9	
+	1 : 9,
+	2 : 6, 
+	3 : 4, 
+	4 : 1	
 }
-
 var gradeCounts = {
 	1 : 0,
 	2 : 0, 
@@ -31,27 +29,69 @@ for ( i in win.data) {
 	}
 }
 
-Ti.API.debug(total + " / " + possible);
-Ti.API.debug(gradeCounts);
-
-var graphContainer = Ti.UI.createView({
-	top : 0,
-	width : 400
-	// left : 0
-});
-
 var graph = Ti.UI.createImageView({
 	image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
-                    + gradeCounts[4] + "," + gradeCounts[3] + "," + gradeCounts[2] + "," + gradeCounts[1] +
-                    "&chdl=Got%20it+-+" + gradeCounts[4] + "|Kinda+-+" + gradeCounts[3] +
-                    "|Barely+-+" + gradeCounts[2] + "|No%20clue+-+" + gradeCounts[1] + "&chma=|2"
+            + gradeCounts[1] + "," + gradeCounts[2] + "," + gradeCounts[3] + "," + gradeCounts[4] +
+            "&chdl=Got it - " + gradeCounts[1] + "|Kinda - " + gradeCounts[2] +
+            "|Barely - " + gradeCounts[3] + "|No clue - " + gradeCounts[4] + "&chma=|2",
+    width : 450, 
+    height : 275,
+    top :  0, 
+    left : -20
 });
 
-var closeLabel = Ti.UI.createLabel({
-	text : total + " / " + possible,
-	top : 0
+var gradeLabel = Ti.UI.createLabel({
+	text : "Your score: " + (Math.round((total/possible) * 100)) + "%",
+	top : -220, 
+	right : -280,
+	textAlign : 'center',
+	font : {fontSize : 20, fontWeight:'bold'} 
 });
+
+var closeButton = Ti.UI.createButton({
+	title : 'Back to notes',
+	width : 120, 
+	height : 50, 
+	bottom : 23,
+	right : 23
+});
+	
+closeButton.addEventListener('click', function() {
+	var newWin = Ti.UI.createWindow({
+		url : "notes.js",
+		navBarHidden : true,
+		nav : win.nav,
+		data : win.folder
+	});	
+	win.nav.open(newWin);
+});
+
+win.add(gradeLabel);
+
+win.add(graph);
+win.add(closeButton);
+
+// var replayButton = Ti.UI.createButton({
+	// title : 'Replay',
+	// width : 100, 
+	// height : 40, 
+	// bottom : 10, 
+	// left : 80
+// });
+// 
+// replayButton.addEventListener('click', function() {
+	// var newWin = Ti.UI.createWindow({
+		// url : "newReview.js",
+		// navBarHidden : true,
+		// nav : win.nav,
+		// data : win.data,
+		// views : win.views
+	// });	
+	// //TODO this is not ideal!
+	// // win.hide();s
+	// win.nav.open(newWin);	
+// });
 
 // graphContainer.add(graph);
-win.add(graph);
-win.add(closeLabel);
+
+// win.add(replayButton);

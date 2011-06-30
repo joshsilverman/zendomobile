@@ -1,379 +1,382 @@
-Ti.UI.setBackgroundColor('#fff');
+Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
+Titanium.UI.currentWindow.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
+Titanium.UI.setBackgroundColor('#000');
+// Titanium.UI.setBackgroundColor('#171717');
 var win = Ti.UI.currentWindow;
 
-win.navBarHidden = false;
+Ti.include('helperMethods.js');
+Ti.include('networkMethods.js');
 
-var back = Ti.UI.createButton({
-    title:'Close',
-    style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
-});
+//TODO @PLATFORM - This may need to be adjusted for Android
+var dimension1 = Ti.Platform.displayCaps.platformHeight;
+var dimension2 = Ti.Platform.displayCaps.platformWidth;
 
-back.addEventListener('click', function(){
-	win.close();
-});
-
-win.leftNavButton = back;
-
-function getCards(){
-	var xhr = Ti.Network.createHTTPClient();
-	xhr.timeout = 1000000;
-	xhr.open("GET","http://grocerygenie.heroku.com/users?format=json");
-	xhr.onload = function(){
-		try {
-			var data = eval(this.responseText);
-			for ( var i = 0; i < data.length; i ++ ) {
-				Ti.API.debug("Created pairing: " + data[i].user.first_name + " / " + data[i].user.last_name);
-				
-				var card = new Object();
-				card.prompt = data[i].user.first_name;
-				card.answer = data[i].user.last_name;
-				card.flipped = false;
-				card.grade = null;
-				
-				cards.push(card);
-			}
-		} catch(E) {
-			alert(E);
-		}
-		start();
-	}
-	xhr.send();
+if (dimension1 > dimension2) {
+	var screenHeight = dimension2 - 20;
+	var screenWidth = dimension1;
+} else {
+	var screenHeight = dimension1 - 20;
+	var screenWidth = dimension2;	
 }
 
-cards = [];
+buttonTopPad = 10;
+buttonRightPad = 10;
+buttonLeftPad = 10;
+buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
+cardLeftPad = 10;
+
+cards = win.cards;
 cardViews = [];
-getCards();
-index = 0;
-
-function createCard(prompt, answer) {
-	
-	var cardView = Ti.UI.createView({
-		width:300,
-		height:300
-	});
-	
-	var cardBackground = Ti.UI.createImageView({
-		image: 'images/card.png',
-		width:300,
-		height:300,
-		top:0
-	});
-	
-	var promptLabel = Ti.UI.createLabel({
-		text:"",
-		top:82,
-		height:50,
-		textAlign:'center'
-	});
-	
-	var answerLabel = Ti.UI.createLabel({
-		text:"",
-		top:195,
-		height:75,
-		width:275,
-		textAlign:'center',
-		opacity:0
-	});
-	
-	// var flipButton = Ti.UI.createButton({
-		// title:'Show',
-		// width:100,
-		// height:50,
-		// top:185,
-		// index:0
-	// });
-	
-	cardView.add(cardBackground);
-	cardView.add(promptLabel);
-	cardView.add(answerLabel);
-	//cardView.add(flipButton);
-	
-	return cardView;
+for ( i in cards ) { 
+	var cardNumber = i;
+	cardNumber++;
+	cardNumber = cardNumber.toString();
+	var cardLength = cards.length.toString();
+	cardViews.push(createCardView(cards[i], cardNumber, cardLength)); 
 }
+initialize(cardViews);
+	
+function initialize(cardViews) {
+	// buttonView = Ti.UI.createView({});
+	button1 = Ti.UI.createButton({
+		// title : 'Got it!',
+		images : { "unselected" : "images/got_it.png", "selected" : 'images/got_it_selected.png'},
+		grade : 1,
+		height : buttonHeight,
+		width : buttonHeight,
+		right : buttonRightPad,
+		top : buttonTopPad, 
+		backgroundImage : "images/got_it.png"
+		// color : 'gray'
+	})
+	button2 = Ti.UI.createButton({
+		// title : 'Kinda',
+		images : { "unselected" : "images/kinda.png", "selected" : 'images/kinda_selected.png'},
+		grade : 2,
+		height : buttonHeight,
+		width : buttonHeight,
+		right : buttonRightPad,
+		top : ((buttonTopPad * 2) + buttonHeight), 
+		backgroundImage : "images/kinda.png"
+		// color : 'gray'
+	})
+	button3 = Ti.UI.createButton({
+		// title : 'Barely',
+		images : { "unselected" : "images/barely.png", "selected" : 'images/barely_selected.png'},
+		grade : 3,
+		height : buttonHeight,
+		width : buttonHeight,
+		right : buttonRightPad,
+		top : ((buttonTopPad * 3) + (buttonHeight * 2)), 
+		backgroundImage : "images/barely.png"
+		// color : 'gray'
+	})
+	button4 = Ti.UI.createButton({
+		// title : 'No clue',
+		images : { "unselected" : "images/no_clue.png", "selected" : 'images/no_clue_selected.png'},
+		grade : 4,
+		height : buttonHeight,
+		width : buttonHeight,
+		right : buttonRightPad, 
+		top : ((buttonTopPad * 4) + (buttonHeight * 3)), 
+		backgroundImage : "images/no_clue.png"
+		// color : 'gray'
+	})
+	
+	buttons = [button1, button2, button3, button4];
+	for (i in buttons) { 
+		buttons[i].hide();
+		buttons[i].opacity = 0;
+		buttons[i].addEventListener('touchstart', function(e) { buttonClicked(e); });
+		//buttonView.add(buttons[i]);
+	}
+	
+	closeButton = Ti.UI.createImageView({
+		image : 'images/close.png', 
+		height : 35,
+		width : 35, 
+		top : 3,
+		left : 2
+	})
+	
+	closeButton.addEventListener('click', function() {
+		var newWin = Ti.UI.createWindow({
+			url : "notes.js",
+			navBarHidden : true,
+			nav : win.nav,
+			data : win.folder
+		});	
+		//TODO this is not ideal!
+		win.hide();
+		win.nav.open(newWin);
+	});
+	
+	cardScrollableView = Titanium.UI.createScrollableView({
+		views:cardViews,
+		showPagingControl:false,
+		clipViews:false,
+		left:0
+	});
+	
+	cardScrollableView.addEventListener('scroll', function(e) {
+		for (i in buttons) { buttons[i].animate( fadeOutAnimation ); }
+		if (cards[cardScrollableView.currentPage].flipped == false) {
+			for (i in buttons) { 
+				//buttons[i].hide();
+				buttons[i].backgroundImage = buttons[i].images["unselected"];
+				//buttons[i].opacity = 0;
+			}
+		} else {
+			showGradeButtons();
+		}
+	});
 
-function createUI() {
-	
-	cardNumber = Ti.UI.createLabel({
-		text : (index + 1) + " / " + cards.length, 
-		top : 0,
-		left : win.width - 50,
-		height : 50,
-		width : 275
-	});
-	
-	cardBackground = Ti.UI.createImageView({
-		image: 'images/card.png',
-		width:300,
-		height:300,
-		top:20
-	});
-	
-	promptLabel = Ti.UI.createLabel({
-		text:"",
-		top:82,
-		height:50,
-		textAlign:'center'
-	});
-	
-	answerLabel = Ti.UI.createLabel({
-		text:"",
-		top:195,
-		height:75,
-		width:275,
-		textAlign:'center',
-		opacity:0
-	});
-	
-	// flipButton = Ti.UI.createButton({
-		// title:'Show',
-		// width:100,
-		// height:50,
-		// top:205,
-		// index:0
-	// });
-	
-	//for (i in cards) {
-	//	cardViews.push(createCard(cards[i].prompt, cards[i].answer));
-	//	scrollView.add(cardViews[i]);
-	//}
-	
-	button_animation = Titanium.UI.createAnimation({
+	fadeInAnimation = Titanium.UI.createAnimation({
 		curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
 	    opacity:1,
-	    duration:750
+	    duration:250
 	});
-	
-	button_1 = Ti.UI.createButton({
-		title:'No Clue',
-		bottom:25,
-		width:65,
-		left:25,
-		height:50,
+	fadeOutAnimation = Titanium.UI.createAnimation({
+		curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
 	    opacity:0,
-	    value:1
-	});
-	
-	button_2 = Ti.UI.createButton({
-		title:'Barely',
-		bottom:25,
-		width:65,
-		left:94,
-		height:50,
-		opacity:0,
-		value:2
-	});
-	
-	button_3 = Ti.UI.createButton({
-		title:'Kinda',
-		bottom:25,
-		width:65,
-		left:162,
-		height:50,
-		opacity:0,
-		value:3
-	});
-	
-	button_4 = Ti.UI.createButton({
-		title:'Got it!',
-		bottom:25,
-		width:65,
-		right:25,
-		height:50,
-		opacity:0,
-		value:4
-	});
-	
-	buttons = new Array(button_1, button_2, button_3, button_4);
-	
-	for (i in buttons) { buttons[i].addEventListener('click', grade_click); }
-	
-	cardBackground.addEventListener('click', fadeInOnFlip);
-	
-	graphView = Ti.UI.createImageView({url:'http://chart.apis.google.com/chart?cht=p3&chs=450x200&chd=t:73,13,10,3,1&chco=80C65A,224499,FF0000&chl=Chocolate|Puff+Pastry|Cookies|Muffins|Gelato'});
-	
-}
-
-function grade_click(e) {
-	//Ti.API.debug("Card " + cards[index].prompt + " set to: " + e.source.value);
-	cards[index].grade = e.source.value;		
-	if (index < cards.length - 1) {
-		for (i in buttons) { buttons[i].opacity = 0; buttons[i].hide(); }
-		index++;
-		showCurrentCard();	
-	} else {
-		showCurrentCard();
-		alert("No more cards!");
-	}		
-}
-	
-function fadeInOnFlip(e) {
-	if (cards[index].flipped == false) {
-		cards[index].flipped = true;
-		//cardBackground.animate(animation);
-		for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
-		answerLabel.show();
-		answerLabel.animate(button_animation);
-	} else {
-		for (i in buttons) { buttons[i].show(); buttons[i].animate(button_animation); }
-		answerLabel.show();
-		answerLabel.animate(button_animation);		
-	}
-	
-	//flipButton.hide();
-
-}
-
-function showCurrentCard(){
-	//snapBack();
-	cardNumber.text = (index + 1) + " / " + cards.length
-
-	if (cards[index] != null) {
-		
-		if (cards[index].flipped == false) {
-			cardBackground.animate(animation);
-			answerLabel.opacity = 0;
-			answerLabel.hide();
-						
-			for (i in buttons) { 
-				buttons[i].color = 'gray'; 
-				buttons[i].opacity = 0;
-				buttons[i].hide(); 
-			}
-			
-			promptLabel.text = cards[index].prompt;
-			answerLabel.text = cards[index].answer;
-			
-			//flipButton.show();
-			promptLabel.show();
-			
-		} else {
-			promptLabel.text = cards[index].prompt;
-			answerLabel.text = cards[index].answer;
-			
-			//flipButton.hide();
-			
-			promptLabel.show();
-			answerLabel.opacity = 1;
-			answerLabel.show();
-			
-			for (i in buttons) { 
-				buttons[i].opacity = 1; 
-				buttons[i].show(); 
-				buttons[i].color = 'gray'
-			}
-			
-			if (cards[index].grade != 0) {
-				
-				switch (cards[index].grade) {
-					case 1:
-						button_1.color = '395CA8';
-						break;
-					case 2:
-						button_2.color = '395CA8';
-						break;
-					case 3:
-						button_3.color = '395CA8';
-						break;
-					case 4:
-						button_4.color = '395CA8';
-						break;
-				}
-			}
-		}		
-	}
-}
-
-function swipe(e){
-	if (e.direction == 'left'){
-		if ( index > 0 ) {
-			index--;
-			showCurrentCard();
-		}
-	} else {
-		if ( index < (cards.length -1) ){
-			index++;
-			showCurrentCard();			
-		} else {
-			reviewComplete();
-			win.add(graphView);
-		}
-	}
-}
-
-function reviewComplete() {
-	cardBackground.hide();
-	promptLabel.hide();
-	answerLabel.hide();
-	//flipButton.hide();
-	for (i in buttons) { buttons[i].hide(); }
-}
-
-function snapBack(){
-	promptLabel.left = Math.round((( Ti.Platform.displayCaps.platformWidth - promptLabel.width ) / 2 ))
-	cardBackground.left = 10;
-	//flipButton.left = 110;
-}
-
-function start(){
-	createUI();
-
-	animation = Ti.UI.createAnimation({
+	    duration:250
+	});	
+	flipAnimation = Ti.UI.createAnimation({
 		transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT,
 		duration : 250
 	});
-	
-	for (i in buttons) {
-		win.add(buttons[i]);
-		buttons[i].hide();
-	}
-	
-	win.add(cardNumber);
-	win.add(cardBackground);
-	win.add(promptLabel);
-	win.add(answerLabel);
-	//win.add(flipButton);
-	
-	//win.add(scrollView);
-	
-	//win.addEventListener('swipe', function(e){
+	render();
+}
+
+// function createCard(prompt, answer) {
+	// var card = new Object();
+	// card.prompt = prompt;
+	// card.answer = answer;
+	// card.flipped = false;
+	// card.grade = 0;
+	// return card;
+// }
+
+function createCardView(cardObject, cardNumber, totalCards) {
+
+	var cardBackground = Ti.UI.createImageView({
+		image : 'images/card.png',
+		status : 'front',
+		width : (screenWidth - cardLeftPad - buttonLeftPad - buttonHeight - buttonRightPad),
+		height : screenHeight - 80,
+		left : cardLeftPad
+	});
 		
-	//})
-	
-	win.addEventListener('touchstart', function (e){
-		x_start = e.x;
+	var cardView = Ti.UI.createView({
+		card : cardObject,
+		width : cardLeftPad + cardBackground.width + buttonLeftPad, 
+		left : 0
 	});
 	
-	//win.addEventListener('touchmove', function(e){
-		//Ti.API.debug(e.x);
-		//var deltax = e.x - x_start;
-	    //olt = olt.translate(deltaX,0,0);
-	   // cardBackground.animate({transform: olt, duration: 100}); 
+	var prompt = Ti.UI.createLabel({
+		text : cardObject.prompt,
+		textAlign : 'center',
+		width : cardBackground.width - 20
+	});
 
-		//cardx = e.x + card.animatedCenter.x - card.width/2;   //card.card.left + (e.x - x_start);
-		//promptx = e.x + prompt.animatedCenter.x - prompt.width/2; //prompt.left + (e.x - x_start);
-		//answerx = e.x + answer.animatedCenter.x - answer.width/2; //answer.left + (e.x - x_start);
-		//flipx =  e.x + flip.animatedCenter.x - flip.width/2; //flip.left + (e.x - x_start);
-		
-		//card.animate({center:{x:cardx}, duration:1});
-		
-	//});
+	var answer = Ti.UI.createLabel({
+		text : cardObject.answer,
+		textAlign : 'center',
+		width : cardBackground.width - 20,
+		height : cardBackground.height - 60
+	});
+
+	var progressLabel = Ti.UI.createLabel({
+		text : cardNumber + " / " + totalCards, 
+		textAlign : 'right',
+		right : 25, 
+		top : -180,
+		font:{fontSize:16},
+		color : 'gray'
+	})
 	
-	win.addEventListener('touchend', function(e){
-		//Ti.API.debug("Dist: " + (e.x - x_start));
-		if ((e.x - x_start) > 30 || (e.x - x_start) < -30) {
-			if (e.x > x_start){
-				swipe({direction:'left'});
-			} else {
-				swipe({direction:'right'});
-				//card.animate({transition:Ti.UI.iPhone.AnimationStyle.CURL_UP});
-
-			}
-			
+	prompt.show();	
+	answer.hide();
+	
+	cardView.add(cardBackground);
+	cardView.add(progressLabel);
+	cardView.add(prompt);
+	cardView.add(answer);
+		
+	cardView.addEventListener('singletap', function(e) {
+		
+		cardView.animate({
+			view : cardBackground,
+			transition : Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT, 
+			duration : 250
+		});
+		
+		if ( cardBackground.status == 'front' ) {
+			cardBackground.status = 'back';
+			cardBackground.image = 'images/card_reversed.png';
+		} else {
+			cardBackground.status = 'front';
+			cardBackground.image = 'images/card.png';
 		}
 		
-		snapBack();
-	});
-	
-	showCurrentCard();
-
+		showGradeButtons();
+		if (prompt.visible == true) {
+			prompt.hide();
+			cardView.add(answer);
+			cardView.add(progressLabel);
+			answer.show();
+			// Ti.API.debug('Showing answer! ' + answer.visible);
+		} else {
+			cardView.add(prompt);
+			cardView.add(progressLabel);
+			prompt.show();
+			answer.hide();			
+		}
+		cards[cardScrollableView.currentPage].flipped = true;
+	});	
+	// cardView.card = cardObject;
+	return cardView;
 }
+
+function showGradeButtons(){
+	for (i in buttons) { 
+		buttons[i].show();
+		buttons[i].animate(fadeInAnimation); 
+		buttons[i].backgroundImage = buttons[i].images["unselected"];
+	}
+	if ( cards[cardScrollableView.currentPage].grade != 0 ){
+		for (i in buttons) { buttons[i].backgroundImage = buttons[i].images["unselected"]; }
+		// Ti.API.debug(buttons[cards[cardScrollableView.currentPage]].images["selected"]);
+		buttons[cards[cardScrollableView.currentPage].grade - 1].backgroundImage = buttons[cards[cardScrollableView.currentPage].grade - 1].images["selected"];
+	}
+}
+
+function buttonClicked(button) {
+	cards[cardScrollableView.currentPage].grade = button.source.grade;
+	reportGrade(cards[cardScrollableView.currentPage].memID, cards[cardScrollableView.currentPage].grade);
+	for (i in buttons) { 
+		buttons[i].backgroundImage = buttons[i].images["unselected"];
+		buttons[i].animate(fadeOutAnimation); 
+	}
+	if ( ( cardViews.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
+		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
+	} else {
+		var newWin = Ti.UI.createWindow({
+			url : "stats.js",
+			navBarHidden : true,
+			nav : win.nav,
+			data : cards,
+			// views : cardViews,
+			folder : win.folder
+		});	
+		//TODO this is not ideal!
+		win.hide();
+		win.nav.open(newWin);
+	}
+}
+
+function render() {
+	win.add(cardScrollableView);
+	for (i in buttons) { win.add(buttons[i]); }
+	win.open();
+	win.add(closeButton);
+}
+
+// TODO for replay 
+// if ( win.views == null ) {
+	// getLines(win.list);
+// } else {
+	// cards = win.data;
+	// initialize(win.views);
+// }
+
+
+//win.add(buttonView);
+//Ti.API.debug('Screen width = ' + screenWidth + ", cardView width = " + card.width)
+//var xml = Ti.XML.parseString(xmlstr);
+//
+// Ti.API.debug(xmlstr);
+// var xml = Ti.XML.parseString(xmlstr);
+// Ti.API.debug(xml);
+// var fooBarList = xml.documentElement.getElementsByTagName("FooBar");
+// Ti.API.debug(fooBarList);
+// var win = Titanium.UI.createWindow({
+	// navBarHidden : true
+// });
+
+
+// var nav = Titanium.UI.iPhone.createNavigationGroup({
+   // window : win
+// });
+// 
+// container.add(nav);
+
+//var win = Ti.UI.createWindow({});
+
+//win.navBarHidden = false;
+
+// var back = Ti.UI.createButton({
+    // title:'Close',
+    // style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+// });
+// 
+// back.addEventListener('click', function(){
+	// win.close();
+// });
+// 
+// win.leftNavButton = back;
+
+
+
+//TODO peel back options button
+	// optionsButton.addEventListener('click', function() {
+		// var w = Ti.UI.createWindow({
+			// backgroundColor : 'gray',
+			// orientationModes : [Titanium.UI.LANDSCAPE_LEFT]
+		// });
+// 		
+		// var foldersButton = Ti.UI.createButton({
+			// title:'Folders',
+			// width:100,
+			// height:30,
+			// left : cardLeftPad,
+			// bottom : 50
+		// }); 
+// 		
+		// foldersButton.addEventListener('click', function() {
+			// Ti.UI.orientation = Ti.UI.PORTRAIT;
+// 
+			// var newWin = Ti.UI.createWindow({
+				// url : "explore.js",
+				// navBarHidden : true,
+				// nav : win.nav
+			// });
+			// //w.close();
+			// //win.close();
+// 
+			// win.nav.open(newWin);
+		// });
+// 		
+		// var doneButton = Ti.UI.createButton({
+			// title : 'Done',
+			// width : 100,
+			// height : 30,
+			// left : cardLeftPad,
+			// bottom : 10
+		// });
+// 		
+		// doneButton.addEventListener('click',function() {
+			// w.close();
+		// });
+		// w.add(doneButton);
+		// w.add(foldersButton);
+		// w.open({
+			// modal : true,
+			// modalTransitionStyle : Ti.UI.iPhone.MODAL_TRANSITION_STYLE_PARTIAL_CURL,
+			// //modalStyle:Ti.UI.iPhone.MODAL_PRESENTATION_CURRENT_CONTEXT,
+			// navBarHidden:true
+		// });
+	// });
+
+	
+	// for (i in cards) { cardViews.push(createCardView(cards[i])); }

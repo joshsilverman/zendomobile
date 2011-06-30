@@ -1,14 +1,9 @@
 Ti.UI.setBackgroundColor('#fff');
 Ti.UI.orientation = Ti.UI.PORTAIT;
-
-// var container = Ti.UI.currentWindow;
-// var win = Titanium.UI.createWindow({navBarHidden : true});
-// var nav = Titanium.UI.iPhone.createNavigationGroup({window : win});
-// container.add(nav);
-
 var win = Ti.UI.currentWindow;
 
-Ti.include('getNotes.js');
+Ti.include('networkMethods.js');
+Ti.include('helperMethods.js');
 
 function initialize() {
 	notesRows = []
@@ -20,7 +15,7 @@ function createNoteRow(name, docid){
 	
     var image = Ti.UI.createImageView({
     	image:'images/unchecked.png',
-    	left: 10,
+    	left: 15,
     	touchEnabled:true,
     	height:25,
     	width:25,
@@ -29,7 +24,7 @@ function createNoteRow(name, docid){
 	
 	var label= Ti.UI.createLabel({
 		text:name, 
-		left:50
+		left:53
 	});
 	
 	row.add(image);
@@ -50,13 +45,30 @@ function render(){
 	});
 	
 	lists.addEventListener('click', function(e){
-		if (e.row.children[0].status == 'unchecked') {
-    		e.row.children[0].status = 'checked';
-    		e.row.children[0].image = 'images/checked.png';
-    	} else {
-    		e.row.children[0].status = 'unchecked';
-    		e.row.children[0].image = 'images/unchecked.png';
-    	}
+		
+		if ( e.row.children[0].status == 'checked' ) {
+			var status = 'unchecked';
+		    var image = 'images/unchecked.png';
+		} else {
+			var status = 'checked';
+			var image = 'images/checked.png';
+		}
+		// Ti.API.debug(notesRows);
+		for ( i in notesRows ) {
+			notesRows[i].children[0].status = 'unchecked';
+			notesRows[i].children[0].image = 'images/unchecked.png';	
+		}
+		
+		 e.row.children[0].status = status;
+		 e.row.children[0].image = image;
+
+		// if (e.row.children[0].status == 'unchecked') {
+    		// e.row.children[0].status = 'checked';
+    		// e.row.children[0].image = 'images/checked.png';
+    	// } else {
+    		// e.row.children[0].status = 'unchecked';
+    		// e.row.children[0].image = 'images/unchecked.png';
+    	// }
 	});
 	
 	var back = Ti.UI.createButton({
@@ -68,7 +80,7 @@ function render(){
 	
 	back.addEventListener('click', function() {
 		var newWin = Ti.UI.createWindow({
-			url:"explore.js",
+			url:"folders.js",
 			navBarHidden : true, 
 			data : win.data,
 			nav : win.nav
@@ -94,14 +106,9 @@ function render(){
 		if ( reviewList.length < 1 ) {
 			alert("Select a document to start reviewing!");
 		} else {
-			var new_win = Ti.UI.createWindow({
-				url:"newReview.js",
-				navBarHidden:true,
-				list : reviewList,
-				nav : win.nav, 
-				folder : win.data
-			}); 
-			win.nav.open(new_win);	
+			
+			cards = getLines(reviewList);
+
 		}
 	});
 
