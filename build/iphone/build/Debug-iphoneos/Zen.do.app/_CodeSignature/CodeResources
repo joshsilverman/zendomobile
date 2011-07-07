@@ -14,7 +14,7 @@
 		</data>
 		<key>Default.png</key>
 		<data>
-		Wg6C7nIg9iWcIWoX4T1VxisETQM=
+		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
 		</data>
 		<key>Default@2x.png</key>
 		<data>
@@ -56,6 +56,14 @@
 		<data>
 		cjL/+8PWuiFb179S2UOsvH/xiC4=
 		</data>
+		<key>images/barely.png</key>
+		<data>
+		bb8YAkvkEad13n9d4fzFoG9rx/4=
+		</data>
+		<key>images/barely_selected.png</key>
+		<data>
+		yfcGnVxwHHh0u4IJ0ekBrcCu7IY=
+		</data>
 		<key>images/card.jpg</key>
 		<data>
 		DbZ4CRNmxxMvMId3O0MXV7Fx+sI=
@@ -63,6 +71,10 @@
 		<key>images/card.png</key>
 		<data>
 		gztDgw24IScvK839pwCm+1SSzHc=
+		</data>
+		<key>images/card_reversed.png</key>
+		<data>
+		G6pJ8zzhFWoQp8vN7ijN8ouZrpQ=
 		</data>
 		<key>images/checked.png</key>
 		<data>
@@ -72,6 +84,10 @@
 		<data>
 		1Pp/vPaHqaLTboZMd5qqMq/XihQ=
 		</data>
+		<key>images/close_updated.png</key>
+		<data>
+		UGea8pCUsRVEs9SL7Y9+IO2wVbE=
+		</data>
 		<key>images/default_app_logo.png</key>
 		<data>
 		KFlQoJWJ07jwAB6IQgZDetdisD4=
@@ -80,9 +96,41 @@
 		<data>
 		0lHeghsapHqkR1Unwn/W8Dw4JdA=
 		</data>
+		<key>images/got_it.png</key>
+		<data>
+		YAYXn74cOp7/o4eSDfS7ZlKqV9E=
+		</data>
+		<key>images/got_it_selected.png</key>
+		<data>
+		JlmBibZiK2MPp+ErBdsv1SNT2I8=
+		</data>
 		<key>images/headLogo.png</key>
 		<data>
 		1F4NXT+ke441lGbyH3IJtu5jPug=
+		</data>
+		<key>images/kinda.png</key>
+		<data>
+		qVPPYA/B7raRSloMvar5xAAyPwQ=
+		</data>
+		<key>images/kinda_selected.png</key>
+		<data>
+		+Yx7aPn0OlqdbDcMK6ulBP3hKb0=
+		</data>
+		<key>images/logo.png</key>
+		<data>
+		9b/kFwaaXncz7kKKdxeBrxIfy54=
+		</data>
+		<key>images/logo_background.png</key>
+		<data>
+		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
+		</data>
+		<key>images/no_clue.png</key>
+		<data>
+		zGNknssd5O9DjgIXiCrzVOPdXf0=
+		</data>
+		<key>images/no_clue_selected.png</key>
+		<data>
+		iDqmvlfGv4Fe5HmNjCV23CJI0Rw=
 		</data>
 		<key>images/options.png</key>
 		<data>

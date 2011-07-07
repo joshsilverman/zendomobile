@@ -1,9 +1,37 @@
-var win = Ti.UI.createWindow({
-	url:"login.js",
-	navBarHidden : true
+// var nav = Titanium.UI.iPhone.createNavigationGroup({
+   // window : win
+// });
+var container = Ti.UI.createWindow({
+	navBarHidden : true,
+	orientationModes : [
+		Titanium.UI.PORTRAIT,
+		Titanium.UI.UPSIDE_PORTRAIT,
+		Titanium.UI.LANDSCAPE_LEFT,
+		Titanium.UI.LANDSCAPE_RIGHT
+	]
 });
 
-win.open();
+var newWin = Ti.UI.createWindow({
+	url:"login.js",
+	navBarHidden : true,
+	//TODO not working!
+	orientationModes : [
+		Titanium.UI.PORTRAIT,
+		Titanium.UI.UPSIDE_PORTRAIT
+	]
+});
+
+var nav = Titanium.UI.iPhone.createNavigationGroup({
+   window : newWin
+});
+
+newWin.nav = nav;
+
+container.add(nav);
+container.open();
+
+// nav.open(newWin);
+// win.open();
 
 //USER OPENS THE APP MANUALLY:
 //if new user:

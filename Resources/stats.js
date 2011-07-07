@@ -1,7 +1,12 @@
-Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
-Titanium.UI.currentWindow.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
-Titanium.UI.setBackgroundColor('#fff');
+// Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
 var win = Ti.UI.currentWindow;
+
+// Titanium.UI.currentWindow.orientationModes = [
+	// Titanium.UI.LANDSCAPE_LEFT,
+	// Titanium.UI.LANDSCAPE_RIGHT	
+// ];
+
+Titanium.UI.setBackgroundColor('#fff');
 
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
@@ -57,13 +62,15 @@ var closeButton = Ti.UI.createButton({
 });
 	
 closeButton.addEventListener('click', function() {
-	var newWin = Ti.UI.createWindow({
-		url : "notes.js",
-		navBarHidden : true,
-		nav : win.nav,
-		data : win.folder
-	});	
-	win.nav.open(newWin);
+	win.nav.close(win._parent);
+	win.nav.close(win);
+	// var newWin = Ti.UI.createWindow({
+		// url : "notes.js",
+		// navBarHidden : false,
+		// nav : win.nav,
+		// data : win.folder
+	// });	
+	// win.nav.open(newWin);
 });
 
 win.add(gradeLabel);

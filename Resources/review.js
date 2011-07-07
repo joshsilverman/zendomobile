@@ -1,29 +1,25 @@
-Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
-Titanium.UI.currentWindow.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
-Titanium.UI.setBackgroundColor('#000');
-// Titanium.UI.setBackgroundColor('#171717');
+// Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
 var win = Ti.UI.currentWindow;
+
+// Titanium.UI.currentWindow.orientationModes = [
+	// Titanium.UI.LANDSCAPE_LEFT,
+	// Titanium.UI.LANDSCAPE_RIGHT	
+// ];
+
+Titanium.UI.setBackgroundColor('#fff');
+// Titanium.UI.setBackgroundColor('#171717');
 
 Ti.include('helperMethods.js');
 Ti.include('networkMethods.js');
-
-//TODO @PLATFORM - This may need to be adjusted for Android
-var dimension1 = Ti.Platform.displayCaps.platformHeight;
-var dimension2 = Ti.Platform.displayCaps.platformWidth;
-
-if (dimension1 > dimension2) {
-	var screenHeight = dimension2 - 20;
-	var screenWidth = dimension1;
-} else {
-	var screenHeight = dimension1 - 20;
-	var screenWidth = dimension2;	
-}
+Ti.include('dimensions.js');
 
 buttonTopPad = 10;
 buttonRightPad = 10;
 buttonLeftPad = 10;
 buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
 cardLeftPad = 10;
+selectedColor = '3B5FD9'
+unselectedColor = 'gray'
 
 cards = win.cards;
 cardViews = [];
@@ -37,62 +33,67 @@ for ( i in cards ) {
 initialize(cardViews);
 	
 function initialize(cardViews) {
-	// buttonView = Ti.UI.createView({});
+	buttonView = Ti.UI.createView({
+		right : 0,
+		width : buttonHeight + buttonLeftPad + buttonRightPad
+	});
+	buttonView.opacity = 0;
+	
 	button1 = Ti.UI.createButton({
-		// title : 'Got it!',
+		title : 'Got it!',
 		images : { "unselected" : "images/got_it.png", "selected" : 'images/got_it_selected.png'},
 		grade : 1,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
 		top : buttonTopPad, 
-		backgroundImage : "images/got_it.png"
-		// color : 'gray'
+		// backgroundImage : "images/got_it.png",
+		color : unselectedColor
 	})
 	button2 = Ti.UI.createButton({
-		// title : 'Kinda',
+		title : 'Kinda',
 		images : { "unselected" : "images/kinda.png", "selected" : 'images/kinda_selected.png'},
 		grade : 2,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
 		top : ((buttonTopPad * 2) + buttonHeight), 
-		backgroundImage : "images/kinda.png"
-		// color : 'gray'
+		// backgroundImage : "images/kinda.png",
+		color : unselectedColor
 	})
 	button3 = Ti.UI.createButton({
-		// title : 'Barely',
+		title : 'Barely',
 		images : { "unselected" : "images/barely.png", "selected" : 'images/barely_selected.png'},
 		grade : 3,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
 		top : ((buttonTopPad * 3) + (buttonHeight * 2)), 
-		backgroundImage : "images/barely.png"
-		// color : 'gray'
+		// backgroundImage : "images/barely.png",
+		color : unselectedColor
 	})
 	button4 = Ti.UI.createButton({
-		// title : 'No clue',
+		title : 'No clue',
 		images : { "unselected" : "images/no_clue.png", "selected" : 'images/no_clue_selected.png'},
 		grade : 4,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad, 
 		top : ((buttonTopPad * 4) + (buttonHeight * 3)), 
-		backgroundImage : "images/no_clue.png"
-		// color : 'gray'
+		// backgroundImage : "images/no_clue.png",
+		color : unselectedColor
 	})
 	
 	buttons = [button1, button2, button3, button4];
 	for (i in buttons) { 
-		buttons[i].hide();
-		buttons[i].opacity = 0;
+		// buttons[i].hide();
+		// buttons[i].opacity = 0;
 		buttons[i].addEventListener('touchstart', function(e) { buttonClicked(e); });
-		//buttonView.add(buttons[i]);
+		buttonView.add(buttons[i]);
 	}
 	
 	closeButton = Ti.UI.createImageView({
-		image : 'images/close.png', 
+		image : 'images/close_updated.png', 
 		height : 35,
 		width : 35, 
 		top : 3,
@@ -100,15 +101,17 @@ function initialize(cardViews) {
 	})
 	
 	closeButton.addEventListener('click', function() {
-		var newWin = Ti.UI.createWindow({
-			url : "notes.js",
-			navBarHidden : true,
-			nav : win.nav,
-			data : win.folder
-		});	
-		//TODO this is not ideal!
-		win.hide();
-		win.nav.open(newWin);
+		win.nav.close(win);
+		// var newWin = Ti.UI.createWindow({
+			// url : "notes.js",
+			// navBarHidden : false,
+			// nav : win.nav,
+			// data : win.folder,
+			// orientationModes : [Titanium.UI.PORTRAIT, Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT]
+		// });	
+		// //TODO this is not ideal!
+		// win.hide();
+		// win.nav.open(newWin);
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({
@@ -119,13 +122,18 @@ function initialize(cardViews) {
 	});
 	
 	cardScrollableView.addEventListener('scroll', function(e) {
-		for (i in buttons) { buttons[i].animate( fadeOutAnimation ); }
+		// for (i in buttons) { buttons[i].animate( fadeOutAnimation ); }
+		buttonView.animate(fadeOutAnimation);
 		if (cards[cardScrollableView.currentPage].flipped == false) {
+			
+			//TODO chang bg img
 			for (i in buttons) { 
 				//buttons[i].hide();
-				buttons[i].backgroundImage = buttons[i].images["unselected"];
+				buttons[i].color = unselectedColor;
+				// buttons[i].backgroundImage = buttons[i].images["unselected"];
 				//buttons[i].opacity = 0;
 			}
+			
 		} else {
 			showGradeButtons();
 		}
@@ -147,15 +155,6 @@ function initialize(cardViews) {
 	});
 	render();
 }
-
-// function createCard(prompt, answer) {
-	// var card = new Object();
-	// card.prompt = prompt;
-	// card.answer = answer;
-	// card.flipped = false;
-	// card.grade = 0;
-	// return card;
-// }
 
 function createCardView(cardObject, cardNumber, totalCards) {
 
@@ -239,45 +238,60 @@ function createCardView(cardObject, cardNumber, totalCards) {
 }
 
 function showGradeButtons(){
+	//TODO resolve
 	for (i in buttons) { 
-		buttons[i].show();
-		buttons[i].animate(fadeInAnimation); 
-		buttons[i].backgroundImage = buttons[i].images["unselected"];
+		// buttons[i].show();
+		// buttons[i].animate(fadeInAnimation); 
+		buttons[i].color = unselectedColor;
+		// buttons[i].backgroundImage = buttons[i].images["unselected"];
 	}
+	buttonView.animate(fadeInAnimation);
 	if ( cards[cardScrollableView.currentPage].grade != 0 ){
-		for (i in buttons) { buttons[i].backgroundImage = buttons[i].images["unselected"]; }
+		//TODO resolve
+		for (i in buttons) { 
+			buttons[i].color = unselectedColor;
+			// buttons[i].backgroundImage = buttons[i].images["unselected"]; 
+		}
 		// Ti.API.debug(buttons[cards[cardScrollableView.currentPage]].images["selected"]);
-		buttons[cards[cardScrollableView.currentPage].grade - 1].backgroundImage = buttons[cards[cardScrollableView.currentPage].grade - 1].images["selected"];
+		buttons[cards[cardScrollableView.currentPage].grade - 1].color = selectedColor;
+		// buttons[cards[cardScrollableView.currentPage].grade - 1].backgroundImage = buttons[cards[cardScrollableView.currentPage].grade - 1].images["selected"];
 	}
 }
 
 function buttonClicked(button) {
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
 	reportGrade(cards[cardScrollableView.currentPage].memID, cards[cardScrollableView.currentPage].grade);
+	buttonView.animate(fadeOutAnimation);
+	//TODO resolve
 	for (i in buttons) { 
-		buttons[i].backgroundImage = buttons[i].images["unselected"];
-		buttons[i].animate(fadeOutAnimation); 
+		buttons[i].color = unselectedColor;
+		// buttons[i].backgroundImage = buttons[i].images["unselected"];
+		// buttons[i].animate(fadeOutAnimation); 
 	}
 	if ( ( cardViews.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
+		
 		var newWin = Ti.UI.createWindow({
 			url : "stats.js",
 			navBarHidden : true,
 			nav : win.nav,
 			data : cards,
 			// views : cardViews,
-			folder : win.folder
+			folder : win.folder,
+			_parent: Titanium.UI.currentWindow
 		});	
 		//TODO this is not ideal!
 		win.hide();
+				
 		win.nav.open(newWin);
 	}
 }
 
 function render() {
 	win.add(cardScrollableView);
-	for (i in buttons) { win.add(buttons[i]); }
+	win.add(buttonView);
+	// for (i in buttons) { win.add(buttons[i]); }
 	win.open();
 	win.add(closeButton);
 }
