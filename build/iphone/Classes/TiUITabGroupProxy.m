@@ -29,6 +29,7 @@
 	for (id thisTab in tabs)
 	{
 		[thisTab setParentOrientationController:nil];
+		[thisTab setTabGroup:nil];
 	}
 	RELEASE_TO_NIL(tabs);
 	[super dealloc];
@@ -62,6 +63,7 @@
 -(void)addTab:(id)tabProxy
 {
 	ENSURE_SINGLE_ARG(tabProxy,TiUITabProxy);
+	[self rememberProxy:tabProxy];
 	if (tabs == nil)
 	{
 		tabs = [[NSMutableArray alloc] initWithCapacity:4];
@@ -93,6 +95,7 @@
 		[tabProxy setTabGroup:nil];
 		[tabs removeObject:tabProxy];
 		[self replaceValue:tabs forKey:@"tabs" notification:YES];
+		[self forgetProxy:tabProxy];
 	}
 }
 
@@ -109,16 +112,26 @@
 		ENSURE_TYPE(thisTab,TiUITabProxy);
 	}
 
+	for (id thisTab in tabs)
+	{
+		if (![newTabs containsObject:thisTab])
+		{
+			[thisTab setParentOrientationController:nil];
+			[thisTab setTabGroup:nil];
+			[self forgetProxy:thisTab];
+		}
+	}
+	for (id thisTab in newTabs)
+	{
+		if (![tabs containsObject:thisTab])
+		{
+			[self rememberProxy:thisTab];
+			[thisTab setTabGroup:self];
+			[thisTab setParentOrientationController:self];
+		}
+	}
 	[tabs release];
-	for (id thisTab in tabs)
-	{
-		[thisTab setParentOrientationController:nil];
-	}
 	tabs = [newTabs mutableCopy];
-	for (id thisTab in tabs)
-	{
-		[thisTab setParentOrientationController:self];
-	}
 
 	[self replaceValue:tabs forKey:@"tabs" notification:YES];
 }

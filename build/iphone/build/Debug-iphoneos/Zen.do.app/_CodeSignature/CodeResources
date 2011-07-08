@@ -14,11 +14,15 @@
 		</data>
 		<key>Default.png</key>
 		<data>
-		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
+		ox0IedGPQxHvfAIxpSnrOwGsZjg=
 		</data>
 		<key>Default@2x.png</key>
 		<data>
 		gtSrOHWPnDa/LSB6mAw3DUhYkzk=
+		</data>
+		<key>Default_zen.png</key>
+		<data>
+		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -38,6 +42,10 @@
 		</data>
 		<key>default_app_logo.png</key>
 		<data>
+		1Pp/vPaHqaLTboZMd5qqMq/XihQ=
+		</data>
+		<key>default_app_logo2.png</key>
+		<data>
 		KFlQoJWJ07jwAB6IQgZDetdisD4=
 		</data>
 		<key>embedded.mobileprovision</key>
@@ -53,6 +61,10 @@
 		f6+Ub3gNn49jASYBSIKkx6YLUX8=
 		</data>
 		<key>images/appicon.png</key>
+		<data>
+		cjL/+8PWuiFb179S2UOsvH/xiC4=
+		</data>
+		<key>images/appicon2.png</key>
 		<data>
 		cjL/+8PWuiFb179S2UOsvH/xiC4=
 		</data>
@@ -124,6 +136,10 @@
 		<data>
 		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
 		</data>
+		<key>images/new_close.png</key>
+		<data>
+		xJh0MGMSCchOY9e+cXh1RYvNIPk=
+		</data>
 		<key>images/no_clue.png</key>
 		<data>
 		zGNknssd5O9DjgIXiCrzVOPdXf0=
@@ -135,6 +151,14 @@
 		<key>images/options.png</key>
 		<data>
 		doXMXKxoqsHlpKh6+5F1jGJFjFg=
+		</data>
+		<key>images/splash.jpg</key>
+		<data>
+		onzQ7zMXwJrBjSRXrGRoO0LlmpE=
+		</data>
+		<key>images/splash.png</key>
+		<data>
+		ox0IedGPQxHvfAIxpSnrOwGsZjg=
 		</data>
 		<key>images/unchecked.png</key>
 		<data>

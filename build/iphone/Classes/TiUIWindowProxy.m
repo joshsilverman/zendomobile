@@ -134,7 +134,7 @@
 	}
 	else 
 	{
-		if (timeout)
+		if (timeout && ![context evaluationError])
 		{
 			[self open:args];
 		}

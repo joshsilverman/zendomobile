@@ -34,16 +34,27 @@ for ( i in win.data) {
 	}
 }
 
-var graph = Ti.UI.createImageView({
-	image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
-            + gradeCounts[1] + "," + gradeCounts[2] + "," + gradeCounts[3] + "," + gradeCounts[4] +
-            "&chdl=Got it - " + gradeCounts[1] + "|Kinda - " + gradeCounts[2] +
-            "|Barely - " + gradeCounts[3] + "|No clue - " + gradeCounts[4] + "&chma=|2",
-    width : 450, 
-    height : 275,
-    top :  0, 
-    left : -20
-});
+if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+	var graph = Ti.UI.createLabel({
+		text : "There was an error accessing your graph. Check your Internet connection and try again.",
+		textAlign : 'center',
+		left : 50,
+		width : 200,
+		color : 'gray',
+		font : {fontSize : 14, fontStyle:'italic'} 
+    });
+} else {
+	var graph = Ti.UI.createImageView({
+		image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
+	            + gradeCounts[1] + "," + gradeCounts[2] + "," + gradeCounts[3] + "," + gradeCounts[4] +
+	            "&chdl=Got it - " + gradeCounts[1] + "|Kinda - " + gradeCounts[2] +
+	            "|Barely - " + gradeCounts[3] + "|No clue - " + gradeCounts[4] + "&chma=|2",
+	    width : 450, 
+	    height : 275,
+	    top :  0, 
+	    left : -20
+	});
+}
 
 var gradeLabel = Ti.UI.createLabel({
 	text : "Your score: " + (Math.round((total/possible) * 100)) + "%",

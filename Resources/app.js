@@ -1,6 +1,8 @@
 // var nav = Titanium.UI.iPhone.createNavigationGroup({
    // window : win
 // });
+Ti.App.Properties.setBool('active', false);
+
 var container = Ti.UI.createWindow({
 	navBarHidden : true,
 	orientationModes : [
@@ -29,6 +31,33 @@ newWin.nav = nav;
 
 container.add(nav);
 container.open();
+// omniAuth();
+// 
+// function omniAuth() {
+	// // alert(Ti.App.Properties.getBool('active'));
+	// xhr = Ti.Network.createHTTPClient();
+	// xhr.setTimeout(1000000);
+	// xhr.onload = function() {
+		// alert(this.responseText);	
+	// }	
+	// // xhr.onreadystatechange = function() {
+		// // if (this.readyState == 4) {
+			// // if (this.status == 200) {
+				// // if ( Ti.App.Properties.getBool('active') == 0 ) {
+					// // // alert('User is logged in but not in app, trying to get saved login...');
+					// // authSuccess(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'));
+				// // }
+// // 
+			// // } else {
+				// // // alert('User is not logged in to server... Attempting auto login...');
+				// // attemptAutoLogin();
+			// // }
+		// // }
+	// // }	
+	// xhr.open("GET", "http://zen.do/auth/open_id?openid_url=gmail.com");
+	// xhr.setRequestHeader('Content-Type', 'text/html');
+	// xhr.send();
+// }
 
 // nav.open(newWin);
 // win.open();

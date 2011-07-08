@@ -397,8 +397,23 @@ MAKE_SYSTEM_PROP(CONTACTS_SORT_LAST_NAME,kABPersonSortByLastName);
 			CFRelease(val);
 			
 			CFStringRef CFlabel = ABMultiValueCopyLabelAtIndex(multival, index);
-			label = [NSString stringWithString:[[[TiContactsPerson multiValueLabels] allKeysForObject:(NSString*)CFlabel] objectAtIndex:0]];
-			CFRelease(CFlabel);
+            NSArray* labelKeys = [[TiContactsPerson multiValueLabels] allKeysForObject:(NSString*)CFlabel];
+            if ([labelKeys count] > 0) {
+                label = [NSString stringWithString:[labelKeys objectAtIndex:0]];
+            }
+            else {
+                // Hack for Exchange and other 'cute' setups where there is no label associated with a multival property;
+                // in this case, force it to be the property name.
+                if (CFlabel != NULL) {
+                    label = [NSString stringWithString:(NSString*)CFlabel];
+                }
+                else {
+                    label = [NSString stringWithString:propertyName];
+                }
+            }
+            if (CFlabel != NULL) {
+                CFRelease(CFlabel);
+            }
 			
 			CFRelease(multival);
 		}

@@ -93,11 +93,11 @@ function initialize(cardViews) {
 	}
 	
 	closeButton = Ti.UI.createImageView({
-		image : 'images/close_updated.png', 
-		height : 35,
-		width : 35, 
-		top : 3,
-		left : 2
+		image : 'images/new_close.png', 
+		height : 25,
+		width : 25, 
+		top : 10,
+		left : cardLeftPad
 	})
 	
 	closeButton.addEventListener('click', function() {

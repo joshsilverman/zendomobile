@@ -56,13 +56,15 @@
 
 -(id)initWithDelegate:(TiNetworkHTTPClientProxy*)proxy
 {
-	if (self = [super _initWithPageContext:[proxy pageContext]])
+	if (self = [super _initWithPageContext:[proxy executionContext]])
 	{
 		delegate = [proxy retain];
-		[[proxy pageContext] unregisterProxy:self]; // Force unregister so that request is cleaned up ASAP
+		//[[proxy pageContext] unregisterProxy:self]; // Force unregister so that request is cleaned up ASAP
 		// set the immutable properties we want to be set when this result is proxied
 		// back as a this pointer in JS land ... all others will be delegated directly
 		// to our delegate
+		
+		// TODO Unregistering while still valid may be not good and obsolete and orphans a JS object. Is this a good idea? --BTH
 		
 		responseHeaders = [[delegate responseHeaders] retain];
 		pthread_rwlock_wrlock(&dynpropsLock);

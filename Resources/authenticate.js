@@ -1,20 +1,22 @@
 Ti.include('networkMethods.js');
 
-if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-	alert("Could not log you in. Check your Internet connection and try again.");
-} else {
-	if (Ti.App.Properties.getString('email') != '' && Ti.App.Properties.getString('email') != null) {
-		authenticate(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'));
+render();
+
+function attemptAutoLogin() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not log you in. Check your Internet connection and try again.");
+	} else {
+		if (Ti.App.Properties.getString('email') != '' && Ti.App.Properties.getString('email') != null) {
+			authenticate(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'));
+		}
 	}
 }
-
-render();
 
 function renderLogin() {
 	activityIndicator = Titanium.UI.createActivityIndicator({
 		height:50,
 		width:10,
-		top : 210,
+		top : 180,
 		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
 	});
 	activityIndicator.show();
@@ -22,6 +24,7 @@ function renderLogin() {
 }
 
 function authSuccess(email, password) {
+	// alert('Rendering authentication success');
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	var newWin = Ti.UI.createWindow({
@@ -36,8 +39,11 @@ function authSuccess(email, password) {
 			Titanium.UI.LANDSCAPE_RIGHT
 		]
 	});
+	
+	//alert('login success!');
 	win.nav.open(newWin);	
 	activityIndicator.hide();
+	
 }
 
 

@@ -18,6 +18,7 @@
 
 -(void)dealloc
 {
+	[(TiWindowProxy *)[self proxy] _associateTab:nil navBar:nil tab:nil];
 	RELEASE_TO_NIL(tab);
 	[super dealloc];
 }
@@ -46,7 +47,6 @@
 
 -(void)viewDidUnload
 {
-	[(TiWindowProxy *)[self proxy] _associateTab:nil navBar:nil tab:nil];
 	[super viewDidUnload];
 }
 

@@ -57,6 +57,7 @@
 
 - (void)open:(id)args
 {
+	[self rememberSelf];
 	ENSURE_TYPE_OR_NIL(args,NSDictionary);
 	Class arrayClass = [NSArray class];
 	NSArray * toArray = [self valueForUndefinedKey:@"toRecipients"];
@@ -158,6 +159,7 @@ MAKE_SYSTEM_PROP(FAILED,MFMailComposeResultFailed);
 							   nil];
 		[self fireEvent:@"complete" withObject:event];
 	}
+	[self forgetSelf];
 	[self autorelease];
 }
 
