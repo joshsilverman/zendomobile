@@ -5,7 +5,7 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 07/08/11 16:18
+Starting build at 07/08/11 18:42
 
 Build details:
 
@@ -156,12 +156,12 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   LICENSE.txt                                                                                                              [92]    
   manifest                                                                                                                 [183]   
   README                                                                                                                   [551]   
-  tiapp.xml                                                                                                                [1534]  
-  .git/COMMIT_EDITMSG                                                                                                      [47]    
+  tiapp.xml                                                                                                                [1536]  
+  .git/COMMIT_EDITMSG                                                                                                      [68]    
   .git/config                                                                                                              [288]   
   .git/description                                                                                                         [73]    
-  .git/HEAD                                                                                                                [26]    
-  .git/index                                                                                                               [7728]  
+  .git/HEAD                                                                                                                [23]    
+  .git/index                                                                                                               [8304]  
   .git/ORIG_HEAD                                                                                                           [41]    
   .git/hooks/applypatch-msg.sample                                                                                         [452]   
   .git/hooks/commit-msg.sample                                                                                             [896]   
@@ -174,15 +174,15 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/hooks/prepare-commit-msg.sample                                                                                     [1239]  
   .git/hooks/update.sample                                                                                                 [3611]  
   .git/info/exclude                                                                                                        [250]   
-  .git/logs/HEAD                                                                                                           [6904]  
+  .git/logs/HEAD                                                                                                           [7457]  
   .git/logs/refs/heads/card_object                                                                                         [161]   
   .git/logs/refs/heads/integrated_data                                                                                     [337]   
-  .git/logs/refs/heads/master                                                                                              [1309]  
+  .git/logs/refs/heads/master                                                                                              [1474]  
   .git/logs/refs/heads/push                                                                                                [631]   
   .git/logs/refs/heads/swipe                                                                                               [161]   
   .git/logs/refs/heads/ui_testing                                                                                          [820]   
-  .git/logs/refs/heads/ui_tweaks                                                                                           [351]   
-  .git/logs/refs/remotes/origin/master                                                                                     [1200]  
+  .git/logs/refs/heads/ui_tweaks                                                                                           [562]   
+  .git/logs/refs/remotes/origin/master                                                                                     [1350]  
   .git/objects/00/053f8a166a1309d97a609e14b1b8cd78dc4154                                                                   [87]    
   .git/objects/00/11225509da6931dc2aad08371e010190a70e0c                                                                   [24327] 
   .git/objects/00/116302a7dfa8718f3640e9b129d248a5cd3b8b                                                                   [4826]  
@@ -268,6 +268,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/05/6842ad56004986c269741af4c5ea546003c88a                                                                   [8496]  
   .git/objects/05/7ec0c049182572877de493eb65955b9b9c97ea                                                                   [26499] 
   .git/objects/05/80f992366254178a7423723979568827943646                                                                   [43867] 
+  .git/objects/05/8293ed4a48a787f3ae4aeecc0bb3539c47e084                                                                   [1065]  
   .git/objects/05/847a07a4441da3a825b68b43b38241badb31c2                                                                   [19718] 
   .git/objects/05/8e7d2279d000a052736a6a523dad1813aac722                                                                   [16294] 
   .git/objects/05/c3cc4702287d829b5613ba448ed31e17d63112                                                                   [1705]  
@@ -275,6 +276,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/05/dc0f4fca8d2b038721b7d55d424c39cd2e46c4                                                                   [1583]  
   .git/objects/05/f3b60c0831d6e564973411530763a077782d8e                                                                   [328]   
   .git/objects/06/148f479e0a745b7088f1aba0132c72c5821f79                                                                   [3993]  
+  .git/objects/06/15b20fe87c2e3db6f430a9a71f04d148dc994c                                                                   [698]   
   .git/objects/06/4aae29401d466d5a0b36d31c43ebfd51bb2e9a                                                                   [1048]  
   .git/objects/06/4f8dbca529e8caab72da5447ce89142a930f8a                                                                   [13610] 
   .git/objects/06/905209c4e5e4dbb277f069d95a0e9f3f9a09ad                                                                   [2431]  
@@ -282,6 +284,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/06/f02ecb1fe4966e6c08eca01344fef66b51acfb                                                                   [513]   
   .git/objects/06/f1225c06f4d07229a30500463b907c55c23b7b                                                                   [6820]  
   .git/objects/06/f30ad6aaadf625cf50be30342628dd7e0b1d5a                                                                   [29952] 
+  .git/objects/06/f6aa0d4882e9463a0075eef79f558aaa05026f                                                                   [1464]  
   .git/objects/07/0b737daa1fe4b485e20fbbb3e165dc7d2d19f2                                                                   [340]   
   .git/objects/07/26201ce3e1b6087cd96bbd5fcbd7289c92b17d                                                                   [6347]  
   .git/objects/07/36190235d104f38a9da1f1498765ad3c5500f6                                                                   [3388]  
@@ -303,6 +306,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/08/abc26f7c6a45f18f560f39fd190f80f6085997                                                                   [5750]  
   .git/objects/08/ad09016b8c147ac3feaa073f8ba654f85fcb36                                                                   [1579]  
   .git/objects/08/afc992dc062b5233f9ff5d1a74ff88eac2b833                                                                   [26549] 
+  .git/objects/08/b1571e2716db6c49edf4f80a649bb6d964d253                                                                   [2387265]
   .git/objects/08/b7b6f844ecae7cc33d0e0392a7fa1595b8d20e                                                                   [8090]  
   .git/objects/08/badb32c75f95e7bbacdf2e8766d83ff3b6968e                                                                   [1587]  
   .git/objects/08/cf96bb4fdf850096720b5a1c21997a28987fd8                                                                   [20938] 
@@ -365,6 +369,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/0c/9b8462a6c0fe1fd93a81f7a04e17fdf460ae95                                                                   [29047] 
   .git/objects/0c/9ff32225a085e4a6c547e84e6cb303d2717207                                                                   [2440]  
   .git/objects/0c/a013769406b2da475568108e2f2f0b76034133                                                                   [6875]  
+  .git/objects/0c/a3ece63eb7cf04869021a6783ab8a34cbd5fbc                                                                   [133]   
   .git/objects/0c/b4243e45d0167cd3b27114810f3a96eddef17f                                                                   [28788] 
   .git/objects/0c/d00781b2d93ced7b65c42084357d2a2e81c2d1                                                                   [1586]  
   .git/objects/0c/e0c783b16f4eb8817a10660f21ffb4b6158731                                                                   [59138] 
@@ -404,6 +409,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/10/0ebadf60bc29b59e5cfddaa624378ed26fa20b                                                                   [2436]  
   .git/objects/10/0ee1109360a61f44765b9f2ffb33e8545009a8                                                                   [4953]  
   .git/objects/10/100774bf36df600cecd7253bdbc30bacb54345                                                                   [2442]  
+  .git/objects/10/42725c75c20ef2acff8d38396595de827fa0ee                                                                   [58379] 
   .git/objects/10/613b858e9b4aa44a2848cba0d31ea5623d0241                                                                   [7511]  
   .git/objects/10/6a6fb24ac5317a931decf742de40d3ebb0c379                                                                   [4774]  
   .git/objects/10/739cd27bf70593246954c87db4bc978a880eab                                                                   [444]   
@@ -422,9 +428,11 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/11/141d7cf99d0ae5da3ddda61df91c337bd00fb6                                                                   [6447]  
   .git/objects/11/26720488902c2fbf4c9743d3e7e22813993fbb                                                                   [1583]  
   .git/objects/11/28228dce53cb2adbea496521d839607fc5c789                                                                   [99]    
+  .git/objects/11/35aa124d8035bbf557c3b5e09ef75e133f1304                                                                   [16800594]
   .git/objects/11/57cabbe3215ab671132b34d9e4d997dca5b7e4                                                                   [1595]  
   .git/objects/11/5d206b248c9c8e1e5a22568d702be333be6a19                                                                   [6361]  
   .git/objects/11/786459dab6434d1c4a15b2512fa5ac2dcb6491                                                                   [2437]  
+  .git/objects/11/7f7db5dd818dedc966a790cb8c274083fc0ea4                                                                   [116]   
   .git/objects/11/d52b87727ecf9396d7c27297b95b6823f602f8                                                                   [378]   
   .git/objects/11/e4e4d6c116d1f5d94002e4dba13d370135705f                                                                   [380393]
   .git/objects/12/04ff82c9e084dd5b9aa5d115bab02866e42808                                                                   [13910] 
@@ -442,6 +450,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/12/d399d79b99cb81361b282635affe56b0037b62                                                                   [629]   
   .git/objects/12/e4d21bbea1c932e31d998147abcfb7fb955cf9                                                                   [8524]  
   .git/objects/12/eedc9e3d0c2bd18a10e541c8bc5e97fb89b779                                                                   [28366] 
+  .git/objects/12/f8770b33cef959a3fae18bc43e545d70dc7f4b                                                                   [8023]  
   .git/objects/12/ff75e9c0bd35eb3000142463ca80b8d371630e                                                                   [32139] 
   .git/objects/13/2475f19a431920c75ba301b2303c6886db2271                                                                   [31172] 
   .git/objects/13/32729644d0a9c7d7deca4ef69c541c0b280dee                                                                   [8231]  
@@ -549,6 +558,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/19/42cb3621a84c8c2f115050131f55e0ffcaa964                                                                   [2435]  
   .git/objects/19/5221a0c9d9d30c37c1d986a1a29679b3ce0131                                                                   [383]   
   .git/objects/19/58e2dd370b6c9390fab9628ead584aedd49cc9                                                                   [38179] 
+  .git/objects/19/6392a384cbecc2b11e6a9ed2289ac249e0682b                                                                   [846]   
   .git/objects/19/64c15ff8d5e4a207886ade9da47610874f871c                                                                   [1933]  
   .git/objects/19/729a104a998cd2072b82af54497dcf836c1029                                                                   [149636]
   .git/objects/19/aa55a71d8698c2e87e328238662544897601d0                                                                   [44351] 
@@ -617,6 +627,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/1d/d069de25429478d2551fc23cfa42c68652175f                                                                   [65322] 
   .git/objects/1d/d8c20128ec14b5f5a8b9cf9c30060cabdcb60e                                                                   [55376] 
   .git/objects/1d/e117892e0bd573f7a9a3aaf06990ad648276bb                                                                   [29195] 
+  .git/objects/1d/e582a15344b0dfa416aadfaa7a7a2fad3b00fe                                                                   [54393] 
   .git/objects/1d/f1687d6f40ffaea8861e98095c698eaab55e42                                                                   [2434]  
   .git/objects/1e/0024b69636b9f6dd445385549efcb306eb3b43                                                                   [2438]  
   .git/objects/1e/0734a3afe2ece714862bdcf714eea1b1530a56                                                                   [446]   
@@ -638,6 +649,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/1f/be3cac9e4ed87f9384d06f51ca03249ffd9cd4                                                                   [56459] 
   .git/objects/1f/cc9c760cbc359e933e3d4aee06403d396e8c14                                                                   [1287]  
   .git/objects/1f/e15b0af8481d6b9deeb8047825593125fad032                                                                   [32396] 
+  .git/objects/1f/e7cfffa054749a31a55f80d06f50a50df56e74                                                                   [58]    
   .git/objects/1f/f62c968a0cb23ed98195c8f99095079808292e                                                                   [16365] 
   .git/objects/1f/f9f635bd5693458873589b132b4628287f14d7                                                                   [2431]  
   .git/objects/20/01cb8c1958254b99c1a90a7de5559e2f82bb92                                                                   [2434]  
@@ -654,6 +666,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/20/b337ddeb4edff37de3d2977a17eb0d9dfe6e7d                                                                   [3399]  
   .git/objects/20/c9ed9601358d37586e88f9057c07b9b10662e3                                                                   [10348] 
   .git/objects/20/d41caee8161d664d29bbecc6831647f3cb873a                                                                   [4956]  
+  .git/objects/20/f2473e157e7522b55aa3b23c51c198bc62e65d                                                                   [1979]  
   .git/objects/20/fb4bb15870e31cc0cafe1f4db5fc74597a5d6e                                                                   [3279]  
   .git/objects/21/1811d6d5c092a6d9d23227fb672dcbf8ffb2a6                                                                   [1583]  
   .git/objects/21/2951ab7d4e8bb75b19bbe4d5b475267cd50ce1                                                                   [10260] 
@@ -694,11 +707,13 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/23/61421304ecaaeb248e6fffb7995392d05d5c5a                                                                   [2429]  
   .git/objects/23/64d9c3b73bc55ed0847614f889c7f46feaa3b6                                                                   [17069641]
   .git/objects/23/74dbd38ebf95360113d6b90e0bdebae76f0b11                                                                   [2440]  
+  .git/objects/23/9f3c973d83d626d496e8123f371e9a942289f8                                                                   [1126]  
   .git/objects/23/c638b395bade6f384cba6a7a8a321bf1740a98                                                                   [2434]  
   .git/objects/23/d3f0565e503a16971c318fe24880458ca87462                                                                   [226]   
   .git/objects/23/f1f6b9c48507b0968a84c01b66b376dc26516d                                                                   [47059] 
   .git/objects/23/f3b311365ec82bf7435716cef4f62bc8f591b9                                                                   [1154]  
   .git/objects/24/0e1b814562f42260a5a4f32d609bf0d3864785                                                                   [11864] 
+  .git/objects/24/1ffa62159b1488bb0907b104da6ef0c4037e4a                                                                   [6311]  
   .git/objects/24/2130350aaed0843c32a6a0849d36445e308b7d                                                                   [1218]  
   .git/objects/24/25de68aa20df269ae6b8558b81e2db2411df1e                                                                   [2439]  
   .git/objects/24/5e135ffe1c3edd2c0436f18cc43f5a6409878b                                                                   [2432]  
@@ -748,6 +763,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/26/f16b3d1845e5595428fef2f99f70b6d51a9542                                                                   [10194] 
   .git/objects/27/05752bfa78ea5c817ca3c15b564ec3d4357f6f                                                                   [1584]  
   .git/objects/27/09b039217b63d38345935fca5dd6f8aa1d9891                                                                   [55552] 
+  .git/objects/27/19b36a2cb364e3bfdac30b612b489afb993727                                                                   [87]    
   .git/objects/27/25ceefda65b615f20684618d97d988cb9b835e                                                                   [8617]  
   .git/objects/27/334e4092091cfc9ee221e1dc815f2684f0c46f                                                                   [56132] 
   .git/objects/27/5630b0a39b034737da631cb758c5168076aeaf                                                                   [2102]  
@@ -805,6 +821,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/2a/02c6988270d18267edd233b2cc7ec538897ced                                                                   [28758] 
   .git/objects/2a/335089f444690af9cfe72f243381b478f7574b                                                                   [15581] 
   .git/objects/2a/3f23bda2bfd3726cdc8c339751fb1b93de635c                                                                   [26683] 
+  .git/objects/2a/4b46d3c9689b5841e1ac4e0551924a5ae54f77                                                                   [5551]  
   .git/objects/2a/502045367bf91862057619f23939806fe0f2b6                                                                   [80]    
   .git/objects/2a/558d020e84a65ff4ea41098402dd7fbf031d7b                                                                   [1584]  
   .git/objects/2a/7072d6c91abacbb30e8d5e6fcb13e7cac7fe15                                                                   [20841] 
@@ -826,6 +843,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/2b/70766fbe9561e04f8efd686d52b98ebc07d2c6                                                                   [57795] 
   .git/objects/2b/8b6053a1e0d504d7bde119bd06906fdb552472                                                                   [2430]  
   .git/objects/2b/8e80dcddf721a4276b24c792eead4f11056ebb                                                                   [3318]  
+  .git/objects/2b/bda23cdd2de77cea81a3b6d840fe24b809799b                                                                   [55]    
   .git/objects/2b/d8b1d6a487ef88c6bdbbdb11e92847e29dd128                                                                   [616]   
   .git/objects/2b/e2df4b97a22b4438447d7b80923e4a5123373e                                                                   [264]   
   .git/objects/2b/f1eb2488686a17224436f1ddcbb45eede8fd64                                                                   [1598]  
@@ -844,6 +862,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/2c/9c1a26e6abdd785b9087bcb4d8f8838b66bdb0                                                                   [886]   
   .git/objects/2c/ab0a478782d045a5d1de5f9e4e64488a2306f6                                                                   [2440]  
   .git/objects/2c/dcf746368b02ce30dc0a3d559c86434883f954                                                                   [116]   
+  .git/objects/2c/f2f6e2aa2603f19dce86e063a1af9a951c9ef8                                                                   [618]   
   .git/objects/2c/fa09587405320894474e1de5d703257b4979a3                                                                   [6633]  
   .git/objects/2d/07049b921e1f80d665aa6f419285fd69b485b3                                                                   [46830] 
   .git/objects/2d/149b6113ad297f472ab04299f273b4ab75a090                                                                   [2431]  
@@ -886,6 +905,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/30/06947189f3525493d684afc3dae8b1b95c88a6                                                                   [47623] 
   .git/objects/30/06f1f2e0858d136d9d0f8c4a25af8a647db41c                                                                   [24488] 
   .git/objects/30/15f8b4d51af9313ecd6c78f503ae6d7ed9a02c                                                                   [27323] 
+  .git/objects/30/35af1979dfa962889c5b4c76d7952fef6a6699                                                                   [8231]  
   .git/objects/30/45901d8eda0df5f99972edea45ba761cb2092f                                                                   [2444]  
   .git/objects/30/5a60f6b37a220678a4bfc5e393a86004b6e714                                                                   [24354] 
   .git/objects/30/62e6938788a7c5278dfaef508973676081da45                                                                   [5933]  
@@ -1050,6 +1070,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/3a/3924459ea396d3d5a6e07f10f9a324dd687efc                                                                   [50]    
   .git/objects/3a/41b14d968fecb7272a36f5efbcd519c3e27c26                                                                   [4449]  
   .git/objects/3a/5e73ab3df27892563c32f0574b52e6f747b47e                                                                   [844]   
+  .git/objects/3a/62a31277275d5fd0ac894a6f07a976738999e5                                                                   [243]   
   .git/objects/3a/783e152ccb01aed6e5f11a5f7371fc9d94c2a3                                                                   [1580]  
   .git/objects/3a/83cc70ef9504ab6385a8208e62176465b2dd7b                                                                   [123495]
   .git/objects/3a/c0f36c8087819cc6d708fe87d18990d6bb9e7d                                                                   [402]   
@@ -1100,6 +1121,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/3d/16eaba360960f2151e5d31711bf2ca6e7e6f99                                                                   [384]   
   .git/objects/3d/2c0d3fcbe32517478f519d0fbbccb55bbf8ced                                                                   [14315] 
   .git/objects/3d/3a7a435fa66d91926b93dd827882efe702606f                                                                   [47276] 
+  .git/objects/3d/50b893a53ae277874dc814ab895d1397d4cfdd                                                                   [588]   
   .git/objects/3d/57d4de2d379f795cdf6ce42964b66156fa5cba                                                                   [2424]  
   .git/objects/3d/6245e6363eb58e74d1fadcc746e819f7182c3d                                                                   [27672] 
   .git/objects/3d/6c462b19417846c0dbbcf839afffed62ff8ab4                                                                   [2230]  
@@ -1206,6 +1228,8 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/44/0f8b89569bc6cde2c487645d58c787d0b99e69                                                                   [88501] 
   .git/objects/44/16c94da10d05753dff22ca58ecc9caa51fa9e6                                                                   [8292]  
   .git/objects/44/247e91d1c348ae6bc65ef369b92bde459444f2                                                                   [29793] 
+  .git/objects/44/3a657ae810980dfbf27eb34dc2a1027e512d6c                                                                   [1414184]
+  .git/objects/44/461a1952081add78634d7444dbf8c362864339                                                                   [27265] 
   .git/objects/44/4df2247537ca462b1bfa3a3a568d8ae68c35fa                                                                   [13825] 
   .git/objects/44/590c276e2d275fb77b58c2bb7255f189fc1045                                                                   [601]   
   .git/objects/44/71f0aec8da7e251affcd0b2e2ed692ba0eb3fd                                                                   [2430]  
@@ -1230,12 +1254,14 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/45/c879ea6d39d07dd1ea0a974adacad084968104                                                                   [2468]  
   .git/objects/45/dc5db894872514b46d76e47211c40c37f6f0db                                                                   [777]   
   .git/objects/45/e05a3581930ea76af1169a42e334fd2ac96315                                                                   [1575]  
+  .git/objects/46/1fe98b700682ad5b97bfcfc92184c6e201fe6e                                                                   [7910]  
   .git/objects/46/3e600669d1ac40d13da9fc5d5bbc4e2198e973                                                                   [25849] 
   .git/objects/46/48a1644b103f35a9609a6f7b7a72a9257047ee                                                                   [757]   
   .git/objects/46/4fc8fd3fcb0ad4b8856ec42b79b47343a6ef63                                                                   [9330]  
   .git/objects/46/51aed9f300d9542486874d7c240e9d00b0225c                                                                   [2440]  
   .git/objects/46/5bef46ac72832616072e4472e0c735b8b29919                                                                   [23472] 
   .git/objects/46/5cb4a5232d552ff2b2a9c4e75aa4187ae3e765                                                                   [2436]  
+  .git/objects/46/7c7e6aac2009bfcf562d3ebdd0306af871ccd5                                                                   [57]    
   .git/objects/46/82fe801e829248a4407191820ab56647c46828                                                                   [50015] 
   .git/objects/46/88bcfad21f5a6340d5d59f04deeb14680e712b                                                                   [1088]  
   .git/objects/46/ab0746446cd4908bc1fdfba4a76be75c538989                                                                   [77]    
@@ -1303,6 +1329,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/4a/c9a893a399b7ca90ddd75ef394007906758d18                                                                   [42951] 
   .git/objects/4a/ca702daa64815e1f91ede0a6798bab75abf804                                                                   [19972] 
   .git/objects/4a/e5c0ad4bee08f48e9391f8ca88bc4932c517d6                                                                   [339]   
+  .git/objects/4a/f73a4f548f9d0aa8c4f47e8d99902c0c59a55b                                                                   [193950]
   .git/objects/4b/02c3bbfeb8a6aa56069cd584f1bf6a2c5a1252                                                                   [37672] 
   .git/objects/4b/1fbb6bf737a7c6a40879683b7aea58e3421cdf                                                                   [2434]  
   .git/objects/4b/295ff0bef721c62a50f52e6db4aa33cf3ee4b7                                                                   [1573]  
@@ -1330,6 +1357,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/4c/92e72c8e604258c472bc1e0bcfaf44e8bff7e3                                                                   [1594]  
   .git/objects/4c/b5b5dd8c1b21c1b5c301c0fd25ea842af043b4                                                                   [4769]  
   .git/objects/4c/b6247ab3462781a7c55e3ea5abf29c27f98c90                                                                   [2442]  
+  .git/objects/4c/b72deaf94c45c4aab49d079f706dd9e1fe3e51                                                                   [607]   
   .git/objects/4c/b88ca73e5854ad4f6f98ea53eadcd7eeaca0ed                                                                   [80]    
   .git/objects/4c/bdbc8cf353d0392bc6504d40274535d04bd3ac                                                                   [55565] 
   .git/objects/4c/c362ff2968a60a753961887bf4bf57a005530f                                                                   [1253]  
@@ -1348,6 +1376,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/4d/27cd8aa2ebc88f6f6f1abb6414b88fcae2c118                                                                   [1580]  
   .git/objects/4d/372204e107bee7fa861521dfe0aeedcb344b23                                                                   [17275] 
   .git/objects/4d/38603d7b2311db0f153c78f654a03a5b9226f4                                                                   [2439]  
+  .git/objects/4d/4876b58958e8a56ed557d80c9fe1fe8d2f7149                                                                   [501]   
   .git/objects/4d/4f6945ee1e6161754072d82d1d3cfb6c96a4d7                                                                   [2425]  
   .git/objects/4d/61366650b15b3c41fdcf380252f5fac847cb4b                                                                   [10302] 
   .git/objects/4d/6afd85dbca17dbf403aa2a6313bb5516296edb                                                                   [1959]  
@@ -1359,6 +1388,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/4d/9ce9f6bb0dc2d0f56c42aca202018d3420aa34                                                                   [139962]
   .git/objects/4d/a0399aba4ce5564d81a9ab7fdc405639e4c27f                                                                   [2470]  
   .git/objects/4d/c42f1b3d83327f868e2a19c547184fa0773751                                                                   [11703] 
+  .git/objects/4d/cc3097ec4d11fa2dc84e30a98b8cbe1a3e2105                                                                   [3205]  
   .git/objects/4d/d139f6d0ef444738a51d674e904c777e71ea9c                                                                   [273]   
   .git/objects/4e/14ab4ab188265b25e9750709e12934866f5dc5                                                                   [20468] 
   .git/objects/4e/308740c367e0325964172778d040552d634837                                                                   [45445] 
@@ -1384,6 +1414,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/4f/5526989d3f61c44236d04fd4a63f1ec874be32                                                                   [2428]  
   .git/objects/4f/63355fe159a599baa2c68f549d9fbe44389da6                                                                   [1585]  
   .git/objects/4f/66b441a6f22d77dcc21bedd9ef00f0555f8287                                                                   [23179] 
+  .git/objects/4f/7714f5832858ff9ab5fda0acc7c3f46d308959                                                                   [205]   
   .git/objects/4f/8bc6a3b4984b06edf60e18e26dcdf40e5c2fa1                                                                   [27048] 
   .git/objects/4f/9b1857a581b51220cb6a9896208ad331d69fcc                                                                   [40854] 
   .git/objects/4f/b1c89754333c562788969f6457ea1b5f360cff                                                                   [865]   
@@ -1397,8 +1428,10 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/50/dcf68a37a43c8fe276f914399a55b58c1be12f                                                                   [1272]  
   .git/objects/50/f36c0a8a336b622f8050bea41e3a471d2615bb                                                                   [20287] 
   .git/objects/51/0edd8d81fdbf462a77b07f2b4bc9eeb67a6a4d                                                                   [6373]  
+  .git/objects/51/277c886984ed3b1fddaadc45dae9c3ff745e1e                                                                   [51]    
   .git/objects/51/3ab141bed8795f2843ac4beb1222d53f91ac1a                                                                   [2522]  
   .git/objects/51/3fca8751bc981985c907d3b81ffd1ceb05adb0                                                                   [29016] 
+  .git/objects/51/531f29c4e89736c402f1fa11b6944dbf2faa3e                                                                   [3768]  
   .git/objects/51/583cae213b7ce70e371c428fe85cf3009d0ad9                                                                   [27551] 
   .git/objects/51/5a5712b6b1619d993916b387217371621e010e                                                                   [3334]  
   .git/objects/51/6077fab851f313597ecf9b53e73c7d3278082a                                                                   [5394]  
@@ -1492,6 +1525,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/58/03c02958aa20188632b25be23ba4dfd6bc65ed                                                                   [48]    
   .git/objects/58/045117ae6ef4fc242b7b7efe00cca85cdb345d                                                                   [7591]  
   .git/objects/58/08fea9ec53530f5cee7b3345edf9d0d5a5c55b                                                                   [49658] 
+  .git/objects/58/15cc272b628a21b1386669f03e3bc66a565a5d                                                                   [91]    
   .git/objects/58/22c0385cd5564a2944b489076c9799049c0284                                                                   [58]    
   .git/objects/58/2f6f8ad82aa2fef5be0e440fe7e6b6b349e70d                                                                   [1346]  
   .git/objects/58/4a399634522edef370065210381b5daf33bc04                                                                   [1838]  
@@ -1508,6 +1542,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/59/02fc8193c7298e12531ac2b399eb8bd01fc366                                                                   [79406] 
   .git/objects/59/057607105a1fb5e90171992c909701538bbc1a                                                                   [46751] 
   .git/objects/59/2711c87b939d966343d85709afc6725621327c                                                                   [1877]  
+  .git/objects/59/361c9ced6087f529609524ed3b01a99d8e283d                                                                   [323]   
   .git/objects/59/3848d49624f75427e4c9e8df6ec7c53e4bd7ad                                                                   [17134] 
   .git/objects/59/43503334edf677184208e0f9dd530ee33dae09                                                                   [158]   
   .git/objects/59/56bb1f13dfd0047579eb26a586245d8074c094                                                                   [2188]  
@@ -1537,6 +1572,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/5a/a6252fe9c0f91f2f313aca733a95d956f9ff56                                                                   [48544] 
   .git/objects/5a/a64ced9eab262b130175dcc31fbcf222199444                                                                   [6184]  
   .git/objects/5a/ab3d65bf7f48f56e5784814f76eba72de00013                                                                   [437]   
+  .git/objects/5a/b299b1c1b2e72104ce0fe6d1ce5f1a40118f33                                                                   [330]   
   .git/objects/5a/b6ef7c3a657c2766ea7d7adb2273971dc833f4                                                                   [7304]  
   .git/objects/5b/095bb6cbd8affeac476f13c54cbfab8fcf7950                                                                   [409]   
   .git/objects/5b/0de791947d494781fef7049c973445b9b1acf2                                                                   [2721]  
@@ -1589,11 +1625,13 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/5d/c480a90471d1a8fdd493714f1dfb281801584b                                                                   [1588]  
   .git/objects/5d/ca8795d2db0b3636038cfa8459058fbb9cf1a9                                                                   [2521]  
   .git/objects/5d/d7ae7565cb475b6ba538e5704244cbfbaf4eae                                                                   [410]   
+  .git/objects/5d/e5d402ec16e4b44c1c33390e6a020d0cd8676b                                                                   [7848]  
   .git/objects/5d/f1131df0197b026277edcba24b6eff4b81d335                                                                   [21921] 
   .git/objects/5d/f417d6c3b38d939c4832f13a7579a08a469748                                                                   [473]   
   .git/objects/5d/fa4d7b53ddcaa68ce6e665c1cf29c26caa3c15                                                                   [319]   
   .git/objects/5d/fca45fc90a38ba15d1e764a75c43b1f0c8db41                                                                   [48196] 
   .git/objects/5e/03939e5f8a84e779bd919cf9d04c16c21f5865                                                                   [2431]  
+  .git/objects/5e/27e6f7634c886ac9c889f2b95651638aed4e68                                                                   [1782]  
   .git/objects/5e/31b744b91042652630e4636ce67e724101ce8b                                                                   [31226] 
   .git/objects/5e/40bbdc3dacc11b05a36002ac22cb38da1de9b7                                                                   [606]   
   .git/objects/5e/555a8e995e38038b765ba76c34c9611db13c5c                                                                   [13490] 
@@ -1601,6 +1639,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/5e/912566a6503eeaace05662348b90966eb40ce8                                                                   [2434]  
   .git/objects/5e/9b38fb871696c9c39c45479eb23c4c2171390c                                                                   [27359] 
   .git/objects/5e/9d726b9761710a07cd88e790dc0ef5d1fbaa76                                                                   [1323]  
+  .git/objects/5e/daa750174bd6699464b67c6bdf44558f6b54b2                                                                   [612]   
   .git/objects/5e/dda1ea27182e088e3f6b8035a28f6c98d8f69d                                                                   [2439]  
   .git/objects/5e/f428097e76ea10b0f420185e34544563bcd5c5                                                                   [133]   
   .git/objects/5e/f7962c12c3ccb2380422cb1a942deb33a6b773                                                                   [8491]  
@@ -1762,6 +1801,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/6b/23d7f28b4ff2e3833edea7931a21ac08ef5512                                                                   [2434]  
   .git/objects/6b/2766e871f8f1edd1c577326a6e8952fd8c8571                                                                   [12695] 
   .git/objects/6b/502ff7f8dd49951eaac09bf6cf437319bb696a                                                                   [20812] 
+  .git/objects/6b/633a18a9b84fad2b7189bc7888a021101e3acd                                                                   [162]   
   .git/objects/6b/65fd17b1c9dcb359f22d3bc017dedebc9b963e                                                                   [2435]  
   .git/objects/6b/6b290815ad202b3af10ce638b61408675636e0                                                                   [38267] 
   .git/objects/6b/7184abe40802b2fadde108cb19020510a0f458                                                                   [4146]  
@@ -1800,6 +1840,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/6d/3b3e94008a753a22a63ef38bcdad38a07220f5                                                                   [7925]  
   .git/objects/6d/3bdbc59cb1390bf8818493e9a880e7457881e9                                                                   [28387] 
   .git/objects/6d/831a3542a7f8c84c517da70c993ef1886b5bef                                                                   [30079] 
+  .git/objects/6d/866d09e781d462ac10676e1d42ee0b8af587da                                                                   [128]   
   .git/objects/6d/ad6f25a79521e62a1f5d2b0438a890ac8548b7                                                                   [412]   
   .git/objects/6d/b8220cb5b1cb9181ec14645b50cdeb3fb62952                                                                   [2435]  
   .git/objects/6d/bdcae88d4e121057bfb66fca826cba5a8ee642                                                                   [2743]  
@@ -1817,6 +1858,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/6e/b58a855b15a2424a9ca59d79318a2f9a57741c                                                                   [6636]  
   .git/objects/6e/cb72b73972b6c89df4401042592f4a62671b2e                                                                   [2438]  
   .git/objects/6e/dfd4796a75c66fe261c6d6efd5610c0c4a9823                                                                   [6186]  
+  .git/objects/6f/01c49bec294be0d0e7c7ec0115e3f4d06be453                                                                   [47]    
   .git/objects/6f/1e1a32501e45a5a4b06d70f604f63a776c2e68                                                                   [24699] 
   .git/objects/6f/5d61f3d980c33483f543a7ce713f130b7cf02f                                                                   [24449] 
   .git/objects/6f/6b7d87af78468695ac4156dc7bdcac6c6cfcb6                                                                   [450]   
@@ -1828,6 +1870,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/70/2d1560edad96bc01f9a5a0e3500cebfa1133bb                                                                   [24642] 
   .git/objects/70/2f443a1861c42c51ff56dfd054dd613c2c1094                                                                   [8246]  
   .git/objects/70/38ded13fcba0ee91fb523a6cc4b3ec5b5b827a                                                                   [944]   
+  .git/objects/70/4be5876f81c4a37ea9bab4220efc158ec87ef1                                                                   [18838] 
   .git/objects/70/517296b21d298fd1a36a1d5f4a6d89e8e20380                                                                   [59]    
   .git/objects/70/5669441ce56e6ac3dae2f51a92e7dfabae1688                                                                   [3026]  
   .git/objects/70/5e85decce89ab6afa172bbfc6ffa50241cc687                                                                   [472]   
@@ -1857,6 +1900,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/71/98db62c495531d41166a260b6bad168146adc7                                                                   [1275997]
   .git/objects/71/a671b09cba88ab32c50328a250d80bbbf46783                                                                   [818]   
   .git/objects/71/c50f97fe34cbc9097e750023c3a4636fedfa45                                                                   [868]   
+  .git/objects/71/c5ebe7201e503e850a09c503e1ee024c068f99                                                                   [2218]  
   .git/objects/71/dfa24dbaf4ad9f33158695f230536a61762533                                                                   [53514] 
   .git/objects/72/2903f756591c8ccace1d105ea7881417ce761a                                                                   [2436]  
   .git/objects/72/355c7ee3eb22793f2dc4b871dc7391ab6b1690                                                                   [47]    
@@ -1928,6 +1972,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/76/b61794a369aadd947384b23a364eb6c6c8a194                                                                   [54]    
   .git/objects/76/b82dddbaf597f04193f9877a5ea4cceb1815e6                                                                   [2450]  
   .git/objects/76/c1e9d3f38412393d3e3f394dfe98f328bb4fa7                                                                   [28246] 
+  .git/objects/76/c63db43a56fcd1783f5b1f2b47c7b841b5f786                                                                   [50]    
   .git/objects/76/c8e8e8dce18c9543d56eab203ba9d6a83ae2f9                                                                   [900]   
   .git/objects/76/d2dd457e6d226e5567f372287ca194bbb5c339                                                                   [1536]  
   .git/objects/76/efd72715c2ccd33d7ffc4a1e867c00c37504de                                                                   [10482] 
@@ -1950,6 +1995,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/77/fb38aa213e2064ee07d15c01c23c322a89ba4d                                                                   [4027382]
   .git/objects/78/0399dec6dc14aee01f0e903a794f3bf88151be                                                                   [45459] 
   .git/objects/78/273451b4972597a5a09951b7bd97b860d7d3f5                                                                   [13305] 
+  .git/objects/78/34375048a7e5c1cd9d1c9163e6f2a0f98730f8                                                                   [800]   
   .git/objects/78/494f30dbd2292b6796a31a1681dbac7c94e5ab                                                                   [9487]  
   .git/objects/78/5bf798514e52ef9cf1992a478f7fba6321252f                                                                   [2435]  
   .git/objects/78/6003418bc1068d33af9571a20331dd23dffd04                                                                   [27425] 
@@ -2011,6 +2057,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/7c/60eea1fa78e28b0ec07074bb00ea9d99a6fd2b                                                                   [42585] 
   .git/objects/7c/615dc8b5f4b729c0dd9e73f144b105cd4ab42b                                                                   [91]    
   .git/objects/7c/67ea7d1b25558f70bdbb4f24143ee09093dbf7                                                                   [25954] 
+  .git/objects/7c/72b5a4358896cdb7a43c273ed963da759da816                                                                   [4546]  
   .git/objects/7c/bcfc3f2891816575a226fdf77160fb8beeb1e6                                                                   [18762] 
   .git/objects/7c/e94810448332c406138a37b1e7fc06362890f9                                                                   [19590] 
   .git/objects/7c/f0c50689abe3b77aa8c22fa631d1bcdc9dec9b                                                                   [611]   
@@ -2063,6 +2110,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/7f/f9dff9c261a4c96a5992051f946dd31eb89133                                                                   [195]   
   .git/objects/80/032e904bd8c5dff0b9c3a166f1f413b04b5e36                                                                   [47674] 
   .git/objects/80/08a562b3acdda196e7e8a993558cd469c99a6b                                                                   [3284]  
+  .git/objects/80/0947c9a33095455a3f117c32c5a9010e6d52e6                                                                   [696]   
   .git/objects/80/2a359e3871f1e20e00ca7e9d9f0a85502b2579                                                                   [35190] 
   .git/objects/80/38c67d489143799d30a52f24825f4467819f29                                                                   [625]   
   .git/objects/80/5137f1df069f97676e75846dc71ce8cfff317f                                                                   [472]   
@@ -2091,6 +2139,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/81/99b3d20800ea1d24f2b47bb5c72d4c799a8e81                                                                   [1415]  
   .git/objects/81/9ab3dc6cfe5cac8666df60da6c921e14b77fe4                                                                   [27466] 
   .git/objects/81/9d54056f7c18f85340444637df2e2250031992                                                                   [6408]  
+  .git/objects/81/b7de7746fe241fd6708eba8478f52bdd6ac3ad                                                                   [7479]  
   .git/objects/81/bb2c1c07cfa1efd0e0b78b50318fff6f21fcc2                                                                   [735157]
   .git/objects/81/cdaf4d0a878dacf35449dfa3d7c044e5ee221d                                                                   [1574]  
   .git/objects/81/ceeed61f28d64ae7a224c46fd802bb15a1bab2                                                                   [37748] 
@@ -2132,6 +2181,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/83/b681015375a9505918ebc20b82d980d038e34c                                                                   [8005]  
   .git/objects/83/c272c768bd6d3840e90191fe20c93e2292eef2                                                                   [9781]  
   .git/objects/83/c2ec1f66da395eec5a094d3b4f901925780271                                                                   [719]   
+  .git/objects/83/d0970839e6abc745b6376e414b284ff82b5289                                                                   [851]   
   .git/objects/83/e48ee4bb2011aa00cf8c557880b8003c97adf2                                                                   [2436]  
   .git/objects/83/e9c3e928f10a38654dc8f896228ad3f3586784                                                                   [40134] 
   .git/objects/83/ed2c6ef8485f57844cd9024fbd9a0810f1a24e                                                                   [11038] 
@@ -2171,10 +2221,12 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/85/d88920e5e1d431343fd1606c734eb970fdcadc                                                                   [15293] 
   .git/objects/85/fc46901db0186c39b750d280386fe212083249                                                                   [2291]  
   .git/objects/86/0b0e1a55ea947caa27a75f044b7f3c7f13e62f                                                                   [2195]  
+  .git/objects/86/179ecdb74f3a243a2d52ae8c3fd3bb4306dea3                                                                   [1564]  
   .git/objects/86/192824035e3a8d2adad65f25e73407d442c7ae                                                                   [2297827]
   .git/objects/86/270b0b512833e30a167eb9832aadbecc54a8b9                                                                   [28267] 
   .git/objects/86/47ac3c218abb33454f51febdde44d1c4c0c9e4                                                                   [2432]  
   .git/objects/86/7093f780f18cb1a3231c6839b302e270aedfc8                                                                   [29240] 
+  .git/objects/86/7e34d5ba14dc54c66e8e3f81cf6b060ed926b7                                                                   [33742] 
   .git/objects/86/873ae7c37fc4c1886616f8163fd7a4f58f6560                                                                   [2146212]
   .git/objects/86/9f2ebe169853a1fb60db54f89a2ecb201220cd                                                                   [420]   
   .git/objects/86/c2a4befb38b18f3a70d3afe70f79e9cb33c275                                                                   [2429]  
@@ -2224,6 +2276,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/8a/03435eceb08821f4c139b39944e0a183741fc2                                                                   [402]   
   .git/objects/8a/106475d8ca12cd9aeabda8ce39ab6239d3bbfb                                                                   [27680] 
   .git/objects/8a/2dfea430450a8160b99a5f94ed33b755429b55                                                                   [1341]  
+  .git/objects/8a/4e679dbdac678e3b3a7a258b6906d6258ba72d                                                                   [11679] 
   .git/objects/8a/7613b41c0ecf0bb3e88ed07f77e36b6d1d1433                                                                   [2428]  
   .git/objects/8a/7b2c7ef9434d14d74d24c07866aeca33151dd0                                                                   [37133] 
   .git/objects/8a/8b04784bf673cb455f895d097d3d94f42e425e                                                                   [2438]  
@@ -2284,6 +2337,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/8d/f2c0478dfdd9adc658f485452bbd64b5e3e2dd                                                                   [1174]  
   .git/objects/8d/f478ed2a356d6b6bd59ded8359823b36e5f1e9                                                                   [13231] 
   .git/objects/8d/f58913fd450bf847a53c3d8c34ee934d770296                                                                   [827]   
+  .git/objects/8d/fb880ad47a444b61f3cd2012f8e7627e0aec35                                                                   [22984] 
   .git/objects/8e/01cbfa5d7ac40f2644d0962026283a9c212b32                                                                   [1588]  
   .git/objects/8e/02d8888010e3b0c6f2acbf395ef43bea3712a6                                                                   [8528]  
   .git/objects/8e/08e2d63acc438571b83dfc1f1d471987734a3f                                                                   [408]   
@@ -2321,6 +2375,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/8f/f4782dc2642ae606465d202cffca2a40208541                                                                   [63197] 
   .git/objects/8f/f7d73cd450f58e6dcd69d5e87c7a648351e003                                                                   [28481] 
   .git/objects/90/1ae2443d627838222134dc50257a73b1e7cb6b                                                                   [12795] 
+  .git/objects/90/2de3c32be95b6b2328ff65d83bdeb6f7028bc8                                                                   [2099]  
   .git/objects/90/48b6f4255c9c4e91b0032436c0d88ef25da2b0                                                                   [2433]  
   .git/objects/90/4b1b03929fb174596a356fb052d52796b74f8e                                                                   [501]   
   .git/objects/90/61d2005754ce6d2136f696bb3d7e5f10627050                                                                   [55515] 
@@ -2350,6 +2405,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/91/d9d567cbbd0401a3d9b7eb42f4a48c17d4eaee                                                                   [1585]  
   .git/objects/91/db40f26632e1a4364094c10554cf280e610ca5                                                                   [1586]  
   .git/objects/91/f00fe362dfcc7274bc4663af0b70ce0cd317f2                                                                   [612]   
+  .git/objects/91/f238eee95547081fb7aa3210370fb6639d3b52                                                                   [2900]  
   .git/objects/92/0668683eb1a87ccad24e6936916cc3dfbc4e35                                                                   [616]   
   .git/objects/92/067cb92cc33c4d24dfba28356efea15c90897f                                                                   [3702]  
   .git/objects/92/07d47a07aed61822611a229f38ae5ae71b8879                                                                   [47193] 
@@ -2373,6 +2429,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/93/66573f66baf549c5439bbb518bf74982b8e802                                                                   [54163] 
   .git/objects/93/6f75d7ab3ad89e5a88977a6b0afd9dc8b32b3c                                                                   [13430] 
   .git/objects/93/7cf2c0249c3c33a44aaf665b3483ac21f0e03c                                                                   [1585]  
+  .git/objects/93/9394314c1d2d0a9146fd1c69a6c2c501bf985a                                                                   [623]   
   .git/objects/93/9b9223163c381ea99f6bef95366b90a2402737                                                                   [18048] 
   .git/objects/93/aad97a492fa4b45b80a4843739231a6feefe54                                                                   [296]   
   .git/objects/93/b73f2b90cdb51066fc972f670f8c78bd1f414d                                                                   [21200] 
@@ -2429,11 +2486,13 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/97/58206a4de781710a708e66d3b0340414b7a4b5                                                                   [3339]  
   .git/objects/97/89f3e8bb3b9dabd3a08d792f944c53905711ad                                                                   [347]   
   .git/objects/97/b3e03a7d866b7d39c5d3c7f0bfbf293dee069b                                                                   [104]   
+  .git/objects/97/cb4cb722ca6a8803fd8bf044101e46ed89212d                                                                   [1666]  
   .git/objects/97/e1fdd96748a855754c1829f73a0e37c20340c9                                                                   [37517] 
   .git/objects/97/ee8af3a73abf88c9870c27993fc7cc13b7ad89                                                                   [49946] 
   .git/objects/98/048b25145ad88885731cc47502e2068e7d561c                                                                   [2503]  
   .git/objects/98/12298ede7a2ffbe3de92a7b8958a1d85bb282f                                                                   [2317]  
   .git/objects/98/38bf3322df6843a56b4654458084df1968535d                                                                   [8834]  
+  .git/objects/98/3c6ab612f273f1eed2d4cd2f7098b79585d2dc                                                                   [136]   
   .git/objects/98/9f55e26655bfcf52a98520513c825072bdcda4                                                                   [2434]  
   .git/objects/98/a4a3ec8226a5ed21f338899b06001627e3505d                                                                   [21417] 
   .git/objects/98/ff00cbb2e0d059e83810ffc01de7e91c0a0dd8                                                                   [323]   
@@ -2455,6 +2514,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/9a/2baa4c3dafb720719e0fb583246b6d3b6b9c06                                                                   [619]   
   .git/objects/9a/48c0896dadd8596e870adc48ec25c3682aede7                                                                   [2435]  
   .git/objects/9a/612ba5d802b8bcb3142ab41eb78816209223d7                                                                   [2429]  
+  .git/objects/9a/6bf35dade8093e0f564e191c4feac68c442ccb                                                                   [19007] 
   .git/objects/9a/80a05d840bd3028d66c589697c930f8d93873f                                                                   [190]   
   .git/objects/9a/8df99cb8c7a613019ab5bf16eff031bbbdf140                                                                   [2440]  
   .git/objects/9a/af4ed25e3129cbe2e2ce3891ab76528c06abad                                                                   [2442]  
@@ -2499,12 +2559,14 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/9d/89e1a2380ca30a0f99c51b7a9487890b46b576                                                                   [791]   
   .git/objects/9d/8b18fa75dd2156debc31424773fec0a6919469                                                                   [9307]  
   .git/objects/9d/9cd13afaabc27e9e2cff136d568b7cd12be9fb                                                                   [33504] 
+  .git/objects/9d/a3bc4922b61d5a207cc488a50af4b41915ca39                                                                   [8699]  
   .git/objects/9d/a3d70557c2db5aa9c1eb993adea7259906e458                                                                   [5483]  
   .git/objects/9d/b70824852484c45146b17b5e773abc5a464f57                                                                   [33118] 
   .git/objects/9d/bc23aa9dabf54c6b2ffba3cf5da781b61a09e4                                                                   [2442]  
   .git/objects/9d/c1391ce2486289e7ba6f57ea86ecccd6cdb702                                                                   [75372] 
   .git/objects/9d/cd236b3c3ab5e463ca978f9dcb7ec37e228c9a                                                                   [2436]  
   .git/objects/9d/d427528f2d5167b002418e4c21a6dc44d49c18                                                                   [296]   
+  .git/objects/9d/f43260d3b0494e1b2695b194a36a9afb513425                                                                   [58]    
   .git/objects/9e/058702a98940a9b60c5b6314fff09956ba7e77                                                                   [14013] 
   .git/objects/9e/230c0b30a5021fd39f8df6c60e351514dbf948                                                                   [113]   
   .git/objects/9e/245a93281fe31640472a3b9258370fab0fbfa0                                                                   [1978]  
@@ -2543,6 +2605,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/9f/b9f1c5cb0984a2a4c94aec66df8bd693446e6e                                                                   [25276] 
   .git/objects/9f/c5eed58225b409a0a3793f8dce91a68868f39c                                                                   [1581]  
   .git/objects/9f/fb1f2b6830ade9d191243fe17b6e39c41b5546                                                                   [9109]  
+  .git/objects/a0/478b629f24b7e49aeb21aec76086d958ce6f13                                                                   [33765] 
   .git/objects/a0/4fa12cce87694419642f7485fc900f894a6005                                                                   [28348] 
   .git/objects/a0/5f76dcda07ec168a2c62485f925706d24ed7e6                                                                   [851]   
   .git/objects/a0/6c08d021a332dc50573ada43960baa34b5fd41                                                                   [34889] 
@@ -2585,6 +2648,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/a2/9a2aa3a4046c032a4da9a4d357b6dc842b4421                                                                   [960]   
   .git/objects/a2/a05f18b9157bfabc53260fe94ef3a16dbd9f46                                                                   [596]   
   .git/objects/a2/b1f3767398e8af4317aa1d1993c3ddc0b26985                                                                   [2490]  
+  .git/objects/a2/d3b787ce336dc0514bd444babef26ab8a10778                                                                   [6830]  
   .git/objects/a2/e35be79e647a4bb72f33af98aee50aa767ad6e                                                                   [265]   
   .git/objects/a3/00532b64a4200ee5d7a1f505354cc37a87a7a4                                                                   [2433]  
   .git/objects/a3/00ef84f3ad6b24fbb40248ef861583d6804d72                                                                   [12889] 
@@ -2664,6 +2728,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/a8/453e4e0983b61ef6303f6cfb3544d7f4193fce                                                                   [980]   
   .git/objects/a8/489c0eebacb3c629ec394f8929b1f465fc9046                                                                   [29399] 
   .git/objects/a8/4b36358f04eba23d788497a7c14164e5d2a5cc                                                                   [9076]  
+  .git/objects/a8/506f18092f30a86dddcaede57775e5194b187d                                                                   [4152979]
   .git/objects/a8/63f0fe7580345c619d4ebf903891cd6d77f903                                                                   [2452]  
   .git/objects/a8/645e921d70182d358c02b313daed19f9065c48                                                                   [2440]  
   .git/objects/a8/89c55a7ea037ef979f097c46af35bd6a73bec5                                                                   [2437]  
@@ -2688,6 +2753,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/a9/9ca32c7933107ed9e05d7a8ac75b9bd24026d3                                                                   [21367] 
   .git/objects/a9/a5aecf429fd8a0d81fbd5fd37006bfa498d5c1                                                                   [19]    
   .git/objects/a9/a77f5b5fc144e1f748499df3c7427735afb9c1                                                                   [2432]  
+  .git/objects/a9/a79eec7e46f05e6d8fbebb5708ef1afd8005d5                                                                   [730]   
   .git/objects/a9/c35e7e6823ab8d69c8f3bfade1302fc78cf56f                                                                   [711]   
   .git/objects/a9/c39efaa8eb541599d153bc1960655e236cf054                                                                   [8694]  
   .git/objects/a9/ccaa1a0a4cefdd854bd2b7bddb87e68f531496                                                                   [2438]  
@@ -2767,7 +2833,9 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/af/def1480b33ea5000b37c4ff3dbe3832a9176a9                                                                   [19410] 
   .git/objects/af/e08b2bc2691691c62a43091bf02b9e0058e076                                                                   [6773]  
   .git/objects/b0/002901d90e7321e6df08c62695ab14f508324c                                                                   [965]   
+  .git/objects/b0/323f86fd5fc5c2fefa3941a4d5acdaae39d0a7                                                                   [4568]  
   .git/objects/b0/609a834ce7e4bfed6979b093f48740a4156639                                                                   [1585]  
+  .git/objects/b0/72c142df245814f9a1a77064bb61d499851c04                                                                   [72764] 
   .git/objects/b0/7d1687f3dedd10931e250685dc9f499a8d9eea                                                                   [35966] 
   .git/objects/b0/abcb83709402351814878f7fd0019f2dbf1986                                                                   [225]   
   .git/objects/b0/b51132cfd3a2b5d2d6b436ede00406b64c5a6a                                                                   [50347] 
@@ -2785,6 +2853,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/b1/e2d4c0ee00082787547f40fd6e5c2f426af662                                                                   [2442]  
   .git/objects/b1/e96bbaa0d97a305041f234f828f13ae43e2164                                                                   [8104]  
   .git/objects/b1/f2209049e3a6b2aad55b9d9860c2fb0a1621f9                                                                   [438]   
+  .git/objects/b1/f57633b0ecbde7300768be35e258f2c739af7c                                                                   [610]   
   .git/objects/b2/0a21f0bb78c2f35f9d46bcd76a4ef308bc3b7e                                                                   [1581]  
   .git/objects/b2/3e28f585a3b4ddb674d2ea64474ceeb08436bb                                                                   [17004523]
   .git/objects/b2/90d41f51b65db920ee2df693092adc52f5bafa                                                                   [511]   
@@ -2862,6 +2931,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/b7/7df226bde38927e8fa9ed09ea734b1c1becc9a                                                                   [289]   
   .git/objects/b7/a16e5a8e6a75352b574faad96e809eb6be9d7e                                                                   [543104]
   .git/objects/b7/baff74eb0f2bbec5cf2395b6b1e994544aebf3                                                                   [1083]  
+  .git/objects/b7/d21451510aa5984caceec31c5c456bd67e94ac                                                                   [1473441]
   .git/objects/b7/d706fd297b60cd5fb91b1cb14445fcb5568cf5                                                                   [1637]  
   .git/objects/b7/ddb9f570c3c49cf60932012b873992786a4d2f                                                                   [34843] 
   .git/objects/b7/eb2ad3cd71003cd52eb98c22821c5156d315ae                                                                   [27416] 
@@ -2953,6 +3023,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/bd/d175ea38b8ead0893b6e54411f18751d055ef5                                                                   [8826]  
   .git/objects/bd/d8213ddf6e6361f27a8dbfe3e3eae7368a91ca                                                                   [7831]  
   .git/objects/bd/ea50c16cb592217ad023713f8df850442f3be8                                                                   [814]   
+  .git/objects/bd/efb7308e7dd017f6891247a51af2d42d6ea073                                                                   [172831]
   .git/objects/be/0429e28fa1e6263b266c0bb38fba8e56f3337b                                                                   [630]   
   .git/objects/be/41cd99b4bdff0c77e3e867a6b0604fa47b7333                                                                   [1582]  
   .git/objects/be/44b15abd3c4bb605e841ad08512e0e5872c479                                                                   [28589] 
@@ -2963,7 +3034,9 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/be/92f07e4cf939faf10231b071f8c7a0a34f5877                                                                   [999]   
   .git/objects/be/aeee56e83592d24cf0eabf716bfc46a7e03196                                                                   [52626] 
   .git/objects/be/b90995e810004db8aa59f2bc23fcd2097f8801                                                                   [377]   
+  .git/objects/be/dae602463cc4650a8981fdc694231e8a3ef77a                                                                   [11634] 
   .git/objects/bf/0b8de36f5b15ddd9db6a7a5608907f9ab8767a                                                                   [1575]  
+  .git/objects/bf/14c6ae23681230ae6bb68ce6e7c71adf5a8f37                                                                   [4388]  
   .git/objects/bf/1515b4a7ff01acc8d25e2e92e981c8945d2420                                                                   [2437]  
   .git/objects/bf/23af3b2f6d934d9038bba7eef2de5eafae9896                                                                   [2053231]
   .git/objects/bf/284a07e38250fe439a70b3d5581d7de94b20b9                                                                   [2433]  
@@ -2988,6 +3061,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c0/5d18e08c7e71265d48afd4569d6a68adc3e574                                                                   [44052] 
   .git/objects/c0/7910ad5b3b395b3b2756040f8a6d7524bf75e0                                                                   [36941] 
   .git/objects/c0/84ef0232213680837bffb045af18ebc3de3994                                                                   [1582]  
+  .git/objects/c0/861176508a9c83a16039495422cf9e2091fe8a                                                                   [9516]  
   .git/objects/c0/8ac91f90da1974afc6b5db0c0f6d9f09a3e79f                                                                   [14367] 
   .git/objects/c0/a448c8e54e52d2cf3ff71094f00df96bf617cf                                                                   [1844]  
   .git/objects/c0/be0e70ae712e9585316d1d66b49d981683fadc                                                                   [662]   
@@ -3001,6 +3075,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c1/743825abda24b2ec5d01f6458cb583e95c4eb3                                                                   [1774]  
   .git/objects/c1/815239e09aad3c32100ee1a00cd6049d479da0                                                                   [396]   
   .git/objects/c1/8417a075d995532d598156d6e01a348270cf9d                                                                   [1926]  
+  .git/objects/c1/958ed8411a78dfb83de212f6d0ad30aa038e95                                                                   [6116]  
   .git/objects/c1/9e133ac48b5f0d0a3f2d198982b63c004f6f8d                                                                   [1586]  
   .git/objects/c1/bd618a639a0d7641f940795ec66b08672627c2                                                                   [3291]  
   .git/objects/c1/bea6c4d36836dcfe066ee1f97b9059cbabba65                                                                   [5405]  
@@ -3063,6 +3138,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c5/78dca79acaffc24eb2ce672691ef6992b70746                                                                   [1353]  
   .git/objects/c5/89ce6a61b45fe81d5db85e8ede10c5e074e79b                                                                   [1475]  
   .git/objects/c5/9943151dbe39d89e1a58734f35018af489c46a                                                                   [2435]  
+  .git/objects/c5/ae973a9e158e041da3a4fae13cde3228f1636e                                                                   [1215]  
   .git/objects/c5/c2b1a90c45b49a3e623f4981b207fdaecfb633                                                                   [476]   
   .git/objects/c5/dee655a55aab8151d7c7964c93e415966253b4                                                                   [54]    
   .git/objects/c5/e4054ef8ae4ad79dad7c15042330636f1fd4b3                                                                   [31275] 
@@ -3076,6 +3152,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c6/618e704afac7d14d6aa6fb118ae2ebf6a8cffc                                                                   [2441]  
   .git/objects/c6/756910c58019d20d43b7834a7cfbfda379ea3a                                                                   [47]    
   .git/objects/c6/77133126cca3c86048db1e14b4a089fca1aeb0                                                                   [3245]  
+  .git/objects/c6/7771feaa653f310bc86704409e73eef01014f2                                                                   [1452]  
   .git/objects/c6/78d2b1156eaf08a8b10f50e37b4899e2076714                                                                   [1337]  
   .git/objects/c6/959e2e5d00f59d22eed81292a2db57ed386978                                                                   [1584]  
   .git/objects/c6/9dd6c3c8080b6ae112d78b6c00271a5b10d7e3                                                                   [12891] 
@@ -3107,6 +3184,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c7/ac950a99e5973702a0ccd476cfca15df7238c1                                                                   [49]    
   .git/objects/c7/b42936f659b4e186b233e50c338527553aab02                                                                   [10052] 
   .git/objects/c7/cc9fb1ca212f91bbe873f2bc439af426d37bba                                                                   [90]    
+  .git/objects/c7/eaf6f30547b09cd65d6ca9c6a94001713d0f88                                                                   [48]    
   .git/objects/c7/f95df147fd2ae387cfba9575bb7df9b5202676                                                                   [1583]  
   .git/objects/c7/fa06c0de9d6d31502fd87056aaf7556e7449a6                                                                   [2440]  
   .git/objects/c8/0e81dd69ec06f11594653458409c34c2b6eaef                                                                   [19589] 
@@ -3136,6 +3214,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/c9/c1e850ca3cfe53ac14c1d0de08f5f6c66281ce                                                                   [2430]  
   .git/objects/c9/c2772d78c4717d079706b14e9ab84182714719                                                                   [2436]  
   .git/objects/c9/c4a74048f143aab8531915e540aa669035fdbf                                                                   [30720] 
+  .git/objects/c9/cbc5ff790daca40f8d0ef998396b8a257529ef                                                                   [2173]  
   .git/objects/c9/d44685362f1e4ae4f78dddbe650a07c67d7852                                                                   [2431]  
   .git/objects/c9/f3d65057f28db5f35641a93ef45965655852d6                                                                   [173]   
   .git/objects/c9/f6b7f3d86f6d4c15f1fd227fe304c766f24a20                                                                   [1579]  
@@ -3176,6 +3255,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/cc/065d90ae1e1c37a89152766efb82903cb186bf                                                                   [3974]  
   .git/objects/cc/0e0606a5abbb09f68f9f0fbafeffaf5cc9b7e8                                                                   [20585] 
   .git/objects/cc/16e759b885e04c794ee6dd67c375843fa3e689                                                                   [25169] 
+  .git/objects/cc/284624156927e05884bfbb077361515e8ff8c8                                                                   [7838]  
   .git/objects/cc/28ec4e22908baa7c69b3794169bb93b9a578b9                                                                   [28589] 
   .git/objects/cc/3992f20de699662dbb005af00e6ff500c372d6                                                                   [18218] 
   .git/objects/cc/469bab7b234122c389475b2d50b26223e49bf0                                                                   [27230] 
@@ -3189,6 +3269,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/cc/e756a292e24f7a5ce45bcd7f82f1c18553a26d                                                                   [28281] 
   .git/objects/cc/e93ba2f122e0002ddf5f5c91d4e0a3d94afec0                                                                   [6124]  
   .git/objects/cd/328558d55e36ce0da750c3db8970f0350896d1                                                                   [3631]  
+  .git/objects/cd/46250efac92ebd990348d45e939beb68925c38                                                                   [3894]  
   .git/objects/cd/6281d2a592c63a5251ce87088d20f86408b920                                                                   [676]   
   .git/objects/cd/6fe77d1a7f8cc980937c155b2fef4ed9ea8306                                                                   [38349] 
   .git/objects/cd/712dab2d77334e2f0194c702d520d5114364d9                                                                   [7840]  
@@ -3223,6 +3304,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/cf/3ef51b37585de1f0d29b55ac89d0cfa40ca74f                                                                   [1580]  
   .git/objects/cf/42e33e4798f65555349c5f08dd33cf42ba2247                                                                   [556]   
   .git/objects/cf/478c4871aab0dcc478661e237d36efaa506aa6                                                                   [376]   
+  .git/objects/cf/6e387b697108db692bddbcc749795c7402d05d                                                                   [1744]  
   .git/objects/cf/8bca2be5f29e71bfb10d2d98d4f0e511d67640                                                                   [2750]  
   .git/objects/cf/8d8185cd1bdda1f18974e4e8d20526faccc6d1                                                                   [383]   
   .git/objects/cf/96075be45c421b934c21268855f3e216dd90e5                                                                   [72]    
@@ -3274,10 +3356,12 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d2/e92bae6e4cebec7293d0cac307b1bc318d4056                                                                   [3277]  
   .git/objects/d2/f8de242422e48ca88f3d23434deb73940ed42f                                                                   [54047] 
   .git/objects/d2/fa86daa1d3c3d3d5e06d97ea09b21ed842b0a2                                                                   [344]   
+  .git/objects/d3/012b43fc0bf750ffc5af1402eea22958435815                                                                   [1248]  
   .git/objects/d3/1fc827400c8e960f2f2485b072224121474078                                                                   [609]   
   .git/objects/d3/2910e45521764778e87a5731dd9ce50a167d1e                                                                   [14979] 
   .git/objects/d3/41ce2371cde520d83d60a098f5fa4b53195a4c                                                                   [540]   
   .git/objects/d3/47a2b70bfe7b8e6d00bb9963c9befc15174990                                                                   [1578]  
+  .git/objects/d3/589cf1c44b874453f20112eda810d85034102b                                                                   [200]   
   .git/objects/d3/7d0c2837230dca0784fac128dbcb0b6a648fd8                                                                   [50]    
   .git/objects/d3/a42768fe24f7ed47c1e2ce795f57eae6946df2                                                                   [30050] 
   .git/objects/d3/a7da483fbafa7f8e4b028355ed0951fdcb7422                                                                   [2173]  
@@ -3286,6 +3370,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d3/f040cf3639d7b7898ebb8b23eba46b45f9ebdf                                                                   [21206] 
   .git/objects/d3/f495fd296acf64b09f9ad0a548cfa5a052513b                                                                   [56038] 
   .git/objects/d4/09407750291a4a2f4e08503d9e3520d9be56f2                                                                   [26169] 
+  .git/objects/d4/499c4e73d1d7b7f8fb08ce58343f2b35b78237                                                                   [640]   
   .git/objects/d4/4cbc75a79f85d2bc9e61e4f26a45d315590d12                                                                   [854]   
   .git/objects/d4/542accff954d53d443cac21a0f380ccc55a3ab                                                                   [416]   
   .git/objects/d4/596be4e36fcd5f2f1fd27bbaf3737bf5c036e5                                                                   [6354]  
@@ -3302,6 +3387,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d4/c4ee3bd9c72b64cb7bd541e951e7adbbf6879b                                                                   [1581]  
   .git/objects/d4/ce59f43aea940cfef70a0b6cdaedc1622dae54                                                                   [25278] 
   .git/objects/d5/546463a049c330c8165159f16a962d2c1ac1f3                                                                   [3356]  
+  .git/objects/d5/5efb59e59cc1d5851c1e192f703ad435a1a811                                                                   [13314] 
   .git/objects/d5/748f4ed52f06025b5712c3609efa594893b055                                                                   [5063]  
   .git/objects/d5/7bb7def633e14e7d438763ba25cc6693be8bbe                                                                   [35698] 
   .git/objects/d5/85abcf91da496dae49813b7504d76471793a82                                                                   [23557] 
@@ -3313,6 +3399,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d6/36c871a43eefe115a0e920100801e15b60ef3f                                                                   [2457]  
   .git/objects/d6/3bd15a436fbf9b56045d40732be4083d02387c                                                                   [2447]  
   .git/objects/d6/4e2392449f355d08f746efe253a068733d0e6e                                                                   [25675] 
+  .git/objects/d6/51842615936895f48d4b4834cccb6e2f2bc125                                                                   [852]   
   .git/objects/d6/5447c36035fd02c0095f3644b3aaccb2cab527                                                                   [897]   
   .git/objects/d6/5831ae27965d00e919492c195cec5efe60476a                                                                   [20301] 
   .git/objects/d6/5a07c707cdf2a42f5f7185da95a59870655faa                                                                   [3980]  
@@ -3322,12 +3409,14 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d6/e1b3a2409e9bcf6ca525ac39c5fd6c112deef0                                                                   [2427]  
   .git/objects/d6/f812a9d1b9f8b2d7ef312da50b383038334384                                                                   [1594]  
   .git/objects/d7/20bbbc89e757d10b70aa1f6f3469c14ec0a3cf                                                                   [2431]  
+  .git/objects/d7/2c18bf80c77c83fdcca139d67184ae8c395b1f                                                                   [26300] 
   .git/objects/d7/32573377d46a5cc9d289a6e44a4148b3f45fb3                                                                   [2446]  
   .git/objects/d7/367c95cf2db26edf4c8283cd5cc5b62abbc0b5                                                                   [16670] 
   .git/objects/d7/485bfe7e07fde15e8ffbac9d60a6f16429d2a2                                                                   [14446] 
   .git/objects/d7/4c58cfb6ad29c7dffa577b0b1beaf3c054e4db                                                                   [5512]  
   .git/objects/d7/5881b0dadcfbf821fbeac6731d4be5251f545d                                                                   [28513] 
   .git/objects/d7/614c9bfa102e42a6556a56121f4b5a408634ce                                                                   [4985]  
+  .git/objects/d7/6413d4962932030f4ab0955518be00f0329f98                                                                   [183]   
   .git/objects/d7/6836074c1e5fd33219c098b361afcdaca3c273                                                                   [772]   
   .git/objects/d7/c3c3de5be6cce8d08de3903163333ff4e7eade                                                                   [4583]  
   .git/objects/d7/cfbf56375ce961754f0c1a56404e0745c9718c                                                                   [564]   
@@ -3359,6 +3448,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/d9/6704de0d272b32591c34378c9d3096e9c51ddc                                                                   [29867] 
   .git/objects/d9/6e6d9867f9e8a1debfb9452776f8d3e80aa071                                                                   [3526]  
   .git/objects/d9/793bdd51815c0e6a2d873747fcfd3944bcd882                                                                   [5175]  
+  .git/objects/d9/973a08a9d9fc2af64f46bda878f12885cf43ee                                                                   [419]   
   .git/objects/d9/a86fc24f7b38b20fae96e328f56fd663133927                                                                   [47]    
   .git/objects/d9/b3c861aa3e768299775442e76705c285d45aaf                                                                   [9547]  
   .git/objects/da/2c9d43d68dfac453c1960e347ad1f87fcd1df3                                                                   [1604]  
@@ -3390,6 +3480,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/dc/43615513cdb252bdfad3889673e2937dfd8d39                                                                   [2441]  
   .git/objects/dc/4463579ec72421148e87aa683ad9b0a759e656                                                                   [4229]  
   .git/objects/dc/453ad22188ece9888a152e9637a48ef274f3a5                                                                   [99]    
+  .git/objects/dc/6e491c4af91e23a1e8739abf0b0e539fbe209f                                                                   [437]   
   .git/objects/dc/8ba2baf5fa09241ded7a0b296d5636894b27f3                                                                   [322]   
   .git/objects/dc/abc0d0b95646f1b9f7ef740710172d8adbb4f2                                                                   [17964] 
   .git/objects/dc/b19fa6b8923dbef574443ff7d0b3c52acaba02                                                                   [52]    
@@ -3569,6 +3660,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/e9/561141c1ff1fa26fc053589e93fdc0482f3eb6                                                                   [90]    
   .git/objects/e9/6cd720a3a629e4f8791c724b0d355b57956d39                                                                   [1575]  
   .git/objects/e9/81358c4cdb1ea731f40e008d7ce9ca8cc75b7a                                                                   [8090]  
+  .git/objects/e9/86ab925108a0635a66372b3c1ca21674225bfa                                                                   [27937] 
   .git/objects/e9/90ae319535227b980ef7993b217bd4af6d35b3                                                                   [22746] 
   .git/objects/e9/a80cb908ff707aad4e8de9b6a2fae2c533318b                                                                   [777]   
   .git/objects/e9/af7f6e438e111401c5667ba1e09144f1e49c27                                                                   [1580]  
@@ -3677,6 +3769,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/f0/80fa3f6d3613835503873245fd7e109b553e9d                                                                   [22305] 
   .git/objects/f0/83fdb10ed5a7fb7c70515b5321e08719d8b117                                                                   [2438]  
   .git/objects/f0/9d233cc8d85bcad8e3d2573953ea411579673f                                                                   [23413] 
+  .git/objects/f0/a029ee54224202edb42965feacfbd333fa32c2                                                                   [72]    
   .git/objects/f0/a72254cc1f8bad351f2e110208b11d4493c2de                                                                   [4081]  
   .git/objects/f0/a8254f27ff4c5824011c65f96fee369028a3f7                                                                   [47529] 
   .git/objects/f0/aa85195af0bb46b0fd31f3cdb40e2c143323c9                                                                   [2435]  
@@ -3845,8 +3938,10 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/fa/cc12a522bbf82153e84fc86511e1944c88dae6                                                                   [1634]  
   .git/objects/fa/d864dbbcb6f13917dd874454c16e39c17bbd46                                                                   [3328]  
   .git/objects/fa/fff72047f3dbb00657bc7d8f803ecaa966f773                                                                   [3322]  
+  .git/objects/fb/36385fe51113ca0440b8cd4adf54d04cbeaf7b                                                                   [962]   
   .git/objects/fb/3fa8ca6097fe5d9a22bf3e53c6cc5955cf0f2b                                                                   [9649]  
   .git/objects/fb/3fd4a05f8755e3b7e74f7e87eca3b56c44da1d                                                                   [35418] 
+  .git/objects/fb/633a15d3a15543bb037177e848dcaf78ed5964                                                                   [1683]  
   .git/objects/fb/6a229f233577f5ea2d1fc0fcd9038df3c0af2a                                                                   [2082]  
   .git/objects/fb/7272322009af0dd7c94a98308fdd9f2396a6ec                                                                   [11825] 
   .git/objects/fb/7b56d26fc478d3e2f6580871a925d9ce8c727c                                                                   [18072] 
@@ -3855,6 +3950,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/fb/9e50643c0eafb014c26dd08bcada38683878b0                                                                   [629]   
   .git/objects/fb/a6e9f862a07babc85293d2903e6428e3de405e                                                                   [116]   
   .git/objects/fb/ba6d662a85ec1f01652a0e110b132febe81a0e                                                                   [6259]  
+  .git/objects/fb/bfb003b66560f8bdd849863f5d93f203cee755                                                                   [806]   
   .git/objects/fb/c86bed34dabc94d4f7c46bc316c107b7c90809                                                                   [2151]  
   .git/objects/fb/dd3c2861fc2f89abe0faea6b7c8e709a83143d                                                                   [3356]  
   .git/objects/fb/f1b70230c691e4a1c233470a0f0e61ca440346                                                                   [13373] 
@@ -3901,6 +3997,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/fe/abc0e04fecfecdde75aa7c0525c816332bfc09                                                                   [18305] 
   .git/objects/fe/dc49b88c327721fe5b2599fec45483db46cb3d                                                                   [503]   
   .git/objects/fe/deff2a26a14b0498f0b4ce97efa6c35a53fa07                                                                   [31527] 
+  .git/objects/fe/ea3e74c5c8ea642ab59bb78df457250a092e7a                                                                   [384]   
   .git/objects/ff/041111cbb043eccb27830dcd486544840ec53c                                                                   [8178]  
   .git/objects/ff/091844ee9785704f3eda34a8ebae78bf927520                                                                   [420]   
   .git/objects/ff/0bad747c3e15e5b31f1212335c88f985fe377f                                                                   [390]   
@@ -3912,6 +4009,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   .git/objects/ff/848bac3fe24a1353fa2b43a9475616cefad079                                                                   [2437]  
   .git/objects/ff/97861ee79fcd9877590b25630240734a50e836                                                                   [46715] 
   .git/objects/ff/a2ea524008d4017d8a8965c96244909badc8cd                                                                   [53]    
+  .git/objects/ff/a8311045738ba41bec2caf85a5633bf4b1f818                                                                   [1603]  
   .git/objects/ff/b78a468cb72881d72ba1180a1082c464706a01                                                                   [395]   
   .git/objects/ff/bc94dbd6f9fbf94a5504cc2e50a9b7d87af659                                                                   [561]   
   .git/objects/ff/bd41b730f3d3b53a71e28daa2f10ec72bae6b3                                                                   [15226] 
@@ -3931,11 +4029,11 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   build/.DS_Store                                                                                                          [6148]  
   build/iphone/.DS_Store                                                                                                   [6148]  
   build/iphone/Info.plist                                                                                                  [1767]  
-  build/iphone/main.m                                                                                                      [1515]  
+  build/iphone/main.m                                                                                                      [1517]  
   build/iphone/module.xcconfig                                                                                             [43]    
   build/iphone/project.xcconfig                                                                                            [273]   
   build/iphone/Zen.do_Prefix.pch                                                                                           [340]   
-  build/iphone/build/build.log                                                                                             [504950]
+  build/iphone/build/build.log                                                                                             [517892]
   build/iphone/Classes/AccelerometerModule.h                                                                               [459]   
   build/iphone/Classes/AccelerometerModule.m                                                                               [1265]  
   build/iphone/Classes/AnalyticsModule.h                                                                                   [543]   
@@ -4076,11 +4174,6 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   build/iphone/Classes/TiDataStream.h                                                                                      [670]   
   build/iphone/Classes/TiDataStream.m                                                                                      [9563]  
   build/iphone/Classes/TiDebugger.h                                                                                        [914]   
-  build/iphone/Classes/TiDebugger.mm                                                                                       [16899] 
-  build/iphone/Classes/TiDebuggerCallFrame.h                                                                               [3547]  
-  build/iphone/Classes/TiDebuggerCallFrame.mm                                                                              [3839]  
-  build/iphone/Classes/TiDebuggerContext.h                                                                                 [1649]  
-  build/iphone/Classes/TiDebuggerContext.mm                                                                                [2909]  
   build/iphone/Classes/TiDimension.h                                                                                       [4586]  
   build/iphone/Classes/TiDimension.m                                                                                       [537]   
   build/iphone/Classes/TiDOMAttrProxy.h                                                                                    [796]   
@@ -4504,8 +4597,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   build/iphone/headers/TiCore/WebKitAvailability.h                                                                         [27606] 
   build/iphone/lib/libti_ios_debugger.a                                                                                    [3932476]
   build/iphone/lib/libTiCore.a                                                                                             [197231508]
-  build/iphone/lib/libtiverify.a                                                                                           [57164] 
-  build/iphone/Resources/.version                                                                                          [142]   
+  build/iphone/lib/libtiverify.a                                                                                           [307692]
   build/iphone/Resources/appicon.png                                                                                       [4275]  
   build/iphone/Resources/debugger.plist                                                                                    [260]   
   build/iphone/Resources/Default-Landscape.png                                                                             [517419]
@@ -4583,7 +4675,7 @@ File listing for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do
   Resources/test/lib/jasmine-1.0.2.js                                                                                      [64942] 
   Resources/test/lib/jasmine-titanium.js                                                                                   [3430]  
 ----------------------------------------------------------------------------------------------------------------------------------
-Total files: 451.0 MB
+Total files: 477.0 MB
 
 Contents of Info.plist
 
@@ -4627,7 +4719,7 @@ Contents of Info.plist
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1310156285</string>
+	<string>1.0.1310164931</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
         <key>UISupportedInterfaceOrientations~ipad</key>
@@ -4695,25 +4787,25 @@ Build settings from command line:
 === BUILD NATIVE TARGET Zen.do OF PROJECT Zen.do WITH CONFIGURATION Debug ===
 Check dependencies
 
-CpResource /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist build/Debug-iphoneos/Zen.do.app/ResourceRules.plist
-    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
-    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app"
-
 ProcessInfoPlistFile build/Debug-iphoneos/Zen.do.app/Info.plist Info.plist
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     builtin-infoPlistUtility Info.plist -genpkginfo "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/PkgInfo" -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/ResourceRules.plist" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Info.plist"
 
-CpResource module.xcconfig build/Debug-iphoneos/Zen.do.app/module.xcconfig
+CpResource /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist build/Debug-iphoneos/Zen.do.app/ResourceRules.plist
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/module.xcconfig" "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app"
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app"
 
 CopyPlistFile build/Debug-iphoneos/Zen.do.app/stylesheet.plist Resources/stylesheet.plist
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     builtin-copyPlist --convert binary1 --outdir "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app" -- Resources/stylesheet.plist
+
+CpResource module.xcconfig build/Debug-iphoneos/Zen.do.app/module.xcconfig
+    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
+    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/module.xcconfig" "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app"
 
 CopyPlistFile build/Debug-iphoneos/Zen.do.app/debugger.plist Resources/debugger.plist
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
@@ -5382,8 +5474,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default-Landscape-pngcrush.png
 [DEBUG] (5.26% IDAT increase)
 [DEBUG] (5.27% filesize increase)
-[DEBUG] CPU time used = 2.630 seconds (decoding 0.029,
-[DEBUG] encoding 2.571, other 0.030 seconds)
+[DEBUG] CPU time used = 2.634 seconds (decoding 0.029,
+[DEBUG] encoding 2.576, other 0.030 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default-Landscape.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -5407,8 +5499,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default-Portrait-pngcrush.png
 [DEBUG] (5.26% IDAT increase)
 [DEBUG] (5.27% filesize increase)
-[DEBUG] CPU time used = 2.456 seconds (decoding 0.034,
-[DEBUG] encoding 2.391, other 0.031 seconds)
+[DEBUG] CPU time used = 2.436 seconds (decoding 0.030,
+[DEBUG] encoding 2.375, other 0.031 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default-Portrait.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -5431,8 +5523,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default-pngcrush.png
 [DEBUG] (3.09% IDAT reduction)
 [DEBUG] (2.79% filesize reduction)
-[DEBUG] CPU time used = 0.147 seconds (decoding 0.019,
-[DEBUG] encoding 0.104, other 0.024 seconds)
+[DEBUG] CPU time used = 0.145 seconds (decoding 0.019,
+[DEBUG] encoding 0.103, other 0.024 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -5456,8 +5548,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default@2x-pngcrush.png
 [DEBUG] (8.91% IDAT increase)
 [DEBUG] (8.91% filesize increase)
-[DEBUG] CPU time used = 1.812 seconds (decoding 0.038,
-[DEBUG] encoding 1.735, other 0.038 seconds)
+[DEBUG] CPU time used = 1.802 seconds (decoding 0.037,
+[DEBUG] encoding 1.727, other 0.038 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default@2x.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -5529,7 +5621,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] (7.45% IDAT reduction)
 [DEBUG] (5.67% filesize reduction)
 [DEBUG] CPU time used = 0.037 seconds (decoding 0.005,
-[DEBUG] encoding 0.023, other 0.009 seconds)
+[DEBUG] encoding 0.022, other 0.009 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/Default_zen.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -5794,7 +5886,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/folder-pngcrush.png
 [DEBUG] (7.40% IDAT increase)
 [DEBUG] (7.78% filesize increase)
-[DEBUG] CPU time used = 0.005 seconds (decoding 0.000,
+[DEBUG] CPU time used = 0.004 seconds (decoding 0.000,
 [DEBUG] encoding 0.001, other 0.003 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/folder.png
 [DEBUG] | pngcrush 1.6.4
@@ -5842,7 +5934,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/got_it_selected-pngcrush.png
 [DEBUG] (0.55% IDAT reduction)
 [DEBUG] (0.09% filesize reduction)
-[DEBUG] CPU time used = 0.008 seconds (decoding 0.000,
+[DEBUG] CPU time used = 0.007 seconds (decoding 0.000,
 [DEBUG] encoding 0.003, other 0.004 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/got_it_selected.png
 [DEBUG] | pngcrush 1.6.4
@@ -5892,7 +5984,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] (15.14% IDAT increase)
 [DEBUG] (7.34% filesize increase)
 [DEBUG] CPU time used = 0.006 seconds (decoding 0.000,
-[DEBUG] encoding 0.001, other 0.005 seconds)
+[DEBUG] encoding 0.001, other 0.004 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/kinda.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -6011,8 +6103,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/logo_background-pngcrush.png
 [DEBUG] (7.45% IDAT reduction)
 [DEBUG] (5.67% filesize reduction)
-[DEBUG] CPU time used = 0.038 seconds (decoding 0.005,
-[DEBUG] encoding 0.023, other 0.009 seconds)
+[DEBUG] CPU time used = 0.037 seconds (decoding 0.005,
+[DEBUG] encoding 0.022, other 0.009 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/logo_background.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -6035,8 +6127,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/new_close-pngcrush.png
 [DEBUG] (27.16% IDAT increase)
 [DEBUG] (25.90% filesize increase)
-[DEBUG] CPU time used = 0.101 seconds (decoding 0.005,
-[DEBUG] encoding 0.088, other 0.008 seconds)
+[DEBUG] CPU time used = 0.098 seconds (decoding 0.004,
+[DEBUG] encoding 0.086, other 0.007 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/new_close.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -6060,7 +6152,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] (10.79% IDAT increase)
 [DEBUG] (5.60% filesize increase)
 [DEBUG] CPU time used = 0.006 seconds (decoding 0.000,
-[DEBUG] encoding 0.001, other 0.005 seconds)
+[DEBUG] encoding 0.001, other 0.004 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/no_clue.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -6131,8 +6223,8 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/splash-pngcrush.png
 [DEBUG] (3.09% IDAT reduction)
 [DEBUG] (2.79% filesize reduction)
-[DEBUG] CPU time used = 0.147 seconds (decoding 0.019,
-[DEBUG] encoding 0.104, other 0.024 seconds)
+[DEBUG] CPU time used = 0.145 seconds (decoding 0.019,
+[DEBUG] encoding 0.103, other 0.024 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/images/splash.png
 [DEBUG] | pngcrush 1.6.4
 [DEBUG] |    Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson
@@ -6179,7 +6271,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/modules/ui/images/badge-pngcrush.png
 [DEBUG] (13.59% IDAT reduction)
 [DEBUG] (11.47% filesize reduction)
-[DEBUG] CPU time used = 0.004 seconds (decoding 0.000,
+[DEBUG] CPU time used = 0.003 seconds (decoding 0.000,
 [DEBUG] encoding 0.001, other 0.003 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/modules/ui/images/badge.png
 [DEBUG] | pngcrush 1.6.4
@@ -6228,7 +6320,7 @@ PhaseScriptExecution Pre-Compile build/Zen.do.build/Debug-iphoneos/Zen.do.build/
 [DEBUG] Best pngcrush method = 120 (fm 0 zl 9 zs 1) for /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/modules/ui/images/photoDefault-pngcrush.png
 [DEBUG] (31.71% IDAT increase)
 [DEBUG] (31.36% filesize increase)
-[DEBUG] CPU time used = 0.018 seconds (decoding 0.003,
+[DEBUG] CPU time used = 0.017 seconds (decoding 0.003,
 [DEBUG] encoding 0.009, other 0.006 seconds)
 [DEBUG] iphoneos-optimize: Optimized PNG: /Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/Zen.do.app/modules/ui/images/photoDefault.png
 
@@ -6999,17 +7091,17 @@ CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiD
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiDatabaseResultSetProxy.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDatabaseResultSetProxy.o"
 
-CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDatabaseProxy.o Classes/TiDatabaseProxy.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
-    setenv LANG en_US.US-ASCII
-    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiDatabaseProxy.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDatabaseProxy.o"
-
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiContactsPerson.o Classes/TiContactsPerson.m normal armv7 objective-c com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv LANG en_US.US-ASCII
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiContactsPerson.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiContactsPerson.o"
+
+CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDatabaseProxy.o Classes/TiDatabaseProxy.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
+    setenv LANG en_US.US-ASCII
+    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiDatabaseProxy.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDatabaseProxy.o"
 
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiComplexValue.o Classes/TiComplexValue.m normal armv7 objective-c com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
@@ -7227,17 +7319,17 @@ CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiU
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiUIScrollView.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiUIScrollView.o"
 
-CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDOMDocumentProxy.o Classes/TiDOMDocumentProxy.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
-    setenv LANG en_US.US-ASCII
-    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiDOMDocumentProxy.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDOMDocumentProxy.o"
-
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiUIWebView.o Classes/TiUIWebView.m normal armv7 objective-c com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv LANG en_US.US-ASCII
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiUIWebView.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiUIWebView.o"
+
+CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDOMDocumentProxy.o Classes/TiDOMDocumentProxy.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
+    setenv LANG en_US.US-ASCII
+    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiDOMDocumentProxy.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiDOMDocumentProxy.o"
 
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/GDataXMLNode.o Classes/GDataXMLNode.m normal armv7 objective-c com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
@@ -7323,6 +7415,12 @@ CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/SCL
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/SCListener.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/SCListener.o"
 
+CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiMediaAudioSession.o Classes/TiMediaAudioSession.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
+    setenv LANG en_US.US-ASCII
+    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiMediaAudioSession.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiMediaAudioSession.o"
+
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/CADebugMacros.o Classes/CADebugMacros.cpp normal armv7 c++ com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
     setenv LANG en_US.US-ASCII
@@ -7340,12 +7438,6 @@ CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/CAX
     setenv LANG en_US.US-ASCII
     setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c++ -arch armv7 -fmessage-length=0 -pipe -Wno-trigraphs -fno-rtti -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -fvisibility-inlines-hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-auyxhnhmscjhgodyfjgrilnzuyvy/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/CAXException.cpp" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/CAXException.o"
-
-CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiMediaAudioSession.o Classes/TiMediaAudioSession.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-    cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
-    setenv LANG en_US.US-ASCII
-    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wunused-function -DDEPLOYTYPE=test -DTI_TEST=1 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -gdwarf-2 -fvisibility=hidden -mthumb -miphoneos-version-min=3.1 -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-generated-files.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-own-target-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-all-target-headers.hmap" -iquote "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Zen.do-project-headers.hmap" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos/include" -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/usr/include/libxml2 -Iheaders "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources/armv7" "-I/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/DerivedSources" "-F/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Debug-iphoneos" -DDEBUG -DTI_POST_1_2 -include /var/folders/gP/gPZbDk3vEJyg+Uq5YSevfE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Zen.do_Prefix-hcltjvwccmdovnfcatkhhmufbexw/Zen.do_Prefix.pch -c "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/Classes/TiMediaAudioSession.m" -o "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone/build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiMediaAudioSession.o"
 
 CompileC build/Zen.do.build/Debug-iphoneos/Zen.do.build/Objects-normal/armv7/TiUIPickerProxy.o Classes/TiUIPickerProxy.m normal armv7 objective-c com.apple.compilers.gcc.4_2
     cd "/Users/jasonurton/Documents/Titanium Studio Workspace/Zen.do/build/iphone"
