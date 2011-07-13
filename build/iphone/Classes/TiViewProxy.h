@@ -12,7 +12,7 @@
 
 @protocol TiKeyboardFocusableView
 
-#pragma mark Public Zendo APIs.
+#pragma mark Public StudyEgg APIs.
 - (void)focus:(id)args;
 - (void)blur:(id)args;
 

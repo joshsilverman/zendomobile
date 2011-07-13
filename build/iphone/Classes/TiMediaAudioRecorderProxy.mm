@@ -206,13 +206,13 @@
         NSLog(@"[WARN] Invalid mode for audio recorder... setting to default.");
         newMode = kAudioSessionCategory_RecordAudio;
     }
-	NSLog(@"[WARN] 'Zendo.Media.AudioRecorder.audioSessionMode' is deprecated; use 'Zendo.Media.audioSessionMode'");
+	NSLog(@"[WARN] 'StudyEgg.Media.AudioRecorder.audioSessionMode' is deprecated; use 'StudyEgg.Media.audioSessionMode'");
 	[[TiMediaAudioSession sharedSession] setSessionMode:newMode];
 }
 
 -(NSNumber*)audioSessionMode
 {
-	NSLog(@"[WARN] 'Zendo.Media.AudioRecorder.audioSessionMode' is deprecated; use 'Zendo.Media.audioSessionMode'");	
+	NSLog(@"[WARN] 'StudyEgg.Media.AudioRecorder.audioSessionMode' is deprecated; use 'StudyEgg.Media.audioSessionMode'");	
     return [NSNumber numberWithUnsignedInt:[[TiMediaAudioSession sharedSession] sessionMode]];
 }
 

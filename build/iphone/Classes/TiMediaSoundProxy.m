@@ -342,13 +342,13 @@
         NSLog(@"[WARN] Invalid mode for audio player... setting to default.");
         newMode = kAudioSessionCategory_SoloAmbientSound;
     }
-	NSLog(@"[WARN] 'Zendo.Media.Sound.audioSessionMode' is deprecated; use 'Zendo.Media.audioSessionMode'");
+	NSLog(@"[WARN] 'StudyEgg.Media.Sound.audioSessionMode' is deprecated; use 'StudyEgg.Media.audioSessionMode'");
 	[[TiMediaAudioSession sharedSession] setSessionMode:newMode];
 }
 
 -(NSNumber*)audioSessionMode
 {
-	NSLog(@"[WARN] 'Zendo.Media.Sound.audioSessionMode' is deprecated; use 'Zendo.Media.audioSessionMode'");
+	NSLog(@"[WARN] 'StudyEgg.Media.Sound.audioSessionMode' is deprecated; use 'StudyEgg.Media.audioSessionMode'");
     return [NSNumber numberWithUnsignedInteger:[[TiMediaAudioSession sharedSession] sessionMode]];
 }
 

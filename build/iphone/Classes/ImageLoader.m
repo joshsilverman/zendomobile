@@ -687,7 +687,7 @@ DEFINE_EXCEPTIONS
 		{
 			NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
 			[errorDetail setValue:@"Response returned nil" forKey:NSLocalizedDescriptionKey];
-			NSError *error = [NSError errorWithDomain:@"com.zendo._zendo.imageloader" code:1 userInfo:errorDetail];
+			NSError *error = [NSError errorWithDomain:@"com.studyegg._studyegg.imageloader" code:1 userInfo:errorDetail];
 			[[req delegate] imageLoadFailed:req error:error];
 			[request setUserInfo:nil];
 			[request release];
@@ -724,7 +724,7 @@ DEFINE_EXCEPTIONS
 		{
 			NSMutableDictionary* errorDetail = [NSMutableDictionary dictionary];
 			[errorDetail setValue:@"Returned invalid image data" forKey:NSLocalizedDescriptionKey];
-			NSError* error = [NSError errorWithDomain:@"com.zendo._zendo.imageloader" code:1 userInfo:errorDetail];
+			NSError* error = [NSError errorWithDomain:@"com.studyegg._studyegg.imageloader" code:1 userInfo:errorDetail];
 			[[req delegate] imageLoadFailed:req error:error];
 			[request setUserInfo:nil];
 			[request release];

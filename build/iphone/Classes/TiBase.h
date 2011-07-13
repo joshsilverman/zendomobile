@@ -52,7 +52,7 @@ extern "C" {
 	#define KMETHOD_DEBUG MEMORY_DEBUG
 #endif
 
-// in simulator we redefine to format for Zendo Developer console
+// in simulator we redefine to format for StudyEgg Developer console
 
 
 #define TI_INLINE static __inline__
@@ -291,7 +291,7 @@ if ((__x<__minX) || (__x>__maxX)) \
 #define DEFINE_EXCEPTIONS \
 - (void) throwException:(NSString *) reason subreason:(NSString*)subreason location:(NSString *)location\
 {\
-	NSString * exceptionName = [@"org.zendo." stringByAppendingString:NSStringFromClass([self class])];\
+	NSString * exceptionName = [@"org.studyegg." stringByAppendingString:NSStringFromClass([self class])];\
 	NSString * message = [NSString stringWithFormat:@"%@. %@ %@",reason,(subreason!=nil?subreason:@""),(location!=nil?location:@"")];\
 	NSLog(@"[ERROR] %@",message);\
 	if ([NSThread isMainThread]==NO) {\
@@ -301,7 +301,7 @@ if ((__x<__minX) || (__x>__maxX)) \
 \
 + (void) throwException:(NSString *) reason subreason:(NSString*)subreason location:(NSString *)location\
 {\
-	NSString * exceptionName = @"org.zendo";\
+	NSString * exceptionName = @"org.studyegg";\
 	NSString * message = [NSString stringWithFormat:@"%@. %@ %@",reason,(subreason!=nil?subreason:@""),(location!=nil?location:@"")];\
 	NSLog(@"[ERROR] %@",message);\
 	if ([NSThread isMainThread]==NO) {\
@@ -375,28 +375,28 @@ return map;\
 
  //MUST BE NEGATIVE, as it inhabits the same space as UIBarButtonSystemItem
 enum {
-	UIZendoNativeItemNone = -1, 
-	UIZendoNativeItemSpinner = -2,
-	UIZendoNativeItemProgressBar = -3,
+	UIStudyEggNativeItemNone = -1, 
+	UIStudyEggNativeItemSpinner = -2,
+	UIStudyEggNativeItemProgressBar = -3,
 	
-	UIZendoNativeItemSlider = -4,
-	UIZendoNativeItemSwitch = -5,
-	UIZendoNativeItemMultiButton = -6,
-	UIZendoNativeItemSegmented = -7,
+	UIStudyEggNativeItemSlider = -4,
+	UIStudyEggNativeItemSwitch = -5,
+	UIStudyEggNativeItemMultiButton = -6,
+	UIStudyEggNativeItemSegmented = -7,
 	
-	UIZendoNativeItemTextView = -8,
-	UIZendoNativeItemTextField = -9,
-	UIZendoNativeItemSearchBar = -10,
+	UIStudyEggNativeItemTextView = -8,
+	UIStudyEggNativeItemTextField = -9,
+	UIStudyEggNativeItemSearchBar = -10,
 	
-	UIZendoNativeItemPicker = -11,
-	UIZendoNativeItemDatePicker = -12,
+	UIStudyEggNativeItemPicker = -11,
+	UIStudyEggNativeItemDatePicker = -12,
 	
-	UIZendoNativeItemInfoLight = -13,
-	UIZendoNativeItemInfoDark = -14,
+	UIStudyEggNativeItemInfoLight = -13,
+	UIStudyEggNativeItemInfoDark = -14,
 	
-	UIZendoNativeItemDisclosure = -15,
+	UIStudyEggNativeItemDisclosure = -15,
 	
-	UIZendoNativeItemContactAdd = -16
+	UIStudyEggNativeItemContactAdd = -16
 };
 
 

@@ -21,7 +21,7 @@
 
 extern BOOL const TI_APPLICATION_ANALYTICS;
 
-@implementation ZendoObject
+@implementation StudyEggObject
 
 -(NSDictionary*)modules
 {
@@ -280,7 +280,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 	[self removeProxies];
 	RELEASE_TO_NIL(preload);
 	RELEASE_TO_NIL(context);
-	RELEASE_TO_NIL(_zendo);
+	RELEASE_TO_NIL(_studyegg);
 	RELEASE_TO_NIL(modules);
 	RELEASE_TO_NIL(proxyLock);
 	OSSpinLockLock(&krollBridgeRegistryLock);
@@ -473,7 +473,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 
 -(void)injectPatches
 {
-	// called to inject any Zendo patches in JS before a context is loaded... nice for 
+	// called to inject any StudyEgg patches in JS before a context is loaded... nice for 
 	// setting up backwards compat type APIs
 	
 	NSMutableString *js = [[NSMutableString alloc] init];
@@ -510,7 +510,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 -(void)gc
 {
 	[context gc];
-	[_zendo gc];
+	[_studyegg gc];
 }
 
 #pragma mark Delegate
@@ -522,15 +522,15 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 
 -(void)didStartNewContext:(KrollContext*)kroll
 {
-	// create Zendo global object
+	// create StudyEgg global object
 	NSString *basePath = (url==nil) ? [TiHost resourcePath] : [[[url path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"."];
-	_zendo = [[ZendoObject alloc] initWithContext:kroll host:host context:self baseURL:[NSURL fileURLWithPath:basePath]];
+	_studyegg = [[StudyEggObject alloc] initWithContext:kroll host:host context:self baseURL:[NSURL fileURLWithPath:basePath]];
 	
 	TiContextRef jsContext = [kroll context];
-	TiValueRef tiRef = [KrollObject toValue:kroll value:_zendo];
+	TiValueRef tiRef = [KrollObject toValue:kroll value:_studyegg];
 	
-	NSString *_zendoNS = [NSString stringWithFormat:@"T%sanium","it"];
-	TiStringRef prop = TiStringCreateWithCFString((CFStringRef) _zendoNS);
+	NSString *_studyeggNS = [NSString stringWithFormat:@"T%sanium","it"];
+	TiStringRef prop = TiStringCreateWithCFString((CFStringRef) _studyeggNS);
 	TiStringRef prop2 = TiStringCreateWithCFString((CFStringRef) [NSString stringWithFormat:@"%si","T"]);
 	TiObjectRef globalRef = TiContextGetGlobalObject(jsContext);
 	TiObjectSetProperty(jsContext, globalRef, prop, tiRef, NULL, NULL);
@@ -543,7 +543,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 	{
 		for (NSString *name in preload)
 		{
-			KrollObject *ti = (KrollObject*)[_zendo valueForKey:name];
+			KrollObject *ti = (KrollObject*)[_studyegg valueForKey:name];
 			NSDictionary *values = [preload valueForKey:name];
 			for (id key in values)
 			{
@@ -579,7 +579,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 		NSNotification *notification = [NSNotification notificationWithName:kTiContextShutdownNotification object:self];
 		[[NSNotificationCenter defaultCenter] postNotification:notification];
 	}
-	[_zendo gc];
+	[_studyegg gc];
 	
 	if (shutdownCondition)
 	{
@@ -594,7 +594,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 {
 	[self performSelectorOnMainThread:@selector(unregisterForMemoryWarning) withObject:nil waitUntilDone:NO];
 	[self removeProxies];
-	RELEASE_TO_NIL(_zendo);
+	RELEASE_TO_NIL(_studyegg);
 	RELEASE_TO_NIL(context);
 	RELEASE_TO_NIL(preload);
 	RELEASE_TO_NIL(modules);
@@ -799,7 +799,7 @@ CFMutableSetRef	krollBridgeRegistry = nil;
 		return module;
 	}
 	
-	@throw [NSException exceptionWithName:@"org.zendo.kroll" reason:[NSString stringWithFormat:@"Couldn't find module: %@",path] userInfo:nil];
+	@throw [NSException exceptionWithName:@"org.studyegg.kroll" reason:[NSString stringWithFormat:@"Couldn't find module: %@",path] userInfo:nil];
 }
 
 + (int)countOfKrollBridgesUsingProxy:(id)proxy

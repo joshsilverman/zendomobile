@@ -16,7 +16,7 @@
 #import "KrollObject.h"
 #import "TiModule.h"
 
-@interface ZendoObject : KrollObject {
+@interface StudyEggObject : KrollObject {
 @private
 	NSMutableDictionary *modules;
 	TiHost *host;
@@ -37,7 +37,7 @@
 	KrollContext *context;
 	NSDictionary *preload;
 	NSMutableDictionary *modules;
-	ZendoObject *_zendo;
+	StudyEggObject *_studyegg;
 	BOOL shutdown;
     BOOL evaluationError;
 	NSMutableArray *proxies;

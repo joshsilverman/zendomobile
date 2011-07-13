@@ -143,7 +143,7 @@
 		if (resultClass==nil)
 		{
 			NSLog(@"[WARN] attempted to load: %@",className);
-			@throw [NSException exceptionWithName:@"org.zendo.module" 
+			@throw [NSException exceptionWithName:@"org.studyegg.module" 
 										   reason:[NSString stringWithFormat:@"invalid method (%@) passed to %@",name,[self class]] 
 										 userInfo:nil];
 		}

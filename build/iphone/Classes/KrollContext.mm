@@ -748,7 +748,7 @@ static TiValueRef StringFormatDecimalCallback (TiContextRef jsContext, TiObjectR
 {
 	if (stopped!=YES)
 	{
-		@throw [NSException exceptionWithName:@"org.zendo.kroll" 
+		@throw [NSException exceptionWithName:@"org.studyegg.kroll" 
 									   reason:@"already started"
 									 userInfo:nil];
 	}

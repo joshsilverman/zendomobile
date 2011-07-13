@@ -1,6 +1,7 @@
 // var serverURL = 'http://localhost:3000';
 // serverURL = 'http://192.168.2.35:3000'
-serverURL = 'http://zen.do'
+// serverURL = 'http://zen.do'
+serverURL = 'http://studyegg.com'
 
 function checkLoggedIn() {
 	xhr = Ti.Network.createHTTPClient();
