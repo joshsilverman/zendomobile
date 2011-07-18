@@ -1,5 +1,5 @@
 // var serverURL = 'http://localhost:3000';
-var serverURL = 'http://192.168.0.102:3000';
+var serverURL = 'http://192.168.2.20:3000';
 // serverURL = 'http://192.168.2.35:3000'
 // serverURL = 'http://zen.do'
 // serverURL = 'http://studyegg.com'
@@ -143,19 +143,37 @@ function createNoteRow(name, docid){
 }
 
 function getLines(doc, context) {
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		reviewing = false;
-		alert("Could not retrieve your cards. Check your Internet connection and try again.");
+	if (context =="push") {
+		// alert("You have new cards to review! Go to them now?");
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+			reviewing = false;
+			alert("Could not retrieve your cards. Check your Internet connection and try again.");
+		} else {
+			xhr = Ti.Network.createHTTPClient();
+			xhr.setTimeout(1000000);
+			xhr.open("GET", serverURL + "/review/" + doc);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				data = JSON.parse(this.responseText);
+				processData(data, context);
+			}	
+			xhr.send();
+		}		
 	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
-		xhr.open("GET", serverURL + "/review/" + doc);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-			data = JSON.parse(this.responseText);
-			processData(data, context);
-		}	
-		xhr.send();
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+			reviewing = false;
+			alert("Could not retrieve your cards. Check your Internet connection and try again.");
+		} else {
+			xhr = Ti.Network.createHTTPClient();
+			xhr.setTimeout(1000000);
+			xhr.open("GET", serverURL + "/review/" + doc);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				data = JSON.parse(this.responseText);
+				processData(data, context);
+			}	
+			xhr.send();
+		}		
 	}
 }
 

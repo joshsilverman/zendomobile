@@ -287,6 +287,7 @@ function buttonClicked(button) {
 				_parent: Titanium.UI.currentWindow
 			});	
 			//TODO this is not ideal!
+			win.hide();
 			// win.close();
 			// win.nav.show(win);
 			win.nav.open(newWin);			

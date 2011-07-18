@@ -16,7 +16,7 @@ function registerForPush() {
 			Titanium.Network.NOTIFICATION_TYPE_SOUND
 		],
 		success : function(e) {
-			var deviceToken = e.deviceToken;
+			//var deviceToken = e.deviceToken;
 			//alert("Push notification device token is: " + deviceToken);
 			//alert("Push notification types: " + Titanium.Network.remoteNotificationTypes);
 			//alert("Push notification enabled: " + Titanium.Network.remoteNotificationsEnabled);
@@ -25,18 +25,25 @@ function registerForPush() {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			//alert(e.data);
-			//alert(e.data.doc);
-			//win.hide();
-			//reviewing = false;
-			//requestLines(e.data.doc);
-			getLines(4043, "push");
+			if (Ti.App.Properties.getBool('foreground') == true) {
+				var reviewAlert = Ti.UI.createAlertDialog({
+				    title : 'You have new cards to review!',
+				    message : "Go to them now?",
+				    buttonNames : ["Later", "Review"],
+				    cancel : 0
+				});
+				reviewAlert.addEventListener('click', function(f) {
+					if (f.index == 1) { getLines(e.data.doc, "push"); };
+				})
+				reviewAlert.show();		
+			} else {
+				getLines(e.data.doc, "push");
+			}
 		}
 	});	
 }
 
 registerForPush();
-
 
 Ti.Gesture.addEventListener('orientationchange',function(e){
     currentOrientation = Ti.Gesture.orientation; 
@@ -64,6 +71,14 @@ Ti.App.addEventListener('resume', function() {
 		}	
 	}
     setTimeout(check, 2000);
+});
+
+Ti.App.addEventListener('resumed', function(e) { 
+	Ti.App.Properties.setBool('foreground', true);
+});
+
+Ti.App.addEventListener('pause', function(e) { 
+	Ti.App.Properties.setBool('foreground', false);
 });
 
 function render() {
@@ -143,7 +158,7 @@ function render() {
 		// top : 50,
 		// height : 100
 	// });
-// 		
+
 	// logo.hide();
 	win.add(logo);
 	
