@@ -1,6 +1,6 @@
 // Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
 var win = Ti.UI.currentWindow;
-
+// alert(win.reviewContext);
 // Titanium.UI.currentWindow.orientationModes = [
 	// Titanium.UI.LANDSCAPE_LEFT,
 	// Titanium.UI.LANDSCAPE_RIGHT	
@@ -9,7 +9,6 @@ var win = Ti.UI.currentWindow;
 Titanium.UI.setBackgroundColor('#fff');
 // Titanium.UI.setBackgroundColor('#171717');
 
-Ti.include('helperMethods.js');
 Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
 
@@ -101,6 +100,8 @@ function initialize(cardViews) {
 	})
 	
 	closeButton.addEventListener('click', function() {
+		// win.close();
+		// win.nav.show(win);
 		win.nav.close(win);
 		// var newWin = Ti.UI.createWindow({
 			// url : "notes.js",
@@ -271,20 +272,25 @@ function buttonClicked(button) {
 	if ( ( cardViews.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
-		
-		var newWin = Ti.UI.createWindow({
-			url : "stats.js",
-			navBarHidden : true,
-			nav : win.nav,
-			data : cards,
-			// views : cardViews,
-			folder : win.folder,
-			_parent: Titanium.UI.currentWindow
-		});	
-		//TODO this is not ideal!
-		win.hide();
-				
-		win.nav.open(newWin);
+		if (win.reviewContext == "push") {
+			// win.close();
+			// win.nav.show(win);
+			win.nav.close(win);
+		} else {
+			var newWin = Ti.UI.createWindow({
+				url : "stats.js",
+				navBarHidden : true,
+				nav : win.nav,
+				data : cards,
+				// views : cardViews,
+				folder : win.folder,
+				_parent: Titanium.UI.currentWindow
+			});	
+			//TODO this is not ideal!
+			// win.close();
+			// win.nav.show(win);
+			win.nav.open(newWin);			
+		}
 	}
 }
 
@@ -292,8 +298,9 @@ function render() {
 	win.add(cardScrollableView);
 	win.add(buttonView);
 	// for (i in buttons) { win.add(buttons[i]); }
-	win.open();
+	
 	win.add(closeButton);
+	win.open();
 }
 
 // TODO for replay 

@@ -4,6 +4,8 @@
 <dict>
 	<key>application-identifier</key>
 	<string>5GNHT5RNS8.com.studyegg.mobile</string>
+	<key>aps-environment</key>
+	<string>development</string>
 	<key>get-task-allow</key>
 	<true/>
 	<key>keychain-access-groups</key>

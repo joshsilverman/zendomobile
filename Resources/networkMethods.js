@@ -1,7 +1,10 @@
 // var serverURL = 'http://localhost:3000';
+var serverURL = 'http://192.168.0.102:3000';
 // serverURL = 'http://192.168.2.35:3000'
 // serverURL = 'http://zen.do'
-serverURL = 'http://studyegg.com'
+// serverURL = 'http://studyegg.com'
+
+Ti.include('helperMethods.js');
 
 function checkLoggedIn() {
 	xhr = Ti.Network.createHTTPClient();
@@ -70,7 +73,7 @@ function getFolders() {
 			for (i in foldersData) {
 				folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id));
 			}
-			render();
+			renderFolders();
 		}	
 		xhr.send();
 	}
@@ -96,11 +99,13 @@ function getNotes(element) {
 					}
 				}
 			}	
+			//alert(notesRows);
 			if ( notesRows.length >= 1 ) {
 				var newWin = Ti.UI.createWindow({
 					url : "notes.js",
 					navBarHidden : false,
 					selection : element,
+					barColor : '#000',
 					data : notesRows,
 					nav : win.nav,
 					_parent: Titanium.UI.currentWindow,
@@ -137,8 +142,7 @@ function createNoteRow(name, docid){
 	return row;
 }
 
-function getLines(doc) {
-	// checkLoggedIn();
+function getLines(doc, context) {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		reviewing = false;
 		alert("Could not retrieve your cards. Check your Internet connection and try again.");
@@ -149,13 +153,13 @@ function getLines(doc) {
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
-			processData(data);
+			processData(data, context);
 		}	
 		xhr.send();
 	}
 }
 
-function processData(data) {
+function processData(data, context) {
 	reviewLineIDs = []
 	
 	//TODO date checking for mems!
@@ -191,18 +195,14 @@ function processData(data) {
 			// }			
 		// }		
 	// }
-	
 	for ( i in data["lines"] ) {
 		reviewLineIDs.push({
 			domid : data["lines"][i].line.domid,
 			mem_id : data["lines"][i].line.mems[0].id
 		});
 	}
-	
 	var xml = replaceAll("<wrapper>" + data["document"].document.html + "</wrapper>", "&nbsp;", " ");
 	xml = replaceAll(replaceAll(xml, "<br>", " "), "&ndash;", "-");
-	//Ti.API.debug(xml);
-	// xml = replaceAll(xml, "&ndash;", "-");
 	var dom = Ti.XML.parseString(xml);
 	cards = [];
 	for ( i in reviewLineIDs ) {
@@ -215,22 +215,29 @@ function processData(data) {
 			continue; 
 		} else { cards.push(createCard(trim(text[0]), trim(text[1]), reviewLineIDs[i]["mem_id"])); }
 	}
+	// alert(Ti.UI.currentWindow.nav);
 	if ( cards.length > 0 ) {
 		reviewing = false;
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
+			reviewContext : context,
 			//list : reviewList,
 			cards : cards,
+			//modal : true,
 			nav : win.nav, 
 			_parent: Titanium.UI.currentWindow,
-			folder : win.data,
+			//TODO need this?
+			//folder : win.data,
 			orientationModes : [
 				Titanium.UI.LANDSCAPE_LEFT,
 				Titanium.UI.LANDSCAPE_RIGHT
 			]
 		}); 
-		win.nav.open(new_win);					
+		// win.nav.hide(win);
+		// new_win.open();
+		win.nav.open(new_win);			
+
 	} else { 
 		reviewing = false;
 		alert('That document has no cards to review!'); 
@@ -246,9 +253,8 @@ function createCard(prompt, answer, memID) {
 	card.memID = memID;
 	return card;
 }
-// /mems/update/25488/4
+
 function reportGrade(memID, confidence) {
-	// checkLoggedIn();
 	var gradeValues = {
 		1 : 9,
 		2 : 6, 

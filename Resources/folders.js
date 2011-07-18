@@ -6,13 +6,14 @@ Ti.include('networkMethods.js');
 
 function initialize() {
 	folderRows = [];
-	folderData = getFolders();
+	getFolders();
 }
 
 function renderNavBar() {
-	var signOutButton = Ti.UI.createButton({ title : 'Sign Out' });
-	signOutButton.addEventListener('click', function(){ signOut(); });
-	win.leftNavButton = signOutButton;	
+	var backButton = Ti.UI.createButton({ title : 'Home' });
+	backButton.addEventListener('click', function(){ win.nav.close(win); });
+	win.leftNavButton = backButton;	
+	
 }
 
 function createFolderRow(name, id){
@@ -32,7 +33,7 @@ function createFolderRow(name, id){
 	return row;
 }
 
-function render() {
+function renderFolders() {
 	
 	var toolbar = Ti.UI.createToolbar({
 		top : 0		

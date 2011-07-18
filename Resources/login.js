@@ -4,8 +4,39 @@ Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 var currentOrientation = Titanium.UI.PORTRAIT;
 var focused = false;
 
+Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
 Ti.include('authenticate.js');
+
+function registerForPush() {
+	Titanium.Network.registerForPushNotifications({
+		types : [
+			Titanium.Network.NOTIFICATION_TYPE_BADGE,
+			Titanium.Network.NOTIFICATION_TYPE_ALERT,
+			Titanium.Network.NOTIFICATION_TYPE_SOUND
+		],
+		success : function(e) {
+			var deviceToken = e.deviceToken;
+			//alert("Push notification device token is: " + deviceToken);
+			//alert("Push notification types: " + Titanium.Network.remoteNotificationTypes);
+			//alert("Push notification enabled: " + Titanium.Network.remoteNotificationsEnabled);
+		},
+		error : function(e) {
+			alert("Error during registration: " + e.error);
+		},
+		callback : function(e) {
+			//alert(e.data);
+			//alert(e.data.doc);
+			//win.hide();
+			//reviewing = false;
+			//requestLines(e.data.doc);
+			getLines(4043, "push");
+		}
+	});	
+}
+
+registerForPush();
+
 
 Ti.Gesture.addEventListener('orientationchange',function(e){
     currentOrientation = Ti.Gesture.orientation; 
@@ -13,9 +44,7 @@ Ti.Gesture.addEventListener('orientationchange',function(e){
 });
 
 win.addEventListener('focus', function() {
-	// var check = function() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		// alert("Internet connection NOT found");
 		alert('Could not reach your account. Check your internet connection.');
 	} else {
 		if ( Ti.App.Properties.getBool('active') == false ) {
@@ -24,10 +53,7 @@ win.addEventListener('focus', function() {
 			authSuccess(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'));
 		} 
 	}	
-// }
-    // setTimeout(check, 2000);
 });
-
 
 Ti.App.addEventListener('resume', function() { 
 	var check = function() {
@@ -111,6 +137,13 @@ function render() {
 		height : 200,
 		font : {fontSize : 64, fontWeight:'bold', fontFamily:'Marker Felt'} 
 	});
+	
+	// logo = Ti.UI.createImageView({
+		// image : 'images/eggLogo.png',
+		// top : 50,
+		// height : 100
+	// });
+// 		
 	// logo.hide();
 	win.add(logo);
 	
@@ -159,22 +192,4 @@ function adjustViews() {
 			confirmButton.bottom = 20;
 		}		
 	}
-}
-
-function shiftAboveKeyboard() {
-	Ti.API.debug(currentOrientation);
-	Ti.API.debug(currentFocus);
-	Ti.API.debug("Shift above keyboard.");
-	emailField.top = 10;
-	passwordField.top = 50;
-	confirmButton.top = 90;
-}
-
-function keyboardDismissed() {
-	Ti.API.debug(currentOrientation);
-	Ti.API.debug(currentFocus);
-	Ti.API.debug("Shift back down.");
-	emailField.top = 100;
-	passwordField.top = 150;
-	confirmButton.top = 200;
 }

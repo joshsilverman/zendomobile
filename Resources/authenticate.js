@@ -24,12 +24,12 @@ function renderLogin() {
 }
 
 function authSuccess(email, password) {
-	// alert('Rendering authentication success');
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	var newWin = Ti.UI.createWindow({
-		url : 'folders.js',
+		url : 'home.js',
 		navBarHidden : false,
+		barColor : '#000',
 		nav : win.nav,
 		_parent: Titanium.UI.currentWindow,
 		orientationModes : [
@@ -39,11 +39,8 @@ function authSuccess(email, password) {
 			Titanium.UI.LANDSCAPE_RIGHT
 		]
 	});
-	
-	//alert('login success!');
 	win.nav.open(newWin);	
-	activityIndicator.hide();
-	
+	activityIndicator.hide();	
 }
 
 

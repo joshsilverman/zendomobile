@@ -1,6 +1,7 @@
 Ti.UI.setBackgroundColor('#fff');
 // Ti.UI.orientation = Ti.UI.PORTRAIT;
 var win = Ti.UI.currentWindow;
+
 var reviewing = false;
 // win.orientationModes = [
     // Titanium.UI.PORTRAIT,
@@ -19,7 +20,7 @@ function initialize() {
 
 function renderNavBar() {
 	var back = Ti.UI.createButton({
-		title : 'Folders'
+		title : 'Folders'		
 	});
 	
 	back.addEventListener('click', function() {
@@ -52,7 +53,7 @@ function renderNavBar() {
 		} else {
 			if ( reviewing == false ) {
 				reviewing = true;
-				cards = getLines(reviewList);
+				getLines(reviewList, "normal");
 			}
 		}
 	});

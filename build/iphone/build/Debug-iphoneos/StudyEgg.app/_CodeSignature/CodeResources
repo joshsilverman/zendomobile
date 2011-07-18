@@ -18,6 +18,10 @@
 		</data>
 		<key>Default@2x.png</key>
 		<data>
+		ox0IedGPQxHvfAIxpSnrOwGsZjg=
+		</data>
+		<key>Default@2x_old.png</key>
+		<data>
 		gtSrOHWPnDa/LSB6mAw3DUhYkzk=
 		</data>
 		<key>Default_zen.png</key>
@@ -31,10 +35,6 @@
 		<key>appicon.png</key>
 		<data>
 		cjL/+8PWuiFb179S2UOsvH/xiC4=
-		</data>
-		<key>card.png</key>
-		<data>
-		Pugdnmi5U02W0WuW4wrcBhYtKs4=
 		</data>
 		<key>debugger.plist</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		GTgm/quI0Q0T2yGnLaRdolqcsu8=
+		OAZvNC42tUfdKEi1Om19pCR4HUQ=
 		</data>
 		<key>head_logo_512.png</key>
 		<data>
@@ -107,6 +107,10 @@
 		<key>images/default_app_logo.png</key>
 		<data>
 		KFlQoJWJ07jwAB6IQgZDetdisD4=
+		</data>
+		<key>images/eggLogo.png</key>
+		<data>
+		5YAdruGAE1P/tACUVbQtH4EevFQ=
 		</data>
 		<key>images/folder.png</key>
 		<data>
