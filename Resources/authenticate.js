@@ -1,6 +1,6 @@
 Ti.include('networkMethods.js');
 
-render();
+// render();
 
 function attemptAutoLogin() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {

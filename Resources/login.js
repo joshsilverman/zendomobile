@@ -25,20 +25,23 @@ function registerForPush() {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			if (Ti.App.Properties.getBool('foreground') == true) {
-				var reviewAlert = Ti.UI.createAlertDialog({
-				    title : 'You have new cards to review!',
-				    message : "Go to them now?",
-				    buttonNames : ["Later", "Review"],
-				    cancel : 0
-				});
-				reviewAlert.addEventListener('click', function(f) {
-					if (f.index == 1) { getLines(e.data.doc, "push"); };
-				})
-				reviewAlert.show();		
-			} else {
-				getLines(e.data.doc, "push");
-			}
+			// if user is logged in :
+				if (Ti.App.Properties.getBool('foreground') == true) {
+					var reviewAlert = Ti.UI.createAlertDialog({
+					    title : 'You have new cards to review!',
+					    message : "Go to them now?",
+					    buttonNames : ["Later", "Review"],
+					    cancel : 0
+					});
+					reviewAlert.addEventListener('click', function(f) {
+						if (f.index == 1) { getLines(e.data.doc, "push"); };
+					})
+					reviewAlert.show();		
+				} else {
+					getLines(e.data.doc, "push");
+				}
+			// if user not logged in:
+			//   
 		}
 	});	
 }
