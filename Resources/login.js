@@ -152,20 +152,20 @@ function render() {
 		}		
 	});
 	
-	logo = Ti.UI.createLabel({
-		text : 'StudyEgg', 
-		textAlign : 'center',
-		top : 10,
-		height : 200,
-		font : {fontSize : 64, fontWeight:'bold', fontFamily:'Marker Felt'} 
+	// logo = Ti.UI.createLabel({
+		// text : 'StudyEgg', 
+		// textAlign : 'center',
+		// top : 10,
+		// height : 200,
+		// font : {fontSize : 64, fontWeight:'bold', fontFamily:'Marker Felt'} 
+	// });
+	
+	logo = Ti.UI.createImageView({
+		image : 'images/studyegg_logo.jpg',
+		height : 90,
+		top : 55
 	});
 	
-	// logo = Ti.UI.createImageView({
-		// image : 'images/eggLogo.png',
-		// top : 50,
-		// height : 100
-	// });
-
 	// logo.hide();
 	win.add(logo);
 	
@@ -173,8 +173,6 @@ function render() {
 	win.add(confirmButton);	
 	// emailField.focus();
 }
-
-render();
 
 function adjustViews() {	
 	if ( focused == true ) {
@@ -197,7 +195,9 @@ function adjustViews() {
 	} else {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard hidden, portrait mode");
-			logo.height = 200;
+			logo.top = 55;
+			// logo.height = 80,
+			//logo.width = 200,
 			logo.show();
 			emailField.top = 250;
 			passwordField.top = 300;
@@ -207,7 +207,10 @@ function adjustViews() {
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");
-			logo.height = 100;
+			//logo.height = 100;
+			logo.top = 20;
+			// logo.height = 80;
+			//logo.width = 150;
 			logo.show();
 			emailField.top = 130;
 			passwordField.top = 180;
@@ -217,3 +220,65 @@ function adjustViews() {
 		}		
 	}
 }
+
+function shiftAboveKeyboard() {
+	Ti.API.debug(currentOrientation);
+	Ti.API.debug(currentFocus);
+	Ti.API.debug("Shift above keyboard.");
+	emailField.top = 10;
+	passwordField.top = 50;
+	confirmButton.top = 90;
+}
+
+function keyboardDismissed() {
+	Ti.API.debug(currentOrientation);
+	Ti.API.debug(currentFocus);
+	Ti.API.debug("Shift back down.");
+	emailField.top = 100;
+	passwordField.top = 150;
+	confirmButton.top = 200;
+}
+
+render();
+
+// function adjustViews() {	
+	// if ( focused == true ) {
+		// if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			// Ti.API.debug("Keyboard up, portrait mode");
+			// logo.hide();
+			// emailField.top = 60;
+			// passwordField.top = 110;
+			// confirmButton.bottom = null;
+			// confirmButton.top = 160;
+		// } 
+		// if ( currentOrientation == 3 || currentOrientation == 4 ) {
+			// Ti.API.debug("Keyboard up, landscape mode");
+			// logo.hide();
+			// emailField.top = 10;
+			// passwordField.top = 50;
+			// confirmButton.bottom = null;
+			// confirmButton.top = 90;
+		// }
+	// } else {
+		// if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			// Ti.API.debug("Keyboard hidden, portrait mode");
+			// logo.height = 200;
+			// logo.show();
+			// emailField.top = 250;
+			// passwordField.top = 300;
+			// // confirmButton.top = 380;
+			// confirmButton.top = null;
+			// confirmButton.bottom = 50;
+		// }
+		// if ( currentOrientation == 3 || currentOrientation == 4 ) {
+			// Ti.API.debug("Keyboard hidden, landscape mode");
+			// logo.height = 100;
+			// logo.show();
+			// emailField.top = 130;
+			// passwordField.top = 180;
+			// // confirmButton.top = 240;
+			// confirmButton.top = null;
+			// confirmButton.bottom = 20;
+		// }		
+	// }
+// }

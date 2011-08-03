@@ -120,6 +120,10 @@ win.add(notesButton);
 
 function renderNavBar() {
 	var signOutButton = Ti.UI.createButton({ title : 'Sign Out' });
+	signOutButton.addEventListener('click', function() {
+		signOut();
+		// win.nav.close(win);
+	});
 	var accountButton = Ti.UI.createButton({ title : 'Account' });
 	accountButton.addEventListener('click', function(){ 
 		var newWin = Ti.UI.createWindow({
@@ -137,7 +141,7 @@ function renderNavBar() {
 		});
 		win.nav.open(newWin);	
 	});
-	win.leftNavButton = accountButton;	
+	win.leftNavButton = signOutButton;	
 }
 
 function adjustViews() {
