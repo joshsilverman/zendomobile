@@ -39,6 +39,9 @@ function authSuccess(email, password) {
 			Titanium.UI.LANDSCAPE_RIGHT
 		]
 	});
+	//TODO
+	//Register device here!
+	// alert("Register device: " + Ti.App.Properties.getString("token"))
 	win.nav.open(newWin);	
 	activityIndicator.hide();	
 }

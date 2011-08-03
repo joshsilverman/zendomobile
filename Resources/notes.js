@@ -8,7 +8,6 @@ var reviewing = false;
     // Titanium.UI.LANDSCAPE_LEFT,
     // Titanium.UI.LANDSCAPE_RIGHT
 // ];
-
 renderNavBar();
 Ti.include('networkMethods.js');
 Ti.include('helperMethods.js');

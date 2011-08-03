@@ -30,7 +30,7 @@ for ( i in cards ) {
 	cardViews.push(createCardView(cards[i], cardNumber, cardLength)); 
 }
 initialize(cardViews);
-	
+
 function initialize(cardViews) {
 	buttonView = Ti.UI.createView({
 		right : 0,
@@ -41,7 +41,7 @@ function initialize(cardViews) {
 	button1 = Ti.UI.createButton({
 		title : 'Got it!',
 		images : { "unselected" : "images/got_it.png", "selected" : 'images/got_it_selected.png'},
-		grade : 1,
+		grade : 4,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
@@ -52,7 +52,7 @@ function initialize(cardViews) {
 	button2 = Ti.UI.createButton({
 		title : 'Kinda',
 		images : { "unselected" : "images/kinda.png", "selected" : 'images/kinda_selected.png'},
-		grade : 2,
+		grade : 3,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
@@ -63,7 +63,7 @@ function initialize(cardViews) {
 	button3 = Ti.UI.createButton({
 		title : 'Barely',
 		images : { "unselected" : "images/barely.png", "selected" : 'images/barely_selected.png'},
-		grade : 3,
+		grade : 2,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad,
@@ -74,7 +74,7 @@ function initialize(cardViews) {
 	button4 = Ti.UI.createButton({
 		title : 'No clue',
 		images : { "unselected" : "images/no_clue.png", "selected" : 'images/no_clue_selected.png'},
-		grade : 4,
+		grade : 1,
 		height : buttonHeight,
 		width : buttonHeight,
 		right : buttonRightPad, 
@@ -100,19 +100,8 @@ function initialize(cardViews) {
 	})
 	
 	closeButton.addEventListener('click', function() {
-		// win.close();
-		// win.nav.show(win);
+		win.hide();
 		win.nav.close(win);
-		// var newWin = Ti.UI.createWindow({
-			// url : "notes.js",
-			// navBarHidden : false,
-			// nav : win.nav,
-			// data : win.folder,
-			// orientationModes : [Titanium.UI.PORTRAIT, Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT]
-		// });	
-		// //TODO this is not ideal!
-		// win.hide();
-		// win.nav.open(newWin);
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({
@@ -272,7 +261,7 @@ function buttonClicked(button) {
 	if ( ( cardViews.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
-		if (win.reviewContext == "push") {
+		if (win._context == "push") {
 			// win.close();
 			// win.nav.show(win);
 			win.nav.close(win);

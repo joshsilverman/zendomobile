@@ -46,9 +46,9 @@ if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 } else {
 	var graph = Ti.UI.createImageView({
 		image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
-	            + gradeCounts[1] + "," + gradeCounts[2] + "," + gradeCounts[3] + "," + gradeCounts[4] +
-	            "&chdl=Got it - " + gradeCounts[1] + "|Kinda - " + gradeCounts[2] +
-	            "|Barely - " + gradeCounts[3] + "|No clue - " + gradeCounts[4] + "&chma=|2",
+	            + gradeCounts[4] + "," + gradeCounts[3] + "," + gradeCounts[2] + "," + gradeCounts[1] +
+	            "&chdl=Got it - " + gradeCounts[4] + "|Kinda - " + gradeCounts[3] +
+	            "|Barely - " + gradeCounts[2] + "|No clue - " + gradeCounts[1] + "&chma=|2",
 	    width : 450, 
 	    height : 275,
 	    top :  0, 

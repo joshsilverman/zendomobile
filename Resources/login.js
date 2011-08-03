@@ -16,6 +16,10 @@ function registerForPush() {
 			Titanium.Network.NOTIFICATION_TYPE_SOUND
 		],
 		success : function(e) {
+			Ti.App.Properties.setString("token", e.deviceToken);
+			alert("Stored device token: " + Ti.App.Properties.getString("token"));
+			//add a device for the user
+		
 			//var deviceToken = e.deviceToken;
 			//alert("Push notification device token is: " + deviceToken);
 			//alert("Push notification types: " + Titanium.Network.remoteNotificationTypes);
@@ -25,30 +29,29 @@ function registerForPush() {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			// if user is logged in :
-				if (Ti.App.Properties.getBool('foreground') == true) {
-					var reviewAlert = Ti.UI.createAlertDialog({
-					    title : 'You have new cards to review!',
-					    message : "Go to them now?",
-					    buttonNames : ["Later", "Review"],
-					    cancel : 0
-					});
-					reviewAlert.addEventListener('click', function(f) {
-						if (f.index == 1) { getLines(e.data.doc, "push"); };
-					})
-					reviewAlert.show();		
-				} else {
-					getLines(e.data.doc, "push");
-				}
-			// if user not logged in:
-			//   
+			if (Ti.App.Properties.getBool('foreground') == true) {
+				var reviewAlert = Ti.UI.createAlertDialog({
+				    title : 'You have new cards to review!',
+				    message : "Go to them now?",
+				    buttonNames : ["Later", "Review"],
+				    cancel : 0
+				});
+				reviewAlert.addEventListener('click', function(f) {
+					if (f.index == 1) { 
+						retrieveAllNotifications(); 
+					};
+				})
+				reviewAlert.show();		
+			} else {
+				checkLoggedIn("push");
+			}
 		}
 	});	
 }
 
 registerForPush();
 
-Ti.Gesture.addEventListener('orientationchange',function(e){
+Ti.Gesture.addEventListener('orientationchange', function(e){
     currentOrientation = Ti.Gesture.orientation; 
     adjustViews();
 });
@@ -70,7 +73,8 @@ Ti.App.addEventListener('resume', function() {
 		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 			alert('Could not reach your account. Check your internet connection.');
 		} else {
-			checkLoggedIn(); 
+			checkLoggedIn("normal"); 
+			// reLogUser();
 		}	
 	}
     setTimeout(check, 2000);
@@ -169,6 +173,8 @@ function render() {
 	win.add(confirmButton);	
 	// emailField.focus();
 }
+
+render();
 
 function adjustViews() {	
 	if ( focused == true ) {

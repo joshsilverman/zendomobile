@@ -14,7 +14,7 @@
 <url>http://www.StudyEgg.com</url>
 <description>Go forth and learn</description>
 <copyright>2011 by Zendo Labs Inc.</copyright>
-<icon>head_logo_512.png</icon>
+<icon>default_app_logo.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
