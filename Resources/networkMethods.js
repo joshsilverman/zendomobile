@@ -1,57 +1,76 @@
 // var serverURL = 'http://localhost:3000';
 // var serverURL = 'http://192.168.2.20:3000';
-var serverURL = 'http://192.168.3.148:3000';
-// var serverURL = 'http://192.168.0.103:3000';
-// serverURL = 'http://studyegg.com'
+// var serverURL = 'http://192.168.3.148:3000';
+// var serverURL = 'http://ec2-204-236-227-202.compute-1.amazonaws.com'
+// var serverURL = 'http://192.168.0.101:3000';
+var serverURL = 'http://studyegg.com'
 
 Ti.include('helperMethods.js');
+// 
+// function checkLoggedIn(context) {
+	// xhr = Ti.Network.createHTTPClient();
+	// xhr.setTimeout(1000000);
+	// xhr.onreadystatechange = function() {
+		// if (this.readyState == 4) {
+			// if ( this.status != 200 ) { 
+				// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), context); 
+			// } else {
+				// if (context == "push") {
+					// retrieveAllNotifications();
+				// }
+			// }
+// 			
+		// }
+	// };
+	// xhr.open("GET", serverURL + "/tags/get_tags_json");
+	// xhr.setRequestHeader('Content-Type', 'text/json');
+	// xhr.send();
+// }
 
-function checkLoggedIn(context) {
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4) {
-			if ( this.status != 200 ) { 
-				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), context); 
-			} else {
-				if (context == "push") {
-					retrieveAllNotifications();
-				}
-			}
-			
-		}
-	}
-	xhr.open("GET", serverURL + "/tags/get_tags_json");
-	xhr.setRequestHeader('Content-Type', 'text/json');
-	xhr.send();
+function alertNotifications(){
+	// alert("Alert notifications");
+	var reviewAlert = Ti.UI.createAlertDialog({
+	    title : 'You have new cards to review!',
+	    message : "Go to them now?",
+	    buttonNames : ["Later", "Review"],
+	    cancel : 0
+	});
+	reviewAlert.addEventListener('click', function(f) {
+		if (f.index == 1) { 
+			// win.hide();
+			retrieveAllNotifications();
+		};
+	});
+	reviewAlert.show();		
 }
 
+
 function reLogUser(email, password, context) {
+	// alert("Reglogging user");
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	var params = {
 		'user[email]' : email,
 		'user[password]' : password
-	}
+	};
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if ( this.status != 200 ) { 
 				Ti.App.Properties.setBool('notification', true);
 			}
-			
 		}
-	}
+	};
 	xhr.onload = function() {
 		if (context == "push") {
 			retrieveAllNotifications();
 		}
-	}
+	};
 	xhr.open("POST", serverURL + "/users/sign_in");
 	xhr.send(params);	
 }
 
 function authenticate(email, password) {
-	renderLogin();
+	// renderLogin();
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	xhr.onreadystatechange = function() {
@@ -60,15 +79,14 @@ function authenticate(email, password) {
 				authSuccess(email, password);
 				Ti.App.Properties.setBool('active', true);
 			} else {
-				activityIndicator.hide();
 				alert("Invalid email/password combination.");
 			}
 		}
-	}	
+	}	;
 	var params = {
 		'user[email]' : email,
 		'user[password]' : password
-	}
+	};
 	xhr.open("POST", serverURL + "/users/sign_in");
 	xhr.send(params);
 }
@@ -88,7 +106,7 @@ function getFolders() {
 				folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id));
 			}
 			renderFolders();
-		}	
+		};
 		xhr.send();
 	}
 }
@@ -127,7 +145,7 @@ function getNotes(element) {
 			} else {
 				alert("That folder has no documents!");
 			}		
-		}	
+		};
 		xhr.send();
 	}
 }
@@ -155,6 +173,7 @@ function createNoteRow(name, docid){
 
 
 function retrieveAllNotifications() {
+	// alert("Retrieve notifications");
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		reviewing = false;
 		alert("Could not retrieve your cards. Check your Internet connection and try again.");
@@ -166,30 +185,38 @@ function retrieveAllNotifications() {
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			processNotifications(data);
-		}	
+		};
 		xhr.send();
 	}			
 }
 
 function processNotifications(data) {
+	// alert("Process notifications");
 	cards = [];
 	for (i in data.cards) {
 		Ti.API.debug("Prompt: " + data.cards[i].prompt + ", answer: " + data.cards[i].answer + ", mem: " + data.cards[i].mem);
 		cards.push(createCard(data.cards[i].prompt, data.cards[i].answer, data.cards[i].mem));
 	}
-	var new_win = Ti.UI.createWindow({
-		url : "review.js",
-		navBarHidden : true,
-		cards : cards,
-		nav : win.nav, 
-		_parent : Titanium.UI.currentWindow,
-		_context : "push",
-		orientationModes : [
-			Titanium.UI.LANDSCAPE_LEFT,
-			Titanium.UI.LANDSCAPE_RIGHT
-		]
-	}); 
-	win.nav.open(new_win);	
+	if (cards.length < 1) {
+		win.show();
+		Titanium.UI.iPhone.appBadge = 0;
+		alert("You have no pending notifications.");
+	} else {
+		var new_win = Ti.UI.createWindow({
+			url : "review.js",
+			navBarHidden : true,
+			cards : cards,
+			nav : win.nav, 
+			_parent : Titanium.UI.currentWindow,
+			_context : "push",
+			orientationModes : [
+				Titanium.UI.LANDSCAPE_LEFT,
+				Titanium.UI.LANDSCAPE_RIGHT
+			]
+		});
+		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
+		win.nav.open(new_win);			
+	}
 }
 
 
@@ -206,7 +233,7 @@ function getLines(doc, context) {
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			processData(data, context);
-		}	
+		};
 		xhr.send();
 	}		
 }
@@ -217,20 +244,31 @@ function processData(data, context) {
 		Ti.API.debug("Prompt: " + data.cards[i].prompt + ", answer: " + data.cards[i].answer + ", mem: " + data.cards[i].mem);
 		cards.push(createCard(data.cards[i].prompt, data.cards[i].answer, data.cards[i].mem));
 	}
-	var new_win = Ti.UI.createWindow({
-		url : "review.js",
-		navBarHidden : true,
-		cards : cards,
-		nav : win.nav, 
-		_parent : Titanium.UI.currentWindow,
-		_context : "normal",
-		orientationModes : [
-			Titanium.UI.LANDSCAPE_LEFT,
-			Titanium.UI.LANDSCAPE_RIGHT
-		]
-	}); 
-	win.nav.open(new_win);		
-	
+	if (cards.length < 1) {
+		reviewing = false;
+		alert('That document has no cards to review!'); 
+	} else {
+		reviewing = false;
+		var new_win = Ti.UI.createWindow({
+			url : "review.js",
+			navBarHidden : true,
+			cards : cards,
+			nav : win.nav, 
+			_parent : Titanium.UI.currentWindow,
+			_context : "normal",
+			orientationModes : [
+				Titanium.UI.LANDSCAPE_LEFT,
+				Titanium.UI.LANDSCAPE_RIGHT
+			]
+		});
+		
+		// Ti.App.fireEvent('orientationchange', {currentOrientation:Titanium.UI.LANDSCAPE_RIGHT});
+		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
+		// adjustViews();
+		// win.hide();
+		win.nav.open(new_win);			
+	}
+}
 	
 	// reviewLineIDs = []
 // 	
@@ -313,7 +351,6 @@ function processData(data, context) {
 		// reviewing = false;
 		// alert('That document has no cards to review!'); 
 	// }
-}
 
 function createCard(prompt, answer, memID) {
 	var card = new Object();
@@ -332,7 +369,7 @@ function reportGrade(memID, confidence) {
 		3 : 6, 
 		2 : 4, 
 		1 : 1	
-	}
+	};
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	xhr.open("POST", serverURL + "/mems/update/" + memID + "/" + gradeValues[confidence]  + "/0");
@@ -340,7 +377,7 @@ function reportGrade(memID, confidence) {
 	xhr.onload = function() {
 		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
 		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
-	}	
+	};
 	xhr.send();
 }
 
@@ -359,6 +396,7 @@ function signOut() {
 		
 		Ti.App.Properties.setBool('active', false);
 		// alert(Ti.App.Properties.getBool('active'));
+		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		win.nav.close(win);		
 	}
 }
@@ -372,7 +410,7 @@ function registerDevice(token) {
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {
 			Ti.API.debug('Added device with token' + token);
-		}	
+		};
 		xhr.send();
 	}
 }

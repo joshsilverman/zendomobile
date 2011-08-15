@@ -12,20 +12,21 @@ function attemptAutoLogin() {
 	}
 }
 
-function renderLogin() {
-	activityIndicator = Titanium.UI.createActivityIndicator({
-		height:50,
-		width:10,
-		top : 180,
-		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
-	});
-	activityIndicator.show();
-	win.add(activityIndicator);	
-}
+// function renderLogin() {
+	// activityIndicator = Titanium.UI.createActivityIndicator({
+		// height:50,
+		// width:10,
+		// top : 50,
+		// style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARL
+	// });
+	// activityIndicator.show();
+	// win.add(activityIndicator);	
+// }
 
 function authSuccess(email, password) {
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
+	registerDevice(Ti.App.Properties.getString("token"));
 	var newWin = Ti.UI.createWindow({
 		url : 'home.js',
 		navBarHidden : false,
@@ -35,15 +36,12 @@ function authSuccess(email, password) {
 		orientationModes : [
 			Titanium.UI.PORTRAIT,
 			Titanium.UI.UPSIDE_PORTRAIT,
-			Titanium.UI.LANDSCAPE_LEFT,
-			Titanium.UI.LANDSCAPE_RIGHT
+			// Titanium.UI.LANDSCAPE_LEFT,
+			// Titanium.UI.LANDSCAPE_RIGHT
 		]
 	});
-	//TODO
-	//Register device here!
-	// alert("Register device: " + Ti.App.Properties.getString("token"))
 	win.nav.open(newWin);	
-	activityIndicator.hide();	
+	// activityIndicator.hide();	
 }
 
 

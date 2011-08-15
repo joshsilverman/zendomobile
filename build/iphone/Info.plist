@@ -9,17 +9,17 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>default_app_logo.png</string>
+	<string>head_logo_57.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>default_app_logo.png</string>
-		<string>default_app_logo@2x.png</string>
+		<string>head_logo_57.png</string>
+		<string>head_logo_57@2x.png</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.studyegg.mobile</string>
+			<string>zen.do.mobile</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>studyegg</string>
@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.studyegg.mobile</string>
+	<string>zen.do.mobile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -38,7 +38,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1313370609</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
         <key>UISupportedInterfaceOrientations~ipad</key>

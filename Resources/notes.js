@@ -23,6 +23,7 @@ function renderNavBar() {
 	});
 	
 	back.addEventListener('click', function() {
+		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		win.nav.close(win);
 		
 		// Can be uncommented to refresh each load
@@ -39,7 +40,7 @@ function renderNavBar() {
 		title:'Review'
 	});
 
-	review.addEventListener('click', function() {		
+	review.addEventListener('click', function() {	
 		var reviewList = [];
 		for ( i in notesRows ) {
 			if ( notesRows[i].children[0].status == 'checked' ) {

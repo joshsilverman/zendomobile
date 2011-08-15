@@ -17,13 +17,6 @@ function registerForPush() {
 		],
 		success : function(e) {
 			Ti.App.Properties.setString("token", e.deviceToken);
-			alert("Stored device token: " + Ti.App.Properties.getString("token"));
-			//add a device for the user
-		
-			//var deviceToken = e.deviceToken;
-			//alert("Push notification device token is: " + deviceToken);
-			//alert("Push notification types: " + Titanium.Network.remoteNotificationTypes);
-			//alert("Push notification enabled: " + Titanium.Network.remoteNotificationsEnabled);
 		},
 		error : function(e) {
 			alert("Error during registration: " + e.error);
@@ -38,12 +31,13 @@ function registerForPush() {
 				});
 				reviewAlert.addEventListener('click', function(f) {
 					if (f.index == 1) { 
+						win.hide();
 						retrieveAllNotifications(); 
 					};
-				})
+				});
 				reviewAlert.show();		
 			} else {
-				checkLoggedIn("push");
+				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
 		}
 	});	
@@ -51,12 +45,13 @@ function registerForPush() {
 
 registerForPush();
 
-Ti.Gesture.addEventListener('orientationchange', function(e){
-    currentOrientation = Ti.Gesture.orientation; 
-    adjustViews();
-});
+// Ti.Gesture.addEventListener('orientationchange', function(e){
+    // currentOrientation = Ti.Gesture.orientation; 
+    // // adjustViews();
+// });
 
 win.addEventListener('focus', function() {
+	// alert("Focus");
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
 	} else {
@@ -69,15 +64,16 @@ win.addEventListener('focus', function() {
 });
 
 Ti.App.addEventListener('resume', function() { 
-	var check = function() {
-		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-			alert('Could not reach your account. Check your internet connection.');
-		} else {
-			checkLoggedIn("normal"); 
-			// reLogUser();
-		}	
-	}
-    setTimeout(check, 2000);
+	// alert("Resume");
+	// var check = function() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert('Could not reach your account. Check your internet connection.');
+	} else {
+		// checkLoggedIn("normal"); 
+		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
+	}	
+// };
+    // setTimeout(check, 2000);
 });
 
 Ti.App.addEventListener('resumed', function(e) { 
@@ -87,7 +83,7 @@ Ti.App.addEventListener('resumed', function(e) {
 Ti.App.addEventListener('pause', function(e) { 
 	Ti.App.Properties.setBool('foreground', false);
 });
-
+	
 function render() {
 	emailField = Ti.UI.createTextField({
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
@@ -162,7 +158,7 @@ function render() {
 	
 	logo = Ti.UI.createImageView({
 		image : 'images/studyegg_logo.jpg',
-		height : 90,
+		height : 130,
 		top : 55
 	});
 	
@@ -196,8 +192,6 @@ function adjustViews() {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard hidden, portrait mode");
 			logo.top = 55;
-			// logo.height = 80,
-			//logo.width = 200,
 			logo.show();
 			emailField.top = 250;
 			passwordField.top = 300;
@@ -207,10 +201,7 @@ function adjustViews() {
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");
-			//logo.height = 100;
 			logo.top = 20;
-			// logo.height = 80;
-			//logo.width = 150;
 			logo.show();
 			emailField.top = 130;
 			passwordField.top = 180;

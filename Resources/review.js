@@ -5,10 +5,8 @@ var win = Ti.UI.currentWindow;
 	// Titanium.UI.LANDSCAPE_LEFT,
 	// Titanium.UI.LANDSCAPE_RIGHT	
 // ];
-
 Titanium.UI.setBackgroundColor('#fff');
 // Titanium.UI.setBackgroundColor('#171717');
-
 Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
 
@@ -17,8 +15,11 @@ buttonRightPad = 10;
 buttonLeftPad = 10;
 buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
 cardLeftPad = 10;
-selectedColor = '3B5FD9'
-unselectedColor = 'gray'
+selectedColor = '3B5FD9';
+unselectedColor = 'gray';
+
+// alert("Review");
+win._parent.hide();
 
 cards = win.cards;
 cardViews = [];
@@ -48,7 +49,7 @@ function initialize(cardViews) {
 		top : buttonTopPad, 
 		// backgroundImage : "images/got_it.png",
 		color : unselectedColor
-	})
+	});
 	button2 = Ti.UI.createButton({
 		title : 'Kinda',
 		images : { "unselected" : "images/kinda.png", "selected" : 'images/kinda_selected.png'},
@@ -59,7 +60,7 @@ function initialize(cardViews) {
 		top : ((buttonTopPad * 2) + buttonHeight), 
 		// backgroundImage : "images/kinda.png",
 		color : unselectedColor
-	})
+	});
 	button3 = Ti.UI.createButton({
 		title : 'Barely',
 		images : { "unselected" : "images/barely.png", "selected" : 'images/barely_selected.png'},
@@ -70,7 +71,7 @@ function initialize(cardViews) {
 		top : ((buttonTopPad * 3) + (buttonHeight * 2)), 
 		// backgroundImage : "images/barely.png",
 		color : unselectedColor
-	})
+	});
 	button4 = Ti.UI.createButton({
 		title : 'No clue',
 		images : { "unselected" : "images/no_clue.png", "selected" : 'images/no_clue_selected.png'},
@@ -81,9 +82,9 @@ function initialize(cardViews) {
 		top : ((buttonTopPad * 4) + (buttonHeight * 3)), 
 		// backgroundImage : "images/no_clue.png",
 		color : unselectedColor
-	})
+	});
 	
-	buttons = [button1, button2, button3, button4];
+	buttons = [button1, button2, button3, button4]; //ADD BUTTON 4 BACK ON HERE
 	for (i in buttons) { 
 		// buttons[i].hide();
 		// buttons[i].opacity = 0;
@@ -97,11 +98,13 @@ function initialize(cardViews) {
 		width : 25, 
 		top : 10,
 		left : cardLeftPad
-	})
+	});
 	
 	closeButton.addEventListener('click', function() {
+		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		win.hide();
 		win.nav.close(win);
+		win._parent.show();
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({
@@ -182,7 +185,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		top : -180,
 		font:{fontSize:16},
 		color : 'gray'
-	})
+	});
 	
 	prompt.show();	
 	answer.hide();
@@ -262,8 +265,8 @@ function buttonClicked(button) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
 		if (win._context == "push") {
-			// win.close();
-			// win.nav.show(win);
+			win._parent.show();
+			Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 			win.nav.close(win);
 		} else {
 			var newWin = Ti.UI.createWindow({
@@ -275,10 +278,8 @@ function buttonClicked(button) {
 				folder : win.folder,
 				_parent: Titanium.UI.currentWindow
 			});	
-			//TODO this is not ideal!
 			win.hide();
-			// win.close();
-			// win.nav.show(win);
+			win._parent.show();
 			win.nav.open(newWin);			
 		}
 	}
