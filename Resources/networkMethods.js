@@ -201,7 +201,6 @@ function getPublicDocs(element){
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
-			alert(foldersData);
 			for ( i in foldersData ) {
 				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
 			}	
@@ -394,11 +393,7 @@ function processData(data, context) {
 				Titanium.UI.LANDSCAPE_RIGHT
 			]
 		});
-		
-		// Ti.App.fireEvent('orientationchange', {currentOrientation:Titanium.UI.LANDSCAPE_RIGHT});
 		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
-		// adjustViews();
-		// win.hide();
 		win.nav.open(new_win);			
 	}
 }

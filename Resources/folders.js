@@ -51,8 +51,11 @@ function renderFolders() {
 	});
 	
 	lists.addEventListener('click', function(e) {
-		alert(e.public_folder);
-		notesData = getNotes(e);
+		if (e.source.public_folder == true){
+			getPublicDocs(e);
+		} else {
+			notesData = getNotes(e);	
+		}	
 	});
 
 	win.add(lists);
