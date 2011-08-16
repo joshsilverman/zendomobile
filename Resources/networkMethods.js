@@ -187,6 +187,42 @@ function getLines(doc, context) {
 	}		
 }
 
+function getPublicDocs(element){
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not retrieve these notes. Check your Internet connection and try again.");
+	} else {
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/documents/get_public_documents");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			foldersData = eval(this.responseText);
+			alert(foldersData);
+			for ( i in foldersData ) {
+				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+			}	
+			if ( notesRows.length >= 1 ) {
+				var newWin = Ti.UI.createWindow({
+					url : "notes.js",
+					navBarHidden : false,
+					selection : element,
+					barColor : '#000',
+					data : notesRows,
+					nav : win.nav,
+					_parent: Titanium.UI.currentWindow,
+					exitOnClose: true
+				});
+				win.nav.open(newWin);
+			} else {
+				alert("That folder has no documents!");
+			}		
+		};
+		xhr.send();
+	}		
+}
+
 
 // Notifications
 function alertNotifications(){
