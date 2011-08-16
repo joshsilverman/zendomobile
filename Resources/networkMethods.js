@@ -232,22 +232,7 @@ function updateCache() {
 	xhr.open("GET", serverURL + "/tags/get_tags_json");//
 	xhr.setRequestHeader('Content-Type', 'text/json');
 	xhr.onload = function() {
-		rawData = eval(this.responseText);
-		// folders = [];
-		// notes = [];
-		// for (i in rawData) {
-			// folders.push({"name" : rawData[i].tag.name,
-						  // "tag_id" : rawData[i].tag.id});
-			// notes.push({"folder" : rawData[i].tag.name, 
-						// "documents" : []});		
-			// for (j in rawData[i].tag.documents) {
-				// notes
-				// notes[rawData[i].tag.name].push(rawData[i].tag.documents[j].name);
-			// }
-		// }
-		// Ti.App.folders = folders;
-		// Ti.App.notes = notes;
-		Ti.App.data = rawData
+		Ti.App.data = eval(this.responseText);
 	};
 
 	xhr.send();
