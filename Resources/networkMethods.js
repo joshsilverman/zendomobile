@@ -84,8 +84,9 @@ function getFolders() {
 	} else {
 		if (Ti.App.data != null) {	
 			for (i in Ti.App.data) {
-				folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id));
+				folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id, false));
 			}
+			folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
 			renderFolders();			
 		} else {
 			xhr = Ti.Network.createHTTPClient();
@@ -96,8 +97,9 @@ function getFolders() {
 			xhr.onload = function() {
 				foldersData = eval(this.responseText);	
 				for (i in foldersData) {
-					folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id));
+					folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id, false));
 				}
+				folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
 				renderFolders();
 			};
 			xhr.send();	

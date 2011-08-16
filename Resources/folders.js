@@ -21,7 +21,7 @@ function renderNavBar() {
 	
 }
 
-function createFolderRow(name, id){
+function createFolderRow(name, id, public_folder){
 	var row = Ti.UI.createTableViewRow({id : id}); 
 	var image = Ti.UI.createImageView({
 		image:'images/folder.png', 
@@ -33,6 +33,7 @@ function createFolderRow(name, id){
 		text : name, 
 		left : 70
 	});
+	label.public_folder = public_folder;
 	row.add(image);
 	row.add(label);
 	return row;
@@ -50,6 +51,7 @@ function renderFolders() {
 	});
 	
 	lists.addEventListener('click', function(e) {
+		alert(e.public_folder);
 		notesData = getNotes(e);
 	});
 
