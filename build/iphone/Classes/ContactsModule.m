@@ -379,17 +379,13 @@ MAKE_SYSTEM_PROP(CONTACTS_SORT_LAST_NAME,kABPersonSortByLastName);
 		ABRecordID id_ = ABRecordGetRecordID(person);
 		TiContactsPerson* personObject = [[[TiContactsPerson alloc] _initWithPageContext:[self executionContext] recordId:id_ module:self] autorelease];
 		NSString* propertyName = nil;
-		id value = [NSNull null];
+		id value = nil;
 		id label = [NSNull null];
 		if (identifier == kABMultiValueInvalidIdentifier) { 
 			propertyName = [[[TiContactsPerson contactProperties] allKeysForObject:[NSNumber numberWithInt:property]] objectAtIndex:0];
-            
-            // Contacts is poorly-designed enough that we should worry about receiving NULL values for properties which are actually assigned.
 			CFTypeRef val = ABRecordCopyValue(person, property);
-            if (val != NULL) {
-                value = [[(id)val retain] autorelease]; // Force toll-free bridging & autorelease
-                CFRelease(val);
-            }
+			value = [[(id)val retain] autorelease]; // Force toll-free bridging & autorelease
+			CFRelease(val);
 		}
 		else {
 			propertyName = [[[TiContactsPerson multiValueProperties] allKeysForObject:[NSNumber numberWithInt:property]] objectAtIndex:0];
@@ -397,10 +393,8 @@ MAKE_SYSTEM_PROP(CONTACTS_SORT_LAST_NAME,kABPersonSortByLastName);
 			CFIndex index = ABMultiValueGetIndexForIdentifier(multival, identifier);
 
 			CFTypeRef val = ABMultiValueCopyValueAtIndex(multival, index);
-            if (val != NULL) {
-                value = [[(id)val retain] autorelease]; // Force toll-free bridging & autorelease
-                CFRelease(val);
-            }
+			value = [[(id)val retain] autorelease]; // Force toll-free bridging & autorelease
+			CFRelease(val);
 			
 			CFStringRef CFlabel = ABMultiValueCopyLabelAtIndex(multival, index);
             NSArray* labelKeys = [[TiContactsPerson multiValueLabels] allKeysForObject:(NSString*)CFlabel];
@@ -413,8 +407,7 @@ MAKE_SYSTEM_PROP(CONTACTS_SORT_LAST_NAME,kABPersonSortByLastName);
                 if (CFlabel != NULL) {
                     label = [NSString stringWithString:(NSString*)CFlabel];
                 }
-                // There may also be cases where we get a property from the system that we can't handle, because it's undocumented or not in the map.
-                else if (propertyName != nil) {
+                else {
                     label = [NSString stringWithString:propertyName];
                 }
             }

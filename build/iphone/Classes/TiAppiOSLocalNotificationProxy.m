@@ -19,14 +19,15 @@
 
 -(void)dealloc
 {
-	[self cancel:nil];
+	[self performSelectorOnMainThread:@selector(cancel:) withObject:nil waitUntilDone:NO];
 	RELEASE_TO_NIL(notification);
 	[super dealloc];
 }
 
 -(void)cancel:(id)args
 {
-	[[UIApplication sharedApplication] performSelectorOnMainThread:@selector(cancelLocalNotification:) withObject:notification waitUntilDone:NO];
+	ENSURE_UI_THREAD(cancel,args);
+	[[UIApplication sharedApplication] cancelLocalNotification:notification];
 }
 
 @end

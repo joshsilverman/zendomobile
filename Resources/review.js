@@ -1,5 +1,8 @@
 // Ti.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
 var win = Ti.UI.currentWindow;
+win.name = "Review";
+Ti.App.current_win = win;
+// alert(Ti.App.current_win.name);
 // alert(win.reviewContext);
 // Titanium.UI.currentWindow.orientationModes = [
 	// Titanium.UI.LANDSCAPE_LEFT,
@@ -18,7 +21,7 @@ cardLeftPad = 10;
 selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
-// alert("Review");
+// win.nav.hide(win._parent);
 win._parent.hide();
 
 cards = win.cards;
@@ -101,8 +104,11 @@ function initialize(cardViews) {
 	});
 	
 	closeButton.addEventListener('click', function() {
-		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
+		if (win._parent.name != "Review") {
+			Titanium.UI.orientation = Titanium.UI.PORTRAIT;	
+		}
 		win.hide();
+		Ti.App.current_win = win._parent;
 		win.nav.close(win);
 		win._parent.show();
 	});
@@ -266,7 +272,10 @@ function buttonClicked(button) {
 	} else {
 		if (win._context == "push") {
 			win._parent.show();
-			Titanium.UI.orientation = Titanium.UI.PORTRAIT;
+			if (win._parent.name != "Review") {
+				Titanium.UI.orientation = Titanium.UI.PORTRAIT;	
+			}
+			Ti.App.current_win = win._parent;
 			win.nav.close(win);
 		} else {
 			var newWin = Ti.UI.createWindow({

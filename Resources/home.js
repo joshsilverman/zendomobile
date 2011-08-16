@@ -1,4 +1,7 @@
 var win = Ti.UI.currentWindow;
+win.name = "Home";
+Ti.App.current_win = win;
+// alert(Ti.App.current_win.name);
 Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
@@ -55,6 +58,7 @@ var notesButton = Ti.UI.createImageView({
 });
 
 notesButton.addEventListener( 'click', function() {
+	// alert(Ti.App.directory);
 	var newWin = Ti.UI.createWindow({
 		url : 'folders.js',
 		navBarHidden : false,

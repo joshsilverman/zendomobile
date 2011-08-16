@@ -1,52 +1,38 @@
 // var serverURL = 'http://localhost:3000';
 // var serverURL = 'http://192.168.2.20:3000';
-// var serverURL = 'http://192.168.3.148:3000';
+var serverURL = 'http://192.168.3.148:3000';
 // var serverURL = 'http://ec2-204-236-227-202.compute-1.amazonaws.com'
 // var serverURL = 'http://192.168.0.101:3000';
-var serverURL = 'http://studyegg.com'
+// var serverURL = 'http://studyegg.com'
 
 Ti.include('helperMethods.js');
-// 
-// function checkLoggedIn(context) {
-	// xhr = Ti.Network.createHTTPClient();
-	// xhr.setTimeout(1000000);
-	// xhr.onreadystatechange = function() {
-		// if (this.readyState == 4) {
-			// if ( this.status != 200 ) { 
-				// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), context); 
-			// } else {
-				// if (context == "push") {
-					// retrieveAllNotifications();
-				// }
-			// }
-// 			
-		// }
-	// };
-	// xhr.open("GET", serverURL + "/tags/get_tags_json");
-	// xhr.setRequestHeader('Content-Type', 'text/json');
-	// xhr.send();
-// }
 
-function alertNotifications(){
-	// alert("Alert notifications");
-	var reviewAlert = Ti.UI.createAlertDialog({
-	    title : 'You have new cards to review!',
-	    message : "Go to them now?",
-	    buttonNames : ["Later", "Review"],
-	    cancel : 0
-	});
-	reviewAlert.addEventListener('click', function(f) {
-		if (f.index == 1) { 
-			// win.hide();
-			retrieveAllNotifications();
-		};
-	});
-	reviewAlert.show();		
+
+// Authentication
+function authenticate(email, password) {
+	// renderLogin();
+	xhr = Ti.Network.createHTTPClient();
+	xhr.setTimeout(1000000);
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			if (this.status == 200) {
+				authSuccess(email, password);
+				updateCache();
+				Ti.App.Properties.setBool('active', true);
+			} else {
+				alert("Invalid email/password combination.");
+			}
+		}
+	}	;
+	var params = {
+		'user[email]' : email,
+		'user[password]' : password
+	};
+	xhr.open("POST", serverURL + "/users/sign_in");
+	xhr.send(params);
 }
 
-
 function reLogUser(email, password, context) {
-	// alert("Reglogging user");
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	var params = {
@@ -69,64 +55,66 @@ function reLogUser(email, password, context) {
 	xhr.send(params);	
 }
 
-function authenticate(email, password) {
-	// renderLogin();
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4) {
-			if (this.status == 200) {
-				authSuccess(email, password);
-				Ti.App.Properties.setBool('active', true);
-			} else {
-				alert("Invalid email/password combination.");
-			}
-		}
-	}	;
-	var params = {
-		'user[email]' : email,
-		'user[password]' : password
-	};
-	xhr.open("POST", serverURL + "/users/sign_in");
-	xhr.send(params);
+function signOut() {
+	// checkLoggedIn();
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not log you out. Check your Internet connection and try again.");
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.open("GET", serverURL + "/users/sign_out");
+		xhr.setRequestHeader('Content-Type', 'text/html');
+		xhr.send();
+		
+		Ti.App.Properties.removeProperty('email');
+		Ti.App.Properties.removeProperty('password');
+		
+		Ti.App.Properties.setBool('active', false);
+		// alert(Ti.App.Properties.getBool('active'));
+		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
+		Ti.App.current_win = win._parent;
+		win.nav.close(win);		
+	}
 }
 
+
+// Data
 function getFolders() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not retrieve your folders. Check your Internet connection and try again.");
 	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
-		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
-		xhr.open("GET", serverURL + "/tags/get_tags_json");//
-		xhr.setRequestHeader('Content-Type', 'text/json');
-		xhr.onload = function() {
-			foldersData = eval(this.responseText);	
-			for (i in foldersData) {
-				folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id));
+		if (Ti.App.data != null) {	
+			for (i in Ti.App.data) {
+				folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id));
 			}
-			renderFolders();
-		};
-		xhr.send();
+			renderFolders();			
+		} else {
+			xhr = Ti.Network.createHTTPClient();
+			xhr.setTimeout(1000000);
+			// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
+			xhr.open("GET", serverURL + "/tags/get_tags_json");//
+			xhr.setRequestHeader('Content-Type', 'text/json');
+			xhr.onload = function() {
+				foldersData = eval(this.responseText);	
+				for (i in foldersData) {
+					folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id));
+				}
+				renderFolders();
+			};
+			xhr.send();	
+		}
 	}
 }
 
-function getNotes(element) {
+function getNotes(element) {	
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not retrieve your notes. Check your Internet connection and try again.");
 	} else {
 		notesRows = [];
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
-		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
-		xhr.open("GET", serverURL + "/tags/get_tags_json");
-		xhr.setRequestHeader('Content-Type', 'text/json');
-		xhr.onload = function() {
-			foldersData = eval(this.responseText);
-			for ( i in foldersData ) {
-				if (foldersData[i].tag.id == element.row.id) {
-					for (n in foldersData[i].tag.documents) {
-						notesRows.push(createNoteRow(foldersData[i].tag.documents[n].name, foldersData[i].tag.documents[n].id));
+		if (Ti.App.data != null) {
+			for ( i in Ti.App.data ) {
+				if (Ti.App.data[i].tag.id == element.row.id) {
+					for (n in Ti.App.data[i].tag.documents) {
+						notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id));
 					}
 				}
 			}	
@@ -144,12 +132,162 @@ function getNotes(element) {
 				win.nav.open(newWin);
 			} else {
 				alert("That folder has no documents!");
-			}		
+			}				
+		} else {
+			xhr = Ti.Network.createHTTPClient();
+			xhr.setTimeout(1000000);
+			// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
+			xhr.open("GET", serverURL + "/tags/get_tags_json");
+			xhr.setRequestHeader('Content-Type', 'text/json');
+			xhr.onload = function() {
+				foldersData = eval(this.responseText);
+				for ( i in foldersData ) {
+					if (foldersData[i].tag.id == element.row.id) {
+						for (n in foldersData[i].tag.documents) {
+							notesRows.push(createNoteRow(foldersData[i].tag.documents[n].name, foldersData[i].tag.documents[n].id));
+						}
+					}
+				}	
+				if ( notesRows.length >= 1 ) {
+					var newWin = Ti.UI.createWindow({
+						url : "notes.js",
+						navBarHidden : false,
+						selection : element,
+						barColor : '#000',
+						data : notesRows,
+						nav : win.nav,
+						_parent: Titanium.UI.currentWindow,
+						exitOnClose: true
+					});
+					win.nav.open(newWin);
+				} else {
+					alert("That folder has no documents!");
+				}		
+			};
+			xhr.send();			
+		}
+	}
+}
+
+function getLines(doc, context) {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not retrieve your cards. Check your Internet connection and try again.");
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		// xhr.open("GET", serverURL + "/review/" + doc);
+		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			data = JSON.parse(this.responseText);
+			processData(data, context);
+		};
+		xhr.send();
+	}		
+}
+
+
+// Notifications
+function alertNotifications(){
+	// alert("Alert notifications");
+	var reviewAlert = Ti.UI.createAlertDialog({
+	    title : 'You have new cards to review!',
+	    message : "Go to them now?",
+	    buttonNames : ["Later", "Review"],
+	    cancel : 0
+	});
+	reviewAlert.addEventListener('click', function(f) {
+		if (f.index == 1) { 
+			// win.hide();
+			retrieveAllNotifications();
+		};
+	});
+	reviewAlert.show();		
+}
+
+function retrieveAllNotifications() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not retrieve your cards. Check your Internet connection and try again.");
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/users/retrieve_notifications");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			data = JSON.parse(this.responseText);
+			processNotifications(data);
+		};
+		xhr.send();
+	}			
+}
+
+
+// Misc Network
+function updateCache() {
+	xhr = Ti.Network.createHTTPClient();
+	xhr.setTimeout(1000000);
+	// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
+	xhr.open("GET", serverURL + "/tags/get_tags_json");//
+	xhr.setRequestHeader('Content-Type', 'text/json');
+	xhr.onload = function() {
+		rawData = eval(this.responseText);
+		// folders = [];
+		// notes = [];
+		// for (i in rawData) {
+			// folders.push({"name" : rawData[i].tag.name,
+						  // "tag_id" : rawData[i].tag.id});
+			// notes.push({"folder" : rawData[i].tag.name, 
+						// "documents" : []});		
+			// for (j in rawData[i].tag.documents) {
+				// notes
+				// notes[rawData[i].tag.name].push(rawData[i].tag.documents[j].name);
+			// }
+		// }
+		// Ti.App.folders = folders;
+		// Ti.App.notes = notes;
+		Ti.App.data = rawData
+	};
+
+	xhr.send();
+}
+
+function reportGrade(memID, confidence) {
+	//Should confidence be converted using this?
+	var gradeValues = {
+		4 : 9,
+		3 : 6, 
+		2 : 4, 
+		1 : 1	
+	};
+	xhr = Ti.Network.createHTTPClient();
+	xhr.setTimeout(1000000);
+	xhr.open("POST", serverURL + "/mems/update/" + memID + "/" + gradeValues[confidence]  + "/0");
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
+		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
+	};
+	xhr.send();
+}
+
+function registerDevice(token) {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not register your device with StudyEgg.");
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.open("POST", serverURL + "/users/add_device/" + token);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			Ti.API.debug('Added device with token' + token);
 		};
 		xhr.send();
 	}
 }
 
+
+// Utility
 function createNoteRow(name, docid){
 	var row = Ti.UI.createTableViewRow({ id : docid}); 
     var image = Ti.UI.createImageView({
@@ -171,27 +309,17 @@ function createNoteRow(name, docid){
 	return row;
 }
 
-
-function retrieveAllNotifications() {
-	// alert("Retrieve notifications");
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		reviewing = false;
-		alert("Could not retrieve your cards. Check your Internet connection and try again.");
-	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
-		xhr.open("GET", serverURL + "/users/retrieve_notifications");
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-			data = JSON.parse(this.responseText);
-			processNotifications(data);
-		};
-		xhr.send();
-	}			
+function createCard(prompt, answer, memID) {
+	var card = new Object();
+	card.prompt = prompt;
+	card.answer = answer;
+	card.flipped = false;
+	card.grade = 0;
+	card.memID = memID;
+	return card;
 }
 
 function processNotifications(data) {
-	// alert("Process notifications");
 	cards = [];
 	for (i in data.cards) {
 		Ti.API.debug("Prompt: " + data.cards[i].prompt + ", answer: " + data.cards[i].answer + ", mem: " + data.cards[i].mem);
@@ -202,12 +330,13 @@ function processNotifications(data) {
 		Titanium.UI.iPhone.appBadge = 0;
 		alert("You have no pending notifications.");
 	} else {
+		// alert("Bro");
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
 			cards : cards,
-			nav : win.nav, 
-			_parent : Titanium.UI.currentWindow,
+			nav : Ti.App.current_win.nav, 
+			_parent : Ti.App.current_win,
 			_context : "push",
 			orientationModes : [
 				Titanium.UI.LANDSCAPE_LEFT,
@@ -215,27 +344,8 @@ function processNotifications(data) {
 			]
 		});
 		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
-		win.nav.open(new_win);			
+		Ti.App.current_win.nav.open(new_win);			
 	}
-}
-
-
-function getLines(doc, context) {
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		reviewing = false;
-		alert("Could not retrieve your cards. Check your Internet connection and try again.");
-	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
-		// xhr.open("GET", serverURL + "/review/" + doc);
-		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-			data = JSON.parse(this.responseText);
-			processData(data, context);
-		};
-		xhr.send();
-	}		
 }
 
 function processData(data, context) {
@@ -269,6 +379,11 @@ function processData(data, context) {
 		win.nav.open(new_win);			
 	}
 }
+	
+	
+	
+	
+	
 	
 	// reviewLineIDs = []
 // 	
@@ -351,66 +466,3 @@ function processData(data, context) {
 		// reviewing = false;
 		// alert('That document has no cards to review!'); 
 	// }
-
-function createCard(prompt, answer, memID) {
-	var card = new Object();
-	card.prompt = prompt;
-	card.answer = answer;
-	card.flipped = false;
-	card.grade = 0;
-	card.memID = memID;
-	return card;
-}
-
-function reportGrade(memID, confidence) {
-	//Should confidence be converted using this?
-	var gradeValues = {
-		4 : 9,
-		3 : 6, 
-		2 : 4, 
-		1 : 1	
-	};
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
-	xhr.open("POST", serverURL + "/mems/update/" + memID + "/" + gradeValues[confidence]  + "/0");
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.onload = function() {
-		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
-		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
-	};
-	xhr.send();
-}
-
-function signOut() {
-	// checkLoggedIn();
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		alert("Could not log you out. Check your Internet connection and try again.");
-	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.open("GET", serverURL + "/users/sign_out");
-		xhr.setRequestHeader('Content-Type', 'text/html');
-		xhr.send();
-		
-		Ti.App.Properties.removeProperty('email');
-		Ti.App.Properties.removeProperty('password');
-		
-		Ti.App.Properties.setBool('active', false);
-		// alert(Ti.App.Properties.getBool('active'));
-		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
-		win.nav.close(win);		
-	}
-}
-
-function registerDevice(token) {
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		alert("Could not register your device with StudyEgg.");
-	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.open("POST", serverURL + "/users/add_device/" + token);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onload = function() {
-			Ti.API.debug('Added device with token' + token);
-		};
-		xhr.send();
-	}
-}

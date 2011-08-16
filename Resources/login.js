@@ -1,5 +1,8 @@
 Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
+win.name = "Login";
+Ti.App.current_win = win;
+
 Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 var currentOrientation = Titanium.UI.PORTRAIT;
 var focused = false;
@@ -46,8 +49,7 @@ function registerForPush() {
 registerForPush();
 
 // Ti.Gesture.addEventListener('orientationchange', function(e){
-    // currentOrientation = Ti.Gesture.orientation; 
-    // // adjustViews();
+	// retrieveAllNotifications();
 // });
 
 win.addEventListener('focus', function() {

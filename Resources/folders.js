@@ -1,6 +1,8 @@
 Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
-
+win.name = "Folders";
+Ti.App.current_win = win;
+// alert(Ti.App.current_win.name);
 renderNavBar();
 Ti.include('networkMethods.js');
 
@@ -11,7 +13,10 @@ function initialize() {
 
 function renderNavBar() {
 	var backButton = Ti.UI.createButton({ title : 'Home' });
-	backButton.addEventListener('click', function(){ win.nav.close(win); });
+	backButton.addEventListener('click', function(){ 
+		Ti.App.current_win = win._parent;
+		win.nav.close(win); 
+	});
 	win.leftNavButton = backButton;	
 	
 }

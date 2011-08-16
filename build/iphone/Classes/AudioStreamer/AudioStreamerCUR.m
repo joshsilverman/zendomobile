@@ -193,12 +193,6 @@ void ASReadStreamCallBackCUR
 @synthesize bitRate;
 @synthesize httpHeaders;
 @synthesize delegate;
-@synthesize bufferSize;
-
--(NSUInteger)bufferSize
-{
-    return (bufferSize) ? bufferSize : kAQDefaultBufSize;
-}
 
 //
 // initWithURL
@@ -211,7 +205,6 @@ void ASReadStreamCallBackCUR
 	if (self != nil)
 	{
 		url = [aURL retain];
-        bufferSize = 0;
 	}
 	return self;
 }
@@ -1160,7 +1153,7 @@ cleanup:
 			}
 		}
 		
-		UInt8 bytes[[self bufferSize]];
+		UInt8 bytes[kAQDefaultBufSize];
 		CFIndex length;
 		@synchronized(self)
 		{
@@ -1172,7 +1165,7 @@ cleanup:
 			//
 			// Read the bytes from the stream
 			//
-			length = CFReadStreamRead(stream, bytes, [self bufferSize]);
+			length = CFReadStreamRead(stream, bytes, kAQDefaultBufSize);
 			
 			if (length == -1)
 			{
@@ -1342,7 +1335,7 @@ cleanup:
 		if (err || packetBufferSize == 0)
 		{
 			// No packet size available, just use the default
-			packetBufferSize = [self bufferSize];
+			packetBufferSize = kAQDefaultBufSize;
 		}
 	}
 
@@ -1628,7 +1621,7 @@ cleanup:
 		while (inNumberBytes)
 		{
 			// if the space remaining in the buffer is not enough for this packet, then enqueue the buffer.
-			size_t bufSpaceRemaining = [self bufferSize] - bytesFilled;
+			size_t bufSpaceRemaining = kAQDefaultBufSize - bytesFilled;
 			if (bufSpaceRemaining < inNumberBytes)
 			{
 				[self enqueueBuffer];
@@ -1643,7 +1636,7 @@ cleanup:
 					return;
 				}
 				
-				bufSpaceRemaining = [self bufferSize] - bytesFilled;
+				bufSpaceRemaining = kAQDefaultBufSize - bytesFilled;
 				size_t copySize;
 				if (bufSpaceRemaining < inNumberBytes)
 				{

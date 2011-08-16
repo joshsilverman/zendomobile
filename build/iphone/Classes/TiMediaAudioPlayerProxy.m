@@ -74,7 +74,6 @@
 		}
 		player = [[AudioStreamer alloc] initWithURL:url];
 		[player setDelegate:self];
-        [player setBufferSize:bufferSize];
 		
 		if (progress)
 		{
@@ -167,19 +166,6 @@ PLAYER_PROP_BOOL(paused,isPaused);
 PLAYER_PROP_DOUBLE(bitRate,bitRate);
 PLAYER_PROP_DOUBLE(progress,progress);
 PLAYER_PROP_DOUBLE(state,state);
-
--(void)setBufferSize:(NSNumber*)bufferSize_
-{
-    bufferSize = [bufferSize_ unsignedIntegerValue];
-    if (player != nil) {
-        [player setBufferSize:bufferSize];
-    }
-}
-
--(NSNumber*)bufferSize
-{
-    return [NSNumber numberWithUnsignedInteger:((bufferSize) ? bufferSize : kAQDefaultBufSize)];
-}
 
 -(void)setUrl:(id)args
 {

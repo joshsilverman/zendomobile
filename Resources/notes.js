@@ -1,7 +1,9 @@
 Ti.UI.setBackgroundColor('#fff');
 // Ti.UI.orientation = Ti.UI.PORTRAIT;
 var win = Ti.UI.currentWindow;
-
+win.name = "Notes";
+Ti.App.current_win = win;
+// alert(Ti.App.current_win.name);
 var reviewing = false;
 // win.orientationModes = [
     // Titanium.UI.PORTRAIT,
@@ -24,6 +26,7 @@ function renderNavBar() {
 	
 	back.addEventListener('click', function() {
 		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
+		Ti.App.current_win = win._parent;
 		win.nav.close(win);
 		
 		// Can be uncommented to refresh each load

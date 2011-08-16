@@ -17,10 +17,7 @@
 	NSString *name;
 	NSString *value;
 	GDataXMLElement *owner;
-	GDataXMLDocument *document;
 }
-
-@property(nonatomic,retain)	GDataXMLDocument *document;
 
 @property(nonatomic,readonly) id name;
 @property(nonatomic,readonly) id value;
