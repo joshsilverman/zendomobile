@@ -76,6 +76,26 @@ function signOut() {
 	}
 }
 
+function signUp(email, password) {
+	xhr = Ti.Network.createHTTPClient();
+	xhr.setTimeout(1000000);
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			if (this.status == 200) {
+				authenticate(email, password);
+			} else {
+				alert("Could not create your account... Did you enter your email address correctly?");
+			}
+		}
+	};
+	var params = {
+		'user[email]' : email,
+		'user[password]' : password
+	};
+	xhr.open("POST", serverURL + "/users");
+	xhr.send(params);	
+}
+
 
 // Data
 function getFolders() {
@@ -270,9 +290,17 @@ function updateCache() {
 	xhr.setRequestHeader('Content-Type', 'text/json');
 	xhr.onload = function() {
 		Ti.App.data = eval(this.responseText);
+		// cacheCards();
 	};
-
 	xhr.send();
+}
+
+function cacheCards() {
+	for (i in Ti.App.data) {
+		for (j in Ti.App.data[i].tag.documents) {
+			getLines(Ti.App.data[i].tag.documents[j].id, "cache");
+		}
+	}
 }
 
 function reportGrade(memID, confidence) {
@@ -375,6 +403,10 @@ function processData(data, context) {
 	for (i in data.cards) {
 		Ti.API.debug("Prompt: " + data.cards[i].prompt + ", answer: " + data.cards[i].answer + ", mem: " + data.cards[i].mem);
 		cards.push(createCard(data.cards[i].prompt, data.cards[i].answer, data.cards[i].mem));
+		if (context == "cache") {
+			return;
+			// alert("Caching doc!");
+		}
 	}
 	if (cards.length < 1) {
 		reviewing = false;

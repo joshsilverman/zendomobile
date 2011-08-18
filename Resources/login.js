@@ -136,7 +136,7 @@ function render() {
 		title : 'Sign In',
 		width : 100,
 		height : 40, 
-		bottom : 50
+		bottom : 70
 	});
 	
 	confirmButton.addEventListener('click', function(){
@@ -149,7 +149,25 @@ function render() {
 			passwordField.value = "";
 		}		
 	});
+
+	signUpButton = Ti.UI.createButton({
+		title : 'Sign Up',
+		width : 100,
+		height : 40, 
+		bottom : 20
+	});
 	
+	signUpButton.addEventListener('click', function(){
+		var newWin = Ti.UI.createWindow({
+			url : "signUp.js",
+			navBarHidden : true,
+			barColor : '#000',
+			nav : win.nav,
+			_parent: Titanium.UI.currentWindow,
+			exitOnClose: true
+		});
+		win.nav.open(newWin);	
+	});
 	// logo = Ti.UI.createLabel({
 		// text : 'StudyEgg', 
 		// textAlign : 'center',
@@ -169,6 +187,7 @@ function render() {
 	
 	win.add(passwordField);
 	win.add(confirmButton);	
+	win.add(signUpButton);
 	// emailField.focus();
 }
 
@@ -199,7 +218,7 @@ function adjustViews() {
 			passwordField.top = 300;
 			// confirmButton.top = 380;
 			confirmButton.top = null;
-			confirmButton.bottom = 50;
+			confirmButton.bottom = 70;
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");
