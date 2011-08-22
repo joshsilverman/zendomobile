@@ -11,6 +11,7 @@ Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
 // Ti.include('authenticate.js');
 
+// alert(win.nav.name);
 function registerForPush() {
 	Titanium.Network.registerForPushNotifications({
 		types : [

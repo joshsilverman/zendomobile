@@ -21,8 +21,10 @@ cardLeftPad = 10;
 selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
-// win.nav.hide(win._parent);
-win._parent.hide();
+alert(win._parent.name);
+win.nav.hide(win._parent);
+
+// win._parent.hide();
 
 cards = win.cards;
 cardViews = [];

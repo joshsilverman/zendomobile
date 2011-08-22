@@ -3,7 +3,7 @@ var win = Ti.UI.currentWindow;
 win.name = "Folders";
 Ti.App.current_win = win;
 // alert(Ti.App.current_win.name);
-renderNavBar();
+// renderNavBar();
 Ti.include('networkMethods.js');
 
 function initialize() {

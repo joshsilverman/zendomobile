@@ -155,7 +155,8 @@ function getNotes(element) {
 					_parent: Titanium.UI.currentWindow,
 					exitOnClose: true
 				});
-				win.nav.open(newWin);
+				// win.nav.open(newWin);
+				Titanium.UI.currentTab.open(newWin);
 			} else {
 				alert("That folder has no documents!");
 			}				
@@ -175,6 +176,7 @@ function getNotes(element) {
 					}
 				}	
 				if ( notesRows.length >= 1 ) {
+					alert("Window");
 					var newWin = Ti.UI.createWindow({
 						url : "notes.js",
 						navBarHidden : false,
@@ -185,7 +187,8 @@ function getNotes(element) {
 						_parent: Titanium.UI.currentWindow,
 						exitOnClose: true
 					});
-					win.nav.open(newWin);
+					// win.nav.open(newWin);
+					Titanium.UI.currentTab.open(newWin);
 				} else {
 					alert("That folder has no documents!");
 				}		
@@ -447,6 +450,7 @@ function processNotifications(data) {
 }
 
 function processData(data, context) {
+	// alert(win.nav.name);
 	cards = [];
 	for (i in data.cards) {
 		Ti.API.debug("Prompt: " + data.cards[i].prompt + ", answer: " + data.cards[i].answer + ", mem: " + data.cards[i].mem);
@@ -460,21 +464,38 @@ function processData(data, context) {
 		reviewing = false;
 		alert('That document has no cards to review!'); 
 	} else {
-		reviewing = false;
+		// tabGroup.hide();
+		// win.hide();
+		// Ti.App.current_win.hide();
+		// win.nav.hide(Ti.App.current_win);
+		// reviewing = false;
+		alert(tabGroup.activeTab);
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
 			cards : cards,
 			nav : win.nav, 
 			_parent : Titanium.UI.currentWindow,
+			// _parent : Ti.App.base_window,
 			_context : "normal",
 			orientationModes : [
 				Titanium.UI.LANDSCAPE_LEFT,
 				Titanium.UI.LANDSCAPE_RIGHT
 			]
 		});
-		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
-		win.nav.open(new_win);			
+		tabGroup.activeTab.open(new_win);
+		// Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
+		
+		// win.close(Ti.App.base_window);
+		// alert(Ti.App.base_window.name);
+		// alert(Ti.App.base_window);
+		// win.nav.hide(Ti.App.current_win);
+		// Ti.App.base_window.nav.open(new_win);
+		// win.nav.open(new_win);	
+		// alert(Ti.App.current_win);
+		// alert(Ti.App.current_win.name);
+		// Ti.App.current_win.nav.open(new_win);
+		// Titanium.UI.currentTab.open(new_win);
 	}
 }
 	

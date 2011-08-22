@@ -13,7 +13,6 @@ var reviewing = false;
 renderNavBar();
 Ti.include('networkMethods.js');
 Ti.include('helperMethods.js');
-
 function initialize() {
 	notesRows = win.data;
 	render();

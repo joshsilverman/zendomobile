@@ -24,7 +24,8 @@ function render() {
 	});
 	
 	var nav = Titanium.UI.iPhone.createNavigationGroup({
-	   window : newWin
+	   window : newWin,
+	   name : "start"
 	});
 	
 	newWin.nav = nav;
