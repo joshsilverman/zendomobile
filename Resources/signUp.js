@@ -103,6 +103,7 @@ function render() {
 			} else {
 				if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 					alert('Could not reach your account. Check your internet connection.');
+					return;
 				} else {
 					signUp(email, password);
 				}				

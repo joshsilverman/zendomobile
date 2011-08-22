@@ -69,7 +69,6 @@ function signOut() {
 		Ti.App.Properties.removeProperty('password');
 		
 		Ti.App.Properties.setBool('active', false);
-		// alert(Ti.App.Properties.getBool('active'));
 		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		Ti.App.current_win = win._parent;
 		win.nav.close(win);		
@@ -81,8 +80,13 @@ function signUp(email, password) {
 	xhr.setTimeout(1000000);
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
-			if (this.status == 200) {
+			if (this.status == 200) {				
+				Ti.App.Properties.setString('email', email);
+				Ti.App.Properties.setString('password', password);				
 				authenticate(email, password);
+				emailField.value = "";
+				passwordField.value = "";
+				confirmPasswordField = "";
 			} else {
 				alert("Could not create your account... Did you enter your email address correctly?");
 			}

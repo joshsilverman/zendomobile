@@ -24,6 +24,8 @@ function attemptAutoLogin() {
 // }
 
 function authSuccess(email, password) {
+	// alert(email);
+	// alert(password);
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	registerDevice(Ti.App.Properties.getString("token"));
