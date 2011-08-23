@@ -32,6 +32,10 @@
 		<data>
 		ox0IedGPQxHvfAIxpSnrOwGsZjg=
 		</data>
+		<key>Default_zen.png</key>
+		<data>
+		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
+		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
@@ -40,13 +44,25 @@
 		<data>
 		cjL/+8PWuiFb179S2UOsvH/xiC4=
 		</data>
+		<key>card.png</key>
+		<data>
+		Pugdnmi5U02W0WuW4wrcBhYtKs4=
+		</data>
 		<key>default_app_logo.png</key>
+		<data>
+		KFlQoJWJ07jwAB6IQgZDetdisD4=
+		</data>
+		<key>default_app_logo2.png</key>
 		<data>
 		KFlQoJWJ07jwAB6IQgZDetdisD4=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		mKnAUWTVxLRZFOeJfL2adyda/Lo=
+		</data>
+		<key>head_logo_114.png</key>
+		<data>
+		gptyfZD92Hp/Et6L2ZIISv+LUrA=
 		</data>
 		<key>head_logo_512.png</key>
 		<data>
@@ -152,6 +168,10 @@
 		<data>
 		9b/kFwaaXncz7kKKdxeBrxIfy54=
 		</data>
+		<key>images/logo_background.png</key>
+		<data>
+		5MOyqEYRCyk/Myu0Qtu9xk+Zw44=
+		</data>
 		<key>images/new_close.png</key>
 		<data>
 		xJh0MGMSCchOY9e+cXh1RYvNIPk=
@@ -175,6 +195,10 @@
 		<key>images/splash.jpg</key>
 		<data>
 		onzQ7zMXwJrBjSRXrGRoO0LlmpE=
+		</data>
+		<key>images/splash.png</key>
+		<data>
+		ox0IedGPQxHvfAIxpSnrOwGsZjg=
 		</data>
 		<key>images/studyegg_logo.jpg</key>
 		<data>

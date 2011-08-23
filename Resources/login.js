@@ -9,7 +9,7 @@ var focused = false;
 
 Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
-Ti.include('authenticate.js');
+// Ti.include('authenticate.js');
 
 function registerForPush() {
 	Titanium.Network.registerForPushNotifications({
@@ -34,7 +34,7 @@ function registerForPush() {
 				});
 				reviewAlert.addEventListener('click', function(f) {
 					if (f.index == 1) { 
-						win.hide();
+						// win.hide();
 						retrieveAllNotifications(); 
 					};
 				});
@@ -91,7 +91,7 @@ function render() {
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 	    autocorrect : false,
 	    width : 300,
-	    top : 250,
+	    bottom : 130,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    keyboardType : Titanium.UI.KEYBOARD_URL,
@@ -114,7 +114,7 @@ function render() {
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 	    autocorrect : false,
 	    width : 300,
-	    top : 300,
+	    bottom : 80,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    passwordMask : true,
@@ -136,7 +136,8 @@ function render() {
 		title : 'Sign In',
 		width : 100,
 		height : 40, 
-		bottom : 70
+		right : 50,
+		bottom : 20
 	});
 	
 	confirmButton.addEventListener('click', function(){
@@ -153,7 +154,8 @@ function render() {
 	signUpButton = Ti.UI.createButton({
 		title : 'Sign Up',
 		width : 100,
-		height : 40, 
+		height : 40,
+		left : 50, 
 		bottom : 20
 	});
 	
@@ -168,18 +170,11 @@ function render() {
 		});
 		win.nav.open(newWin);	
 	});
-	// logo = Ti.UI.createLabel({
-		// text : 'StudyEgg', 
-		// textAlign : 'center',
-		// top : 10,
-		// height : 200,
-		// font : {fontSize : 64, fontWeight:'bold', fontFamily:'Marker Felt'} 
-	// });
 	
 	logo = Ti.UI.createImageView({
 		image : 'images/studyegg_logo.jpg',
 		height : 130,
-		top : 55
+		top : 35
 	});
 	
 	// logo.hide();
@@ -197,9 +192,13 @@ function adjustViews() {
 			Ti.API.debug("Keyboard up, portrait mode");
 			logo.hide();
 			emailField.top = 60;
+			emailField.bottom = null;
 			passwordField.top = 110;
+			passwordField.bottom = null;
 			confirmButton.bottom = null;
 			confirmButton.top = 160;
+			signUpButton.bottom = null;
+			signUpButton.top = 160;
 		} 
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard up, landscape mode");
@@ -214,11 +213,15 @@ function adjustViews() {
 			Ti.API.debug("Keyboard hidden, portrait mode");
 			logo.top = 55;
 			logo.show();
-			emailField.top = 250;
-			passwordField.top = 300;
+			emailField.top = null;
+			emailField.bottom = 130;
+			passwordField.top = null;
+			passwordField.bottom = 80;
 			// confirmButton.top = 380;
 			confirmButton.top = null;
-			confirmButton.bottom = 70;
+			confirmButton.bottom = 20;
+			signUpButton.top = null;
+			signUpButton.bottom = 20;
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");

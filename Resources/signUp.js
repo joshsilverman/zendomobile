@@ -9,15 +9,15 @@ var focused = false;
 
 Ti.include('networkMethods.js');
 Ti.include('helperMethods.js');
-Ti.include('dimensions.js');
-Ti.include('authenticate.js');
+// Ti.include('dimensions.js');
+// Ti.include('authenticate.js');
 
 function render() {
 	emailField = Ti.UI.createTextField({
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 	    autocorrect : false,
 	    width : 300,
-	    top : 200,
+	    bottom : 180,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    keyboardType : Titanium.UI.KEYBOARD_URL,
@@ -40,7 +40,7 @@ function render() {
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 	    autocorrect : false,
 	    width : 300,
-	    top : 250,
+	    bottom : 130,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    passwordMask : true,
@@ -63,7 +63,7 @@ function render() {
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 	    autocorrect : false,
 	    width : 300,
-	    top : 300,
+	    bottom : 80,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	    passwordMask : true,
@@ -86,7 +86,8 @@ function render() {
 		title : 'Sign Up',
 		width : 100,
 		height : 40, 
-		bottom : 70
+		right : 50,
+		bottom : 20
 	});
 	
 	confirmButton.addEventListener('click', function(){
@@ -97,17 +98,21 @@ function render() {
 			alert("Your password and password confirmation must match!");
 			return;
 		} else {
-			if (password.length < 6) {
-				alert("Your password must be at least six characters!");
-				return;				
+			if (email.length < 1) {
+				alert("You must enter an email address!");
 			} else {
-				if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-					alert('Could not reach your account. Check your internet connection.');
-					return;
+				if (password.length < 6) {
+					alert("Your password must be at least six characters!");
+					return;				
 				} else {
-					signUp(email, password);
-				}				
-			}
+					if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+						alert('Could not create your account. Check your internet connection.');
+						return;
+					} else {
+						signUp(email, password);
+					}				
+				}
+			}	
 		}	
 	});
 
@@ -115,6 +120,7 @@ function render() {
 		title : 'Cancel',
 		width : 100,
 		height : 40, 
+		left : 50,
 		bottom : 20
 	});
 	
@@ -144,11 +150,16 @@ function adjustViews() {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard up, portrait mode");
 			logo.hide();
+			emailField.bottom = null;
 			emailField.top = 30;
+			passwordField.bottom = null;
 			passwordField.top = 80;
+			confirmPasswordField.bottom = null;
 			confirmPasswordField.top = 130;
 			confirmButton.bottom = null;
 			confirmButton.top = 180;
+			cancelButton.bottom = null;			
+			cancelButton.top = 180;
 		} 
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard up, landscape mode");
@@ -163,12 +174,16 @@ function adjustViews() {
 			Ti.API.debug("Keyboard hidden, portrait mode");
 			logo.top = 55;
 			logo.show();
-			emailField.top = 200;
-			passwordField.top = 250;
-			confirmPasswordField.top = 300;
-			// confirmButton.top = 380;
+			emailField.bottom = 180;
+			emailField.top = null;
+			passwordField.bottom = 130;
+			passwordField.top = null;
+			confirmPasswordField.bottom = 80;
+			confirmPasswordField.top = null;
 			confirmButton.top = null;
-			confirmButton.bottom = 70;
+			confirmButton.bottom = 20;
+			cancelButton.top = null;
+			cancelButton.bottom = 20;
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");

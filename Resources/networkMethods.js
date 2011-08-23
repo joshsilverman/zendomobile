@@ -1,9 +1,9 @@
 // var serverURL = 'http://localhost:3000';
 // var serverURL = 'http://192.168.2.20:3000';
-var serverURL = 'http://192.168.3.148:3000';
+// var serverURL = 'http://192.168.3.148:3000';
 // var serverURL = 'http://ec2-204-236-227-202.compute-1.amazonaws.com'
 // var serverURL = 'http://192.168.0.101:3000';
-// var serverURL = 'http://studyegg.com'
+var serverURL = 'http://studyegg.com'
 
 Ti.include('helperMethods.js');
 
@@ -17,7 +17,6 @@ function authenticate(email, password) {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
 				authSuccess(email, password);
-				updateCache();
 				Ti.App.Properties.setBool('active', true);
 			} else {
 				alert("Invalid email/password combination.");
@@ -80,13 +79,14 @@ function signUp(email, password) {
 	xhr.setTimeout(1000000);
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
-			if (this.status == 200) {				
+			if (this.status == 200) {		
 				Ti.App.Properties.setString('email', email);
 				Ti.App.Properties.setString('password', password);				
-				authenticate(email, password);
+				// authenticate(email, password);
+				authSuccess(email, password);
 				emailField.value = "";
 				passwordField.value = "";
-				confirmPasswordField = "";
+				confirmPasswordField.value = "";
 			} else {
 				alert("Could not create your account... Did you enter your email address correctly?");
 			}
@@ -216,7 +216,7 @@ function getLines(doc, context) {
 function getPublicDocs(element){
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		reviewing = false;
-		alert("Could not retrieve these notes. Check your Internet connection and try again.");
+		alert("Could not retrieve those notes. Check your Internet connection and try again.");
 	} else {
 		notesRows = [];
 		xhr = Ti.Network.createHTTPClient();
@@ -246,6 +246,41 @@ function getPublicDocs(element){
 		};
 		xhr.send();
 	}		
+}
+
+function getRecentDocs() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not retrieve recent documents. Check your Internet connection and try again.");
+	} else {
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/tags/get_recent_json");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			foldersData = eval(this.responseText);
+			for ( i in foldersData ) {
+				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+			}	
+			if ( notesRows.length >= 1 ) {
+				var newWin = Ti.UI.createWindow({
+					url : "notes.js",
+					navBarHidden : false,
+					selection : element,
+					barColor : '#000',
+					data : notesRows,
+					nav : win.nav,
+					_parent: Titanium.UI.currentWindow,
+					exitOnClose: true
+				});
+				win.nav.open(newWin);
+			} else {
+				alert("That folder has no documents!");
+			}		
+		};
+		xhr.send();
+	}
 }
 
 
@@ -284,6 +319,16 @@ function retrieveAllNotifications() {
 	}			
 }
 
+function attemptAutoLogin() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not log you in. Check your Internet connection and try again.");
+	} else {
+		if (Ti.App.Properties.getString('email') != '' && Ti.App.Properties.getString('email') != null) {
+			authenticate(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'));
+		}
+	}
+}
+
 
 // Misc Network
 function updateCache() {
@@ -308,7 +353,6 @@ function cacheCards() {
 }
 
 function reportGrade(memID, confidence) {
-	//Should confidence be converted using this?
 	var gradeValues = {
 		4 : 9,
 		3 : 6, 
@@ -434,6 +478,29 @@ function processData(data, context) {
 	}
 }
 	
+function authSuccess(email, password) {
+	// alert(email);
+	// alert(password);
+	Ti.App.Properties.setString('email', email);
+	Ti.App.Properties.setString('password', password);
+	registerDevice(Ti.App.Properties.getString("token"));
+	var newWin = Ti.UI.createWindow({
+		url : 'home.js',
+		navBarHidden : false,
+		barColor : '#000',
+		nav : win.nav,
+		_parent: Titanium.UI.currentWindow,
+		orientationModes : [
+			Titanium.UI.PORTRAIT,
+			Titanium.UI.UPSIDE_PORTRAIT,
+			// Titanium.UI.LANDSCAPE_LEFT,
+			// Titanium.UI.LANDSCAPE_RIGHT
+		]
+	});
+	win.nav.open(newWin);	
+	updateCache();
+	// activityIndicator.hide();	
+}
 	
 	
 	

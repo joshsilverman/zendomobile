@@ -87,7 +87,7 @@ function initialize(cardViews) {
 		color : unselectedColor
 	});
 	
-	buttons = [button1, button2, button3, button4]; //ADD BUTTON 4 BACK ON HERE
+	buttons = [button4, button3, button2, button1]; //ADD BUTTON 4 BACK ON HERE
 	for (i in buttons) { 
 		// buttons[i].hide();
 		// buttons[i].opacity = 0;
@@ -252,6 +252,7 @@ function showGradeButtons(){
 			// buttons[i].backgroundImage = buttons[i].images["unselected"]; 
 		}
 		// Ti.API.debug(buttons[cards[cardScrollableView.currentPage]].images["selected"]);
+
 		buttons[cards[cardScrollableView.currentPage].grade - 1].color = selectedColor;
 		// buttons[cards[cardScrollableView.currentPage].grade - 1].backgroundImage = buttons[cards[cardScrollableView.currentPage].grade - 1].images["selected"];
 	}
