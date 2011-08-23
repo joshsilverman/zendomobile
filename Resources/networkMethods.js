@@ -264,26 +264,33 @@ function getRecentDocs() {
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
 			for ( i in foldersData ) {
-				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
-			}	
-			if ( notesRows.length >= 1 ) {
-				var newWin = Ti.UI.createWindow({
-					url : "notes.js",
-					navBarHidden : false,
-					selection : element,
-					barColor : '#000',
-					data : notesRows,
-					nav : win.nav,
-					_parent: Titanium.UI.currentWindow,
-					exitOnClose: true
-				});
-				win.nav.open(newWin);
-			} else {
-				alert("That folder has no documents!");
-			}		
+				notesRows.push(createAddableNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+			}
+			renderRecent();	
 		};
 		xhr.send();
 	}
+}
+
+function getInterestingEggs(){
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not retrieve those notes. Check your Internet connection and try again.");
+	} else {
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/documents/get_public_documents");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			foldersData = eval(this.responseText);
+			for ( i in foldersData ) {
+				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+			}	
+			renderInteresing();
+		};
+		xhr.send();
+	}		
 }
 
 
@@ -410,6 +417,40 @@ function createNoteRow(name, docid){
 	return row;
 }
 
+function createAddableNoteRow(name, docid){
+	var row = Ti.UI.createTableViewRow({ id : docid}); 
+    var image = Ti.UI.createImageView({
+    	image:'images/unchecked.png',
+    	left: 15,
+    	touchEnabled:true,
+    	height:25,
+    	width:25,
+    	status:'unchecked'
+    });
+	
+	var addButton = Ti.UI.createImageView({
+		image:'images/close.png',
+    	right: 0,
+    	touchEnabled:true,
+    	height:50,
+    	width:50
+	});
+	
+	addButton.addEventListener('click', function(){
+		alert("Clicked");
+	})
+	
+	var label= Ti.UI.createLabel({
+		text:name, 
+		left:53
+	});
+	
+	row.add(image);
+	row.add(label);
+	row.add(addButton);
+	return row;
+}
+
 function createCard(prompt, answer, memID) {
 	var card = new Object();
 	card.prompt = prompt;
@@ -450,6 +491,7 @@ function processNotifications(data) {
 }
 
 function processData(data, context) {
+
 	// alert(win.nav.name);
 	cards = [];
 	for (i in data.cards) {
@@ -464,12 +506,22 @@ function processData(data, context) {
 		reviewing = false;
 		alert('That document has no cards to review!'); 
 	} else {
-		// tabGroup.hide();
+		// alert("Reviewing!");
+		// alert(Ti.App.tabGroup);
+		
+		Ti.App.tabGroup.visible = false;
+		// tabGroup.visible = false;
+		// alert(win.nav);
+		win.nav.visible = false;
+		// tabGroup.setActiveTab();
+		// alert("Yo");
+		// alert(tabGroup);
+		// tabGroup.visible = false;
 		// win.hide();
 		// Ti.App.current_win.hide();
 		// win.nav.hide(Ti.App.current_win);
-		// reviewing = false;
-		alert(tabGroup.activeTab);
+		reviewing = false;
+		// alert(tabGroup.activeTab);
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
@@ -483,7 +535,7 @@ function processData(data, context) {
 				Titanium.UI.LANDSCAPE_RIGHT
 			]
 		});
-		tabGroup.activeTab.open(new_win);
+		// tabGroup.activeTab.open(new_win);
 		// Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
 		
 		// win.close(Ti.App.base_window);
@@ -491,7 +543,7 @@ function processData(data, context) {
 		// alert(Ti.App.base_window);
 		// win.nav.hide(Ti.App.current_win);
 		// Ti.App.base_window.nav.open(new_win);
-		// win.nav.open(new_win);	
+		win.nav.open(new_win);	
 		// alert(Ti.App.current_win);
 		// alert(Ti.App.current_win.name);
 		// Ti.App.current_win.nav.open(new_win);
@@ -506,7 +558,7 @@ function authSuccess(email, password) {
 	Ti.App.Properties.setString('password', password);
 	registerDevice(Ti.App.Properties.getString("token"));
 	var newWin = Ti.UI.createWindow({
-		url : 'home.js',
+		url : 'browser.js',
 		navBarHidden : false,
 		barColor : '#000',
 		nav : win.nav,

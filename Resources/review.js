@@ -21,7 +21,7 @@ cardLeftPad = 10;
 selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
-alert(win._parent.name);
+// alert(win._parent.name);
 win.nav.hide(win._parent);
 
 // win._parent.hide();
@@ -112,7 +112,9 @@ function initialize(cardViews) {
 		win.hide();
 		Ti.App.current_win = win._parent;
 		win.nav.close(win);
-		win._parent.show();
+		// win._parent.show();
+		Ti.App.tabGroup.visible = true;
+		win.nav.visible = true;
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({
@@ -281,6 +283,7 @@ function buttonClicked(button) {
 			Ti.App.current_win = win._parent;
 			win.nav.close(win);
 		} else {
+			alert("Bromine");
 			var newWin = Ti.UI.createWindow({
 				url : "stats.js",
 				navBarHidden : true,
@@ -290,8 +293,8 @@ function buttonClicked(button) {
 				folder : win.folder,
 				_parent: Titanium.UI.currentWindow
 			});	
-			win.hide();
-			win._parent.show();
+			// win.hide();
+			// win._parent.show();
 			win.nav.open(newWin);			
 		}
 	}

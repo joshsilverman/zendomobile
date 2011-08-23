@@ -5,8 +5,11 @@ win.name = "Browser";
 Ti.App.base_window = Ti.UI.currentWindow;
 Ti.App.current_win = win;
 // create tab group
-var tabGroup = Titanium.UI.createTabGroup();
 Ti.include('networkMethods.js');
+tabGroup = Titanium.UI.createTabGroup();
+Ti.App.tabGroup = tabGroup;
+
+// data = getRecentDocs();
 
 // 
 // 
@@ -37,15 +40,25 @@ function renderNavBar() {
 	// win.leftNavButton = signOutButton;	
 }
 
-renderNavBar();
+// renderNavBar();
 
-var signOutButton = Ti.UI.createButton({ title : 'Sign Out' });
+var signOutButton = Ti.UI.createButton({ title : 'Account' });
 
 signOutButton.addEventListener('click', function() {
 	signOut();
+	// tabGroup.visible = true;
 });
 	
-	
+logo = Ti.UI.createImageView({
+	image : 'images/eggLogo.png', 
+	// height : 25,
+	// width : 25, 
+	// top : 10,
+	// left : cardLeftPad
+});
+
+
+
 var myEggsWindow = Titanium.UI.createWindow({  
     title:'My Eggs',
     backgroundColor:'#fff',
@@ -56,14 +69,14 @@ var myEggsWindow = Titanium.UI.createWindow({
 });
 
 var myEggsTab = Titanium.UI.createTab({  
-    icon : 'KS_nav_views.png',
+    icon : 'images/KS_nav_views.png',
     title : 'My Eggs',
     window : myEggsWindow
 });
 
 var myEggsLabel = Titanium.UI.createLabel({
 	color:'#999',
-	text:'My Eggs',
+	text:'Loading your eggs...',
 	font:{fontSize:20,fontFamily:'Helvetica Neue'},
 	textAlign:'center',
 	width:'auto'
@@ -76,17 +89,19 @@ var recentWindow = Titanium.UI.createWindow({
     backgroundColor:'#fff',
     leftNavButton : signOutButton,
     barColor : '#000',
+    url : 'recentDocuments.js',
     nav : win.nav
 });
+
 var recentTab = Titanium.UI.createTab({  
-    icon:'KS_nav_ui.png',
+    icon:'images/KS_nav_ui.png',
     title:'Recent',
     window:recentWindow
 });
 
 var recentLabel = Titanium.UI.createLabel({
 	color:'#999',
-	text:'Recent',
+	text:'Loading recent docs...',
 	font:{fontSize:20,fontFamily:'Helvetica Neue'},
 	textAlign:'center',
 	width:'auto'
@@ -104,18 +119,19 @@ var interestingWindow = Titanium.UI.createWindow({
     backgroundColor:'#fff',
     barColor : '#000',
     leftNavButton : signOutButton,
+    url : 'interestingEggs.js',
     nav : win.nav
 });
 
 var interestingTab = Titanium.UI.createTab({  
-    icon:'KS_nav_ui.png',
+    icon:'images/KS_nav_ui.png',
     title:'Interesting',
     window:interestingWindow
 });
 
 var interestingLabel = Titanium.UI.createLabel({
 	color : '#999',
-	text : 'Interesting',
+	text : 'Loading interesting...',
 	font : {fontSize : 20, fontFamily : 'Helvetica Neue'},
 	textAlign : 'center',
 	width : 'auto'
@@ -134,7 +150,7 @@ var categoriesWindow = Titanium.UI.createWindow({
     nav : win.nav
 });
 var categoriesTab = Titanium.UI.createTab({  
-    icon:'KS_nav_ui.png',
+    icon:'images/KS_nav_ui.png',
     title:'Categories',
     window:categoriesWindow
 });
@@ -160,8 +176,9 @@ var searchWindow = Titanium.UI.createWindow({
     leftNavButton : signOutButton,
     nav : win.nav
 });
+
 var searchTab = Titanium.UI.createTab({  
-    icon:'KS_nav_ui.png',
+    icon:'images/KS_nav_ui.png',
     title:'Search',
     window:searchWindow
 });
@@ -179,8 +196,8 @@ searchWindow.add(searchLabel);
 tabGroup.addTab(myEggsTab);  
 tabGroup.addTab(recentTab);  
 tabGroup.addTab(interestingTab);  
-tabGroup.addTab(categoriesTab);  
-tabGroup.addTab(searchTab);  
+// tabGroup.addTab(categoriesTab);  
+// tabGroup.addTab(searchTab);  
 
 // win.add(tabGroup);
 tabGroup.open();
