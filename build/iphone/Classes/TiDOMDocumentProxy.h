@@ -14,9 +14,11 @@
 
 @interface TiDOMDocumentProxy : TiDOMElementProxy {
 @private
+	GDataXMLDocument *document;
 }
 
 -(void)parseString:(NSString*)xml;
+-(void)setDocument:(GDataXMLDocument*)doc;
 
 @end
 

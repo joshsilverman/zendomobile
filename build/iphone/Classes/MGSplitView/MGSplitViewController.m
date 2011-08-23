@@ -14,7 +14,6 @@
 #import "MGSplitViewController.h"
 #import "MGSplitDividerView.h"
 #import "MGSplitCornersView.h"
-#import "MGSplitView.h"
 
 #define MG_DEFAULT_SPLIT_POSITION		320.0	// default width of master view in UISplitViewController.
 #define MG_DEFAULT_SPLIT_WIDTH			1.0		// default width of split-gutter in UISplitViewController.
@@ -78,7 +77,7 @@
 
 - (BOOL)isLandscape
 {
-	return UIInterfaceOrientationIsLandscape(currentOrientation);
+	return UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
 }
 
 
@@ -91,7 +90,7 @@
 
 - (BOOL)shouldShowMaster
 {
-	return [self shouldShowMasterForInterfaceOrientation:currentOrientation];
+	return [self shouldShowMasterForInterfaceOrientation:self.interfaceOrientation];
 }
 
 
@@ -180,7 +179,6 @@
 {
 	[self.masterViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	[self.detailViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    currentOrientation = toInterfaceOrientation;
 }
 
 
@@ -205,7 +203,6 @@
 	// Re-tile views.
 	_reconfigurePopup = YES;
 	[self layoutSubviewsForInterfaceOrientation:toInterfaceOrientation withAnimation:YES];
-    currentOrientation = toInterfaceOrientation;
 }
 
 
@@ -234,9 +231,6 @@
 {
 	UIScreen *screen = [UIScreen mainScreen];
 	CGRect fullScreenRect = screen.bounds; // always implicitly in Portrait orientation.
-    
-    // Because we may 'force' rotation, the status bar isn't oriented yet when this value is retrieved, and it could
-    // very well be wrong. 
 	CGRect appFrame = screen.applicationFrame;
 	
 	// Find status bar height by checking which dimension of the applicationFrame is narrower than screen bounds.
@@ -262,12 +256,6 @@
 
 - (void)layoutSubviewsForInterfaceOrientation:(UIInterfaceOrientation)theOrientation withAnimation:(BOOL)animate
 {
-    // Not ready to begin drawing yet!
-    if (theOrientation == 0) {
-        return;
-    }
-    
-    [(MGSplitView*)[self view] setLayingOut:YES];
 	if (_reconfigurePopup) {
 		[self reconfigureForMasterInPopover:![self shouldShowMasterForInterfaceOrientation:theOrientation]];
 	}
@@ -333,8 +321,7 @@
 			theView = controller.view;
 			if (theView) {
 				theView.frame = masterRect;
-                theView.bounds = CGRectMake(0, 0, masterRect.size.width, masterRect.size.height);
-				if (theView.superview != self.view) {
+				if (!theView.superview) {
 					[controller viewWillAppear:NO];
 					[self.view addSubview:theView];
 					[controller viewDidAppear:NO];
@@ -355,8 +342,7 @@
 			theView = controller.view;
 			if (theView) {
 				theView.frame = detailRect;
-                theView.bounds = CGRectMake(0, 0, detailRect.size.width, detailRect.size.height);
-				if (theView.superview != self.view) {
+				if (!theView.superview) {
 					[self.view insertSubview:theView aboveSubview:self.masterViewController.view];
 				} else {
 					[self.view bringSubviewToFront:theView];
@@ -497,19 +483,18 @@
 		[self.view bringSubviewToFront:leadingCorners];
 		[self.view bringSubviewToFront:trailingCorners];
 	}
-    [(MGSplitView*)[self view] setLayingOut:NO];
 }
 
 
 - (void)layoutSubviewsWithAnimation:(BOOL)animate
 {
-	[self layoutSubviewsForInterfaceOrientation:currentOrientation withAnimation:animate];
+	[self layoutSubviewsForInterfaceOrientation:self.interfaceOrientation withAnimation:animate];
 }
 
 
 - (void)layoutSubviews
 {
-	[self layoutSubviewsForInterfaceOrientation:currentOrientation withAnimation:YES];
+	[self layoutSubviewsForInterfaceOrientation:self.interfaceOrientation withAnimation:YES];
 }
 
 
@@ -559,13 +544,10 @@
 	[self.detailViewController viewDidDisappear:animated];
 }
 
--(void)loadView
-{
-    [self setView:[[MGSplitView alloc] initWithFrame:CGRectZero controller:self]];
-}
 
 #pragma mark -
 #pragma mark Popover handling
+
 
 - (void)reconfigureForMasterInPopover:(BOOL)inPopover
 {
@@ -740,7 +722,6 @@
 		}
 		
 		// Show popover.
-        [(MGSplitView*)[self view] setSingleLayout];
 		[_hiddenPopoverController presentPopoverFromBarButtonItem:_barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 	}
 }
@@ -750,7 +731,6 @@
 	if (!_hiddenPopoverController || (_hiddenPopoverController.popoverVisible)) {
 		// TODO: Does this alert the delegate? More importantly, will this have ramifications in terms of race conditions if someone rotates while this
 		// is hiding? Hope this works.
-        [(MGSplitView*)[self view] setSingleLayout];
 		[_hiddenPopoverController dismissPopoverAnimated:YES];
 	}
 }
@@ -880,7 +860,7 @@
 	// Check to see if delegate wishes to constrain the position.
 	float newPosn = posn;
 	BOOL constrained = NO;
-	CGSize fullSize = [self splitViewSizeForOrientation:currentOrientation];
+	CGSize fullSize = [self splitViewSizeForOrientation:self.interfaceOrientation];
 	if (_delegate && [_delegate respondsToSelector:@selector(splitViewController:constrainSplitPosition:splitViewSize:)]) {
 		newPosn = [_delegate splitViewController:self constrainSplitPosition:newPosn splitViewSize:fullSize];
 		constrained = YES; // implicitly trust delegate's response.

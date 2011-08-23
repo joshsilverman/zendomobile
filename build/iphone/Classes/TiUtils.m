@@ -379,9 +379,6 @@ NSDictionary* sizeMap = nil;
 		if(isValid != NULL) *isValid = YES;
 		return [value floatValue];
 	}
-    if (isValid != NULL) {
-        *isValid = NO;
-    }
 	return def;
 }
 
@@ -398,9 +395,6 @@ NSDictionary* sizeMap = nil;
 		}
 		return [value intValue];
 	}
-    if (isValid != NULL) {
-        *isValid = NO;
-    }
 	return def;	
 }
 

@@ -187,12 +187,6 @@ void ASReadStreamCallBackBC
 @synthesize bitRate;
 @dynamic progress;
 @synthesize delegate;
-@synthesize bufferSize;
-
--(NSUInteger)bufferSize
-{
-    return (bufferSize) ? bufferSize : kAQDefaultBufSize;
-}
 
 //
 // initWithURL
@@ -205,7 +199,6 @@ void ASReadStreamCallBackBC
 	if (self != nil)
 	{
 		url = [aURL retain];
-        bufferSize = 0;
 	}
 	return self;
 }
@@ -978,7 +971,7 @@ cleanup:
 	}
 	else if (eventType == kCFStreamEventHasBytesAvailable)
 	{
-		UInt8 bytes[[self bufferSize]];
+		UInt8 bytes[kAQBufSize];
 		CFIndex length;
 		@synchronized(self)
 		{
@@ -990,7 +983,7 @@ cleanup:
 			//
 			// Read the bytes from the stream
 			//
-			length = CFReadStreamRead(stream, bytes, [self bufferSize]);
+			length = CFReadStreamRead(stream, bytes, kAQBufSize);
 			
 			if (length == -1)
 			{
@@ -1176,7 +1169,7 @@ cleanup:
 			// allocate audio queue buffers
 			for (unsigned int i = 0; i < kNumAQBufs; ++i)
 			{
-				err = AudioQueueAllocateBuffer(audioQueue, [self bufferSize], &audioQueueBuffer[i]);
+				err = AudioQueueAllocateBuffer(audioQueue, kAQBufSize, &audioQueueBuffer[i]);
 				if (err)
 				{
 					[self failWithErrorCode:AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED];
@@ -1300,12 +1293,12 @@ cleanup:
 					return;
 				}
 				
-				if (packetSize > [self bufferSize])
+				if (packetSize > kAQBufSize)
 				{
 					[self failWithErrorCode:AS_AUDIO_BUFFER_TOO_SMALL];
 				}
 
-				bufSpaceRemaining = [self bufferSize] - bytesFilled;
+				bufSpaceRemaining = kAQBufSize - bytesFilled;
 			}
 
 			// if the space remaining in the buffer is not enough for this packet, then enqueue the buffer.
@@ -1357,7 +1350,7 @@ cleanup:
 		while (inNumberBytes)
 		{
 			// if the space remaining in the buffer is not enough for this packet, then enqueue the buffer.
-			size_t bufSpaceRemaining = [self bufferSize] - bytesFilled;
+			size_t bufSpaceRemaining = kAQBufSize - bytesFilled;
 			if (bufSpaceRemaining < inNumberBytes)
 			{
 				[self enqueueBuffer];
@@ -1383,7 +1376,7 @@ cleanup:
 				
 				// copy data to the audio queue buffer
 				AudioQueueBufferRef fillBuf = audioQueueBuffer[fillBufferIndex];
-				bufSpaceRemaining = [self bufferSize] - bytesFilled;
+				bufSpaceRemaining = kAQBufSize - bytesFilled;
 				size_t copySize;
 				if (bufSpaceRemaining < inNumberBytes)
 				{

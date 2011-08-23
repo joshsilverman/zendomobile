@@ -812,12 +812,8 @@ static TiValueRef StringFormatDecimalCallback (TiContextRef jsContext, TiObjectR
 
 -(BOOL)isKJSThread
 {
-#if 1
-	return (cachedThreadId == [NSThread currentThread] ? YES : NO);
-#else
 	NSString *name = [[NSThread currentThread] name];
 	return [name isEqualToString:[self threadName]];
-#endif
 }
 
 -(void)invoke:(id)object
@@ -947,7 +943,6 @@ static TiValueRef StringFormatDecimalCallback (TiContextRef jsContext, TiObjectR
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[[NSThread currentThread] setName:[self threadName]];
-	cachedThreadId = [NSThread currentThread];
 	pthread_rwlock_rdlock(&KrollGarbageCollectionLock);
 //	context = TiGlobalContextCreateInGroup([TiApp contextGroup],NULL);
 	context = TiGlobalContextCreate(NULL);

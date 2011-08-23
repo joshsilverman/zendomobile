@@ -115,9 +115,11 @@
 	NSMutableArray* newControllers = [NSMutableArray arrayWithArray:controller.viewControllers];
 	BOOL animated = [TiUtils boolValue:@"animated" properties:properties def:(windowController == [newControllers lastObject])];
 	[newControllers removeObject:windowController];
-	closingProxy = [window retain];
 	[controller setViewControllers:newControllers animated:animated];
 	
+	[window retain];
+	[window close:nil];
+	[window autorelease];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -149,9 +151,6 @@
 		}
 		[self setVisibleProxy:newWindow];
 	}
-	[closingProxy close:nil];
-	[closingProxy release];
-	closingProxy = nil;
 	opening = NO;
 	[newWindow windowDidOpen];
 }
