@@ -72,16 +72,25 @@ function renderRecent(){
 	});
 		
 	var lists = Titanium.UI.createTableView({
-		//top : toolbar.height,
 		rowHeight : 60,
 		data : notesRows
 	});
 	
 	lists.addEventListener('click', function(e){
-		if ( reviewing == false ) {
-			reviewing = true;
-			getLines(e.row.id, "normal");
+		if (e.source.id == "label") {
+			if ( reviewing == false ) {
+				reviewing = true;
+				getLines(e.row.id, "normal");
+			}	
+		} else if (e.source.id == "doc") {
+			if (e.source.push == 1) {
+				enableNotifications(e.row.id, false, e);
+			} else {
+				enableNotifications(e.row.id, true, e);
+			}
 		}	
+		// if (e.source)
+
 		// if ( e.row.children[0].status == 'checked' ) {
 			// var status = 'unchecked';
 		    // var image = 'images/unchecked.png';

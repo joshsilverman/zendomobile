@@ -91,10 +91,23 @@ function renderInteresing(){
 // 		
 		 // e.row.children[0].status = status;
 		 // e.row.children[0].image = image;
-		if ( reviewing == false ) {
-			reviewing = true;
-			getLines(e.row.id, "normal");
-		}			 
+		if (e.source.id == "label") {
+			if ( reviewing == false ) {
+				reviewing = true;
+				getLines(e.row.id, "normal");
+			}	
+		} else if (e.source.id == "add") {
+			addDocument(e.row.id);
+		// } else if (e.source.id == "egg") {
+			// enableNotifications(e.row.id, true);
+		// }	 
+		} else if (e.source.id == "doc") {
+			if (e.source.push == 1) {
+				enableNotifications(e.row.id, false, e);
+			} else {
+				enableNotifications(e.row.id, true, e);
+			}
+		}	
 	});
 	
 	// toolbar.add(back);

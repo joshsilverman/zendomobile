@@ -1,9 +1,9 @@
 // var serverURL = 'http://localhost:3000';
 // var serverURL = 'http://192.168.2.20:3000';
-// var serverURL = 'http://192.168.3.148:3000';
+var serverURL = 'http://192.168.3.148:3000';
 // var serverURL = 'http://ec2-204-236-227-202.compute-1.amazonaws.com'
 // var serverURL = 'http://192.168.0.101:3000';
-var serverURL = 'http://studyegg.com'
+// var serverURL = 'http://studyegg.com';
 
 Ti.include('helperMethods.js');
 
@@ -32,6 +32,7 @@ function authenticate(email, password) {
 }
 
 function reLogUser(email, password, context) {
+	alert(context);
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	var params = {
@@ -70,7 +71,9 @@ function signOut() {
 		Ti.App.Properties.setBool('active', false);
 		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		Ti.App.current_win = win._parent;
+		Ti.App.tabGroup.close();
 		win.nav.close(win);		
+		Ti.App.base_window.show();
 	}
 }
 
@@ -106,13 +109,24 @@ function getFolders() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not retrieve your folders. Check your Internet connection and try again.");
 	} else {
+		// if (Ti.App.data == null) { 
+			// updateCache(renderFolders(Ti.App.data)); 
+		// } else {
+			// updateCache(Ti.App.data);
+		// }
+		folderRows = []
 		if (Ti.App.data != null) {	
+			alert("Using cache");
+			alert(Ti.App.data);
 			for (i in Ti.App.data) {
+				alert(Ti.App.data[i].tag.name);
+				alert(Ti.App.data[i].tag.id);
 				folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id, false));
 			}
-			folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
-			renderFolders();			
+			// folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
+			renderFolders(folderRows);			
 		} else {
+			alert("NOT using cache");
 			xhr = Ti.Network.createHTTPClient();
 			xhr.setTimeout(1000000);
 			// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
@@ -123,8 +137,8 @@ function getFolders() {
 				for (i in foldersData) {
 					folderRows.push(createFolderRow(foldersData[i].tag.name, foldersData[i].tag.id, false));
 				}
-				folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
-				renderFolders();
+				// folderRows.push(createFolderRow("Public", (folderRows.length + 1), true));
+				renderFolders(folderRows);
 			};
 			xhr.send();	
 		}
@@ -137,17 +151,19 @@ function getNotes(element) {
 	} else {
 		notesRows = [];
 		if (Ti.App.data != null) {
+			alert("Using cache");
 			for ( i in Ti.App.data ) {
-				if (Ti.App.data[i].tag.id == element.row.id) {
+				if (Ti.App.data[i].tag.id == element.row.id) {					
 					for (n in Ti.App.data[i].tag.documents) {
-						notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id));
+						// alert(Ti.App.data[i].tag.documents[n].userships[0].push_enabled);
+						notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id, Ti.App.data[i].tag.documents[n].userships[0].push_enabled));
 					}
 				}
 			}	
 			if ( notesRows.length >= 1 ) {
 				var newWin = Ti.UI.createWindow({
 					url : "notes.js",
-					navBarHidden : false,
+					// navBarHidden : false,
 					selection : element,
 					barColor : '#000',
 					data : notesRows,
@@ -156,11 +172,13 @@ function getNotes(element) {
 					exitOnClose: true
 				});
 				// win.nav.open(newWin);
-				Titanium.UI.currentTab.open(newWin);
+				// Titanium.UI.currentTab.open(newWin);
+				Titanium.UI.currentTab.open(newWin, {animated:true});
 			} else {
 				alert("That folder has no documents!");
 			}				
 		} else {
+			alert("NOT using cache");
 			xhr = Ti.Network.createHTTPClient();
 			xhr.setTimeout(1000000);
 			// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
@@ -168,6 +186,7 @@ function getNotes(element) {
 			xhr.setRequestHeader('Content-Type', 'text/json');
 			xhr.onload = function() {
 				foldersData = eval(this.responseText);
+				// alert(foldersData);
 				for ( i in foldersData ) {
 					if (foldersData[i].tag.id == element.row.id) {
 						for (n in foldersData[i].tag.documents) {
@@ -179,7 +198,7 @@ function getNotes(element) {
 					alert("Window");
 					var newWin = Ti.UI.createWindow({
 						url : "notes.js",
-						navBarHidden : false,
+						// navBarHidden : false,
 						selection : element,
 						barColor : '#000',
 						data : notesRows,
@@ -188,7 +207,8 @@ function getNotes(element) {
 						exitOnClose: true
 					});
 					// win.nav.open(newWin);
-					Titanium.UI.currentTab.open(newWin);
+					// Titanium.UI.currentTab.open(newWin);
+					Titanium.UI.currentTab.open(newWin, {animated:true});
 				} else {
 					alert("That folder has no documents!");
 				}		
@@ -264,7 +284,7 @@ function getRecentDocs() {
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
 			for ( i in foldersData ) {
-				notesRows.push(createAddableNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
 			}
 			renderRecent();	
 		};
@@ -284,13 +304,37 @@ function getInterestingEggs(){
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
+			// alert(foldersData);
 			for ( i in foldersData ) {
-				notesRows.push(createNoteRow(foldersData[i].document.name, foldersData[i].document.id));
+				notesRows.push(createAddableNoteRow(foldersData[i].document.name, foldersData[i].document.id));
 			}	
 			renderInteresing();
 		};
 		xhr.send();
 	}		
+}
+
+function addDocument(id) {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		reviewing = false;
+		alert("Could not add those notes. Check your Internet connection and try again.");
+	} else {
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/documents/add_document/" + id);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status != 200) {		
+					alert("Could not add this document!");
+				} else {
+					alert("Change icon style");
+				}
+			}
+		}
+		xhr.send();
+	}	
 }
 
 
@@ -339,9 +383,33 @@ function attemptAutoLogin() {
 	}
 }
 
+function enableNotifications(id, enable, row_object) {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not connect to StudyEgg. Check your Internet connection and try again.");
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		xhr.open("GET", serverURL + "/documents/enable_mobile/" + id + "/" + ((enable)?1:0));
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			if ( row_object.row.children[0].push == true ) {
+				var push = false;
+		    	var image = 'images/unchecked.png';
+			} else {
+				var push = true;
+				var image = 'images/checked.png';
+			}
+			row_object.row.children[0].push = push;
+		 	row_object.row.children[0].image = image;
+		};
+		xhr.send();
+	}	
+}
+
 
 // Misc Network
-function updateCache() {
+function updateCache(context) {
+	alert("Updating cache");
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(1000000);
 	// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
@@ -349,7 +417,9 @@ function updateCache() {
 	xhr.setRequestHeader('Content-Type', 'text/json');
 	xhr.onload = function() {
 		Ti.App.data = eval(this.responseText);
-		// cacheCards();
+		if (context = "login") {
+			getFolders();
+		}
 	};
 	xhr.send();
 }
@@ -396,20 +466,63 @@ function registerDevice(token) {
 
 
 // Utility
-function createNoteRow(name, docid){
-	var row = Ti.UI.createTableViewRow({ id : docid}); 
-    var image = Ti.UI.createImageView({
-    	image:'images/unchecked.png',
-    	left: 15,
-    	touchEnabled:true,
-    	height:25,
-    	width:25,
-    	status:'unchecked'
-    });
+function createFolderRow(name, id, public_folder){
+	var row = Ti.UI.createTableViewRow({
+		id : id,
+		hasChild : true
+	}); 
+	
+	var image = Ti.UI.createImageView({
+		image : 'images/egg.jpg', 
+    	left : 5,
+    	touchEnabled : true,
+    	height : 50,
+    	width : 40,
+		id : "egg"
+	});
 	
 	var label= Ti.UI.createLabel({
-		text:name, 
-		left:53
+		text : name, 
+		left : 52
+	});
+	
+	label.public_folder = public_folder;
+	row.add(image);
+	row.add(label);
+	return row;
+}
+
+function createNoteRow(name, docid, push_enabled){
+	var row = Ti.UI.createTableViewRow({ id : docid}); 
+	if (push_enabled == 1) {
+	    var image = Ti.UI.createImageView({
+	    	image:'images/checked.png',
+	    	left: 15,
+	    	touchEnabled:true,
+	    	height:25,
+	    	width:25,
+	    	status:'unchecked',
+	    	id : "doc",
+	    	push : true
+	    });				
+	} else {
+	    var image = Ti.UI.createImageView({
+	    	image:'images/unchecked.png',
+	    	left: 15,
+	    	touchEnabled:true,
+	    	height:25,
+	    	width:25,
+	    	status:'unchecked',
+	    	id : "doc",
+	    	push : false
+	    });		
+	}
+
+	
+	var label= Ti.UI.createLabel({
+		text : name, 
+		left : 53, 
+		id : "label"
 	});
 	
 	row.add(image);
@@ -418,14 +531,15 @@ function createNoteRow(name, docid){
 }
 
 function createAddableNoteRow(name, docid){
-	var row = Ti.UI.createTableViewRow({ id : docid}); 
+	
     var image = Ti.UI.createImageView({
     	image:'images/unchecked.png',
     	left: 15,
     	touchEnabled:true,
     	height:25,
     	width:25,
-    	status:'unchecked'
+    	status:'unchecked',
+    	id : "doc"
     });
 	
 	var addButton = Ti.UI.createImageView({
@@ -433,17 +547,22 @@ function createAddableNoteRow(name, docid){
     	right: 0,
     	touchEnabled:true,
     	height:50,
-    	width:50
+    	width:50,
+    	id : "add"
 	});
-	
-	addButton.addEventListener('click', function(){
-		alert("Clicked");
-	})
 	
 	var label= Ti.UI.createLabel({
-		text:name, 
-		left:53
+		text : name, 
+		left : 53,
+		width : 220,
+		id : "label"
 	});
+	
+	var row = Ti.UI.createTableViewRow({ 
+		id : docid
+		// hasDetail : true
+		// rightImage : 'images/close.png'
+	}); 
 	
 	row.add(image);
 	row.add(label);
@@ -472,7 +591,10 @@ function processNotifications(data) {
 		Titanium.UI.iPhone.appBadge = 0;
 		alert("You have no pending notifications.");
 	} else {
-		// alert("Bro");
+		Ti.App.tabGroup.visible = false;
+
+		win.nav.visible = false;
+		reviewing = false;
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
@@ -506,22 +628,12 @@ function processData(data, context) {
 		reviewing = false;
 		alert('That document has no cards to review!'); 
 	} else {
-		// alert("Reviewing!");
 		// alert(Ti.App.tabGroup);
 		
 		Ti.App.tabGroup.visible = false;
-		// tabGroup.visible = false;
-		// alert(win.nav);
+
 		win.nav.visible = false;
-		// tabGroup.setActiveTab();
-		// alert("Yo");
-		// alert(tabGroup);
-		// tabGroup.visible = false;
-		// win.hide();
-		// Ti.App.current_win.hide();
-		// win.nav.hide(Ti.App.current_win);
 		reviewing = false;
-		// alert(tabGroup.activeTab);
 		var new_win = Ti.UI.createWindow({
 			url : "review.js",
 			navBarHidden : true,
@@ -552,26 +664,34 @@ function processData(data, context) {
 }
 	
 function authSuccess(email, password) {
+	updateCache("login");
 	// alert(email);
 	// alert(password);
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	registerDevice(Ti.App.Properties.getString("token"));
-	var newWin = Ti.UI.createWindow({
-		url : 'browser.js',
-		navBarHidden : false,
-		barColor : '#000',
-		nav : win.nav,
-		_parent: Titanium.UI.currentWindow,
-		orientationModes : [
-			Titanium.UI.PORTRAIT,
-			Titanium.UI.UPSIDE_PORTRAIT,
-			// Titanium.UI.LANDSCAPE_LEFT,
-			// Titanium.UI.LANDSCAPE_RIGHT
-		]
-	});
-	win.nav.open(newWin);	
-	updateCache();
+	// var newWin = Ti.UI.createWindow({
+		// url : 'browser.js',
+		// // navBarHidden : false,
+		// barColor : '#000',
+		// nav : win.nav,
+		// _parent: Titanium.UI.currentWindow,
+		// orientationModes : [
+			// Titanium.UI.PORTRAIT,
+			// Titanium.UI.UPSIDE_PORTRAIT,
+			// // Titanium.UI.LANDSCAPE_LEFT,
+			// // Titanium.UI.LANDSCAPE_RIGHT
+		// ]
+	// });
+	// win.nav.open(newWin);
+	emailField.blur();
+	passwordField.blur();
+	// confirmPasswordField.blur();
+	// alert(win.name);
+	Ti.App.base_window = win;
+	win.hide();
+	Ti.include('browser.js');
+	
 	// activityIndicator.hide();	
 }
 	

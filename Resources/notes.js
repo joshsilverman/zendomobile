@@ -5,7 +5,7 @@ win.name = "Notes";
 Ti.App.current_win = win;
 var reviewing = false;
 
-renderNavBar();
+// renderNavBar();
 Ti.include('networkMethods.js');
 Ti.include('helperMethods.js');
 
@@ -15,6 +15,7 @@ function initialize() {
 }
 
 function renderNavBar() {
+	
 	var back = Ti.UI.createButton({
 		title : 'Folders'		
 	});
@@ -40,6 +41,18 @@ function render(){
 	});
 	
 	lists.addEventListener('click', function(e){
+		if (e.source.id == "label") {
+			if ( reviewing == false ) {
+				reviewing = true;
+				getLines(e.row.id, "normal");
+			}	
+		} else if (e.source.id == "doc") {
+			if (e.source.push == 1) {
+				enableNotifications(e.row.id, false, e);
+			} else {
+				enableNotifications(e.row.id, true, e);
+			}
+		}		
 		// if ( e.row.children[0].status == 'checked' ) {
 			// var status = 'unchecked';
 		    // var image = 'images/unchecked.png';
@@ -54,10 +67,7 @@ function render(){
 // 		
 		 // e.row.children[0].status = status;
 		 // e.row.children[0].image = image;
-		if ( reviewing == false ) {
-			reviewing = true;
-			getLines(e.row.id, "normal");
-		}			 
+		 
 	});
 	
 	// toolbar.add(back);

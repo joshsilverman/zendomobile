@@ -2,13 +2,11 @@ Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
 win.name = "Folders";
 Ti.App.current_win = win;
-// alert(Ti.App.current_win.name);
-// renderNavBar();
 Ti.include('networkMethods.js');
 
 function initialize() {
-	folderRows = [];
-	getFolders();
+	// folderRows = [];
+	// getFolders();
 }
 
 function renderNavBar() {
@@ -17,37 +15,21 @@ function renderNavBar() {
 		Ti.App.current_win = win._parent;
 		win.nav.close(win); 
 	});
-	win.leftNavButton = backButton;	
-	
+	win.leftNavButton = backButton;		
 }
 
-function createFolderRow(name, id, public_folder){
-	var row = Ti.UI.createTableViewRow({id : id}); 
-	var image = Ti.UI.createImageView({
-		image:'images/folder.png', 
-		left: 10,
-		width:50,
-		height:50
-	});
-	var label= Ti.UI.createLabel({
-		text : name, 
-		left : 70
-	});
-	label.public_folder = public_folder;
-	row.add(image);
-	row.add(label);
-	return row;
-}
 
-function renderFolders() {
-	
+
+function renderFolders(data) {
+	// folderRows = [];
+	// for (i in Ti.App.data) { folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id, false)); }
 	var toolbar = Ti.UI.createToolbar({
 		top : 0		
 	});
 	
 	var lists = Titanium.UI.createTableView({
 		rowHeight : 80,
-		data : folderRows
+		data : data
 	});
 	
 	lists.addEventListener('click', function(e) {
@@ -62,3 +44,4 @@ function renderFolders() {
 }
 
 initialize();
+

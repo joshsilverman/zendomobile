@@ -26,7 +26,9 @@ function registerForPush() {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
+			// Ti.App.Properties.setBool('notification', true);
 			if (Ti.App.Properties.getBool('foreground') == true) {
+				alert("Callback from foreground!");
 				var reviewAlert = Ti.UI.createAlertDialog({
 				    title : 'You have new cards to review!',
 				    message : "Go to them now?",
@@ -35,12 +37,12 @@ function registerForPush() {
 				});
 				reviewAlert.addEventListener('click', function(f) {
 					if (f.index == 1) { 
-						// win.hide();
 						retrieveAllNotifications(); 
 					};
 				});
 				reviewAlert.show();		
 			} else {
+				alert("Callback from background!");
 				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
 		}
@@ -169,17 +171,19 @@ function render() {
 			_parent: Titanium.UI.currentWindow,
 			exitOnClose: true
 		});
+		emailField.blur();
+		passwordField.blur();
 		win.nav.open(newWin);	
 	});
 	
-	logo = Ti.UI.createImageView({
+	studyEggLogo = Ti.UI.createImageView({
 		image : 'images/studyegg_logo.jpg',
 		height : 130,
 		top : 35
 	});
 	
 	// logo.hide();
-	win.add(logo);
+	win.add(studyEggLogo);
 	
 	win.add(passwordField);
 	win.add(confirmButton);	
@@ -191,7 +195,7 @@ function adjustViews() {
 	if ( focused == true ) {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard up, portrait mode");
-			logo.hide();
+			studyEggLogo.hide();
 			emailField.top = 60;
 			emailField.bottom = null;
 			passwordField.top = 110;
@@ -203,7 +207,7 @@ function adjustViews() {
 		} 
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard up, landscape mode");
-			logo.hide();
+			studyEggLogo.hide();
 			emailField.top = 10;
 			passwordField.top = 50;
 			confirmButton.bottom = null;
@@ -212,8 +216,8 @@ function adjustViews() {
 	} else {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard hidden, portrait mode");
-			logo.top = 55;
-			logo.show();
+			studyEggLogo.top = 55;
+			studyEggLogo.show();
 			emailField.top = null;
 			emailField.bottom = 130;
 			passwordField.top = null;
@@ -226,8 +230,8 @@ function adjustViews() {
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");
-			logo.top = 20;
-			logo.show();
+			studyEggLogo.top = 20;
+			studyEggLogo.show();
 			emailField.top = 130;
 			passwordField.top = 180;
 			// confirmButton.top = 240;
