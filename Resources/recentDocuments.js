@@ -71,47 +71,47 @@ function renderRecent(){
 		top : 0
 	});
 		
-	var lists = Titanium.UI.createTableView({
+	recentList = Titanium.UI.createTableView({
 		rowHeight : 60,
-		data : notesRows
+		data : [],
+		backgroundColor : '#dfdacd'
 	});
 	
-	lists.addEventListener('click', function(e){
+	recentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
 			if ( reviewing == false ) {
 				reviewing = true;
 				getLines(e.row.id, "normal");
 			}	
 		} else if (e.source.id == "doc") {
-			if (e.source.push == 1) {
+			if ( e.row.children[0].push == true ) {
+				var push = false;
+		    	var image = 'images/document@2x.png';
+			} else {
+				var push = true;
+				var image = 'images/document-feed@2x.png';
+			}
+			e.row.children[0].push = push;
+		 	e.row.children[0].image = image;		 	
+			if (e.source.push == 0) {
 				enableNotifications(e.row.id, false, e);
 			} else {
 				enableNotifications(e.row.id, true, e);
 			}
 		}	
-		// if (e.source)
-
-		// if ( e.row.children[0].status == 'checked' ) {
-			// var status = 'unchecked';
-		    // var image = 'images/unchecked.png';
-		// } else {
-			// var status = 'checked';
-			// var image = 'images/checked.png';
-		// }
-		// for ( i in notesRows ) {
-			// notesRows[i].children[0].status = 'unchecked';
-			// notesRows[i].children[0].image = 'images/unchecked.png';	
-		// }
-// 		
-		 // e.row.children[0].status = status;
-		 // e.row.children[0].image = image;
 	});
-	
-	// toolbar.add(back);
-	// toolbar.add(review);
-
-	win.add(lists);
-	//win.add(toolbar);
+	win.add(recentList);
 }
 
-initialize();
+function setRecentList(results) {
+	var data = [];
+	//Insert check for push enabled -> Josh
+	//Fix recent, doesn't seem to be working here or on live site
+	for ( i in results ) { data.push(createNoteRow(results[i].document.name, results[i].document.id, results[i].document.tag_id, false)); }
+	recentList.setData(data);
+}
+
+win.addEventListener('focus', function() {
+	renderRecent();
+	updateRecent();
+});

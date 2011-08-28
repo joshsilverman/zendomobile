@@ -2,9 +2,12 @@ Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
 win.name = "Folders";
 Ti.App.current_win = win;
+dataHash = {};
+// folderRows = [];
+// alert(folderRows);
 Ti.include('networkMethods.js');
-
 function initialize() {
+	updateCache("login");
 	// folderRows = [];
 	// getFolders();
 }
@@ -18,30 +21,41 @@ function renderNavBar() {
 	win.leftNavButton = backButton;		
 }
 
-
-
-function renderFolders(data) {
-	// folderRows = [];
-	// for (i in Ti.App.data) { folderRows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id, false)); }
+function renderFolders(rows) {
+	// alert(dataHash);
 	var toolbar = Ti.UI.createToolbar({
 		top : 0		
 	});
-	
-	var lists = Titanium.UI.createTableView({
+	eggList = Titanium.UI.createTableView({
 		rowHeight : 80,
-		data : data
+		data : rows,
+		backgroundColor : '#dfdacd'
 	});
-	
-	lists.addEventListener('click', function(e) {
+	eggList.addEventListener('click', function(e) {
 		if (e.source.public_folder == true){
 			getPublicDocs(e);
 		} else {
 			notesData = getNotes(e);	
 		}	
 	});
-
-	win.add(lists);
+	win.add(eggList);
 }
 
-initialize();
+// function setEggsList(results) {
+	// // var data = [];
+	// //Insert check for push enabled -> Josh
+	// //Fix recent, doesn't seem to be working here or on live site
+	// // for ( i in results ) { data.push(createNoteRow(results[i].document.name, results[i].document.id, results[i].document.tag_id, results[i].document)); }
+	// eggList.setData(results);
+// }
+// 
+// win.addEventListener('focus', function() {	
+	// if (Ti.App.myEggsDirty == true) {
+		// alert("Dirty");
+		// updateDocuments(win.selection);
+		// Ti.App.myEggsDirty = false;
+	// }
+// });
 
+
+initialize();

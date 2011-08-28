@@ -75,15 +75,11 @@ var closeButton = Ti.UI.createButton({
 closeButton.addEventListener('click', function() {
 	Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 	win._parent._parent.show();
-	win.nav.close(win._parent);
-	win.nav.close(win)
-	// var newWin = Ti.UI.createWindow({
-		// url : "notes.js",
-		// navBarHidden : false,
-		// nav : win.nav,
-		// data : win.folder
-	// });	
-	// win.nav.open(newWin);
+	// win._parent._parent.close();
+	win.close();
+	Ti.App.tabGroup.visible = true;
+	win.nav.visible = true;
+	Ti.App.reviewing = false;
 });
 
 win.add(gradeLabel);

@@ -2,13 +2,14 @@
 var win = Ti.UI.currentWindow;
 win.name = "Review";
 Ti.App.current_win = win;
+// alert(Ti.App.reviewing);
 // alert(Ti.App.current_win.name);
 // alert(win.reviewContext);
 // Titanium.UI.currentWindow.orientationModes = [
 	// Titanium.UI.LANDSCAPE_LEFT,
 	// Titanium.UI.LANDSCAPE_RIGHT	
 // ];
-Titanium.UI.setBackgroundColor('#fff');
+// Titanium.UI.setBackgroundColor('#fff');
 // Titanium.UI.setBackgroundColor('#171717');
 Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
@@ -22,7 +23,7 @@ selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
 // alert(win._parent.name);
-win.nav.hide(win._parent);
+// win.nav.hide(win._parent);
 
 // win._parent.hide();
 
@@ -109,12 +110,14 @@ function initialize(cardViews) {
 		if (win._parent.name != "Review") {
 			Titanium.UI.orientation = Titanium.UI.PORTRAIT;	
 		}
-		win.hide();
-		Ti.App.current_win = win._parent;
-		win.nav.close(win);
+		// win.hide();
+		// Ti.App.current_win = win._parent;
+		// win.nav.close(win);
 		// win._parent.show();
+		win.close();
 		Ti.App.tabGroup.visible = true;
 		win.nav.visible = true;
+		Ti.App.reviewing = false;
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({
@@ -283,7 +286,7 @@ function buttonClicked(button) {
 			Ti.App.current_win = win._parent;
 			win.nav.close(win);
 		} else {
-			alert("Bromine");
+			// alert("Bromine");
 			var newWin = Ti.UI.createWindow({
 				url : "stats.js",
 				navBarHidden : true,
@@ -293,9 +296,18 @@ function buttonClicked(button) {
 				folder : win.folder,
 				_parent: Titanium.UI.currentWindow
 			});	
+			win.nav.close(win);
+			// win.hide();
+			// Ti.App.current_win = win._parent;
+			// win.nav.close(win);
+			// win._parent.show();
+			// Ti.App.tabGroup.visible = true;
+			// win.nav.visible = true;
+			// alert("Bromine");
 			// win.hide();
 			// win._parent.show();
-			win.nav.open(newWin);			
+			newWin.open();
+			// win.nav.open(newWin);			
 		}
 	}
 }

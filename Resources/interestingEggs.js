@@ -15,6 +15,7 @@ Ti.include('networkMethods.js');
 Ti.include('helperMethods.js');
 
 function initialize() {
+	renderInteresing();
 	getInterestingEggs();
 }
 
@@ -70,51 +71,95 @@ function renderInteresing(){
 		top : 0
 	});
 		
-	var lists = Titanium.UI.createTableView({
+	popularList = Titanium.UI.createTableView({
 		//top : toolbar.height,
 		rowHeight : 60,
-		data : notesRows
+		data : [],
+		backgroundColor : '#dfdacd'
 	});
 	
-	lists.addEventListener('click', function(e){
-		// if ( e.row.children[0].status == 'checked' ) {
-			// var status = 'unchecked';
-		    // var image = 'images/unchecked.png';
-		// } else {
-			// var status = 'checked';
-			// var image = 'images/checked.png';
-		// }
-		// for ( i in notesRows ) {
-			// notesRows[i].children[0].status = 'unchecked';
-			// notesRows[i].children[0].image = 'images/unchecked.png';	
-		// }
-// 		
-		 // e.row.children[0].status = status;
-		 // e.row.children[0].image = image;
+	popularList.addEventListener('click', function(e){
+		// if (e.source.id == "label") {
+			// if ( reviewing == false ) {
+				// reviewing = true;
+				// getLines(e.row.id, "normal");
+			// }	
+		// } else if (e.source.id == "add") {
+			// //Insert check for added status, if not then:
+			// // alert(JSON.stringify(e.row.children[2].image = null));
+			// e.row.children[2].image = null;
+			// addDocument(e.row.id);
+// 			
+		// } else if (e.source.id == "doc") {
+			// if (e.source.push == 1) {
+				// enableNotifications(e.row.id, false, e);
+			// } else {
+				// enableNotifications(e.row.id, true, e);
+			// }
+		// }	
 		if (e.source.id == "label") {
-			if ( reviewing == false ) {
-				reviewing = true;
+			// if ( reviewing == false ) {
+				// reviewing = true;
 				getLines(e.row.id, "normal");
-			}	
+			// }	
 		} else if (e.source.id == "add") {
-			addDocument(e.row.id);
-		// } else if (e.source.id == "egg") {
-			// enableNotifications(e.row.id, true);
-		// }	 
+			e.row.children[2].image = 'images/folder.png';
+			e.row.children[2].owned = true;
+			addDocument(e.row.id, e);		
+		// } else if (e.source.id == "owned") {
 		} else if (e.source.id == "doc") {
-			if (e.source.push == 1) {
+			if ( e.row.children[0].push == true ) {
+				var push = false;
+		    	var image = 'images/document@2x.png';
+			} else {
+				var push = true;
+				var image = 'images/document-feed@2x.png';
+			}
+			e.row.children[0].push = push;
+		 	e.row.children[0].image = image;	
+			e.row.children[2].image = 'images/folder.png';
+			e.row.children[2].owned = true;	 	
+			if (e.source.push == 0) {
 				enableNotifications(e.row.id, false, e);
 			} else {
 				enableNotifications(e.row.id, true, e);
 			}
-		}	
+		}
 	});
-	
+			
 	// toolbar.add(back);
 	// toolbar.add(review);
 
-	win.add(lists);
+	win.add(popularList);
 	//win.add(toolbar);
 }
 
+function setPopularResults(results) {
+	//TODO no push data coming through here	
+	var data = [];
+	for ( i in results ) { 
+		// alert(JSON.stringify(results[i].id));
+		if (docs[results[i].document.id] == null) {
+			data.push(createAddableNoteRow(results[i].document.name, results[i].document.id, false, docs[results[i].document.id])); 
+		} else {
+			data.push(createAddableNoteRow(results[i].document.name, results[i].document.id, true, docs[results[i].document.id])); 
+		}	
+	}
+	popularList.setData(data);
+}
+
 initialize();
+
+win.addEventListener('focus', function() {
+	docs = {};
+	for (i in Ti.App.data) {
+		for ( j in Ti.App.data[i].tag.documents ) {
+			docs[Ti.App.data[i].tag.documents[j].id] = Ti.App.data[i].tag.documents[j].userships[0].push_enabled
+		}
+	}
+	alert(docs);
+	if (Ti.App.popularDirty == true) {
+		alert("Dirty");
+		Ti.App.popularDirty = false;
+	}
+});

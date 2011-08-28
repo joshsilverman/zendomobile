@@ -105,12 +105,12 @@ function render() {
 					alert("Your password must be at least six characters!");
 					return;				
 				} else {
-					if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-						alert('Could not create your account. Check your internet connection.');
-						return;
-					} else {
+					// if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+						// alert('Could not create your account. Check your internet connection.');
+						// return;
+					// } else {
 						signUp(email, password);
-					}				
+					// }				
 				}
 			}	
 		}	
@@ -126,7 +126,7 @@ function render() {
 	
 	cancelButton.addEventListener('click', function(){
 		Ti.App.current_win = win._parent;
-		win.nav.close(win);	
+		win.close(win);	
 	});
 	
 	logo = Ti.UI.createImageView({
