@@ -1,53 +1,65 @@
-Ti.UI.setBackgroundColor('#fff');
-// Ti.UI.orientation = Ti.UI.PORTRAIT;
 var win = Ti.UI.currentWindow;
-win.name = "Notes";
-Ti.App.current_win = win;
-var reviewing = false;
 
-// renderNavBar();
-Ti.include('networkMethods.js');
-Ti.include('helperMethods.js');
+// Ti.include('networkMethods.js');
+Ti.include('commonMethods.js');
 
 function initialize() {
-	// notesRows = win.data;
-	render();
+	renderDocuments();
+	renderNavBar();
 }
 
 function renderNavBar() {
-	
-	var back = Ti.UI.createButton({
-		title : 'Folders'		
+	var accountButton = Ti.UI.createButton({ title : 'Account' });
+	accountButton.addEventListener('click', function() {
+		newWin = Ti.UI.createWindow({
+			backgroundColor : '#dfdacd',
+			backgroundImage : 'images/splash@2x.png',
+			navBarHidden : false,
+			barColor : '#0066b2',
+	    	url : 'account.js',
+		});
+		newWin.open();
+	});	
+	var refreshButton = Titanium.UI.createButton({
+		systemButton : Titanium.UI.iPhone.SystemButton.REFRESH
+	})
+	refreshButton.addEventListener('click', function() {
+		updateDocuments("refresh");
+	});	
+	var logo = Ti.UI.createImageView({
+		image : 'images/logo-indicator.png', 
+		height : 35,
+		width : 80
 	});
 	
-	back.addEventListener('click', function() {
-		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
-		Ti.App.current_win = win._parent;
-		win.nav.close(win);
-	});
-	
-	win.leftNavButton = back;
+	logo.addEventListener('click', function() {
+		// if (Titanium.Network.remoteNotificationsEnabled == false) {
+			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		// }
+		retrieveAllNotifications();
+	});	
+	win.rightNavButton = refreshButton;
+	win.titleControl = logo;
 }
 
-function render(){
+function renderDocuments(){
 
 	var toolbar = Ti.UI.createToolbar({
 		top : 0
 	});
 	
 	
-	lists = Titanium.UI.createTableView({
+	documentList = Titanium.UI.createTableView({
 		rowHeight : 60,
 		data : win.data,
 		backgroundColor : '#dfdacd'
 	});
 	
-	lists.addEventListener('click', function(e){
-		// alert(JSON.stringify(win.row.children[0]));
+	documentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			if ( reviewing == false ) {
-				reviewing = true;
-				getLines(e.row.id, "normal");
+			if ( Ti.App.reviewing != true ) {
+				Ti.App.reviewing = true;
+				getLines(e.row.id, "normal", documentList);
 			}	
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
@@ -60,83 +72,55 @@ function render(){
 			e.row.children[0].push = push;
 		 	e.row.children[0].image = image;		 	
 			if (e.source.push == 0) {
-				enableNotifications(e.row.id, false, e);
+				enableNotifications(e.row.id, false, e, "documents");
 			} else {
-				enableNotifications(e.row.id, true, e);
+				enableNotifications(e.row.id, true, e, "documents");
 			}
 		}	
 	});
-	
-	// toolbar.add(back);
-	// toolbar.add(review);
 
-	win.add(lists);
-	updateDocuments(win.selection);
+	win.add(documentList);
+	updateDocuments();
 }
 
-function setDocumentsList(results) {
-	// var data = [];
-	//Insert check for push enabled -> Josh
-	//Fix recent, doesn't seem to be working here or on live site
-	// for ( i in results ) { data.push(createNoteRow(results[i].document.name, results[i].document.id, results[i].document.tag_id, results[i].document)); }
-	lists.setData(results);
+function updateDocuments(context) {
+	notesRows = [];
+	if (Ti.App.data != null && context != "refresh") {
+		for ( i in Ti.App.data ) {
+			if (Ti.App.data[i].tag.id == win.selection) {					
+				for (n in Ti.App.data[i].tag.documents) {
+					notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id, Ti.App.data[i].tag.documents[n].tag_id, Ti.App.data[i].tag.documents[n].userships[0].push_enabled));
+				}
+			}
+		}
+		documentList.setData(notesRows);
+	} else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(1000000);
+		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
+		xhr.open("GET", serverURL + "/tags/get_tags_json");
+		xhr.setRequestHeader('Content-Type', 'text/json');
+		xhr.onload = function() {
+			foldersData = eval(this.responseText);
+			for ( i in foldersData ) {
+				if (foldersData[i].tag.id == win.selection) {
+					for (n in foldersData[i].tag.documents) {
+						notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id, Ti.App.data[i].tag.documents[n].tag_id, Ti.App.data[i].tag.documents[n].userships[0].push_enabled));				
+					}
+				}
+			}
+			documentList.setData(notesRows);	
+		}	
+		xhr.send();			
+	}	
 }
 
-initialize();
-
-win.addEventListener('focus', function() {	
+win.addEventListener('focus', function() {
+	updateLogo();	
 	if (Ti.App.documentsDirty == true) {
-		alert("Dirty");
-		updateDocuments(win.selection);
+		updateDocuments();
 		Ti.App.documentsDirty = false;
 	}
 });
 
-// win.addEventListener('focus', function() {	
-	// if (Ti.App.dirty != true) {
-		// return;
-	// }
-	// //For each tag
-	// for (i in Ti.App.data) {
-		// //If it is the current tag
-		// if (Ti.App.data[i].tag.id == win.selection) {
-			// //For each doc within the tag
-			// for (j in Ti.App.data[i].tag.documents) {
-				// //For each row in the list
-				// for (k in win.data) {
-					// //If the row id matches the doc id AND the push status is not the same for these two 
-					// // alert("In here");
-					// if (Ti.App.data[i].tag.documents[j].id == win.data[k].id && win.data[k].children[0].push != Ti.App.data[i].tag.documents[j].userships[0].push_enabled) {
-						// if (win.data[k].children[0].status == "unchecked"){
-							// win.data[k].children[0].status = "checked";
-							// win.data[k].children[0].image = 'images/checked.png';
-							// win.data[k].children[0].push = true;
-						// } else {
-							// win.data[k].children[0].status = "unchecked";
-							// win.data[k].children[0].image = 'images/unchecked.png';
-							// win.data[k].children[0].push = false;
-						// }
-					// }
-				// }		
-			// }	
-		// }
-	// }
-// 	
-	// if (win.selection == null){
-		// var docIds = [];
-		// for (k in win.data) { docIds.push(win.data[k].id); }
-		// alert(docIDs);
-		// for (i in Ti.App.data) {
-			// if (Ti.App.data[i].tag.id == null) {
-				// for (j in Ti.App.data[i].tag.documents) {	
-					// // alert()			
-					// if (docIds.indexOf(Ti.App.data[i].tag.documents[j].id) == -1) {
-						// // alert(JSON.stringify(Ti.App.data[i].tag.documents[j]));
-						// lists.appendRow(createNoteRow(Ti.App.data[i].tag.documents[j].name, Ti.App.data[i].tag.documents[j].id, Ti.App.data[i].tag.documents[j].tag_id, Ti.App.data[i].tag.documents[j].userships[0].push_enabled));
-					// }
-				// }
-			// }
-		// }
-	// }
-	// Ti.App.dirty = false;
-// });
+initialize();

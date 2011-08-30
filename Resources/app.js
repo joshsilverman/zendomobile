@@ -2,9 +2,12 @@ Ti.App.Properties.setBool('active', false);
 Ti.App.Properties.setBool('launching', true);
 Ti.App.Properties.setBool('foreground', false);
 Ti.App.Properties.setBool('notification', false);
-// var serverURL = 'http://192.168.0.101:3000';
 
-Ti.include('networkMethods.js');
+Ti.include('authentication.js');
+authenticate(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "start");
+
+
+
 // alert(Ti.App.Properties.getString('email'));
 // Ti.App.eggList;
 // Ti.App.docList;
@@ -224,4 +227,3 @@ Ti.include('networkMethods.js');
     // tabGroup.open();
 // });
 
-authenticate(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "start");

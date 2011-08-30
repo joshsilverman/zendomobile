@@ -7,14 +7,14 @@ var win = Ti.UI.currentWindow;
 // ];
 
 Titanium.UI.setBackgroundColor('#fff');
-
+// alert(JSON.stringify(win.data));
 var screenWidth = Ti.Platform.displayCaps.platformWidth;
 var screenHeight = Ti.Platform.displayCaps.platformHeight;
 var gradeValues = {
-	1 : 9,
-	2 : 6, 
-	3 : 4, 
-	4 : 1	
+	4 : 9,
+	3 : 6, 
+	2 : 4, 
+	1 : 1	
 }
 var gradeCounts = {
 	1 : 0,
@@ -23,11 +23,11 @@ var gradeCounts = {
 	4 : 0	
 }
 
-var total = 0;
-var possible = 0;
+total = 0;
+possible = 0;
 
 for ( i in win.data) {
-	if ( win.data[i].grade != 0 ) {
+	if ( win.data[i].grade != null && win.data[i].grade != 0 ) {
 		possible += 9;
 		total += gradeValues[win.data[i].grade];
 		gradeCounts[win.data[i].grade] += 1
@@ -45,27 +45,27 @@ if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
     });
 } else {
 	var graph = Ti.UI.createImageView({
-		image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
+		image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&legend=bottom&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
 	            + gradeCounts[4] + "," + gradeCounts[3] + "," + gradeCounts[2] + "," + gradeCounts[1] +
 	            "&chdl=Got it - " + gradeCounts[4] + "|Kinda - " + gradeCounts[3] +
 	            "|Barely - " + gradeCounts[2] + "|No clue - " + gradeCounts[1] + "&chma=|2",
-	    width : 450, 
+	    width : 325, 
 	    height : 275,
-	    top :  0, 
+	    top :  80, 
 	    left : -20
 	});
 }
 
 var gradeLabel = Ti.UI.createLabel({
 	text : "Your score: " + (Math.round((total/possible) * 100)) + "%",
-	top : -220, 
-	right : -280,
+	top : -320, 
+	right : 0,
 	textAlign : 'center',
-	font : {fontSize : 20, fontWeight:'bold'} 
+	font : {fontFamily : 'Marker Felt', fontSize : 30, fontWeight:'bold'} 
 });
 
 var closeButton = Ti.UI.createButton({
-	title : 'Back to notes',
+	title : 'Done',
 	width : 120, 
 	height : 50, 
 	bottom : 23,
@@ -74,11 +74,9 @@ var closeButton = Ti.UI.createButton({
 	
 closeButton.addEventListener('click', function() {
 	Titanium.UI.orientation = Titanium.UI.PORTRAIT;
-	win._parent._parent.show();
-	// win._parent._parent.close();
 	win.close();
-	Ti.App.tabGroup.visible = true;
-	win.nav.visible = true;
+	win._parent.close();
+	Ti.App.tabGroup.show();
 	Ti.App.reviewing = false;
 });
 

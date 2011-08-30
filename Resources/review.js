@@ -209,6 +209,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	cardView.add(answer);
 		
 	cardView.addEventListener('singletap', function(e) {
+		alert('sup');
 		
 		cardView.animate({
 			view : cardBackground,
@@ -224,7 +225,9 @@ function createCardView(cardObject, cardNumber, totalCards) {
 			cardBackground.image = 'images/card.png';
 		}
 		
-		showGradeButtons();
+		// showGradeButtons();
+		alert(JSON.stringify(prompt));
+		alert(JSON.stringify(answer));
 		if (prompt.visible == true) {
 			prompt.hide();
 			cardView.add(answer);
@@ -260,7 +263,7 @@ function showGradeButtons(){
 		}
 		// Ti.API.debug(buttons[cards[cardScrollableView.currentPage]].images["selected"]);
 
-		buttons[cards[cardScrollableView.currentPage].grade - 1].color = selectedColor;
+		// buttons[cards[cardScrollableView.currentPage].grade - 1].color = selectedColor;
 		// buttons[cards[cardScrollableView.currentPage].grade - 1].backgroundImage = buttons[cards[cardScrollableView.currentPage].grade - 1].images["selected"];
 	}
 }

@@ -1,16 +1,16 @@
-Ti.UI.setBackgroundColor('#fff');
 var win = Ti.UI.currentWindow;
-win.name = "Sign Up";
-Ti.App.current_win = win;
+win.backgroundImage = 'images/splash@2x.png';
+
+// Ti.App.current_win = win;
 
 Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 var currentOrientation = Titanium.UI.PORTRAIT;
 var focused = false;
 
-Ti.include('networkMethods.js');
-Ti.include('helperMethods.js');
+// Ti.include('networkMethods.js');
+// Ti.include('helperMethods.js');
 // Ti.include('dimensions.js');
-// Ti.include('authenticate.js');
+Ti.include('authentication.js');
 
 function render() {
 	emailField = Ti.UI.createTextField({
@@ -110,6 +110,9 @@ function render() {
 						// return;
 					// } else {
 						signUp(email, password);
+						emailField.blur();
+						passwordField.blur();
+						confirmPasswordField.blur();	
 					// }				
 				}
 			}	
@@ -129,14 +132,14 @@ function render() {
 		win.close(win);	
 	});
 	
-	logo = Ti.UI.createImageView({
-		image : 'images/studyegg_logo.jpg',
-		height : 130,
-		top : 35
-	});
+	// logo = Ti.UI.createImageView({
+		// image : 'images/studyegg_logo.jpg',
+		// height : 130,
+		// top : 35
+	// });
 	
 	// logo.hide();
-	win.add(logo);
+	// win.add(logo);
 	win.add(emailField);
 	win.add(confirmPasswordField);
 	win.add(passwordField);
@@ -149,7 +152,7 @@ function adjustViews() {
 	if ( focused == true ) {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard up, portrait mode");
-			logo.hide();
+			// logo.hide();
 			emailField.bottom = null;
 			emailField.top = 30;
 			passwordField.bottom = null;
@@ -163,7 +166,7 @@ function adjustViews() {
 		} 
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard up, landscape mode");
-			logo.hide();
+			// logo.hide();
 			emailField.top = 10;
 			passwordField.top = 50;
 			confirmButton.bottom = null;
@@ -172,8 +175,8 @@ function adjustViews() {
 	} else {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
 			Ti.API.debug("Keyboard hidden, portrait mode");
-			logo.top = 55;
-			logo.show();
+			// logo.top = 55;
+			// logo.show();
 			emailField.bottom = 180;
 			emailField.top = null;
 			passwordField.bottom = 130;
@@ -187,8 +190,8 @@ function adjustViews() {
 		}
 		if ( currentOrientation == 3 || currentOrientation == 4 ) {
 			Ti.API.debug("Keyboard hidden, landscape mode");
-			logo.top = 20;
-			logo.show();
+			// logo.top = 20;
+			// logo.show();
 			emailField.top = 130;
 			passwordField.top = 180;
 			// confirmButton.top = 240;
