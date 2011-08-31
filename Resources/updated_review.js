@@ -14,7 +14,8 @@ Ti.include('dimensions.js');
 buttonTopPad = 10;
 buttonRightPad = 10;
 buttonLeftPad = 10;
-buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
+// buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
+buttonHeight = 55;
 cardLeftPad = 10;
 selectedColor = '3B5FD9';
 unselectedColor = 'gray';
@@ -37,16 +38,25 @@ flipAnimation = Ti.UI.createAnimation({
 // alert(win._context);
 // getCards(win.doc_id, win._context);
 
+shortSession = true;
+
 function renderReview() {
 	cards = win.cards;
 	cardViews = [];
-	count = 0
+	count = 0;
 	if (cards.length <= 10) {
-		for ( i in cards ) { 
+		for ( i in cards ) {
+			// alert(cards);
+			// alert(i);
+			// alert(cards[i]);
+			cards[i].flipped = false;
 			cardViews.push(createCardView(cards[i], cards[i].answer, cards[i].mem));
+			// alert(JSON.stringify(cardViews[i]));
 		}	
 	} else {
-		while (count <= 10 ) {
+		shortSession = false;
+		while (count < 10 ) {
+			cards[count].flipped = false;
 			cardViews.push(createCardView(cards[count], cards[count].answer, cards[count].mem));
 			count++;
 		}
@@ -107,14 +117,14 @@ function renderReview() {
 	}
 	closeButton = Ti.UI.createImageView({
 		image : 'images/close@2x.png', 
-		height : 50,
-		width : 50, 
-		top : 15,
-		left : cardLeftPad
+		height : 40,
+		width : 40, 
+		top : 12,
+		left : 20
 	});
 	closeButton.addEventListener('click', function() {
 		// Ti.App.tabGroup.visible = true;
-		Ti.App.reviewing = false;
+		// Ti.App.reviewing = false;
 		Ti.App.tabGroup.show();
 		win.close();
 	});
@@ -122,13 +132,20 @@ function renderReview() {
 		
 	cardScrollableView.addEventListener('scroll', function(e) {
 		buttonView.animate(fadeOutAnimation);
+		// alert(cards);
+		// alert(cardScrollableView.currentPage);
+		// alert(cards[cardScrollableView.currentPage]);
 		if (cards[cardScrollableView.currentPage].flipped == true) {
 			buttonView.animate(fadeInAnimation);
 		}
-		if (cards.length > count) {
-			cardScrollableView.addView(createCardView(cards[count], cards[count].answer, cards[count].mem));
-			count++;		
-		}	
+		// alert(count);
+		if (shortSession == false){
+			if (cards.length > count) {
+				cardScrollableView.addView(createCardView(cards[count], cards[count].answer, cards[count].mem));
+				count++;		
+			}	
+		}
+
 	});
 	
 	
@@ -146,7 +163,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	// alert(cardObject.answer);
 
 	var cardBackground = Ti.UI.createImageView({
-		image : 'images/review-bg-solid@2x.png',
+		image : 'images/review-bg@2x.png',
 		status : 'front',
 		// height : 445
 		left : 20,
@@ -234,8 +251,8 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	
 	var skipButton = Titanium.UI.createImageView({
 		image : 'images/skip@2x.png',
-		bottom : 20,
-		right : 30,
+		bottom : 8,
+		right : 23,
 		height : 60, 
 		width : 60,
 		action : "skip"
@@ -268,7 +285,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 				if (cardGraded == true) {
 					openStats();
 				} else {
-					Ti.App.reviewing = false;
+					// Ti.App.reviewing = false;
 					Ti.App.tabGroup.show();
 					win.close();
 				}
@@ -282,10 +299,10 @@ function createCardView(cardObject, cardNumber, totalCards) {
 			});
 			if ( cardBackground.status == 'front' ) {
 				cardBackground.status = 'back';
-				cardBackground.image = 'images/review-bg-solid@2x.png';
+				cardBackground.image = 'images/review-bg@2x.png';
 			} else {
 				cardBackground.status = 'front';
-				cardBackground.image = 'images/review-bg-solid@2x.png';
+				cardBackground.image = 'images/review-bg@2x.png';
 			}
 			
 			
@@ -355,7 +372,7 @@ function buttonClicked(button) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
 		if (win._context == "push") {
-			Ti.App.reviewing = false;
+			// Ti.App.reviewing = false;
 			Ti.App.tabGroup.show();
 			win.close();
 		} else {
@@ -367,7 +384,7 @@ function buttonClicked(button) {
 function openStats() {
 	win.hide();
 	Ti.App.tabGroup.hide();
-	Ti.App.reviewing = false;
+	// Ti.App.reviewing = false;
 	var newWin = Ti.UI.createWindow({
 		url : "stats.js",
 		navBarHidden : true,
@@ -395,7 +412,7 @@ function reportGrade(memID, confidence) {
 		1 : 1	
 	};
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
+	xhr.setTimeout(5000);
 	xhr.open("POST", serverURL + "/mems/update/" + memID + "/" + gradeValues[confidence]  + "/0");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {

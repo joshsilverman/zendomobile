@@ -39,9 +39,9 @@ function renderNavBar() {
 	});
 	
 	logo.addEventListener('click', function() {
-		// if (Titanium.Network.remoteNotificationsEnabled == false) {
-			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		// }
+		if (Titanium.Network.remoteNotificationsEnabled == false) {
+			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		}
 		retrieveAllNotifications();
 	});	
 	win.rightNavButton = refreshButton;
@@ -87,14 +87,14 @@ function renderRecent(){
 function updateRecent() {
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
+	xhr.setTimeout(5000);
 	xhr.open("GET", serverURL + "/tags/get_recent_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		recentData = eval(this.responseText);
 		var data = [];
 		for ( i in recentData ) { 
-			data.push(createNoteRow(recentData[i].document.name, recentData[i].document.id, recentData[i].document.tag_id, false));
+			data.push(createNoteRow(recentData[i].document.name, recentData[i].document.id, recentData[i].document.tag_id, recentData[i].document.userships[0].push_enabled));
 		}
 		recentList.setData(data);
 	};

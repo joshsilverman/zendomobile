@@ -5,6 +5,7 @@ Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 var currentOrientation = Titanium.UI.PORTRAIT;
 
 Ti.include('authentication.js');
+Ti.include('commonMethods.js');
 
 function render() {
 	emailField = Ti.UI.createTextField({
@@ -63,13 +64,14 @@ function render() {
 	confirmButton.addEventListener('click', function(){
 		var email = emailField.value; 
 		var password = passwordField.value;
-		// if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-			// alert('Could not reach your account. Check your internet connection.');
-		// } else { 
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not complete your request. Check your connection and try again.");
+		} else { 
 			// win.close();
 			authenticate(email, password, "login");
 			passwordField.value = "";
-		// }	
+			
+		}	
 		emailField.blur();
 		passwordField.blur();	
 	});
@@ -115,6 +117,7 @@ function render() {
 function adjustViews() {	
 	if ( focused == true ) {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			win.backgroundImage = 'images/splash-bg@2x.png';
 			Ti.API.debug("Keyboard up, portrait mode");
 			// studyEggLogo.hide();
 			emailField.top = 60;
@@ -136,6 +139,7 @@ function adjustViews() {
 		}
 	} else {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			win.backgroundImage = 'images/splash@2x.png';
 			Ti.API.debug("Keyboard hidden, portrait mode");
 			// studyEggLogo.top = 55;
 			// studyEggLogo.show();

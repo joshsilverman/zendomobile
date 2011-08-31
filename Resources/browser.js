@@ -1,6 +1,8 @@
 var win = Ti.UI.currentWindow;
+Ti.App.base_window = win;
 Ti.UI.setBackgroundColor('#dfdacd');
 Ti.include('commonMethods.js');
+// Ti.include('listeners.js');
 updateCache();
 
 tabGroup = Titanium.UI.createTabGroup({
@@ -9,6 +11,30 @@ tabGroup = Titanium.UI.createTabGroup({
 });
 
 Ti.App.tabGroup = tabGroup;
+
+setPaused = function() {
+	Ti.App.Properties.setBool('foreground', false);
+	
+}
+
+setResumed = function() {
+	Ti.App.Properties.setBool('foreground', true);
+}
+
+setResume = function() {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert('Could not reach your account. Check your internet connection.');
+	} else {
+		alert("Relogging from normal resume with email " + Ti.App.Properties.getString('email') + " and password " + Ti.App.Properties.getString('password'));
+		// checkLoggedIn("normal"); 
+		// Titanium.Network.HTTPClient.clearCookies
+		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
+	}		
+}
+
+Ti.App.addEventListener('resume', setResume); 
+Ti.App.addEventListener('resumed', setResumed);
+Ti.App.addEventListener('pause', setPaused);
 
 var myEggsWindow = Titanium.UI.createWindow({  
     backgroundColor:'#dfdacd',
@@ -61,13 +87,14 @@ var interestingWindow = Titanium.UI.createWindow({
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
     url : 'interestingEggs.js',
+    // url : 'interestingEggs.js',
     orientationModes : [
 		Titanium.UI.PORTRAIT
 	]
 });
 var interestingTab = Titanium.UI.createTab({  
     icon:'images/star@2x.png',
-    title:'Interesting',
+    title:'Popular',
     window:interestingWindow
 });
 // var interestingLabel = Titanium.UI.createLabel({
@@ -127,12 +154,18 @@ tabGroup.addTab(interestingTab);
 // tabGroup.addTab(categoriesTab);  
 tabGroup.addTab(searchTab);  
 
+
+
 if (Ti.App.Properties.getBool('educated') != true) {
 	tabGroup.setActiveTab(2);
 } else {
 	tabGroup.setActiveTab(1);	
 }
 win.add(tabGroup);
+Ti.App.myEggsDirty = true;
+Ti.App.documentsDirty = true;
+Ti.App.popularDirty = true;
+Ti.App.searchDirty = true;
 tabGroup.open();
 
 if ( Ti.App.Properties.getBool('notification') == true ) {
@@ -141,24 +174,7 @@ if ( Ti.App.Properties.getBool('notification') == true ) {
 }
 
 
-//Listeners
-Ti.App.addEventListener('resume', function() { 
-	// alert("Resume");
-	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		alert('Could not reach your account. Check your internet connection.');
-	} else {
-		// checkLoggedIn("normal"); 
-		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
-	}	
-});
 
-Ti.App.addEventListener('resumed', function(e) { 
-	Ti.App.Properties.setBool('foreground', true);
-});
-
-Ti.App.addEventListener('pause', function(e) { 
-	Ti.App.Properties.setBool('foreground', false);
-});
 
 function registerForPush() {
 	Titanium.Network.registerForPushNotifications({
@@ -174,6 +190,8 @@ function registerForPush() {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
+			
+			updateLogo();
 			// Ti.App.Properties.setBool('notification', true);
 			if (Ti.App.Properties.getBool('foreground') == true) {
 				alert("Callback from foreground!");
@@ -191,6 +209,7 @@ function registerForPush() {
 				reviewAlert.show();		
 			} else {
 				alert("Callback from background!");
+				alert("Relogging from push");
 				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
 		}
@@ -220,6 +239,5 @@ if (Ti.App.Properties.getBool('educated') != true) {
 	});
 	pushReminderAlert.show();	
 }
-
 // tabGroup.open(pushReminderAlert);	
 

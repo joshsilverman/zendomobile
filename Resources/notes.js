@@ -57,11 +57,13 @@ function renderDocuments(){
 	
 	documentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			if ( Ti.App.reviewing != true ) {
-				Ti.App.reviewing = true;
-				getLines(e.row.id, "normal", documentList);
-			}	
+			// alert("click label");
+			// if ( Ti.App.reviewing != true ) {
+				// Ti.App.reviewing = true;
+			getLines(e.row.id, "normal", documentList);
+			// }	
 		} else if (e.source.id == "doc") {
+			alert("click doc");
 			if ( e.row.children[0].push == true ) {
 				var push = false;
 		    	var image = 'images/document@2x.png';
@@ -96,7 +98,7 @@ function updateDocuments(context) {
 		documentList.setData(notesRows);
 	} else {
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(1000000);
+		xhr.setTimeout(5000);
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');

@@ -151,6 +151,7 @@ function render() {
 function adjustViews() {	
 	if ( focused == true ) {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			win.backgroundImage = 'images/splash-bg@2x.png';
 			Ti.API.debug("Keyboard up, portrait mode");
 			// logo.hide();
 			emailField.bottom = null;
@@ -174,6 +175,7 @@ function adjustViews() {
 		}
 	} else {
 		if ( currentOrientation == 1 || currentOrientation == 2 ) {
+			win.backgroundImage = 'images/splash@2x.png';
 			Ti.API.debug("Keyboard hidden, portrait mode");
 			// logo.top = 55;
 			// logo.show();

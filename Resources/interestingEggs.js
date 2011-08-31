@@ -34,9 +34,9 @@ function renderNavBar() {
 		width : 80
 	});
 	logo.addEventListener('click', function() {
-		// if (Titanium.Network.remoteNotificationsEnabled == false) {
-			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		// }
+		if (Titanium.Network.remoteNotificationsEnabled == false) {
+			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		}
 		retrieveAllNotifications();
 	});	
 	win.leftNavButton = accountButton;
@@ -53,15 +53,25 @@ function renderPopular(){
 		backgroundColor : '#dfdacd'
 	});
 	popularList.addEventListener('click', function(e){
-		if (e.source.id == "label") {
-			if ( Ti.App.reviewing != true ) {
-				Ti.App.reviewing = true;
-				getLines(e.row.id, "normal", popularList);
-			}	
-		} else if (e.source.id == "add") {
-			e.row.children[2].image = 'images/plus-fade@2x.png';
+		// if (e.source.id == "label") {
+			// if ( Ti.App.reviewing != true ) {
+				// Ti.App.reviewing = true;
+				// getLines(e.row.id, "normal", popularList);
+			// }	
+		// } else 
+		if (e.source.id == "add") {
+			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;
-			addEgg(e.row.id, e, "popular");
+			// alert(Ti.App.Properties.getBool('download_educated'));
+			if (Ti.App.Properties.getBool('download_educated') != true) {
+				// alert("download educated = false");
+				addEgg(e.row.id, e, "popular", false);
+			} else {
+				// alert("download educated = true");
+				addEgg(e.row.id, e, "popular");
+			}
+			
+			
 			// addDocument(e.row.id, e, "popular");		
 		} 
 		// else if (e.source.id == "doc") {
@@ -84,40 +94,42 @@ function renderPopular(){
 		// }
 	});
 	win.add(popularList);
-	updatePopular();
+	// updatePopular();
 }
 
 function updatePopular() {
 	//TODO no push data coming through here	
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
-	xhr.open("GET", serverURL + "/documents/get_public_documents");
+	xhr.setTimeout(5000);
+	// xhr.open("GET", serverURL + "/documents/get_public_documents");
+	xhr.open("GET", serverURL + "/tags/get_popular_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
 		popularData = eval(this.responseText);
 		var data = [];
-		for ( i in popularData ) { 
-			if (docs[popularData[i].document.id] == null) {			
-				data.push(createAddableEggRow(popularData[i].document.name, popularData[i].document.id, false, docs[popularData[i].document.id])); 
-			} else {		
-				data.push(createAddableEggRow(popularData[i].document.name, popularData[i].document.id, true, docs[popularData[i].document.id])); 
-			}	
+		for (i in popularData) {
+			data.push(createAddableEggRow(popularData[i][1], popularData[i][0], popularData[i][2]));
 		}
 		popularList.setData(data);
 	};
 	xhr.send();	
-
 }
 
 win.addEventListener('focus', function() {
+	// updatePopular();
 	updateLogo();
-	docs = {};
-	for (i in Ti.App.data) {
-		for ( j in Ti.App.data[i].tag.documents ) {
-			docs[Ti.App.data[i].tag.documents[j].id] = Ti.App.data[i].tag.documents[j].userships[0].push_enabled
-		}
-	}
+	// alert(Ti.App.data);
+	// eggs = {};
+	// eggs = [];
+	// for (i in Ti.App.data) {
+		// alert(JSON.stringify(Ti.App.data[i].tag.id));
+		// eggs.push(Ti.App.data[i].tag.id);
+		// // for ( j in Ti.App.data[i].tag.documents ) {
+			// // eggs[Ti.App.data[i].tag.documents[j].id] = Ti.App.data[i].tag.documents[j].userships[0].push_enabled
+		// // }
+	// }
+	// alert(eggs);
 	if (Ti.App.popularDirty == true) {
 		updatePopular();
 		Ti.App.popularDirty = false;

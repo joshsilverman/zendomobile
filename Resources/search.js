@@ -33,9 +33,9 @@ function renderSearch() {
 	searchList.addEventListener('click', function(e) {
 		search.blur();
 		if (e.source.id == "label") {
-			if ( Ti.App.reviewing != true ) {
-				Ti.App.reviewing = true;
-				getLines(e.row.id, "normal", searchList);
+			// if ( Ti.App.reviewing != true ) {
+				// Ti.App.reviewing = true;
+			getLines(e.row.id, "normal", searchList);
 				// var new_win = Ti.UI.createWindow({
 					// url : "updated_review.js",
 					// backgroundColor : '#dfdacd',
@@ -51,10 +51,11 @@ function renderSearch() {
 				// });
 				// Ti.App.tabGroup.hide();
 				// new_win.open();
-			}	
+			// }	
 		} else if (e.source.id == "add") {
-			e.row.children[2].image = 'images/folder.png';
+			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;
+			// alert('add doc');
 			addDocument(e.row.id, e, "search");		
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
@@ -66,7 +67,7 @@ function renderSearch() {
 			}
 			e.row.children[0].push = push;
 		 	e.row.children[0].image = image;	
-			e.row.children[2].image = 'images/folder.png';
+			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;	 	
 			if (e.source.push == 0) {
 				enableNotifications(e.row.id, false, e, "search");
@@ -102,9 +103,9 @@ function renderNavBar() {
 		width : 80
 	});
 	logo.addEventListener('click', function() {
-		// if (Titanium.Network.remoteNotificationsEnabled == false) {
-			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		// }
+		if (Titanium.Network.remoteNotificationsEnabled == false) {
+			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		}
 		retrieveAllNotifications();
 	});	
 	win.leftNavButton = accountButton;
@@ -126,7 +127,7 @@ function setSearchResults(results) {
 
 function searchQuery(text) {
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(1000000);
+	xhr.setTimeout(5000);
 	xhr.onload = function() {
 		results = eval(this.responseText);
 		setSearchResults(results);

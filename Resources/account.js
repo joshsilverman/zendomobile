@@ -42,7 +42,10 @@ function renderAccount() {
 		bottom : 40
 	});
 	
-	signOutButton.addEventListener('click', function() { signOut(); });
+	signOutButton.addEventListener('click', function() { 
+		signOut(); 
+		// acctWin.close();
+	});
 	
 	acctWin.add(backButton);
 	acctWin.add(signOutButton);
