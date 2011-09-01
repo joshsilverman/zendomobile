@@ -14,7 +14,6 @@ Ti.App.tabGroup = tabGroup;
 
 setPaused = function() {
 	Ti.App.Properties.setBool('foreground', false);
-	
 }
 
 setResumed = function() {
@@ -25,7 +24,7 @@ setResume = function() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
 	} else {
-		alert("Relogging from normal resume with email " + Ti.App.Properties.getString('email') + " and password " + Ti.App.Properties.getString('password'));
+		// alert("Relogging from normal resume with email " + Ti.App.Properties.getString('email') + " and password " + Ti.App.Properties.getString('password'));
 		// checkLoggedIn("normal"); 
 		// Titanium.Network.HTTPClient.clearCookies
 		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
@@ -83,7 +82,7 @@ var recentTab = Titanium.UI.createTab({
 // recentWindow.add(recentLabel);
 
 var interestingWindow = Titanium.UI.createWindow({  
-    title:'Interesting',
+    title:'Popular',
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
     url : 'interestingEggs.js',
@@ -161,20 +160,20 @@ if (Ti.App.Properties.getBool('educated') != true) {
 } else {
 	tabGroup.setActiveTab(1);	
 }
+
 win.add(tabGroup);
+
 Ti.App.myEggsDirty = true;
 Ti.App.documentsDirty = true;
 Ti.App.popularDirty = true;
 Ti.App.searchDirty = true;
+
 tabGroup.open();
 
 if ( Ti.App.Properties.getBool('notification') == true ) {
 	Ti.App.Properties.setBool('notification', false);
 	retrieveAllNotifications();
 }
-
-
-
 
 function registerForPush() {
 	Titanium.Network.registerForPushNotifications({
@@ -187,14 +186,14 @@ function registerForPush() {
 			Ti.App.Properties.setString("token", e.deviceToken);
 		},
 		error : function(e) {
-			alert("Error during registration: " + e.error);
+			// alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			
-			updateLogo();
-			// Ti.App.Properties.setBool('notification', true);
+			Ti.App.myEggsDirty = true;
+			Ti.App.documentsDirty = true;
+			Ti.App.popularDirty = true;
+			Ti.App.searchDirty = true;			
 			if (Ti.App.Properties.getBool('foreground') == true) {
-				alert("Callback from foreground!");
 				var reviewAlert = Ti.UI.createAlertDialog({
 				    title : 'You have new cards to review!',
 				    message : "Go to them now?",
@@ -208,8 +207,6 @@ function registerForPush() {
 				});
 				reviewAlert.show();		
 			} else {
-				alert("Callback from background!");
-				alert("Relogging from push");
 				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
 		}
@@ -229,7 +226,6 @@ if (Ti.App.Properties.getBool('educated') != true) {
 	    title : 'Reminder!',
 	    message : "To enable push review, tap on the docs icon.",
 	    buttonNames : ["Don't show again", "Okay"]
-	    // cancel : 0
 	});
 	
 	pushReminderAlert.addEventListener('click', function(f) {

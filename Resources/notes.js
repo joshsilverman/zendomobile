@@ -63,7 +63,6 @@ function renderDocuments(){
 			getLines(e.row.id, "normal", documentList);
 			// }	
 		} else if (e.source.id == "doc") {
-			alert("click doc");
 			if ( e.row.children[0].push == true ) {
 				var push = false;
 		    	var image = 'images/document@2x.png';
@@ -80,7 +79,6 @@ function renderDocuments(){
 			}
 		}	
 	});
-
 	win.add(documentList);
 	updateDocuments();
 }
@@ -107,11 +105,11 @@ function updateDocuments(context) {
 			for ( i in foldersData ) {
 				if (foldersData[i].tag.id == win.selection) {
 					for (n in foldersData[i].tag.documents) {
-						notesRows.push(createNoteRow(Ti.App.data[i].tag.documents[n].name, Ti.App.data[i].tag.documents[n].id, Ti.App.data[i].tag.documents[n].tag_id, Ti.App.data[i].tag.documents[n].userships[0].push_enabled));				
+						notesRows.push(createNoteRow(foldersData[i].tag.documents[n].name, foldersData[i].tag.documents[n].id, foldersData[i].tag.documents[n].tag_id, foldersData[i].tag.documents[n].userships[0].push_enabled));				
 					}
 				}
 			}
-			documentList.setData(notesRows);	
+			documentList.setData(notesRows);
 		}	
 		xhr.send();			
 	}	

@@ -7,14 +7,14 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <id>zen.do.mobile</id>
-    <name>StudyEgg</name>
-    <version>1.0</version>
-    <publisher>jasonurton</publisher>
-    <url>http://www.StudyEgg.com</url>
-    <description>Go forth and learn</description>
-    <copyright>2011 by Zendo Labs Inc.</copyright>
-    <icon>head_logo_114.png</icon>
+<id>zen.do.mobile</id>
+<name>StudyEgg</name>
+<version>1.0</version>
+<publisher>jasonurton</publisher>
+<url>http://www.StudyEgg.com</url>
+<description>Go forth and learn</description>
+<copyright>2011 by Zendo Labs Inc.</copyright>
+<icon>iphone-app-icon-57px.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>

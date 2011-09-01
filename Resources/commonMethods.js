@@ -452,32 +452,17 @@ function createCard(prompt, answer, memID) {
 }
 
 function reLogUser(email, password, context) {
-	alert('In relog with email ' + email + ', password ' + password + ' and context ' + context);
 	xhr = Titanium.Network.createHTTPClient();
-	
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	var params = {
 		'user[email]' : email,
 		'user[password]' : password
-	};
-	//TODO user is logged out when receives push
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4) {
-			if ( this.status != 200 ) {
-				alert('status is not 200!'); 
-				// Ti.App.Properties.setBool('notification', true);
-			} else {
-				alert(xhr.getResponseHeader('Set-Cookie'));
-				alert('status is 200!');
-			}
-		}
 	};
 	xhr.onerror = function(e) {
 		Ti.API.debug("Error: " + e.error);
 	};
 	// xhr.clearCookies(serverURL);
 	xhr.onload = function() {
-		alert('In relog success!');
 		if (context == "push") {
 			retrieveAllNotifications();
 		}

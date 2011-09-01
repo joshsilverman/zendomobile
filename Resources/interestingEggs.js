@@ -53,56 +53,24 @@ function renderPopular(){
 		backgroundColor : '#dfdacd'
 	});
 	popularList.addEventListener('click', function(e){
-		// if (e.source.id == "label") {
-			// if ( Ti.App.reviewing != true ) {
-				// Ti.App.reviewing = true;
-				// getLines(e.row.id, "normal", popularList);
-			// }	
-		// } else 
 		if (e.source.id == "add") {
 			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;
-			// alert(Ti.App.Properties.getBool('download_educated'));
 			if (Ti.App.Properties.getBool('download_educated') != true) {
-				// alert("download educated = false");
 				addEgg(e.row.id, e, "popular", false);
 			} else {
-				// alert("download educated = true");
 				addEgg(e.row.id, e, "popular");
 			}
-			
-			
-			// addDocument(e.row.id, e, "popular");		
 		} 
-		// else if (e.source.id == "doc") {
-			// if ( e.row.children[0].push == true ) {
-				// var push = false;
-		    	// var image = 'images/document@2x.png';
-			// } else {
-				// var push = true;
-				// var image = 'images/document-feed@2x.png';
-			// }
-			// e.row.children[0].push = push;
-		 	// e.row.children[0].image = image;	
-			// e.row.children[2].image = 'images/plus-fade@2x.png';
-			// e.row.children[2].owned = true;	 	
-			// if (e.source.push == 0) {
-				// enableNotifications(e.row.id, false, e, "popular");
-			// } else {
-				// enableNotifications(e.row.id, true, e, "popular");
-			// }
-		// }
 	});
 	win.add(popularList);
 	// updatePopular();
 }
 
 function updatePopular() {
-	//TODO no push data coming through here	
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(5000);
-	// xhr.open("GET", serverURL + "/documents/get_public_documents");
 	xhr.open("GET", serverURL + "/tags/get_popular_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {
@@ -117,19 +85,7 @@ function updatePopular() {
 }
 
 win.addEventListener('focus', function() {
-	// updatePopular();
 	updateLogo();
-	// alert(Ti.App.data);
-	// eggs = {};
-	// eggs = [];
-	// for (i in Ti.App.data) {
-		// alert(JSON.stringify(Ti.App.data[i].tag.id));
-		// eggs.push(Ti.App.data[i].tag.id);
-		// // for ( j in Ti.App.data[i].tag.documents ) {
-			// // eggs[Ti.App.data[i].tag.documents[j].id] = Ti.App.data[i].tag.documents[j].userships[0].push_enabled
-		// // }
-	// }
-	// alert(eggs);
 	if (Ti.App.popularDirty == true) {
 		updatePopular();
 		Ti.App.popularDirty = false;

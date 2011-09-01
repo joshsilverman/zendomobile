@@ -20,9 +20,11 @@ function renderSearch() {
 		search.blur();
 	});
 	search.addEventListener('return', function(e) {
-		currentSearch = e.value;
-		searchQuery(e.value);
-		search.blur();
+		if (e.value != "" && e.value != " ") {
+			currentSearch = e.value;
+			searchQuery(e.value);
+			search.blur();			
+		}
 	});
 	searchList = Titanium.UI.createTableView({
 		rowHeight : 60,
@@ -33,29 +35,10 @@ function renderSearch() {
 	searchList.addEventListener('click', function(e) {
 		search.blur();
 		if (e.source.id == "label") {
-			// if ( Ti.App.reviewing != true ) {
-				// Ti.App.reviewing = true;
 			getLines(e.row.id, "normal", searchList);
-				// var new_win = Ti.UI.createWindow({
-					// url : "updated_review.js",
-					// backgroundColor : '#dfdacd',
-					// navBarHidden : false,
-					// doc_id : e.row.id,
-					// // cards : data.cards,
-					// _parent : Titanium.UI.currentWindow,
-					// _context : "normal",
-					// // _context : "push",
-					// orientationModes : [
-						// Titanium.UI.PORTRAIT
-					// ]
-				// });
-				// Ti.App.tabGroup.hide();
-				// new_win.open();
-			// }	
 		} else if (e.source.id == "add") {
 			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;
-			// alert('add doc');
 			addDocument(e.row.id, e, "search");		
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
@@ -83,6 +66,7 @@ function renderSearch() {
 function renderNavBar() {
 	var accountButton = Ti.UI.createButton({ title : 'Account' });
 	accountButton.addEventListener('click', function() {
+		search.blur();
 		newWin = Ti.UI.createWindow({
 			backgroundColor : '#dfdacd',
 			backgroundImage : 'images/splash@2x.png',
@@ -103,10 +87,12 @@ function renderNavBar() {
 		width : 80
 	});
 	logo.addEventListener('click', function() {
+		search.blur();
 		if (Titanium.Network.remoteNotificationsEnabled == false) {
 			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		} else {
+			retrieveAllNotifications();
 		}
-		retrieveAllNotifications();
 	});	
 	win.leftNavButton = accountButton;
 	win.titleControl = logo;

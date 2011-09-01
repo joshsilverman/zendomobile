@@ -209,7 +209,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	cardView.add(answer);
 		
 	cardView.addEventListener('singletap', function(e) {
-		alert('sup');
+		// alert('sup');
 		
 		cardView.animate({
 			view : cardBackground,
@@ -226,8 +226,8 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		}
 		
 		// showGradeButtons();
-		alert(JSON.stringify(prompt));
-		alert(JSON.stringify(answer));
+		// alert(JSON.stringify(prompt));
+		// alert(JSON.stringify(answer));
 		if (prompt.visible == true) {
 			prompt.hide();
 			cardView.add(answer);
