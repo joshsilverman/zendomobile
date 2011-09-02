@@ -87,7 +87,7 @@ function renderRecent(){
 function updateRecent() {
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_recent_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {

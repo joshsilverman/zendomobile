@@ -48,7 +48,6 @@ function renderDocuments(){
 		top : 0
 	});
 	
-	
 	documentList = Titanium.UI.createTableView({
 		rowHeight : 60,
 		data : win.data,
@@ -81,6 +80,20 @@ function renderDocuments(){
 	});
 	win.add(documentList);
 	updateDocuments();
+	if (Ti.App.Properties.getBool('educated') != true) {
+		var pushReminderAlert = Ti.UI.createAlertDialog({
+		    title : 'Reminder!',
+		    message : "Tap the icon next to a section, StudyEgg will send you notifications to teach you the material.",
+		    buttonNames : ["Don't show again", "Okay"]
+		});
+		
+		pushReminderAlert.addEventListener('click', function(f) {
+			if (f.index == 0) { 
+				Ti.App.Properties.setBool('educated', true);
+			}
+		});
+		pushReminderAlert.show();	
+	}
 }
 
 function updateDocuments(context) {
@@ -96,7 +109,7 @@ function updateDocuments(context) {
 		documentList.setData(notesRows);
 	} else {
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');

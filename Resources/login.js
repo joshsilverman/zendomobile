@@ -7,6 +7,10 @@ var currentOrientation = Titanium.UI.PORTRAIT;
 Ti.include('authentication.js');
 Ti.include('commonMethods.js');
 
+// activityIndicator = Titanium.UI.createActivityIndicator({
+	// style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+// });
+
 function render() {
 	emailField = Ti.UI.createTextField({
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
@@ -65,12 +69,12 @@ function render() {
 		var email = emailField.value; 
 		var password = passwordField.value;
 		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		alert("Could not complete your request. Check your connection and try again.");
+			alert("Could not complete your request. Check your connection and try again.");
 		} else { 
-			// win.close();
+			// activityIndicator.show();
+			// win.add(activityIndicator);
 			authenticate(email, password, "login");
 			passwordField.value = "";
-			
 		}	
 		emailField.blur();
 		passwordField.blur();	

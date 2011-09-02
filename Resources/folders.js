@@ -90,7 +90,7 @@ function updateEggs(context) {
 		eggList.setData(rows);
 	} else {	
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');

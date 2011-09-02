@@ -1,29 +1,23 @@
 Ti.include('network.js');
 // Ti.include('listeners.js');
-
+	
 function authenticate(email, password, context) {
-	// alert('authentication');
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.onreadystatechange = function() {
-		// alert('so');
 		if (this.readyState == 4) {
 			if (this.status == 200) {
-				// alert("200");
 				authSuccess(email, password);
 			} else {
-				// alert("boo");
 				if (context != "start") {
 					alert("Invalid email/password combination.");	
 				} else {
-					// alert("in here");
 					var win = Ti.UI.createWindow({
 						url:"login.js",
 						navBarHidden : true,
 						backgroundColor : '#dfdacd',
 						orientationModes : [
-							Titanium.UI.PORTRAIT,
-							Titanium.UI.UPSIDE_PORTRAIT
+							Titanium.UI.PORTRAIT
 						]
 					});
 					win.open();	
@@ -31,9 +25,6 @@ function authenticate(email, password, context) {
 			}
 		}
 	};
-	// xhr.onload = function() {
-		// alert("YOOOO");
-	// }
 	var params = {
 		'user[email]' : email,
 		// 'user[password]' : Titanium.Utils.md5HexDigest(password)
@@ -44,11 +35,9 @@ function authenticate(email, password, context) {
 }
 
 function signOut() {
-	// alert("in signout");
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
-		// alert("in signout");
 		xhr = Ti.Network.createHTTPClient();
 		xhr.open("GET", serverURL + "/users/sign_out");
 		xhr.setRequestHeader('Content-Type', 'text/html');
@@ -79,16 +68,12 @@ function signOut() {
 
 function signUp(email, password) {
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {		
 				Ti.App.Properties.setString('email', email);
 				Ti.App.Properties.setString('password', password);
-				// alert(email);
-				// email = email.concat('_educated');
-				// alert(email);
-				// var test = email + 'educated';
 				Ti.App.Properties.setBool('educated', false);	
 				Ti.App.Properties.setBool('download_educated', false);		
 				authSuccess(email, password);
@@ -113,9 +98,11 @@ function signUp(email, password) {
 }
 
 function authSuccess(email, password) {
+	// activityIndicator.hide();
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	registerDevice(Ti.App.Properties.getString("token"));
+	// activityIndicator.hide();
 	var new_win = Ti.UI.createWindow({
 		url : "browser.js",
 		backgroundColor : '#dfdacd',
@@ -138,3 +125,5 @@ function registerDevice(token) {
 	// };
 	xhr.send();
 }
+
+

@@ -64,13 +64,12 @@ function renderPopular(){
 		} 
 	});
 	win.add(popularList);
-	// updatePopular();
 }
 
 function updatePopular() {
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_popular_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function() {

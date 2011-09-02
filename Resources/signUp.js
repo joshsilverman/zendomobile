@@ -12,6 +12,10 @@ var focused = false;
 // Ti.include('dimensions.js');
 Ti.include('authentication.js');
 
+// activityIndicator = Titanium.UI.createActivityIndicator({
+	// style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+// });
+
 function render() {
 	emailField = Ti.UI.createTextField({
 	    autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
@@ -94,29 +98,31 @@ function render() {
 		var email = emailField.value; 
 		var password = passwordField.value;
 		var passwordConfirmation = confirmPasswordField.value;
-		if ( password != passwordConfirmation) {
-			alert("Your password and password confirmation must match!");
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+			alert("Could not complete your request. Check your connection and try again.");
 			return;
-		} else {
-			if (email.length < 1) {
-				alert("You must enter an email address!");
+		} else {		
+			if ( password != passwordConfirmation) {
+				alert("Your password and password confirmation must match!");
+				return;
 			} else {
-				if (password.length < 6) {
-					alert("Your password must be at least six characters!");
-					return;				
+				if (email.length < 1) {
+					alert("You must enter an email address!");
 				} else {
-					// if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-						// alert('Could not create your account. Check your internet connection.');
-						// return;
-					// } else {
+					if (password.length < 6) {
+						alert("Your password must be at least six characters!");
+						return;				
+					} else {	
+						// activityIndicator.show();
+						// win.add(activityIndicator);						
 						signUp(email, password);
 						emailField.blur();
 						passwordField.blur();
 						confirmPasswordField.blur();	
-					// }				
-				}
+					}
+				}	
 			}	
-		}	
+		}
 	});
 
 	cancelButton = Ti.UI.createButton({

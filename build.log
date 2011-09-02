@@ -1,10 +1,9 @@
 Logfile initialized
-[INFO] logfile = /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build.log
-[DEBUG] /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/builder.py simulator "Zen.do" "/Users/jasonurton/Downloads/android-sdk-mac_86" "/Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do" "com.jason.summer.test" "11" "HVGA"
-[INFO] Building Zen.do for Android ... one moment
-[INFO] Titanium SDK version: 1.7.0 (05/15/11 17:26 e6afca8)
+[INFO] logfile = /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build.log
+[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/1.7.1/android/builder.py simulator StudyEgg /Users/jasonurton/Downloads/android-sdk-mac_86 /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg zen.do.mobile 5 HVGA 
+[INFO] Building StudyEgg for Android ... one moment
+[INFO] Titanium SDK version: 1.7.1 (06/21/11 14:28 1293a6d)
 [DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 0 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
@@ -12,129 +11,117 @@ Logfile initialized
 [TRACE] adb devices returned 1 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
-[TRACE] adb devices returned 1 devices/emulators
-[TRACE] adb devices returned 1 devices/emulators
-[DEBUG] Device connected... (waited 45 seconds)
-[DEBUG] waited 45.310484 seconds on emulator to get ready
+[DEBUG] Device connected... (waited 30 seconds)
+[DEBUG] waited 30.128431 seconds on emulator to get ready
 [INFO] Waiting for the Android Emulator to become available
-[ERROR] Timed out waiting for android.process.acore
-[DEBUG] com.jason.summer.test installed? False
-[WARN] Fastdev enabled, but server isn't running, deploying normally
+[DEBUG] zen.do.mobile installed? False
+[INFO] Fastdev server running, deploying in Fastdev mode
 [INFO] Copying project resources..
 [INFO] Detected tiapp.xml change, forcing full re-build...
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/appicon.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/appicon.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/card.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/card.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/default.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/default.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/folder.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/folder.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/app.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/app.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/checked.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/checked.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/explore.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/explore.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/KS_nav_ui.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/KS_nav_ui.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/KS_nav_views.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/KS_nav_views.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/notes.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/notes.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/review.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/review.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/test/lib/jasmine-1.0.2.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/test/lib/jasmine-1.0.2.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/test/lib/jasmine-titanium.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/test/lib/jasmine-titanium.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/test/test_main.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/test/test_main.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/test/tests.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/test/tests.js
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/unchecked.png => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/unchecked.png
-[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/urbanairship.js => /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/urbanairship.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/account.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/account.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/appicon.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/appicon.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/card.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/card.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/default.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/folder.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/folder.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/app.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/authentication.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/authentication.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/browser.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/browser.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/commonMethods.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/commonMethods.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/dimensions.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/dimensions.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/folders.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/folders.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/helperMethods.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/helperMethods.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/barely.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/barely.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/barely@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/barely@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/clock.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/clock.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/clock@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/clock@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/close.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/close.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/close@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/close@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/document-feed.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/document-feed.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/document-feed@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/document-feed@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/document.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/document.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/document@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/document@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/download-faded.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/download-faded.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/download-faded@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/download-faded@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/download.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/download.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/download@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/download@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/egg-feed@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/egg-feed@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/egg.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/egg.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/egg@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/egg@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/eggicon.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/eggicon.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/eggicon@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/eggicon@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/got-it.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/got-it.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/got-it@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/got-it@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/headLogo.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/headLogo.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/kinda.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/kinda.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/kinda@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/kinda@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/logo-indicator.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/logo-indicator.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/logo-indicator@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/logo-indicator@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/logo.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/logo.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/logo@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/logo@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/no-clue.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/no-clue.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/no-clue@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/no-clue@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/plus-fade.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/plus-fade.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/plus-fade@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/plus-fade@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/plus.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/plus.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/plus@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/plus@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/review-bg-solid.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/review-bg-solid.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/review-bg-solid@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/review-bg-solid@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/review-bg.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/review-bg.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/review-bg@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/review-bg@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/search.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/search.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/search@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/search@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/skip.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/skip.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/skip@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/skip@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/splash-bg.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/splash-bg.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/splash-bg@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/splash-bg@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/splash.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/splash.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/splash@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/splash@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/star.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/star.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/images/star@2x.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/images/star@2x.png
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/interestingEggs.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/interestingEggs.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/listeners.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/listeners.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/login.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/login.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/network.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/network.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/networkMethods.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/networkMethods.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/notes.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/notes.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/recentDocuments.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/recentDocuments.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/review.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/review.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/search.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/search.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/signUp.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/signUp.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/stats.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/stats.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/test/lib/jasmine-1.0.2.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/test/lib/jasmine-1.0.2.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/test/lib/jasmine-titanium.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/test/lib/jasmine-titanium.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/test/test_main.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/test/test_main.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/test/tests.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/test/tests.js
+[TRACE] COPYING CREATED FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/updated_review.js => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/updated_review.js
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
-[DEBUG] copying app icon: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/appicon.png
-[DEBUG] generating theme.xml
-[DEBUG] found drawable-long-land-hdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-land-hdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-land-hdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-long-land-hdpi/background.png
-[DEBUG] found drawable-long-land-ldpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-land-ldpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-land-ldpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-long-land-ldpi/background.png
-[DEBUG] found drawable-long-port-hdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-port-hdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-port-hdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-long-port-hdpi/background.png
-[DEBUG] found drawable-long-port-ldpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-port-ldpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-long-port-ldpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-long-port-ldpi/background.png
-[DEBUG] found drawable-notlong-land-hdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-hdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-hdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-land-hdpi/background.png
-[DEBUG] found drawable-notlong-land-ldpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-ldpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-ldpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-land-ldpi/background.png
-[DEBUG] found drawable-notlong-land-mdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-mdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-land-mdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-land-mdpi/background.png
-[DEBUG] found drawable-notlong-port-hdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-hdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-hdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-port-hdpi/background.png
-[DEBUG] found drawable-notlong-port-ldpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-ldpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-ldpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-port-ldpi/background.png
-[DEBUG] found drawable-notlong-port-mdpi splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-mdpi/default.png
-[DEBUG] copying /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/res/drawable-notlong-port-mdpi/background.png
-[DEBUG] found splash screen at /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/assets/Resources/default.png
-[TRACE] Writing out AndroidManifest.xml
-[DEBUG] adding /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/R.java to javac build list
-[DEBUG] adding /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoActivity.java to javac build list
-[DEBUG] adding /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoAppInfo.java to javac build list
-[DEBUG] adding /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoApplication.java to javac build list
-[DEBUG] Building Java Sources: "/Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/R.java" "/Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoActivity.java" "/Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoAppInfo.java" "/Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/gen/com/jason/summer/test/ZenDoApplication.java"
-[INFO] Waiting for SDCard to become available..
-[INFO] Compiling Android Resources... This could take some time
-[DEBUG] Android classes.dex built
-[DEBUG] creating unsigned apk: /Users/jasonurton/Desktop/Dropbox/Titanium Studio Workspace/Zen.do/build/android/bin/app-unsigned.apk
-[DEBUG] from resource zip => assets/Resources/test/lib/jasmine-1.0.2.js
-[DEBUG] from resource zip => assets/Resources/test/lib/jasmine-titanium.js
-[DEBUG] from resource zip => assets/Resources/test/test_main.js
-[DEBUG] from resource zip => assets/Resources/test/tests.js
-[DEBUG] from resource zip => assets/Resources/KS_nav_ui.png
-[DEBUG] from resource zip => assets/Resources/KS_nav_views.png
-[DEBUG] from resource zip => assets/Resources/app.js
-[DEBUG] from resource zip => assets/Resources/appicon.png
-[DEBUG] from resource zip => assets/Resources/card.png
-[DEBUG] from resource zip => assets/Resources/checked.png
-[DEBUG] from resource zip => assets/Resources/default.png
-[DEBUG] from resource zip => assets/Resources/explore.js
-[DEBUG] from resource zip => assets/Resources/folder.png
-[DEBUG] from resource zip => assets/Resources/notes.js
-[DEBUG] from resource zip => assets/Resources/review.js
-[DEBUG] from resource zip => assets/Resources/unchecked.png
-[DEBUG] from resource zip => assets/Resources/urbanairship.js
-[DEBUG] from resource zip => assets/tiapp.xml
-[DEBUG] from resource zip => res/drawable/appicon.png
-[DEBUG] from resource zip => res/drawable/background.png
-[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
-[DEBUG] from resource zip => AndroidManifest.xml
-[DEBUG] from resource zip => resources.arsc
-[DEBUG] from resource zip => res/drawable-long-land-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-long-land-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-long-port-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-long-port-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/apache/Commons-NOTICE.txt
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/apache/HttpComponents-NOTICE.txt
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/apache/mime4j-NOTICE.txt
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/build.properties
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/smalljs.jar => org/mozilla/javascript/resources/Messages.properties
-[DEBUG] from JAR /Users/jasonurton/Library/Application Support/Titanium/mobilesdk/osx/1.7.0.RC1/android/smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
-[DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 1 devices/emulators
-[DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.053984 seconds on emulator to get ready
-[INFO] Installing application on device
-[INFO] Launching application ... Zen.do
-[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.jason.summer.test/.ZenDoActivity }
-
-[INFO] Deployed Zen.do ... Application should be running.
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-long-land-hdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-long-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-long-land-ldpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-long-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-long-port-hdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-long-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-long-port-ldpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-long-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-land-hdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-land-ldpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-land-mdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-land-mdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-port-hdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-port-ldpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/Resources/android/images/res-notlong-port-mdpi/default.png => /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/res/drawable-notlong-port-mdpi/default_d44e27d97b.png
+[DEBUG] copying app icon: /Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/iphone-app-icon-57px.png
+[ERROR] Exception occured while building Android project:
+[ERROR] Traceback (most recent call last):
+[ERROR]   File "/Library/Application Support/Titanium/mobilesdk/osx/1.7.1/android/builder.py", line 1947, in <module>
+[ERROR]     s.build_and_run(False, avd_id, debugger_host=debugger_host)
+[ERROR]   File "/Library/Application Support/Titanium/mobilesdk/osx/1.7.1/android/builder.py", line 1740, in build_and_run
+[ERROR]     self.manifest_changed = self.generate_android_manifest(compiler)
+[ERROR]   File "/Library/Application Support/Titanium/mobilesdk/osx/1.7.1/android/builder.py", line 811, in generate_android_manifest
+[ERROR]     shutil.copy(iconpath, dest_icon)
+[ERROR]   File "/System/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/shutil.py", line 88, in copy
+[ERROR]     copyfile(src, dst)
+[ERROR]   File "/System/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/shutil.py", line 52, in copyfile
+[ERROR]     fsrc = open(src, 'rb')
+[ERROR] IOError: [Errno 2] No such file or directory: u'/Users/jasonurton/Desktop/Titanium Studio Workspace/StudyEgg/build/android/bin/assets/Resources/iphone-app-icon-57px.png'
+[DEBUG] signal caught: 15
+[DEBUG] calling emulator kill on 28951
+[DEBUG] signal caught: 3
+[DEBUG] calling emulator kill on 28951
 [INFO] Android Emulator has exited

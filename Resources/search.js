@@ -113,7 +113,7 @@ function setSearchResults(results) {
 
 function searchQuery(text) {
 	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.onload = function() {
 		results = eval(this.responseText);
 		setSearchResults(results);

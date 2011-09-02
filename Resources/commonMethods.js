@@ -3,7 +3,7 @@ Ti.include('network.js');
 function updateCache() {
 	xhr = Ti.Network.createHTTPClient();
 	// xhr.setTimeout(1000000);
-	xhr.setTimeout(5000);
+	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_tags_json");//
 	xhr.setRequestHeader('Content-Type', 'text/json');
 	xhr.onload = function() {
@@ -40,7 +40,7 @@ function enableNotifications(id, enable, row_object, context) {
 				break;						
 		}			
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/enable_mobile/" + id + "/" + ((enable)?1:0));
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onreadystatechange = function() {
@@ -72,7 +72,7 @@ function getLines(doc, context, listView) {
 	} else {
 		renderLoading(listView, Ti.UI.currentWindow);
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {
@@ -126,7 +126,7 @@ function addDocument(id, row_object, context) {
 		}			
 		notesRows = [];
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/add_document/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onreadystatechange = function() {
@@ -174,7 +174,7 @@ function addEgg(id, row_object, context, trigger_dirty){
 		}
 		notesRows = [];
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/tags/claim_tag/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onreadystatechange = function() {
@@ -402,7 +402,7 @@ function retrieveAllNotifications() {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
 		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(5000);
+		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/users/retrieve_notifications");
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function() {

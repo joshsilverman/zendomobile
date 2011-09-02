@@ -221,19 +221,5 @@ registerForPush();
 	// top : 50
 // })
 
-if (Ti.App.Properties.getBool('educated') != true) {
-	var pushReminderAlert = Ti.UI.createAlertDialog({
-	    title : 'Reminder!',
-	    message : "To enable push review, tap on the docs icon.",
-	    buttonNames : ["Don't show again", "Okay"]
-	});
-	
-	pushReminderAlert.addEventListener('click', function(f) {
-		if (f.index == 0) { 
-			Ti.App.Properties.setBool('educated', true);
-		}
-	});
-	pushReminderAlert.show();	
-}
 // tabGroup.open(pushReminderAlert);	
 
