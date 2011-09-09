@@ -1,6 +1,5 @@
 var win = Ti.UI.currentWindow;
 
-// Ti.include('networkMethods.js');
 Ti.include('commonMethods.js');
 
 function initialize() {
@@ -62,10 +61,7 @@ function renderFolders(rows) {
 			selection : e.row.id,
 			barColor : '#0066b2',
 			_parent: Titanium.UI.currentWindow,
-			// exitOnClose: true
-			orientationModes : [
-				Titanium.UI.PORTRAIT
-			]
+			orientationModes : [ Titanium.UI.PORTRAIT ]
 		});
 		Titanium.UI.currentTab.open(newWin, {animated:true});
 	});
@@ -117,16 +113,8 @@ function updateEggs(context) {
 }
 
 win.addEventListener('focus', function() {	
-	// alert("focus");
 	updateLogo();
 	updateEggs('refresh');
-	// if (Ti.App.myEggsDirty == true) {
-		// alert("Dirty!");
-		// //TODO this okay?
-		// updateEggs();
-		// // updateEggs('refresh');
-		// Ti.App.myEggsDirty = false;
-	// }
 });
 
 initialize();

@@ -71,15 +71,6 @@ function render() {
 		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 			alert("Could not complete your request. Check your connection and try again.");
 		} else { 
-			// renderLoading(win, win);
-			// var check = function() {
-// 				
-				// activityIndicator.hide();
-				// // alert('yooooo');
-			// };
-		    // setTimeout(check, 10000);			
-			// activityIndicator.show();
-			// win.add(activityIndicator);
 			authenticate(email, password, "login");
 			passwordField.value = "";
 		}	
@@ -109,15 +100,6 @@ function render() {
 		passwordField.blur();
 		newWin.open();
 	});
-	
-	// studyEggLogo = Ti.UI.createImageView({
-		// image : 'images/studyegg_logo.jpg',
-		// height : 130,
-		// top : 35
-	// });
-// 	
-	// // logo.hide();
-	// win.add(studyEggLogo);
 	
 	win.add(passwordField);
 	win.add(confirmButton);	

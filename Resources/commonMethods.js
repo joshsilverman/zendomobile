@@ -2,7 +2,6 @@ Ti.include('network.js');
 
 function updateCache() {
 	xhr = Ti.Network.createHTTPClient();
-	// xhr.setTimeout(1000000);
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_tags_json");//
 	xhr.setRequestHeader('Content-Type', 'text/json');

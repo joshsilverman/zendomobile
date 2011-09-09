@@ -11,7 +11,6 @@ Ti.App.current_win = win;
 // ];
 // Titanium.UI.setBackgroundColor('#fff');
 // Titanium.UI.setBackgroundColor('#171717');
-Ti.include('networkMethods.js');
 Ti.include('dimensions.js');
 
 buttonTopPad = 10;

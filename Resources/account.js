@@ -1,4 +1,4 @@
-Ti.UI.setBackgroundColor('#fff');
+// Ti.UI.setBackgroundColor('#fff');
 var acctWin = Ti.UI.currentWindow;
 
 Ti.include('authentication.js');
@@ -32,7 +32,6 @@ function renderAccount() {
 	});
 	
 	backButton.addEventListener('click', function(){ acctWin.close(); });
-	// acctWin.leftNavButton = backButton;
 	
 	var signOutButton = Ti.UI.createButton({
 		title : "Sign Out",

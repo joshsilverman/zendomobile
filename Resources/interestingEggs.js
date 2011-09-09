@@ -1,6 +1,5 @@
 var win = Ti.UI.currentWindow;
 
-// Ti.include('networkMethods.js');
 Ti.include('commonMethods.js');
 
 function initialize() {
@@ -22,7 +21,7 @@ function renderNavBar() {
 	});	
 	var refreshButton = Titanium.UI.createButton({
 		systemButton : Titanium.UI.iPhone.SystemButton.REFRESH
-	})
+	});
 	if (Titanium.UI.iPhone.appBadge == 0) {
 		var image = 'images/logo@2x.png'
 	} else {

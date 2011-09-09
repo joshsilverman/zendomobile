@@ -1,15 +1,10 @@
 var win = Ti.UI.currentWindow;
 win.backgroundImage = 'images/splash@2x.png';
 
-// Ti.App.current_win = win;
-
 Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 var currentOrientation = Titanium.UI.PORTRAIT;
 var focused = false;
 
-// Ti.include('networkMethods.js');
-// Ti.include('helperMethods.js');
-// Ti.include('dimensions.js');
 Ti.include('authentication.js');
 
 // activityIndicator = Titanium.UI.createActivityIndicator({

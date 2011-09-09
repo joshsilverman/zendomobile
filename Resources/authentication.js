@@ -1,5 +1,4 @@
 Ti.include('network.js');
-// Ti.include('listeners.js');
 	
 function authenticate(email, password, context) {
 	xhr = Ti.Network.createHTTPClient();

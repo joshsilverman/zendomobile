@@ -2,7 +2,6 @@ var win = Ti.UI.currentWindow;
 Ti.App.base_window = win;
 Ti.UI.setBackgroundColor('#dfdacd');
 Ti.include('commonMethods.js');
-// Ti.include('listeners.js');
 updateCache();
 
 tabGroup = Titanium.UI.createTabGroup({
@@ -46,14 +45,7 @@ var myEggsTab = Titanium.UI.createTab({
     title : 'My Eggs',
     window : myEggsWindow
 });
-// var myEggsLabel = Titanium.UI.createLabel({
-	// color:'#999',
-	// text:'Loading your eggs...',
-	// font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	// textAlign:'center',
-	// width:'auto'
-// });
-// myEggsWindow.add(myEggsLabel);
+
 
 var recentWindow = Titanium.UI.createWindow({  
     title:'Recent',
@@ -69,14 +61,7 @@ var recentTab = Titanium.UI.createTab({
     title:'Recent',
     window:recentWindow
 });
-// var recentLabel = Titanium.UI.createLabel({
-	// color:'#999',
-	// text:'Loading recent docs...',
-	// font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	// textAlign:'center',
-	// width:'auto'
-// });
-// recentWindow.add(recentLabel);
+
 
 var interestingWindow = Titanium.UI.createWindow({  
     title:'Popular',
@@ -93,14 +78,7 @@ var interestingTab = Titanium.UI.createTab({
     title:'Popular',
     window:interestingWindow
 });
-// var interestingLabel = Titanium.UI.createLabel({
-	// color : '#999',
-	// text : 'Loading popular docs...',
-	// font : {fontSize : 20, fontFamily : 'Helvetica Neue'},
-	// textAlign : 'center',
-	// width : 'auto'
-// });
-// interestingWindow.add(interestingLabel);
+
 
 // var categoriesWindow = Titanium.UI.createWindow({  
     // title:'Categories',
@@ -112,14 +90,7 @@ var interestingTab = Titanium.UI.createTab({
     // title:'Categories',
     // window:categoriesWindow
 // });
-// var categoriesLabel = Titanium.UI.createLabel({
-	// color:'#999',
-	// text:'Loading categories...',
-	// font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	// textAlign:'center',
-	// width:'auto'
-// });
-// categoriesWindow.add(categoriesLabel);
+
 
 var searchWindow = Titanium.UI.createWindow({  
     title:'Search',
@@ -135,21 +106,13 @@ var searchTab = Titanium.UI.createTab({
     title:'Search',
     window:searchWindow
 });
-// var searchLabel = Titanium.UI.createLabel({
-	// color:'#999',
-	// text:'Search',
-	// font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	// textAlign:'center',
-	// width:'auto'
-// });
-// searchWindow.add(searchLabel);
+
 
 tabGroup.addTab(myEggsTab);  
 tabGroup.addTab(recentTab);  
 tabGroup.addTab(interestingTab);  
 // tabGroup.addTab(categoriesTab);  
 tabGroup.addTab(searchTab);  
-
 
 
 if (Ti.App.Properties.getBool('educated') != true) {
@@ -211,12 +174,4 @@ function registerForPush() {
 }
 
 registerForPush();
-
-// var pushReminderAlert = Ti.UI.createWindow({
-	// height : 100, 
-	// width : 100, 
-	// top : 50
-// })
-
-// tabGroup.open(pushReminderAlert);	
 

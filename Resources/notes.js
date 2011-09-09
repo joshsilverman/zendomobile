@@ -1,6 +1,5 @@
 var win = Ti.UI.currentWindow;
 
-// Ti.include('networkMethods.js');
 Ti.include('commonMethods.js');
 
 function initialize() {
