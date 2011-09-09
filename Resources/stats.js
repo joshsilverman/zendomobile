@@ -77,7 +77,7 @@ closeButton.addEventListener('click', function() {
 	win.close();
 	win._parent.close();
 	Ti.App.tabGroup.show();
-	Ti.App.reviewing = false;
+	// Ti.App.reviewing = false;
 });
 
 win.add(gradeLabel);

@@ -7,6 +7,7 @@ function authenticate(email, password, context) {
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
+				// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
 				authSuccess(email, password);
 			} else {
 				if (context != "start") {
@@ -41,6 +42,7 @@ function signOut() {
 		xhr = Ti.Network.createHTTPClient();
 		xhr.open("GET", serverURL + "/users/sign_out");
 		xhr.setRequestHeader('Content-Type', 'text/html');
+		// xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.send();
 		
 		Ti.App.Properties.removeProperty('email');

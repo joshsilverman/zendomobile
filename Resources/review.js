@@ -117,7 +117,7 @@ function initialize(cardViews) {
 		win.close();
 		Ti.App.tabGroup.visible = true;
 		win.nav.visible = true;
-		Ti.App.reviewing = false;
+		// Ti.App.reviewing = false;
 	});
 	
 	cardScrollableView = Titanium.UI.createScrollableView({

@@ -60,10 +60,7 @@ function renderRecent(){
 	});
 	recentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			if ( Ti.App.reviewing != true ) {
-				Ti.App.reviewing = true;
-				getLines(e.row.id, "normal", recentList);
-			}	
+			getLines(e.row.id, "normal", recentList);
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
 				var push = false;
