@@ -476,13 +476,21 @@ activityIndicator = Titanium.UI.createActivityIndicator({
 });
 
 function renderLoading(view, currentWindow) {
+	Ti.API.debug('render loading');
+	var loadTimeout = function() {
+		view.opacity = 1;
+		activityIndicator.hide();
+	};
+    setTimeout(loadTimeout, 10000);
+
 	view.opacity = .25;
 	activityIndicator.show();
 	currentWindow.add(activityIndicator);		
 }
 
 function loadingComplete(view, currentWindow) {
+	Ti.API.debug('done loading');
 	view.opacity = 1;
 	activityIndicator.hide();
-	currentWindow.remove(activityIndicator);
+	// currentWindow.remove(activityIndicator);
 }

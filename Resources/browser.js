@@ -24,9 +24,6 @@ setResume = function() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
 	} else {
-		// alert("Relogging from normal resume with email " + Ti.App.Properties.getString('email') + " and password " + Ti.App.Properties.getString('password'));
-		// checkLoggedIn("normal"); 
-		// Titanium.Network.HTTPClient.clearCookies
 		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
 	}		
 }

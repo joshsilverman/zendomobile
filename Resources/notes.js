@@ -56,11 +56,7 @@ function renderDocuments(){
 	
 	documentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			// alert("click label");
-			// if ( Ti.App.reviewing != true ) {
-				// Ti.App.reviewing = true;
 			getLines(e.row.id, "normal", documentList);
-			// }	
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
 				var push = false;
@@ -97,6 +93,7 @@ function renderDocuments(){
 }
 
 function updateDocuments(context) {
+	renderLoading(documentList, win);
 	notesRows = [];
 	if (Ti.App.data != null && context != "refresh") {
 		for ( i in Ti.App.data ) {
@@ -107,6 +104,7 @@ function updateDocuments(context) {
 			}
 		}
 		documentList.setData(notesRows);
+		loadingComplete(documentList, win);
 	} else {
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
@@ -123,6 +121,7 @@ function updateDocuments(context) {
 				}
 			}
 			documentList.setData(notesRows);
+			loadingComplete(documentList, win);
 		}	
 		xhr.send();			
 	}	
