@@ -1,0 +1,84 @@
+var win = Ti.UI.currentWindow;
+
+var screenWidth = Ti.Platform.displayCaps.platformWidth;
+var screenHeight = Ti.Platform.displayCaps.platformHeight;
+
+var gradeValues = {
+	4 : 9,
+	3 : 6, 
+	2 : 4, 
+	1 : 1	
+}
+var gradeCounts = {
+	1 : 0,
+	2 : 0, 
+	3 : 0, 
+	4 : 0	
+}
+
+total = 0;
+possible = 0;
+
+for ( i in win.data) {
+	if ( win.data[i].grade != null && win.data[i].grade != 0 ) {
+		possible += 9;
+		total += gradeValues[win.data[i].grade];
+		gradeCounts[win.data[i].grade] += 1
+	}
+}
+
+if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+	var graph = Ti.UI.createLabel({
+		text : "There was an error accessing your graph. Check your Internet connection and try again.",
+		textAlign : 'center',
+		left : 50,
+		width : 200,
+		color : 'gray',
+		font : {fontSize : 14, fontStyle:'italic'} 
+    });
+} else {
+	var URL = "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&legend=bottom&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
+	             + gradeCounts[4] + "," + gradeCounts[3] + "," + gradeCounts[2] + "," + gradeCounts[1] +
+	             "&chdl=Got it - " + gradeCounts[4] + "|Kinda - " + gradeCounts[3] +
+	             "|Barely - " + gradeCounts[2] + "|No clue - " + gradeCounts[1] + "&chma=|2"
+	var graph = Ti.UI.createImageView({
+		image : URL,
+		// image : "http://chart.apis.google.com/chart?chf=bg,s,F5F5F500&chs=500x225&legend=bottom&cht=p3&chco=16BE16|7FE97F|FD6666|E03838&chd=t:"
+	            // + gradeCounts[4] + "," + gradeCounts[3] + "," + gradeCounts[2] + "," + gradeCounts[1] +
+	            // "&chdl=Got it - " + gradeCounts[4] + "|Kinda - " + gradeCounts[3] +
+	            // "|Barely - " + gradeCounts[2] + "|No clue - " + gradeCounts[1] + "&chma=|2",
+	    width : 50, 
+	    height : 50,
+	    top : 50
+	    // width : 325, 
+	    // height : 275,
+	    // top :  80, 
+	    // left : -20
+	});
+}
+
+var gradeLabel = Ti.UI.createLabel({
+	text : "Your score: " + (Math.round((total/possible) * 100)) + "%",
+	// top : -320, 
+	right : 0,
+	textAlign : 'center',
+	font : {fontFamily : 'Marker Felt', fontSize : 30, fontWeight:'bold'} 
+});
+
+var closeButton = Ti.UI.createButton({
+	title : 'Done',
+	width : 120, 
+	height : 50, 
+	bottom : 23,
+	right : 23
+});
+	
+closeButton.addEventListener('click', function() {
+	// Titanium.UI.orientation = Titanium.UI.PORTRAIT;
+	win.close();
+	win._parent.close();
+});
+
+win.add(gradeLabel);
+win.add(graph);
+win.add(closeButton);
