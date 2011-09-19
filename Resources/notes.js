@@ -41,6 +41,10 @@ function renderNavBar() {
 	win.titleControl = logo;
 }
 
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
+
 function renderDocuments(){
 
 	var toolbar = Ti.UI.createToolbar({
@@ -81,7 +85,6 @@ function renderDocuments(){
 		    message : "Tap the icon next to a section, StudyEgg will send you notifications to teach you the material.",
 		    buttonNames : ["Don't show again", "Okay"]
 		});
-		
 		pushReminderAlert.addEventListener('click', function(f) {
 			if (f.index == 0) { 
 				Ti.App.Properties.setBool('educated', true);

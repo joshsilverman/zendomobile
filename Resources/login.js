@@ -71,6 +71,8 @@ function render() {
 		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 			alert("Could not complete your request. Check your connection and try again.");
 		} else { 
+			win.add(activityIndicator);
+			activityIndicator.show();
 			authenticate(email, password, "login");
 			passwordField.value = "";
 		}	

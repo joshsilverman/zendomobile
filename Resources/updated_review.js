@@ -3,17 +3,12 @@ win.name = "Review";
 Ti.App.current_win = win;
 cardGraded = false;
 
-
 Ti.include('commonMethods.js');
 Ti.include('network.js');
-Ti.include('dimensions.js');
+// Ti.include('dimensions.js');
 
-buttonTopPad = 10;
-buttonRightPad = 10;
-buttonLeftPad = 10;
-// buttonHeight = ((screenHeight - (buttonTopPad * 5)) / 4);
 buttonHeight = 55;
-cardLeftPad = 10;
+buttonLeftPad = (((Ti.Platform.displayCaps.platformWidth / 4) - buttonHeight ) / 2 );
 selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
@@ -60,7 +55,7 @@ function renderReview() {
 		
 	buttonView = Ti.UI.createView({
 		bottom : 0,
-		width : screenWidth, 
+		width : Ti.Platform.displayCaps.platformWidth, 
 		height : buttonHeight
 	});
 	buttonView.opacity = 0;
@@ -70,7 +65,7 @@ function renderReview() {
 		height : buttonHeight,
 		width : buttonHeight,
 		bottom : 12,
-		left : 100
+		left : buttonLeftPad
 	});
 	button2 = Ti.UI.createImageView({
 		image : 'images/kinda@2x.png',
@@ -78,7 +73,7 @@ function renderReview() {
 		height : buttonHeight,
 		width : buttonHeight,
 		bottom : 12,
-		left : 172
+		left : ( buttonLeftPad * 3 ) + buttonHeight
 	});
 	button3 = Ti.UI.createImageView({
 		image : 'images/barely@2x.png',
@@ -86,7 +81,7 @@ function renderReview() {
 		height : buttonHeight,
 		width : buttonHeight,
 		bottom : 12,
-		right : 172
+		left : ( buttonLeftPad * 5) + ( buttonHeight * 2 )
 	});
 	button4 = Ti.UI.createImageView({
 		image : 'images/no-clue@2x.png',
@@ -94,7 +89,7 @@ function renderReview() {
 		height : buttonHeight,
 		width : buttonHeight,
 		bottom : 12,
-		right : 100
+		left : ( buttonLeftPad * 7) + ( buttonHeight * 3 )
 	});
 	buttons = [button4, button3, button2, button1];
 	for (i in buttons) { 
@@ -111,10 +106,10 @@ function renderReview() {
 		left : 20
 	});
 	closeButton.addEventListener('click', function() {
+		Ti.App.fireEvent('updateNavBar');
 		Ti.App.tabGroup.show();
 		win.close();
 	});
-		
 		
 	cardScrollableView.addEventListener('scroll', function(e) {
 		buttonView.animate(fadeOutAnimation);
@@ -253,6 +248,7 @@ function buttonClicked(button) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
 		if (win._context == "push") {
+			Ti.App.fireEvent('updateNavBar');
 			Ti.App.tabGroup.show();
 			win.close();
 		} else {
@@ -288,6 +284,7 @@ function reportGrade(memID, confidence) {
 	xhr.onload = function() {
 		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
 		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
+		Ti.App.recentDirty = true;
 	};
 	xhr.send();
 }

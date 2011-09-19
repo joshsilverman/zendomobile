@@ -46,6 +46,10 @@ function renderNavBar() {
 	win.titleControl = logo;
 }
 
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
+
 function renderFolders(rows) {
 	var toolbar = Ti.UI.createToolbar({
 		top : 0		
@@ -112,9 +116,14 @@ function updateEggs(context) {
 	}		
 }
 
-win.addEventListener('focus', function() {	
+win.addEventListener('focus', function() {
+	//TODO made change here, added check	
+	if (Ti.App.myEggsDirty == true) {
+		updateEggs('refresh');
+		Ti.App.myEggsDirty = false;
+	}
 	updateLogo();
-	updateEggs('refresh');
+	
 });
 
 initialize();

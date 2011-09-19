@@ -90,13 +90,16 @@ function renderNavBar() {
 		search.blur();
 		if (Titanium.Network.remoteNotificationsEnabled == false) {
 			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		} else {
-			retrieveAllNotifications();
 		}
+		retrieveAllNotifications();
 	});	
 	win.leftNavButton = accountButton;
 	win.titleControl = logo;
 }
+
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
 
 function setSearchResults(results) {	
 	var data = [];

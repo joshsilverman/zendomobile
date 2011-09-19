@@ -47,6 +47,10 @@ function renderNavBar() {
 	win.titleControl = logo;
 }
 
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
+
 function renderRecent(){
 	var toolbar = Ti.UI.createToolbar({
 		top : 0
@@ -77,6 +81,7 @@ function renderRecent(){
 		}	
 	});
 	win.add(recentList);
+	updateRecent();
 }
 
 function updateRecent() {
@@ -84,7 +89,7 @@ function updateRecent() {
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_recent_json");
-	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Content-Type', 'application/json');	
 	xhr.onload = function() {
 		recentData = eval(this.responseText);
 		var data = [];
@@ -97,7 +102,10 @@ function updateRecent() {
 }
 
 win.addEventListener('focus', function() {
-	updateRecent();
+	if ( Ti.App.recentDirty == true ) {
+		updateRecent();
+		Ti.App.recentDirty = false;
+	}
 	updateLogo();
 });
 

@@ -7,9 +7,9 @@ var focused = false;
 
 Ti.include('authentication.js');
 
-// activityIndicator = Titanium.UI.createActivityIndicator({
-	// style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
-// });
+activityIndicator = Titanium.UI.createActivityIndicator({
+	style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+});
 
 function render() {
 	emailField = Ti.UI.createTextField({
@@ -108,8 +108,8 @@ function render() {
 						alert("Your password must be at least six characters!");
 						return;				
 					} else {	
-						// activityIndicator.show();
-						// win.add(activityIndicator);						
+						win.add(activityIndicator);
+						activityIndicator.show();					
 						signUp(email, password);
 						emailField.blur();
 						passwordField.blur();

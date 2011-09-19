@@ -1,37 +1,43 @@
 Ti.include('network.js');
-	
+
 function authenticate(email, password, context) {
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(10000);
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4) {
-			if (this.status == 200) {
-				// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
-				authSuccess(email, password);
-			} else {
-				if (context != "start") {
-					alert("Invalid email/password combination.");	
+	// if (Ti.App.Properties.getString('cookie') != '' || Ti.App.Properties.getString('cookie') != null) {
+		// authSuccess(email, password);
+	// } else {
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(10000);
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status == 200) {
+					Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
+					// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
+					authSuccess(email, password);
 				} else {
-					var win = Ti.UI.createWindow({
-						url:"login.js",
-						navBarHidden : true,
-						backgroundColor : '#dfdacd',
-						orientationModes : [
-							Titanium.UI.PORTRAIT
-						]
-					});
-					win.open();	
+					if (context != "start") {
+						alert("Invalid email/password combination.");
+						activityIndicator.hide();	
+					} else {
+						var win = Ti.UI.createWindow({
+							url:"login.js",
+							navBarHidden : true,
+							backgroundColor : '#dfdacd',
+							orientationModes : [
+								Titanium.UI.PORTRAIT
+							]
+						});
+						win.open();	
+					}
 				}
 			}
-		}
-	};
-	var params = {
-		'user[email]' : email,
-		// 'user[password]' : Titanium.Utils.md5HexDigest(password)
-		'user[password]' : password
-	};
-	xhr.open("POST", serverURL + "/users/sign_in");
-	xhr.send(params);
+		};
+		var params = {
+			'user[email]' : email,
+			// 'user[password]' : Titanium.Utils.md5HexDigest(password)
+			'user[password]' : password
+		};
+		xhr.open("POST", serverURL + "/users/sign_in");
+		xhr.send(params);
+	// }
 }
 
 function signOut() {
@@ -47,10 +53,6 @@ function signOut() {
 		Ti.App.Properties.removeProperty('email');
 		Ti.App.Properties.removeProperty('password');
 		Ti.App.data = null;
-		// alert("signing out!");
-		// Ti.App.removeEventListener('resume', setResume);
-		// Ti.App.removeEventListener('resumed', setResumed);
-		// Ti.App.removeEventListener('pause', setPaused);	
 		Ti.App.Properties.setBool('active', false);
 		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
 		var win = Ti.UI.createWindow({
@@ -72,7 +74,7 @@ function signUp(email, password) {
 	xhr.setTimeout(10000);
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
-			if (this.status == 200) {		
+			if (this.status == 200) {	
 				Ti.App.Properties.setString('email', email);
 				Ti.App.Properties.setString('password', password);
 				Ti.App.Properties.setBool('educated', false);	
@@ -87,6 +89,7 @@ function signUp(email, password) {
 				Ti.App.popularDirty = true;
 			} else {
 				alert("Could not create your account... Did you enter your email address correctly?");
+				activityIndicator.hide();	
 			}
 		}
 	};

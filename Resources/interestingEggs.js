@@ -42,6 +42,10 @@ function renderNavBar() {
 	win.titleControl = logo;
 }
 
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
+
 function renderPopular(){
 	var toolbar = Ti.UI.createToolbar({
 		top : 0

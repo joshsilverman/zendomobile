@@ -65,8 +65,9 @@ function enableNotifications(id, enable, row_object, context) {
 }
 
 function getLines(doc, context, listView) {
+	// var currMem = Ti.Platform.availableMemory;
+	// Ti.API.debug("Current memory: " + currMem);
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		// Ti.App.reviewing = false;
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
 		renderLoading(listView, Ti.UI.currentWindow);
@@ -77,7 +78,6 @@ function getLines(doc, context, listView) {
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
-				// Ti.App.reviewing = false;
 				loadingComplete(listView, Ti.UI.currentWindow);
 				alert('That document has no cards to review!'); 
 			} else {
@@ -92,7 +92,7 @@ function getLines(doc, context, listView) {
 						Titanium.UI.PORTRAIT
 					]
 				});
-				Ti.App.tabGroup.hide();
+				// Ti.App.tabGroup.hide();
 				new_win.open();
 				loadingComplete(listView, Ti.UI.currentWindow);
 			}
@@ -410,6 +410,7 @@ function retrieveAllNotifications() {
 				// Ti.App.reviewing = false;
 				Titanium.UI.iPhone.appBadge = 0;
 				alert('You have no pending notifications!'); 
+				Ti.App.fireEvent('updateNavBar');
 			} else {
 				var new_win = Ti.UI.createWindow({
 					url : "updated_review.js",
@@ -475,7 +476,6 @@ activityIndicator = Titanium.UI.createActivityIndicator({
 });
 
 function renderLoading(view, currentWindow) {
-	Ti.API.debug('render loading');
 	var loadTimeout = function() {
 		view.opacity = 1;
 		activityIndicator.hide();
@@ -488,7 +488,6 @@ function renderLoading(view, currentWindow) {
 }
 
 function loadingComplete(view, currentWindow) {
-	Ti.API.debug('done loading');
 	view.opacity = 1;
 	activityIndicator.hide();
 	// currentWindow.remove(activityIndicator);
