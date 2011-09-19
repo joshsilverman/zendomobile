@@ -106,6 +106,7 @@ function renderReview() {
 		left : 20
 	});
 	closeButton.addEventListener('click', function() {
+		win.listView.opacity = 1;
 		Ti.App.fireEvent('updateNavBar');
 		Ti.App.tabGroup.show();
 		win.close();
@@ -128,6 +129,8 @@ function renderReview() {
 	win.add(cardScrollableView);
 	win.add(buttonView);	
 	win.add(closeButton);
+	
+	// loadingComplete(win.listView, win._parent);
 }
 
 function createCardView(cardObject, cardNumber, totalCards) {
@@ -145,7 +148,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		width : 350,
 		height : 450
 	});
-	
+
 	var prompt = Ti.UI.createLabel({
 		text : cardObject.prompt,
 		textAlign : 'center',
@@ -159,7 +162,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		height:300,
 		width:280,		
 		top:75,
-		showVerticalScrollIndicator:true
+		showVerticalScrollIndicator:true,
 	});
  
 	var text = Titanium.UI.createTextArea({
@@ -167,7 +170,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		editable : false,
 		verticalAlign : 'center',
         bottom: 0,
-		font:{fontSize:20,fontFamily:'Arial'},
+		font : { fontSize : 20, fontFamily : 'Arial' },
 		color:'#888',
 		textAlign:'center',
 		borderWidth:1,
@@ -175,6 +178,10 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		borderRadius:5
 	});
 
+	text.addEventListener('click', function(){
+		alert('hey');
+	});
+	
 	answer.add(text);
 
 	var skipButton = Titanium.UI.createImageView({
@@ -240,6 +247,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 
 
 function buttonClicked(button) {
+	win.listView.opacity = 1;
 	cardGraded = true;
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
 	reportGrade(cards[cardScrollableView.currentPage].mem, button.source.grade);
@@ -258,6 +266,7 @@ function buttonClicked(button) {
 }
 
 function openStats() {
+	win.listView.opacity = 1;
 	win.hide();
 	Ti.App.tabGroup.hide();
 	var newWin = Ti.UI.createWindow({

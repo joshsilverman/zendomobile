@@ -90,11 +90,13 @@ function getLines(doc, context, listView) {
 					_context : "normal",
 					orientationModes : [
 						Titanium.UI.PORTRAIT
-					]
+					],
+					listView : listView
 				});
 				// Ti.App.tabGroup.hide();
+				activityIndicator.hide();
 				new_win.open();
-				loadingComplete(listView, Ti.UI.currentWindow);
+				// loadingComplete(listView, Ti.UI.currentWindow);
 			}
 		};
 		xhr.send();
