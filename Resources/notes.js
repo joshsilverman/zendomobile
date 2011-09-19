@@ -48,7 +48,7 @@ function renderDocuments(){
 	});
 	
 	documentList = Titanium.UI.createTableView({
-		rowHeight : 60,
+		rowHeight : 80,
 		data : win.data,
 		backgroundColor : '#dfdacd'
 	});
