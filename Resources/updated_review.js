@@ -107,6 +107,7 @@ function renderReview() {
 	});
 	closeButton.addEventListener('click', function() {
 		win.listView.opacity = 1;
+		win.activityIndicator.hide();
 		Ti.App.fireEvent('updateNavBar');
 		Ti.App.tabGroup.show();
 		win.close();
@@ -125,7 +126,7 @@ function renderReview() {
 		}
 
 	});
-	
+
 	win.add(cardScrollableView);
 	win.add(buttonView);	
 	win.add(closeButton);
@@ -156,32 +157,49 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		font:{fontSize:20,fontFamily:'Arial'}
 	});
 
+	// var answer = Titanium.UI.createImageView({
+		// image : 'images/egg.png',
+		// height : 100, 
+		// width : 100
+	// });
+	// answer.addEventListener('click', function() {
+		// alert('yooo');
+	// });
+	
 	var answer = Titanium.UI.createScrollView({
-		contentWidth:50,
-		contentHeight:50,
-		height:300,
-		width:280,		
-		top:75,
-		showVerticalScrollIndicator:true,
-	});
- 
-	var text = Titanium.UI.createTextArea({
-		value:cardObject.answer,
-		editable : false,
-		verticalAlign : 'center',
-        bottom: 0,
-		font : { fontSize : 20, fontFamily : 'Arial' },
-		color:'#888',
-		textAlign:'center',
-		borderWidth:1,
-		borderColor:'#bbb',
-		borderRadius:5
+		contentWidth : 'auto',
+		contentHeight : 'auto',
+		height : 300,
+		width : 280,		
+		top : 75,
+		borderWidth : 1,
+		borderColor : '#bbb',
+		borderRadius : 5,
+		layout : 'vertical'
 	});
 
-	text.addEventListener('click', function(){
-		alert('hey');
-	});
-	
+	if ( cardObject.answer.length < 300 ) {
+		var text = Titanium.UI.createLabel({
+			text : cardObject.answer,
+			height : 300,
+			textAlign : 'center',
+			verticalAlign : 'center',
+	        bottom: 0,
+			font : { fontSize : 20, fontFamily : 'Arial' },
+			color : '#888',
+		});		
+	} else {
+		var text = Titanium.UI.createLabel({
+			text : cardObject.answer,
+			height : 'auto',
+			textAlign : 'center',
+			verticalAlign : 'center',
+		    bottom: 0,
+			font : { fontSize : 20, fontFamily : 'Arial' },
+			color : '#888',
+		});		
+	}
+
 	answer.add(text);
 
 	var skipButton = Titanium.UI.createImageView({
@@ -245,9 +263,9 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	return cardView;
 }
 
-
 function buttonClicked(button) {
 	win.listView.opacity = 1;
+	win.activityIndicator.hide();
 	cardGraded = true;
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
 	reportGrade(cards[cardScrollableView.currentPage].mem, button.source.grade);
@@ -267,6 +285,7 @@ function buttonClicked(button) {
 
 function openStats() {
 	win.listView.opacity = 1;
+	win.activityIndicator.hide();
 	win.hide();
 	Ti.App.tabGroup.hide();
 	var newWin = Ti.UI.createWindow({

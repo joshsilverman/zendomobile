@@ -9,7 +9,7 @@ function authenticate(email, password, context) {
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status == 200) {
-					Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
+					// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
 					// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
 					authSuccess(email, password);
 				} else {
@@ -72,6 +72,9 @@ function signOut() {
 function signUp(email, password) {
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
+	// xhr.onload = function() {
+		// activityIndicator.hide();	
+	// };
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {	

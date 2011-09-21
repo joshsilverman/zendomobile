@@ -112,15 +112,20 @@ function setSearchResults(results) {
 		}	
 	}
 	searchList.setData(data);
+	loadingComplete(searchList, win);
 }
 
 function searchQuery(text) {
+	renderLoading(searchList, win);
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
+	xhr.onerror = function() {
+		loadingComplete(searchList, win);
+	};
 	xhr.onload = function() {
 		results = eval(this.responseText);
 		setSearchResults(results);
-	}
+	};
 	var params = { 'q' : text };
 	xhr.open("POST", serverURL + "/search/full_query");
 	xhr.send(params);		

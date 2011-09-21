@@ -91,10 +91,11 @@ function getLines(doc, context, listView) {
 					orientationModes : [
 						Titanium.UI.PORTRAIT
 					],
-					listView : listView
+					listView : listView,
+					activityIndicator : activityIndicator
 				});
 				// Ti.App.tabGroup.hide();
-				activityIndicator.hide();
+				// activityIndicator.hide();
 				new_win.open();
 				// loadingComplete(listView, Ti.UI.currentWindow);
 			}

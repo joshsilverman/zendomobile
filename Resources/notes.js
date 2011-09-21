@@ -113,6 +113,9 @@ function updateDocuments(context) {
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');
+		xhr.onerror = function() {
+			loadingComplete(documentList, win);
+		};
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
 			for ( i in foldersData ) {

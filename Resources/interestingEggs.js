@@ -70,11 +70,15 @@ function renderPopular(){
 }
 
 function updatePopular() {
+	renderLoading(popularList, win);
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_popular_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onerror = function() {
+		loadingComplete(popularList, win);
+	};
 	xhr.onload = function() {
 		popularData = eval(this.responseText);
 		var data = [];
@@ -82,6 +86,7 @@ function updatePopular() {
 			data.push(createAddableEggRow(popularData[i][1], popularData[i][0], popularData[i][2]));
 		}
 		popularList.setData(data);
+		loadingComplete(popularList, win);
 	};
 	xhr.send();	
 }
