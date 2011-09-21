@@ -42,13 +42,11 @@ var myEggsWindow = Titanium.UI.createWindow({
 });
 var myEggsTab = Titanium.UI.createTab({  
     icon : 'images/eggicon@2x.png',
-    title : 'My Eggs',
     window : myEggsWindow
 });
 
 
 var recentWindow = Titanium.UI.createWindow({  
-    title:'Recent',
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
     url : 'recentDocuments.js',
@@ -58,13 +56,11 @@ var recentWindow = Titanium.UI.createWindow({
 });
 var recentTab = Titanium.UI.createTab({  
     icon:'images/clock@2x.png',
-    title:'Recent',
     window:recentWindow
 });
 
 
 var interestingWindow = Titanium.UI.createWindow({  
-    title:'Popular',
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
     url : 'interestingEggs.js',
@@ -75,7 +71,6 @@ var interestingWindow = Titanium.UI.createWindow({
 });
 var interestingTab = Titanium.UI.createTab({  
     icon:'images/star@2x.png',
-    title:'Popular',
     window:interestingWindow
 });
 
@@ -93,7 +88,6 @@ var interestingTab = Titanium.UI.createTab({
 
 
 var searchWindow = Titanium.UI.createWindow({  
-    title:'Search',
     url : 'search.js',
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
@@ -103,7 +97,6 @@ var searchWindow = Titanium.UI.createWindow({
 });
 var searchTab = Titanium.UI.createTab({  
     icon:'images/search@2x.png',
-    title:'Search',
     window:searchWindow
 });
 
@@ -174,4 +167,9 @@ function registerForPush() {
 }
 
 registerForPush();
+
+function memCheck() {
+	Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);
+}
+// setInterval(memCheck, 1000);
 

@@ -85,11 +85,15 @@ function renderRecent(){
 }
 
 function updateRecent() {
+	renderLoading(recentList, win);
 	notesRows = [];
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_recent_json");
 	xhr.setRequestHeader('Content-Type', 'application/json');	
+	xhr.onerror = function() {
+		loadingComplete(recentList, win);
+	};
 	xhr.onload = function() {
 		recentData = eval(this.responseText);
 		var data = [];
@@ -97,6 +101,7 @@ function updateRecent() {
 			data.push(createNoteRow(recentData[i].document.name, recentData[i].document.id, recentData[i].document.tag_id, recentData[i].document.userships[0].push_enabled));
 		}
 		recentList.setData(data);
+		loadingComplete(recentList, win);
 	};
 	xhr.send();
 }

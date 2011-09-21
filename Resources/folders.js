@@ -73,6 +73,7 @@ function renderFolders(rows) {
 }
 
 function updateEggs(context) {
+	renderLoading(eggList, win);
 	rows = [];	
 	if (Ti.App.data != null && context != "refresh" && Ti.App.Properties.getBool('download_educated') == true) {
 		for ( i in Ti.App.data ) {
@@ -88,12 +89,16 @@ function updateEggs(context) {
 			rows.push(createFolderRow(Ti.App.data[i].tag.name, Ti.App.data[i].tag.id, false, pushFlag));
 		}
 		eggList.setData(rows);
+		loadingComplete(eggList, win);
 	} else {	
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');
+		xhr.onerror = function() {
+			loadingComplete(eggList, win);
+		};
 		xhr.onload = function() {
 			foldersData = eval(this.responseText);
 			if (foldersData != null) {
@@ -111,6 +116,7 @@ function updateEggs(context) {
 				}
 			}
 			eggList.setData(rows);
+			loadingComplete(eggList, win);
 		};
 		xhr.send();	
 	}		
