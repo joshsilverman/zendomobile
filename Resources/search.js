@@ -128,6 +128,7 @@ function searchQuery(text) {
 	};
 	var params = { 'q' : text };
 	xhr.open("POST", serverURL + "/search/full_query");
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.send(params);		
 }
 

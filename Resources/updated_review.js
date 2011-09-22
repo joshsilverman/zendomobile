@@ -106,8 +106,7 @@ function renderReview() {
 		left : 20
 	});
 	closeButton.addEventListener('click', function() {
-		win.listView.opacity = 1;
-		win.activityIndicator.hide();
+		cleanLoadingState();
 		Ti.App.fireEvent('updateNavBar');
 		Ti.App.tabGroup.show();
 		win.close();
@@ -129,9 +128,7 @@ function renderReview() {
 
 	win.add(cardScrollableView);
 	win.add(buttonView);	
-	win.add(closeButton);
-	
-	// loadingComplete(win.listView, win._parent);
+	win.add(closeButton);	
 }
 
 function createCardView(cardObject, cardNumber, totalCards) {
@@ -217,6 +214,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	cardView.add(skipButton);
 	cardView.addEventListener('singletap', function(e) {
 		if (e.source.action == "skip") {
+			cleanLoadingState();
 			reportGrade(cards[cardScrollableView.currentPage].mem, 4);
 			if ( ( cardScrollableView.views.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 				cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
@@ -264,8 +262,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 }
 
 function buttonClicked(button) {
-	win.listView.opacity = 1;
-	win.activityIndicator.hide();
+	cleanLoadingState();
 	cardGraded = true;
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
 	reportGrade(cards[cardScrollableView.currentPage].mem, button.source.grade);
@@ -284,8 +281,7 @@ function buttonClicked(button) {
 }
 
 function openStats() {
-	win.listView.opacity = 1;
-	win.activityIndicator.hide();
+	cleanLoadingState();
 	win.hide();
 	Ti.App.tabGroup.hide();
 	var newWin = Ti.UI.createWindow({
@@ -309,12 +305,20 @@ function reportGrade(memID, confidence) {
 	xhr.setTimeout(10000);
 	xhr.open("POST", serverURL + "/mems/update/" + memID + "/" + gradeValues[confidence]  + "/0");
 	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
 		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
 		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
 		Ti.App.recentDirty = true;
 	};
 	xhr.send();
+}
+
+function cleanLoadingState() {
+	if ( win.listView != null ) {
+		win.listView.opacity = 1;
+		win.activityIndicator.hide();
+	}
 }
 
 renderReview();

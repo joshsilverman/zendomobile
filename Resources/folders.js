@@ -96,6 +96,7 @@ function updateEggs(context) {
 		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
 		xhr.open("GET", serverURL + "/tags/get_tags_json");
 		xhr.setRequestHeader('Content-Type', 'text/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onerror = function() {
 			loadingComplete(eggList, win);
 		};

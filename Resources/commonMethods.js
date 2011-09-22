@@ -5,6 +5,7 @@ function updateCache() {
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_tags_json");//
 	xhr.setRequestHeader('Content-Type', 'text/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
 		Ti.App.data = eval(this.responseText);
 	};
@@ -42,6 +43,7 @@ function enableNotifications(id, enable, row_object, context) {
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/enable_mobile/" + id + "/" + ((enable)?1:0));
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status != 200) {	
@@ -75,6 +77,7 @@ function getLines(doc, context, listView) {
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
@@ -131,6 +134,7 @@ function addDocument(id, row_object, context) {
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/add_document/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status != 200) {	
@@ -179,6 +183,7 @@ function addEgg(id, row_object, context, trigger_dirty){
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/tags/claim_tag/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status != 200) {	
@@ -407,6 +412,7 @@ function retrieveAllNotifications() {
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/users/retrieve_notifications");
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
@@ -471,6 +477,7 @@ function reLogUser(email, password, context) {
 		}
 	};
 	xhr.open("POST", serverURL + "/users/sign_in");
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.send(params);	
 }
 

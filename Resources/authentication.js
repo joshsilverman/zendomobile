@@ -1,16 +1,15 @@
 Ti.include('network.js');
 
 function authenticate(email, password, context) {
-	// if (Ti.App.Properties.getString('cookie') != '' || Ti.App.Properties.getString('cookie') != null) {
-		// authSuccess(email, password);
-	// } else {
+	if (Ti.App.Properties.getString('cookie') != '' && Ti.App.Properties.getString('cookie') != null) {
+		authSuccess(email, password);
+	} else {
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status == 200) {
-					// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
-					// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie"));
+					Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie").split(";")[0]);
 					authSuccess(email, password);
 				} else {
 					if (context != "start") {
@@ -37,7 +36,7 @@ function authenticate(email, password, context) {
 		};
 		xhr.open("POST", serverURL + "/users/sign_in");
 		xhr.send(params);
-	// }
+	}
 }
 
 function signOut() {
@@ -47,11 +46,12 @@ function signOut() {
 		xhr = Ti.Network.createHTTPClient();
 		xhr.open("GET", serverURL + "/users/sign_out");
 		xhr.setRequestHeader('Content-Type', 'text/html');
-		// xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 		xhr.send();
 		
 		Ti.App.Properties.removeProperty('email');
 		Ti.App.Properties.removeProperty('password');
+		Ti.App.Properties.removeProperty('cookie');
 		Ti.App.data = null;
 		Ti.App.Properties.setBool('active', false);
 		Titanium.UI.orientation = Titanium.UI.PORTRAIT;
@@ -81,7 +81,8 @@ function signUp(email, password) {
 				Ti.App.Properties.setString('email', email);
 				Ti.App.Properties.setString('password', password);
 				Ti.App.Properties.setBool('educated', false);	
-				Ti.App.Properties.setBool('download_educated', false);		
+				Ti.App.Properties.setBool('download_educated', false);	
+				Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie").split(";")[0]);	
 				authSuccess(email, password);
 				emailField.value = "";
 				passwordField.value = "";
@@ -127,6 +128,7 @@ function registerDevice(token) {
 	xhr = Ti.Network.createHTTPClient();
 	xhr.open("POST", serverURL + "/users/add_device/" + token);
 	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	// xhr.onload = function() {
 		// Ti.API.debug('Added device with token' + token);
 	// };

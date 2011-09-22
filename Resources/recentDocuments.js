@@ -90,7 +90,8 @@ function updateRecent() {
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
 	xhr.open("GET", serverURL + "/tags/get_recent_json");
-	xhr.setRequestHeader('Content-Type', 'application/json');	
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onerror = function() {
 		loadingComplete(recentList, win);
 	};

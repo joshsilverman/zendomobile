@@ -23,7 +23,7 @@ setResume = function() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
 	} else {
-		reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
+		// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
 	}		
 }
 
@@ -42,6 +42,7 @@ var myEggsWindow = Titanium.UI.createWindow({
 });
 var myEggsTab = Titanium.UI.createTab({  
     icon : 'images/eggicon@2x.png',
+    title : "My Eggs",
     window : myEggsWindow
 });
 
@@ -56,6 +57,7 @@ var recentWindow = Titanium.UI.createWindow({
 });
 var recentTab = Titanium.UI.createTab({  
     icon:'images/clock@2x.png',
+    title : "Recent",
     window:recentWindow
 });
 
@@ -71,6 +73,7 @@ var interestingWindow = Titanium.UI.createWindow({
 });
 var interestingTab = Titanium.UI.createTab({  
     icon:'images/star@2x.png',
+    title : "Popular",
     window:interestingWindow
 });
 
@@ -97,6 +100,7 @@ var searchWindow = Titanium.UI.createWindow({
 });
 var searchTab = Titanium.UI.createTab({  
     icon:'images/search@2x.png',
+    title : "Search",
     window:searchWindow
 });
 
@@ -171,5 +175,5 @@ registerForPush();
 function memCheck() {
 	Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);
 }
-// setInterval(memCheck, 1000);
+setInterval(memCheck, 1000);
 
