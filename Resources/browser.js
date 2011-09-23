@@ -148,16 +148,18 @@ function registerForPush() {
 			// alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			alert(e);
-			// Ti.App.fireEvent('updateNavBar'); 
-			// Ti.App.myEggsDirty = true;
-			// Ti.App.documentsDirty = true;
-			// Ti.App.popularDirty = true;
-			// Ti.App.searchDirty = true;	
+
 			if (Ti.App.Properties.getBool('foreground') == true) {
+				if (e.data.aps.alert.indexOf('challenge') != -1 ) {
+					var title = "You have a new challenge!";
+					var message = "View it now?";
+				} else {
+					var title = "You have new cards to review!";
+					var message = "Go to them now?";
+				}	
 				var reviewAlert = Ti.UI.createAlertDialog({
-				    title : 'You have new cards to review!',
-				    message : "Go to them now?",
+				    title : title,
+				    message : message,
 				    buttonNames : ["Later", "Review"],
 				    cancel : 0
 				});
