@@ -123,7 +123,6 @@ function renderReview() {
 				count++;		
 			}	
 		}
-
 	});
 
 	win.add(cardScrollableView);
@@ -132,7 +131,7 @@ function renderReview() {
 }
 
 function createCardView(cardObject, cardNumber, totalCards) {
-
+	
 	var cardBackground = Ti.UI.createImageView({
 		image : 'images/review-bg@2x.png',
 		status : 'front',
@@ -146,21 +145,53 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		width : 350,
 		height : 450
 	});
-
-	var prompt = Ti.UI.createLabel({
-		text : cardObject.prompt,
-		textAlign : 'center',
-		width : 300,
-		font:{fontSize:20,fontFamily:'Arial'}
-	});
-
-	// var answer = Titanium.UI.createImageView({
-		// image : 'images/egg.png',
-		// height : 100, 
-		// width : 100
-	// });
-	// answer.addEventListener('click', function() {
-		// alert('yooo');
+	
+	if ( cardObject.prompt.length < 300 ) {
+		var prompt_text = Ti.UI.createLabel({
+			text : cardObject.prompt,
+			height : 300,
+			textAlign : 'center',
+			verticalAlign : 'center',
+			bottom : 0,
+			font:{fontSize:20,fontFamily:'Arial'}
+		});	
+		var prompt = Titanium.UI.createScrollView({
+			contentWidth : 'auto',
+			contentHeight : 'auto',
+			height : 300,
+			width : 280,		
+			top : 75,
+			layout : 'vertical'
+		});		
+	} else {
+		var prompt_text = Ti.UI.createLabel({
+			text : cardObject.prompt,
+			height : 'auto',
+			textAlign : 'center',
+			verticalAlign : 'center',
+			bottom : 0,
+			font:{fontSize:20,fontFamily:'Arial'}
+		});	
+		var prompt = Titanium.UI.createScrollView({
+			contentWidth : 'auto',
+			contentHeight : 'auto',
+			height : 300,
+			width : 280,		
+			top : 75,
+			borderWidth : 1,
+			borderColor : '#bbb',
+			borderRadius : 5,
+			layout : 'vertical'
+		});				
+	}
+	
+	prompt.add(prompt_text);
+	
+	// var prompt = Ti.UI.createLabel({
+		// text : cardObject.prompt,
+		// textAlign : 'center',
+		// width : 280,
+		// font:{fontSize:20,fontFamily:'Arial'}
 	// });
 	
 	var answer = Titanium.UI.createScrollView({
@@ -174,7 +205,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		borderRadius : 5,
 		layout : 'vertical'
 	});
-
+	
 	if ( cardObject.answer.length < 300 ) {
 		var text = Titanium.UI.createLabel({
 			text : cardObject.answer,
@@ -322,3 +353,15 @@ function cleanLoadingState() {
 }
 
 renderReview();
+
+// function loadCard() {
+	// if (shortSession == false){
+		// if (cards.length > count) {
+			// cardScrollableView.addView(createCardView(cards[count], cards[count].answer, cards[count].mem));
+			// count++;		
+		// } else {
+			// clearInterval(run);
+		// }
+	// }
+// }
+// run = setInterval(loadCard, 500);

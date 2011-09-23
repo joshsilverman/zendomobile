@@ -20,11 +20,13 @@ setResumed = function() {
 }
 
 setResume = function() {
+	Ti.App.fireEvent('updateNavBar'); 
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
-	} else {
+	}
+	// } else {
 		// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
-	}		
+	// }		
 }
 
 Ti.App.addEventListener('resume', setResume); 
@@ -146,10 +148,11 @@ function registerForPush() {
 			// alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
-			Ti.App.myEggsDirty = true;
-			Ti.App.documentsDirty = true;
-			Ti.App.popularDirty = true;
-			Ti.App.searchDirty = true;			
+			// Ti.App.fireEvent('updateNavBar'); 
+			// Ti.App.myEggsDirty = true;
+			// Ti.App.documentsDirty = true;
+			// Ti.App.popularDirty = true;
+			// Ti.App.searchDirty = true;	
 			if (Ti.App.Properties.getBool('foreground') == true) {
 				var reviewAlert = Ti.UI.createAlertDialog({
 				    title : 'You have new cards to review!',
@@ -164,7 +167,8 @@ function registerForPush() {
 				});
 				reviewAlert.show();		
 			} else {
-				reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
+				retrieveAllNotifications();
+				// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
 		}
 	});	
@@ -172,8 +176,8 @@ function registerForPush() {
 
 registerForPush();
 
-function memCheck() {
-	Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);
-}
-setInterval(memCheck, 1000);
+// function memCheck() {
+	// Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);
+// }
+// setInterval(memCheck, 1000);
 

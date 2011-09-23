@@ -25,12 +25,17 @@ function renderNavBar() {
 	refreshButton.addEventListener('click', function() {
 		updateDocuments("refresh");
 	});	
+	if (Titanium.UI.iPhone.appBadge == 0) {
+		var image = 'images/logo@2x.png'
+	} else {
+		var image = 'images/logo-indicator@2x.png'
+	}	
 	var logo = Ti.UI.createImageView({
-		image : 'images/logo-indicator.png', 
+		image : image, 
 		height : 35,
 		width : 80
 	});
-	
+	//TODO should be uncommented?
 	logo.addEventListener('click', function() {
 		// if (Titanium.Network.remoteNotificationsEnabled == false) {
 			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");

@@ -50,6 +50,10 @@ Ti.App.addEventListener('updateNavBar', function() {
 	updateLogo();
 });
 
+Ti.App.addEventListener('updateEggs', function() {
+	updateEggs();
+});
+
 function renderFolders(rows) {
 	var toolbar = Ti.UI.createToolbar({
 		top : 0		

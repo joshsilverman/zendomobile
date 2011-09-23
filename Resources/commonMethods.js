@@ -57,6 +57,8 @@ function enableNotifications(id, enable, row_object, context) {
 					}
 					row_object.row.children[0].push = push;
 				 	row_object.row.children[0].image = image;
+					row_object.row.children[2].image = 'images/download@2x.png';
+					row_object.row.children[2].owned = false;	 				 	
 				} else {
 					updateCache();			
 				}
@@ -78,6 +80,14 @@ function getLines(doc, context, listView) {
 		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status != 200) {
+					loadingComplete(listView, Ti.UI.currentWindow);
+					alert('That document has no cards to review!'); 
+				}	
+			}
+		};	
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
@@ -158,26 +168,26 @@ function addEgg(id, row_object, context, trigger_dirty){
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
-		if (trigger_dirty != false) {
-			switch (context) {
-				case "popular":
-					Ti.App.myEggsDirty = true;
-					Ti.App.documentsDirty = true;
-					Ti.App.searchDirty = true;
-					break;
-				case "search":
-					Ti.App.myEggsDirty = true;
-					Ti.App.documentsDirty = true;
-					Ti.App.popularDirty = true;
-					break;
-				case "recent":
-					Ti.App.myEggsDirty = true;
-					Ti.App.documentsDirty = true;
-					Ti.App.popularDirty = true;
-					Ti.App.searchDirty = true;
-					break;									
-			}	
-		}
+		// if (trigger_dirty != false) {
+		switch (context) {
+			case "popular":
+				Ti.App.myEggsDirty = true;
+				Ti.App.documentsDirty = true;
+				Ti.App.searchDirty = true;
+				break;
+			case "search":
+				Ti.App.myEggsDirty = true;
+				Ti.App.documentsDirty = true;
+				Ti.App.popularDirty = true;
+				break;
+			case "recent":
+				Ti.App.myEggsDirty = true;
+				Ti.App.documentsDirty = true;
+				Ti.App.popularDirty = true;
+				Ti.App.searchDirty = true;
+				break;									
+		}	
+		// }
 		notesRows = [];
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
@@ -199,6 +209,7 @@ function addEgg(id, row_object, context, trigger_dirty){
 					if (Ti.App.Properties.getBool('download_educated') != true) {
 						Ti.App.tabGroup.setActiveTab(0);						
 						Ti.App.Properties.setBool('download_educated', true);
+						// Ti.App.fireEvent('updateEggs');
 					}
 				}
 			}
@@ -395,7 +406,8 @@ function createAddableNoteRow(name, docid, owned, push){
 	});
 	var row = Ti.UI.createTableViewRow({ 
 		id : docid,
-		backgroundColor : '#dfdacd'
+		backgroundColor : '#dfdacd',
+		owned : owned
 	}); 
 	row.add(image);
 	row.add(label);

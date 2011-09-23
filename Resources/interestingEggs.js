@@ -59,11 +59,12 @@ function renderPopular(){
 		if (e.source.id == "add") {
 			e.row.children[2].image = 'images/download-faded@2x.png';
 			e.row.children[2].owned = true;
-			if (Ti.App.Properties.getBool('download_educated') != true) {
-				addEgg(e.row.id, e, "popular", false);
-			} else {
-				addEgg(e.row.id, e, "popular");
-			}
+			addEgg(e.row.id, e, "popular");
+			// if (Ti.App.Properties.getBool('download_educated') != true) {
+				// addEgg(e.row.id, e, "popular");
+			// } else {
+				// addEgg(e.row.id, e, "popular");
+			// }
 		} 
 	});
 	win.add(popularList);

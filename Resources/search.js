@@ -9,6 +9,44 @@ function initialize() {
 	renderNavBar();
 }
 
+function renderNavBar() {
+	var accountButton = Ti.UI.createButton({ title : 'Account' });
+	accountButton.addEventListener('click', function() {
+		search.blur();
+		newWin = Ti.UI.createWindow({
+			backgroundColor : '#dfdacd',
+			backgroundImage : 'images/splash@2x.png',
+			navBarHidden : false,
+			barColor : '#0066b2',
+	    	url : 'account.js',
+		});
+		newWin.open();
+	});	
+	if (Titanium.UI.iPhone.appBadge == 0) {
+		var image = 'images/logo@2x.png'
+	} else {
+		var image = 'images/logo-indicator@2x.png'
+	}
+	var logo = Ti.UI.createImageView({
+		image : image, 
+		height : 35,
+		width : 80
+	});
+	logo.addEventListener('click', function() {
+		search.blur();
+		if (Titanium.Network.remoteNotificationsEnabled == false) {
+			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		}
+		retrieveAllNotifications();
+	});	
+	win.leftNavButton = accountButton;
+	win.titleControl = logo;
+}
+
+Ti.App.addEventListener('updateNavBar', function() {
+	updateLogo();
+});
+
 function renderSearch() {
 	search = Titanium.UI.createSearchBar({
 		barColor:'#0066b2',
@@ -62,44 +100,6 @@ function renderSearch() {
 	win.add(search);
 	win.add(searchList);
 }
-
-function renderNavBar() {
-	var accountButton = Ti.UI.createButton({ title : 'Account' });
-	accountButton.addEventListener('click', function() {
-		search.blur();
-		newWin = Ti.UI.createWindow({
-			backgroundColor : '#dfdacd',
-			backgroundImage : 'images/splash@2x.png',
-			navBarHidden : false,
-			barColor : '#0066b2',
-	    	url : 'account.js',
-		});
-		newWin.open();
-	});	
-	if (Titanium.UI.iPhone.appBadge == 0) {
-		var image = 'images/logo@2x.png'
-	} else {
-		var image = 'images/logo-indicator@2x.png'
-	}
-	var logo = Ti.UI.createImageView({
-		image : image, 
-		height : 35,
-		width : 80
-	});
-	logo.addEventListener('click', function() {
-		search.blur();
-		if (Titanium.Network.remoteNotificationsEnabled == false) {
-			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		}
-		retrieveAllNotifications();
-	});	
-	win.leftNavButton = accountButton;
-	win.titleControl = logo;
-}
-
-Ti.App.addEventListener('updateNavBar', function() {
-	updateLogo();
-});
 
 function setSearchResults(results) {	
 	var data = [];
