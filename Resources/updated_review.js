@@ -53,6 +53,56 @@ function renderReview() {
 		left:0
 	});
 		
+	challengeButton = Ti.UI.createButton({
+		height : 50,
+		width : 80,
+		top : 20,
+		title : "Challenge"
+	});
+	
+	challengeButton.addEventListener('click', function() {
+		var dialog = Ti.UI.createView({
+			top : 25,
+			width : 250, 
+			height : 150,
+			backgroundColor : '#dfdacd'
+		});
+		
+		var textfield = Titanium.UI.createTextField({
+		    color:'#336699',
+		    value:'Start typing a name...',
+		    height:35,
+		    width:200,
+		    top:25,
+			autocapitalization : Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+		    autocorrect : false,
+		    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+		});
+		
+		var done = Ti.UI.createButton({
+			title : 'Done',
+			width : 80, 
+			height : 50,
+			bottom : 5
+		});
+		
+		done.addEventListener('click', function() {
+			textfield.blur();
+			challengeUser(textfield.value);
+			dialog.hide();
+		})
+		
+		textfield.addEventListener('focus', function() {
+			textfield.value = '';
+		});
+		
+		dialog.add(textfield);
+		dialog.add(done);
+		
+		win.add(dialog);
+
+	});
+	
 	buttonView = Ti.UI.createView({
 		bottom : 0,
 		width : Ti.Platform.displayCaps.platformWidth, 
@@ -128,6 +178,7 @@ function renderReview() {
 	win.add(cardScrollableView);
 	win.add(buttonView);	
 	win.add(closeButton);	
+	win.add(challengeButton);
 }
 
 function createCardView(cardObject, cardNumber, totalCards) {
@@ -350,6 +401,15 @@ function cleanLoadingState() {
 		win.listView.opacity = 1;
 		win.activityIndicator.hide();
 	}
+}
+
+function challengeUser(username) {
+	xhr = Ti.Network.createHTTPClient();
+	xhr.setTimeout(10000);
+	xhr.open("POST", serverURL + "/users/challenge_user/" + username + "/" + cards[cardScrollableView.currentPage].mem);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+	xhr.send();
 }
 
 renderReview();

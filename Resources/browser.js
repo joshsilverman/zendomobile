@@ -148,6 +148,7 @@ function registerForPush() {
 			// alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {
+			alert(e);
 			// Ti.App.fireEvent('updateNavBar'); 
 			// Ti.App.myEggsDirty = true;
 			// Ti.App.documentsDirty = true;

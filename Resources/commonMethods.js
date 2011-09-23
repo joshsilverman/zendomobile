@@ -50,7 +50,7 @@ function enableNotifications(id, enable, row_object, context) {
 					alert("Could not enable notifications for that document!");	
 					if ( row_object.row.children[0].push == true ) {
 						var push = false;
-				    	var image = 'images/document@2x.png';
+				    	var image = 'images/document-feed-gray-4@2x.png';
 					} else {
 						var push = true;
 						var image = 'images/document-feed@2x.png';
@@ -333,7 +333,7 @@ function createNoteRow(name, docid, tagId, push_enabled){
 	    });				
 	} else {
 	    var image = Ti.UI.createImageView({
-	    	image:'images/document@2x.png',
+	    	image:'images/document-feed-gray-4@2x.png',
 	    	left: 5,
 	    	touchEnabled:true,
 	    	height:50,
@@ -367,7 +367,7 @@ function createAddableNoteRow(name, docid, owned, push){
 	    });		
 	} else {
 	    var image = Ti.UI.createImageView({
-	    	image:'images/document@2x.png',
+	    	image:'images/document-feed-gray-4@2x.png',
 	    	left: 5,
 	    	touchEnabled:true,
 	    	push : false,

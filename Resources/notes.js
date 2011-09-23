@@ -68,7 +68,7 @@ function renderDocuments(){
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
 				var push = false;
-		    	var image = 'images/document@2x.png';
+		    	var image = 'images/document-feed-gray-4@2x.png';
 			} else {
 				var push = true;
 				var image = 'images/document-feed@2x.png';
