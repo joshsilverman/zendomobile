@@ -339,7 +339,9 @@ function reportGrade(memID, confidence) {
 	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
 		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
-		Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;
+		if (win._context == "push") {
+			Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;	
+		}
 		Ti.App.recentDirty = true;
 	};
 	xhr.send();
