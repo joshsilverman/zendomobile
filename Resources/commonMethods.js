@@ -25,12 +25,14 @@ function enableNotifications(id, enable, row_object, context) {
 			case "documents":
 				Ti.App.myEggsDirty = true;
 				Ti.App.popularDirty = true;
-				Ti.App.searchDirty = true;						
+				Ti.App.searchDirty = true;	
+				Ti.App.recentDirty = true;					
 				break;
 			case "search":
 				Ti.App.myEggsDirty = true;
 				Ti.App.documentsDirty = true;
 				Ti.App.popularDirty = true;
+				Ti.App.recentDirty = true;
 				break;
 			case "recent":
 				Ti.App.myEggsDirty = true;
@@ -84,7 +86,7 @@ function getLines(doc, context, listView) {
 			if (this.readyState == 4) {
 				if (this.status != 200) {
 					loadingComplete(listView, Ti.UI.currentWindow);
-					alert('That document has no cards to review!'); 
+					alert("Could not complete your request. Check your connection and try again.");
 				}	
 			}
 		};	
@@ -455,6 +457,7 @@ function retrieveAllNotifications() {
 }
 
 function updateLogo() {
+	alert(Titanium.UI.iPhone.appBadge);
 	if (Titanium.UI.iPhone.appBadge == 0) {
 		win.titleControl.image = 'images/logo@2x.png'
 	} else {
