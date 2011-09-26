@@ -457,7 +457,6 @@ function retrieveAllNotifications() {
 }
 
 function updateLogo() {
-	alert(Titanium.UI.iPhone.appBadge);
 	if (Titanium.UI.iPhone.appBadge == 0) {
 		win.titleControl.image = 'images/logo@2x.png'
 	} else {
