@@ -8,6 +8,7 @@ function updateCache() {
 	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
 		Ti.App.data = eval(this.responseText);
+		alert(Ti.App.data);
 	};
 	xhr.send();
 }

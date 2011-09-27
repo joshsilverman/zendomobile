@@ -143,7 +143,8 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	var cardView = Ti.UI.createView({
 		card : cardObject,
 		width : 350,
-		height : 450
+		height : 450,
+		// zIndex : 2
 	});
 	
 	if ( cardObject.prompt.length < 300 ) {
