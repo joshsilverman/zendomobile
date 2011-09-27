@@ -15,6 +15,13 @@ function updateCache() {
 function enableNotifications(id, enable, row_object, context) {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
+		if ( row_object.row.children[0].push == true ) {
+			var push = false;
+	    	var image = 'images/document-feed-gray-4@2x.png';
+		} else {
+			var push = true;
+			var image = 'images/document-feed@2x.png';
+		}		
 	} else {
 		switch (context) {
 			case "popular":
@@ -46,6 +53,23 @@ function enableNotifications(id, enable, row_object, context) {
 		xhr.open("GET", serverURL + "/documents/enable_mobile/" + id + "/" + ((enable)?1:0));
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		// xhr.onerror = function() {
+			// alert("Could not enable notifications for that document!");	
+			// if ( row_object.row.children[0].push == true ) {
+				// var push = false;
+		    	// var image = 'images/document-feed-gray-4@2x.png';
+			// } else {
+				// var push = true;
+				// var image = 'images/document-feed@2x.png';
+			// }
+			// row_object.row.children[0].push = push;
+		 	// row_object.row.children[0].image = image;
+			// row_object.row.children[2].image = 'images/download@2x.png';
+			// row_object.row.children[2].owned = false;				
+		// };
+		// xhr.onload = function() {
+			// updateCache();
+		// };
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status != 200) {	
@@ -71,8 +95,6 @@ function enableNotifications(id, enable, row_object, context) {
 }
 
 function getLines(doc, context, listView) {
-	// var currMem = Ti.Platform.availableMemory;
-	// Ti.API.debug("Current memory: " + currMem);
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
@@ -82,14 +104,10 @@ function getLines(doc, context, listView) {
 		xhr.open("GET", serverURL + "/documents/" + doc + "/cards");
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-		xhr.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status != 200) {
-					loadingComplete(listView, Ti.UI.currentWindow);
-					alert("Could not complete your request. Check your connection and try again.");
-				}	
-			}
-		};	
+		xhr.onerror = function() {
+			loadingComplete(listView, Ti.UI.currentWindow);
+			alert("Could not reach your account, please try again later.");			
+		};
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
@@ -109,10 +127,7 @@ function getLines(doc, context, listView) {
 					listView : listView,
 					activityIndicator : activityIndicator
 				});
-				// Ti.App.tabGroup.hide();
-				// activityIndicator.hide();
 				new_win.open();
-				// loadingComplete(listView, Ti.UI.currentWindow);
 			}
 		};
 		xhr.send();
@@ -147,6 +162,18 @@ function addDocument(id, row_object, context) {
 		xhr.open("GET", serverURL + "/documents/add_document/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		// xhr.onerror = function() {
+			// alert("Could not add that document!");	
+			// if ( row_object.row.children[2].owned == true ) {
+				// var owned = false;
+		    	// var image = 'images/download@2x.png';
+			// } 
+			// row_object.row.children[2].owned = owned;
+		 	// row_object.row.children[2].image = image;			
+		// };
+		// xhr.onload = function() {
+			// updateCache();	
+		// };
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status != 200) {	
@@ -170,7 +197,6 @@ function addEgg(id, row_object, context, trigger_dirty){
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
-		// if (trigger_dirty != false) {
 		switch (context) {
 			case "popular":
 				Ti.App.myEggsDirty = true;
@@ -189,33 +215,48 @@ function addEgg(id, row_object, context, trigger_dirty){
 				Ti.App.searchDirty = true;
 				break;									
 		}	
-		// }
 		notesRows = [];
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/tags/claim_tag/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-		xhr.onreadystatechange = function() {
-			if (this.readyState == 4) {
-				if (this.status != 200) {	
-					alert("Could not add that egg!");	
-					if ( row_object.row.children[2].owned == true ) {
-						var owned = false;
-				    	var image = 'images/download@2x.png';
-					} 
-					row_object.row.children[2].owned = owned;
-				 	row_object.row.children[2].image = image;
-				} else {	
-					updateCache();			
-					if (Ti.App.Properties.getBool('download_educated') != true) {
-						Ti.App.tabGroup.setActiveTab(0);						
-						Ti.App.Properties.setBool('download_educated', true);
-						// Ti.App.fireEvent('updateEggs');
-					}
-				}
-			}
-		}		
+		xhr.onerror = function() {
+			alert("Could not add that egg!");	
+			if ( row_object.row.children[2].owned == true ) {
+				var owned = false;
+		    	var image = 'images/download@2x.png';
+			} 
+			row_object.row.children[2].owned = owned;
+		 	row_object.row.children[2].image = image;			
+		};
+		xhr.onload = function() {
+			updateCache();			
+			if (Ti.App.Properties.getBool('download_educated') != true) {
+				Ti.App.tabGroup.setActiveTab(0);						
+				Ti.App.Properties.setBool('download_educated', true);
+			}			
+		};
+		// xhr.onreadystatechange = function() {
+			// if (this.readyState == 4) {
+				// if (this.status != 200) {	
+					// alert("Could not add that egg!");	
+					// if ( row_object.row.children[2].owned == true ) {
+						// var owned = false;
+				    	// var image = 'images/download@2x.png';
+					// } 
+					// row_object.row.children[2].owned = owned;
+				 	// row_object.row.children[2].image = image;
+				// } else {	
+					// updateCache();			
+					// if (Ti.App.Properties.getBool('download_educated') != true) {
+						// Ti.App.tabGroup.setActiveTab(0);						
+						// Ti.App.Properties.setBool('download_educated', true);
+						// // Ti.App.fireEvent('updateEggs');
+					// }
+				// }
+			// }
+		// };	
 		xhr.send();
 	}	
 }
@@ -419,7 +460,6 @@ function createAddableNoteRow(name, docid, owned, push){
 
 function retrieveAllNotifications() {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
-		// Ti.App.reviewing = false;
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
 		xhr = Ti.Network.createHTTPClient();
@@ -427,14 +467,16 @@ function retrieveAllNotifications() {
 		xhr.open("GET", serverURL + "/users/retrieve_notifications");
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.onerror = function() {
+			alert("Could not retrieve your notifications, please try again later.");				
+		};
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
 			if (data.cards.length < 1) {
-				// Ti.App.reviewing = false;
 				Titanium.UI.iPhone.appBadge = 0;
 				alert('You have no pending notifications!'); 
-				Ti.App.fireEvent('updateNavBar');
 			} else {
+				Titanium.UI.iPhone.appBadge = data.cards.length;
 				var new_win = Ti.UI.createWindow({
 					url : "updated_review.js",
 					backgroundColor : '#dfdacd',
@@ -448,8 +490,8 @@ function retrieveAllNotifications() {
 				});
 				Ti.App.tabGroup.hide();
 				new_win.open();
-				// Ti.App.reviewing = true;								
-			}			
+			}	
+			Ti.App.fireEvent('updateNavBar'); 		
 
 		};
 		xhr.send();
@@ -457,7 +499,7 @@ function retrieveAllNotifications() {
 }
 
 function updateLogo() {
-	if (Titanium.UI.iPhone.appBadge == 0) {
+	if (Titanium.UI.iPhone.appBadge <= 0) {
 		win.titleControl.image = 'images/logo@2x.png'
 	} else {
 		win.titleControl.image = 'images/logo-indicator@2x.png'
@@ -484,7 +526,6 @@ function reLogUser(email, password, context) {
 	xhr.onerror = function(e) {
 		Ti.API.debug("Error: " + e.error);
 	};
-	// xhr.clearCookies(serverURL);
 	xhr.onload = function() {
 		if (context == "push") {
 			retrieveAllNotifications();
@@ -514,5 +555,4 @@ function renderLoading(view, currentWindow) {
 function loadingComplete(view, currentWindow) {
 	view.opacity = 1;
 	activityIndicator.hide();
-	// currentWindow.remove(activityIndicator);
 }

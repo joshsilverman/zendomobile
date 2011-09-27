@@ -57,40 +57,43 @@ function renderPopular(){
 	});
 	popularList.addEventListener('click', function(e){
 		if (e.source.id == "add") {
-			e.row.children[2].image = 'images/download-faded@2x.png';
-			e.row.children[2].owned = true;
-			addEgg(e.row.id, e, "popular");
-			// if (Ti.App.Properties.getBool('download_educated') != true) {
-				// addEgg(e.row.id, e, "popular");
-			// } else {
-				// addEgg(e.row.id, e, "popular");
-			// }
+			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+				alert("Could not complete your request. Check your connection and try again.");	
+			} else {	
+				e.row.children[2].image = 'images/download-faded@2x.png';
+				e.row.children[2].owned = true;
+				addEgg(e.row.id, e, "popular");
+			}
 		} 
 	});
 	win.add(popularList);
 }
 
 function updatePopular() {
-	renderLoading(popularList, win);
-	notesRows = [];
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(10000);
-	xhr.open("GET", serverURL + "/tags/get_popular_json");
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-	xhr.onerror = function() {
-		loadingComplete(popularList, win);
-	};
-	xhr.onload = function() {
-		popularData = eval(this.responseText);
-		var data = [];
-		for (i in popularData) {
-			data.push(createAddableEggRow(popularData[i][1], popularData[i][0], popularData[i][2]));
-		}
-		popularList.setData(data);
-		loadingComplete(popularList, win);
-	};
-	xhr.send();	
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+		alert("Could not complete your request. Check your connection and try again.");	
+	} else {		
+		renderLoading(popularList, win);
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(10000);
+		xhr.open("GET", serverURL + "/tags/get_popular_json");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.onerror = function() {
+			loadingComplete(popularList, win);
+		};
+		xhr.onload = function() {
+			popularData = eval(this.responseText);
+			var data = [];
+			for (i in popularData) {
+				data.push(createAddableEggRow(popularData[i][1], popularData[i][0], popularData[i][2]));
+			}
+			popularList.setData(data);
+			loadingComplete(popularList, win);
+		};
+		xhr.send();	
+	}
 }
 
 win.addEventListener('focus', function() {
@@ -98,6 +101,9 @@ win.addEventListener('focus', function() {
 	if (Ti.App.popularDirty == true) {
 		updatePopular();
 		Ti.App.popularDirty = false;
+	}
+	if (popularList.data.length < 1) {
+		updatePopular();
 	}
 });
 

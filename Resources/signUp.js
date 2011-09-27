@@ -107,13 +107,18 @@ function render() {
 					if (password.length < 6) {
 						alert("Your password must be at least six characters!");
 						return;				
-					} else {	
-						win.add(activityIndicator);
-						activityIndicator.show();					
-						signUp(email, password);
-						emailField.blur();
-						passwordField.blur();
-						confirmPasswordField.blur();	
+					} else {
+						if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+							alert("Could not create your account... Did you enter your email address correctly?");
+							return;
+						} else {
+							win.add(activityIndicator);
+							activityIndicator.show();					
+							signUp(email, password);
+							emailField.blur();
+							passwordField.blur();
+							confirmPasswordField.blur();							
+						}	
 					}
 				}	
 			}	

@@ -32,12 +32,12 @@ function renderNavBar() {
 		height : 35,
 		width : 80
 	});
-	logo.addEventListener('click', function() {
-		search.blur();
+	logo.addEventListener('click', function() {		
 		if (Titanium.Network.remoteNotificationsEnabled == false) {
 			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
 		}
 		retrieveAllNotifications();
+		search.blur();
 	});	
 	win.leftNavButton = accountButton;
 	win.titleControl = logo;
@@ -58,10 +58,14 @@ function renderSearch() {
 		search.blur();
 	});
 	search.addEventListener('return', function(e) {
-		if (e.value != "" && e.value != " ") {
-			currentSearch = e.value;
-			searchQuery(e.value);
-			search.blur();			
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+			alert("Could not complete your request. Check your connection and try again.");	
+		} else {	
+			if (e.value != "" && e.value != " ") {
+				currentSearch = e.value;
+				searchQuery(e.value);
+				search.blur();			
+			}
 		}
 	});
 	searchList = Titanium.UI.createTableView({
@@ -75,25 +79,33 @@ function renderSearch() {
 		if (e.source.id == "label") {
 			getLines(e.row.id, "normal", searchList);
 		} else if (e.source.id == "add") {
-			e.row.children[2].image = 'images/download-faded@2x.png';
-			e.row.children[2].owned = true;
-			addDocument(e.row.id, e, "search");		
-		} else if (e.source.id == "doc") {
-			if ( e.row.children[0].push == true ) {
-				var push = false;
-		    	var image = 'images/document-feed-gray-4@2x.png';
-			} else {
-				var push = true;
-				var image = 'images/document-feed@2x.png';
+			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+				alert("Could not complete your request. Check your connection and try again.");	
+			} else {	
+				e.row.children[2].image = 'images/download-faded@2x.png';
+				e.row.children[2].owned = true;
+				addDocument(e.row.id, e, "search");		
 			}
-			e.row.children[0].push = push;
-		 	e.row.children[0].image = image;	
-			e.row.children[2].image = 'images/download-faded@2x.png';
-			e.row.children[2].owned = true;	 	
-			if (e.source.push == 0) {
-				enableNotifications(e.row.id, false, e, "search");
-			} else {
-				enableNotifications(e.row.id, true, e, "search");
+		} else if (e.source.id == "doc") {
+			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+				alert("Could not complete your request. Check your connection and try again.");	
+			} else {				
+				if ( e.row.children[0].push == true ) {
+					var push = false;
+			    	var image = 'images/document-feed-gray-4@2x.png';
+				} else {
+					var push = true;
+					var image = 'images/document-feed@2x.png';
+				}
+				e.row.children[0].push = push;
+			 	e.row.children[0].image = image;	
+				e.row.children[2].image = 'images/download-faded@2x.png';
+				e.row.children[2].owned = true;	 	
+				if (e.source.push == 0) {
+					enableNotifications(e.row.id, false, e, "search");
+				} else {
+					enableNotifications(e.row.id, true, e, "search");
+				}
 			}
 		}			
 	});
@@ -116,20 +128,25 @@ function setSearchResults(results) {
 }
 
 function searchQuery(text) {
-	renderLoading(searchList, win);
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(10000);
-	xhr.onerror = function() {
-		loadingComplete(searchList, win);
-	};
-	xhr.onload = function() {
-		results = eval(this.responseText);
-		setSearchResults(results);
-	};
-	var params = { 'q' : text };
-	xhr.open("POST", serverURL + "/search/full_query");
-	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-	xhr.send(params);		
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
+		alert("Could not complete your request. Check your connection and try again.");	
+	} else {	
+		renderLoading(searchList, win);
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(10000);
+		xhr.onerror = function() {
+			loadingComplete(searchList, win);
+			alert("Could not complete your request. Please try again later.");
+		};
+		xhr.onload = function() {
+			results = eval(this.responseText);
+			setSearchResults(results);
+		};
+		var params = { 'q' : text };
+		xhr.open("POST", serverURL + "/search/full_query");
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.send(params);	
+	}	
 }
 
 win.addEventListener('focus', function() {
@@ -141,7 +158,7 @@ win.addEventListener('focus', function() {
 		}
 	}
 	if (Ti.App.searchDirty == true) {
-		if (currentSearch != "") {
+		if (currentSearch != "" && currentSearch != null) {
 			searchQuery(currentSearch);
 			Ti.App.searchDirty = false;		
 		};

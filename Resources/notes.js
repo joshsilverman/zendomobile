@@ -35,11 +35,10 @@ function renderNavBar() {
 		height : 35,
 		width : 80
 	});
-	//TODO should be uncommented?
 	logo.addEventListener('click', function() {
-		// if (Titanium.Network.remoteNotificationsEnabled == false) {
-			// alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
-		// }
+		if (Titanium.Network.remoteNotificationsEnabled == false) {
+			alert("Enable push notifications for StudyEgg if you want to be notified when you have new cards to review.");
+		}
 		retrieveAllNotifications();
 	});	
 	win.rightNavButton = refreshButton;
@@ -113,28 +112,33 @@ function updateDocuments(context) {
 		documentList.setData(notesRows);
 		loadingComplete(documentList, win);
 	} else {
-		xhr = Ti.Network.createHTTPClient();
-		xhr.setTimeout(10000);
-		// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
-		xhr.open("GET", serverURL + "/tags/get_tags_json");
-		xhr.setRequestHeader('Content-Type', 'text/json');
-		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-		xhr.onerror = function() {
-			loadingComplete(documentList, win);
-		};
-		xhr.onload = function() {
-			foldersData = eval(this.responseText);
-			for ( i in foldersData ) {
-				if (foldersData[i].tag.id == win.selection) {
-					for (n in foldersData[i].tag.documents) {
-						notesRows.push(createNoteRow(foldersData[i].tag.documents[n].name, foldersData[i].tag.documents[n].id, foldersData[i].tag.documents[n].tag_id, foldersData[i].tag.documents[n].userships[0].push_enabled));				
+		if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+			alert("Could not complete your request. Check your connection and try again.");	
+		} else {
+			xhr = Ti.Network.createHTTPClient();
+			xhr.setTimeout(10000);
+			// xhr.onerror = alert('Could not connect to your account... Please try again in a moment.');
+			xhr.open("GET", serverURL + "/tags/get_tags_json");
+			xhr.setRequestHeader('Content-Type', 'text/json');
+			xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+			xhr.onerror = function() {
+				loadingComplete(documentList, win);
+				alert("Could not complete your request. Please try again later.");
+			};
+			xhr.onload = function() {
+				foldersData = eval(this.responseText);
+				for ( i in foldersData ) {
+					if (foldersData[i].tag.id == win.selection) {
+						for (n in foldersData[i].tag.documents) {
+							notesRows.push(createNoteRow(foldersData[i].tag.documents[n].name, foldersData[i].tag.documents[n].id, foldersData[i].tag.documents[n].tag_id, foldersData[i].tag.documents[n].userships[0].push_enabled));				
+						}
 					}
 				}
-			}
-			documentList.setData(notesRows);
-			loadingComplete(documentList, win);
+				documentList.setData(notesRows);
+				loadingComplete(documentList, win);
+			}	
+			xhr.send();		
 		}	
-		xhr.send();			
 	}	
 }
 

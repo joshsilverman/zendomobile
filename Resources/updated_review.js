@@ -106,8 +106,10 @@ function renderReview() {
 		left : 20
 	});
 	closeButton.addEventListener('click', function() {
-		cleanLoadingState();
-		Ti.App.fireEvent('updateNavBar');
+		if (win._context == "push") {
+			// Ti.App.fireEvent('updateNavBar');
+		}
+		cleanLoadingState();		
 		Ti.App.tabGroup.show();
 		win.close();
 	});
@@ -302,7 +304,7 @@ function buttonClicked(button) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
 		if (win._context == "push") {
-			Ti.App.fireEvent('updateNavBar');
+			// Ti.App.fireEvent('updateNavBar');
 			Ti.App.tabGroup.show();
 			win.close();
 		} else {
@@ -338,10 +340,11 @@ function reportGrade(memID, confidence) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
-		Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
+		// Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
 		if (win._context == "push") {
 			Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;	
 		}
+		Ti.App.fireEvent('updateNavBar');
 		Ti.App.recentDirty = true;
 	};
 	xhr.send();

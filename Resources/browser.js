@@ -23,10 +23,7 @@ setResume = function() {
 	Ti.App.fireEvent('updateNavBar'); 
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert('Could not reach your account. Check your internet connection.');
-	}
-	// } else {
-		// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "normal");
-	// }		
+	}	
 }
 
 Ti.App.addEventListener('resume', setResume); 
@@ -68,7 +65,6 @@ var interestingWindow = Titanium.UI.createWindow({
     backgroundColor : '#dfdacd',
     barColor : '#0066b2',
     url : 'interestingEggs.js',
-    // url : 'interestingEggs.js',
     orientationModes : [
 		Titanium.UI.PORTRAIT
 	]
@@ -147,8 +143,8 @@ function registerForPush() {
 		error : function(e) {
 			// alert("Error during registration: " + e.error);
 		},
-		callback : function(e) {
-			// Ti.App.fireEvent('updateNavBar'); 
+		callback : function(e) {	
+			Titanium.UI.iPhone.appBadge = e.data.badge;	
 			// Ti.App.myEggsDirty = true;
 			// Ti.App.documentsDirty = true;
 			// Ti.App.popularDirty = true;
@@ -168,13 +164,18 @@ function registerForPush() {
 				reviewAlert.show();		
 			} else {
 				retrieveAllNotifications();
-				// reLogUser(Ti.App.Properties.getString('email'), Ti.App.Properties.getString('password'), "push");
 			}
+			Ti.App.fireEvent('updateNavBar');
 		}
 	});	
 }
 
 registerForPush();
+
+function setForeground() {
+	Ti.App.Properties.setBool('foreground', true);
+}
+setTimeout(setForeground, 2000);
 
 // function memCheck() {
 	// Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);

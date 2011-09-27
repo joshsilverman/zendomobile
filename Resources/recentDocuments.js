@@ -48,6 +48,7 @@ function renderNavBar() {
 }
 
 Ti.App.addEventListener('updateNavBar', function() {
+	// alert(Titanium.UI.iPhone.appBadge);
 	updateLogo();
 });
 
@@ -85,26 +86,31 @@ function renderRecent(){
 }
 
 function updateRecent() {
-	renderLoading(recentList, win);
-	notesRows = [];
-	xhr = Ti.Network.createHTTPClient();
-	xhr.setTimeout(10000);
-	xhr.open("GET", serverURL + "/tags/get_recent_json");
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-	xhr.onerror = function() {
-		loadingComplete(recentList, win);
-	};
-	xhr.onload = function() {
-		recentData = eval(this.responseText);
-		var data = [];
-		for ( i in recentData ) { 
-			data.push(createNoteRow(recentData[i].document.name, recentData[i].document.id, recentData[i].document.tag_id, recentData[i].document.userships[0].push_enabled));
-		}
-		recentList.setData(data);
-		loadingComplete(recentList, win);
-	};
-	xhr.send();
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not complete your request. Check your connection and try again.");	
+	} else {	
+		renderLoading(recentList, win);
+		notesRows = [];
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(10000);
+		xhr.open("GET", serverURL + "/tags/get_recent_json");
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		xhr.onerror = function() {
+			loadingComplete(recentList, win);
+			alert("Could not complete your request. Please try again later.");
+		};
+		xhr.onload = function() {
+			recentData = eval(this.responseText);
+			var data = [];
+			for ( i in recentData ) { 
+				data.push(createNoteRow(recentData[i].document.name, recentData[i].document.id, recentData[i].document.tag_id, recentData[i].document.userships[0].push_enabled));
+			}
+			recentList.setData(data);
+			loadingComplete(recentList, win);
+		};
+		xhr.send();
+	}
 }
 
 win.addEventListener('focus', function() {

@@ -6,12 +6,32 @@ function authenticate(email, password, context) {
 	} else {
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
+		// xhr.onerror = function() {
+			// if (context != "start") {
+				// alert("Invalid email/password combination.");
+				// activityIndicator.hide();	
+			// } else {
+				// var win = Ti.UI.createWindow({
+					// url:"login.js",
+					// navBarHidden : true,
+					// backgroundColor : '#dfdacd',
+					// orientationModes : [
+						// Titanium.UI.PORTRAIT
+					// ]
+				// });
+				// win.open();	
+			// }	
+		// };
+		// xhr.onload = function() {
+			// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie").split(";")[0]);
+			// authSuccess(email, password);			
+		// };
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status == 200) {
 					Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie").split(";")[0]);
 					authSuccess(email, password);
-				} else {
+				} else if (this.status == 401) {
 					if (context != "start") {
 						alert("Invalid email/password combination.");
 						activityIndicator.hide();	
@@ -26,6 +46,21 @@ function authenticate(email, password, context) {
 						});
 						win.open();	
 					}
+				} else {
+					if (context != "start") {
+						alert("Could not connect to StudyEgg, please try again in a moment.");
+						activityIndicator.hide();	
+					} else {
+						var win = Ti.UI.createWindow({
+							url:"login.js",
+							navBarHidden : true,
+							backgroundColor : '#dfdacd',
+							orientationModes : [
+								Titanium.UI.PORTRAIT
+							]
+						});
+						win.open();	
+					}										
 				}
 			}
 		};
@@ -63,7 +98,6 @@ function signOut() {
 				Titanium.UI.PORTRAIT,
 			]
 		});
-		// Ti.App.base_window.close();
 		win.open();	
 		Ti.App.tabGroup.close();
 	}
@@ -72,8 +106,24 @@ function signOut() {
 function signUp(email, password) {
 	xhr = Ti.Network.createHTTPClient();
 	xhr.setTimeout(10000);
+	// xhr.onerror = function() {
+		// alert("Could not create your account... Did you enter your email address correctly?");
+		// activityIndicator.hide();			
+	// };
 	// xhr.onload = function() {
-		// activityIndicator.hide();	
+		// Ti.App.Properties.setString('email', email);
+		// Ti.App.Properties.setString('password', password);
+		// Ti.App.Properties.setBool('educated', false);	
+		// Ti.App.Properties.setBool('download_educated', false);	
+		// Ti.App.Properties.setString('cookie', xhr.getResponseHeader("Set-Cookie").split(";")[0]);	
+		// authSuccess(email, password);
+		// emailField.value = "";
+		// passwordField.value = "";
+		// confirmPasswordField.value = "";
+		// Ti.App.myEggsDirty = true;
+		// Ti.App.documentsDirty = true;
+		// Ti.App.searchDirty = true;
+		// Ti.App.popularDirty = true;		
 	// };
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
@@ -91,6 +141,9 @@ function signUp(email, password) {
 				Ti.App.documentsDirty = true;
 				Ti.App.searchDirty = true;
 				Ti.App.popularDirty = true;
+			} else if (this.status == 0) {
+				alert("Could not connect to StudyEgg, please try again in a moment.");
+				activityIndicator.hide();				
 			} else {
 				alert("Could not create your account... Did you enter your email address correctly?");
 				activityIndicator.hide();	
@@ -106,11 +159,9 @@ function signUp(email, password) {
 }
 
 function authSuccess(email, password) {
-	// activityIndicator.hide();
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
 	registerDevice(Ti.App.Properties.getString("token"));
-	// activityIndicator.hide();
 	var new_win = Ti.UI.createWindow({
 		url : "browser.js",
 		backgroundColor : '#dfdacd',
@@ -129,9 +180,6 @@ function registerDevice(token) {
 	xhr.open("POST", serverURL + "/users/add_device/" + token);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-	// xhr.onload = function() {
-		// Ti.API.debug('Added device with token' + token);
-	// };
 	xhr.send();
 }
 
