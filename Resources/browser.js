@@ -16,7 +16,11 @@ setPaused = function() {
 }
 
 setResumed = function() {
-	Ti.App.Properties.setBool('foreground', true);
+	function setForeground() {
+		Ti.App.Properties.setBool('foreground', true);
+	}
+	setTimeout(setForeground, 2000);	
+	// Ti.App.Properties.setBool('foreground', true);
 }
 
 setResume = function() {
@@ -172,10 +176,10 @@ function registerForPush() {
 
 registerForPush();
 
-function setForeground() {
-	Ti.App.Properties.setBool('foreground', true);
-}
-setTimeout(setForeground, 2000);
+// function setForeground() {
+	// Ti.App.Properties.setBool('foreground', true);
+// }
+// setTimeout(setForeground, 2000);
 
 // function memCheck() {
 	// Ti.API.debug('Current memory: ' + Titanium.Platform.availableMemory);
