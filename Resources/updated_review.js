@@ -318,11 +318,12 @@ function openStats() {
 	win.hide();
 	Ti.App.tabGroup.hide();
 	var newWin = Ti.UI.createWindow({
-		url : "stats.js",
+		url : "break.js",
 		navBarHidden : true,
 		data : cards,
 		folder : win.folder,
-		_parent: win
+		_parent: win,
+		backgroundColor : 'gray'
 	});	
 	newWin.open();	
 }

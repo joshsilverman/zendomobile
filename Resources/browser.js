@@ -4,6 +4,8 @@ Ti.UI.setBackgroundColor('#dfdacd');
 Ti.include('commonMethods.js');
 updateCache();
 
+var paint = require("ti.paint");
+
 tabGroup = Titanium.UI.createTabGroup({
 	backgroundColor : '#dfdacd',
 	barColor : '#dfdacd'
