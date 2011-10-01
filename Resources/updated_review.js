@@ -318,7 +318,7 @@ function openStats() {
 	win.hide();
 	Ti.App.tabGroup.hide();
 	var newWin = Ti.UI.createWindow({
-		url : "break.js",
+		url : "game.js",
 		navBarHidden : true,
 		data : cards,
 		folder : win.folder,

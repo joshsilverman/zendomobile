@@ -38,5 +38,6 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android"/>
     <modules>
         <module platform="iphone" version="1.0">ti.paint</module>
+        <module platform="iphone" version="0.9">ti.box2d</module>
     </modules>
 </ti:app>
