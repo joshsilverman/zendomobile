@@ -142,10 +142,11 @@ function registerForPush() {
 			Titanium.Network.NOTIFICATION_TYPE_SOUND
 		],
 		success : function(e) {
-			Ti.App.Properties.setString("token", e.deviceToken);
+			registerDevice(e.deviceToken);
+			// Ti.App.Properties.setString("token", e.deviceToken);
 		},
 		error : function(e) {
-			// alert("Error during registration: " + e.error);
+			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {	
 			Titanium.UI.iPhone.appBadge = e.data.badge;	
@@ -174,7 +175,16 @@ function registerForPush() {
 	});	
 }
 
+function registerDevice(token) {
+	xhr = Ti.Network.createHTTPClient();
+	xhr.open("POST", serverURL + "/users/add_device/" + token);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+	xhr.send();
+}
+
 registerForPush();
+
 
 // function setForeground() {
 	// Ti.App.Properties.setBool('foreground', true);

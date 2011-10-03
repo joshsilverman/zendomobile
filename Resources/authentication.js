@@ -161,7 +161,7 @@ function signUp(email, password) {
 function authSuccess(email, password) {
 	Ti.App.Properties.setString('email', email);
 	Ti.App.Properties.setString('password', password);
-	registerDevice(Ti.App.Properties.getString("token"));
+	// registerDevice(Ti.App.Properties.getString("token"));
 	var new_win = Ti.UI.createWindow({
 		url : "browser.js",
 		backgroundColor : '#dfdacd',
@@ -173,14 +173,6 @@ function authSuccess(email, password) {
 		]
 	});
 	new_win.open();
-}
-
-function registerDevice(token) {
-	xhr = Ti.Network.createHTTPClient();
-	xhr.open("POST", serverURL + "/users/add_device/" + token);
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-	xhr.send();
 }
 
 
