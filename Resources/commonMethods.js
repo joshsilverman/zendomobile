@@ -134,6 +134,28 @@ function getLines(doc, context, listView) {
 	}		
 }
 
+function createReviewSession(_args) {
+	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
+		alert("Could not complete your request. Check your connection and try again.");
+	} else {
+		// alert(serverURL + "/documents/" + _args.docId + "/" + _args.method);
+		// renderLoading(_args.listView, Ti.UI.currentWindow);
+		xhr = Ti.Network.createHTTPClient();
+		xhr.setTimeout(10000);
+		xhr.open("GET", serverURL + "/documents/" + _args.docId + "/" + _args.method);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
+		// xhr.onerror = function() {
+		// 	loadingComplete(listView, Ti.UI.currentWindow);
+		// 	alert("Could not reach your account, please try again later.");			
+		// };	
+		xhr.onload = function() {			
+			alert(this.responseText);
+		}
+		xhr.send();
+	}
+}
+
 function addDocument(id, row_object, context) {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
@@ -556,4 +578,4 @@ function renderLoading(view, currentWindow) {
 function loadingComplete(view, currentWindow) {
 	view.opacity = 1;
 	activityIndicator.hide();
-}
+} 
