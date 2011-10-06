@@ -138,19 +138,38 @@ function createReviewSession(_args) {
 	if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE ) {
 		alert("Could not complete your request. Check your connection and try again.");
 	} else {
-		// alert(serverURL + "/documents/" + _args.docId + "/" + _args.method);
-		// renderLoading(_args.listView, Ti.UI.currentWindow);
+		renderLoading(_args.listView, Ti.UI.currentWindow);
 		xhr = Ti.Network.createHTTPClient();
 		xhr.setTimeout(10000);
 		xhr.open("GET", serverURL + "/documents/" + _args.docId + "/" + _args.method);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-		// xhr.onerror = function() {
-		// 	loadingComplete(listView, Ti.UI.currentWindow);
-		// 	alert("Could not reach your account, please try again later.");			
-		// };	
+		xhr.onerror = function() {
+			loadingComplete(listView, Ti.UI.currentWindow);
+			alert("Could not reach your account, please try again later.");			
+		};	
 		xhr.onload = function() {			
-			alert(this.responseText);
+			var data = JSON.parse(this.responseText);
+			if (data.length < 1) {
+				loadingComplete(listView, Ti.UI.currentWindow);
+				alert('That document has no cards to review!'); 
+			} else {
+				alert('sup');
+				var new_win = Ti.UI.createWindow({
+					url : "updated_review.js",
+					backgroundColor : '#dfdacd',
+					navBarHidden : false,
+					cards : data,
+					_parent : Titanium.UI.currentWindow,
+					_context : "normal",
+					orientationModes : [
+						Titanium.UI.PORTRAIT
+					],
+					listView : listView,
+					activityIndicator : activityIndicator
+				});
+				new_win.open();
+			}			
 		}
 		xhr.send();
 	}

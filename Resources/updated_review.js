@@ -31,6 +31,7 @@ shortSession = true;
 
 function renderReview() {
 	cards = win.cards;
+	alert(JSON.stringify(cards));
 	cardViews = [];
 	count = 0;
 	if (cards.length <= 10) {
