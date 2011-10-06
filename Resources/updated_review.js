@@ -357,6 +357,7 @@ function cleanLoadingState() {
 	}
 }
 
+
 renderReview();
 
 // function loadCard() {
