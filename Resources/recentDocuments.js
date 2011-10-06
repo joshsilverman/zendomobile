@@ -64,17 +64,17 @@ function renderRecent(){
 	recentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
 			var reviewAlert = Ti.UI.createAlertDialog({
-			    title : 'Alert!',
-			    message : "Select a review mode.",
-			    buttonNames : ["Adaptive", "All"],
+			    title : 'Select a review mode!',
+			    message : "Choose whether to show only cards you need to review or all cards.",
+			    buttonNames : ["All", "Adaptive"],
 			    cancel : 0
 			});
 			reviewAlert.addEventListener('click', function(f) {
-				if (f.index == 0) { 
-					createReviewSession({"method" : "review_adaptive_cards", "docId" : e.row.id, "listView" : recentList});
-				} else if (f.index == 1) {
-					createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : recentList});
-				}
+				if (f.index == 1) { 
+					createReviewSession({"method" : "review_adaptive_cards", "docId" : e.row.id, "listView" : recentList, "activityIndicator" : activityIndicator});
+				} else if (f.index == 0) {
+					createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : recentList, "activityIndicator" : activityIndicator});
+				}			
 			});
 			reviewAlert.show();	
 		} else if (e.source.id == "doc") {

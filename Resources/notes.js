@@ -63,7 +63,20 @@ function renderDocuments(){
 	
 	documentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			getLines(e.row.id, "normal", documentList);
+			var reviewAlert = Ti.UI.createAlertDialog({
+			    title : 'Alert!',
+			    message : "Select a review mode.",
+			    buttonNames : ["All", "Adaptive"],
+			    cancel : 0
+			});
+			reviewAlert.addEventListener('click', function(f) {
+				if (f.index == 1) { 
+					createReviewSession({"method" : "review_adaptive_cards", "docId" : e.row.id, "listView" : documentList, "activityIndicator" : activityIndicator});
+				} else if (f.index == 0) {
+					createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : documentList, "activityIndicator" : activityIndicator});
+				}			
+			});
+			reviewAlert.show();	
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
 				var push = false;

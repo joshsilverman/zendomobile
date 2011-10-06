@@ -150,11 +150,15 @@ function createReviewSession(_args) {
 		};	
 		xhr.onload = function() {			
 			var data = JSON.parse(this.responseText);
-			if (data.length < 1) {
-				loadingComplete(listView, Ti.UI.currentWindow);
-				alert('That document has no cards to review!'); 
+			if (data.terms.length < 1) {
+				if (_args.method == "review_adaptive_cards") {
+					loadingComplete(_args.listView, Ti.UI.currentWindow);
+					alert("You don't need to review any cards from that document!"); 					
+				} else {
+					loadingComplete(_args.listView, Ti.UI.currentWindow);
+					alert('That document has no cards to review!'); 					
+				}
 			} else {
-				alert('sup');
 				var new_win = Ti.UI.createWindow({
 					url : "updated_review.js",
 					backgroundColor : '#dfdacd',
@@ -165,8 +169,8 @@ function createReviewSession(_args) {
 					orientationModes : [
 						Titanium.UI.PORTRAIT
 					],
-					listView : listView,
-					activityIndicator : activityIndicator
+					listView : _args.listView,
+					activityIndicator : _args.activityIndicator
 				});
 				new_win.open();
 			}			

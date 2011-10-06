@@ -77,7 +77,7 @@ function renderSearch() {
 	searchList.addEventListener('click', function(e) {
 		search.blur();
 		if (e.source.id == "label") {
-			getLines(e.row.id, "normal", searchList);
+			createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : searchList, "activityIndicator" : activityIndicator});		
 		} else if (e.source.id == "add") {
 			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
 				alert("Could not complete your request. Check your connection and try again.");	
