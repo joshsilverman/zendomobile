@@ -127,11 +127,11 @@ function updateRecent() {
 }
 
 win.addEventListener('focus', function() {
+	updateLogo();
 	if ( Ti.App.recentDirty == true ) {
 		updateRecent();
 		Ti.App.recentDirty = false;
-	}
-	updateLogo();
+	}	
 });
 
 initialize();

@@ -36,13 +36,13 @@ function renderReview() {
 	if (cards.length <= 10) {
 		for ( i in cards ) {
 			cards[i].flipped = false;
-			cardViews.push(createCardView(cards[i], cards[i].term.name, cards[i].term.mems[0].id));
+			cardViews.push(createCardView(cards[i], cards[i].term.name, cards[i].term.mem));
 		}	
 	} else {
 		shortSession = false;
 		while (count < 10 ) {
 			cards[count].flipped = false;
-			cardViews.push(createCardView(cards[count], cards[count].term.name, cards[count].term.mems[0].id));
+			cardViews.push(createCardView(cards[count], cards[count].term.name, cards[count].term.mem));
 			count++;
 		}
 	}
@@ -242,7 +242,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	cardView.addEventListener('singletap', function(e) {
 		if (e.source.action == "skip") {
 			cleanLoadingState();
-			reportGrade(cards[cardScrollableView.currentPage].term.mems[0].id, 4);
+			reportGrade(cards[cardScrollableView.currentPage].term.mem, 4);
 			if ( ( cardScrollableView.views.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 				cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 			} else {
@@ -292,7 +292,7 @@ function buttonClicked(button) {
 	cleanLoadingState();
 	cardGraded = true;
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
-	reportGrade(cards[cardScrollableView.currentPage].term.mems[0].id, button.source.grade);
+	reportGrade(cards[cardScrollableView.currentPage].term.mem, button.source.grade);
 	buttonView.animate(fadeOutAnimation);
 	if ( ( cardScrollableView.views.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );

@@ -140,12 +140,11 @@ function updateEggs(context) {
 
 win.addEventListener('focus', function() {
 	//TODO made change here, added check	
+	updateLogo();
 	if (Ti.App.myEggsDirty == true) {
 		updateEggs('refresh');
 		Ti.App.myEggsDirty = false;
-	}
-	updateLogo();
-	
+	}	
 });
 
 initialize();

@@ -19,7 +19,7 @@ function render() {
 	    bottom : 180,
 	    height : 35,
 	    borderStyle : Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-	    keyboardType : Titanium.UI.KEYBOARD_URL,
+	    keyboardType : Titanium.UI.KEYBOARD_EMAIL,
 	    returnKeyType : Titanium.UI.RETURNKEY_DONE,
 	    hintText : 'Email'
 	});

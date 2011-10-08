@@ -266,42 +266,42 @@ function addEgg(id, row_object, context, trigger_dirty){
 		xhr.open("GET", serverURL + "/tags/claim_tag/" + id);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
-		xhr.onerror = function() {
-			alert("Could not add that egg!");	
-			if ( row_object.row.children[2].owned == true ) {
-				var owned = false;
-		    	var image = 'images/download@2x.png';
-			} 
-			row_object.row.children[2].owned = owned;
-		 	row_object.row.children[2].image = image;			
-		};
-		xhr.onload = function() {
-			updateCache();			
-			if (Ti.App.Properties.getBool('download_educated') != true) {
-				Ti.App.tabGroup.setActiveTab(0);						
-				Ti.App.Properties.setBool('download_educated', true);
-			}			
-		};
-		// xhr.onreadystatechange = function() {
-			// if (this.readyState == 4) {
-				// if (this.status != 200) {	
-					// alert("Could not add that egg!");	
-					// if ( row_object.row.children[2].owned == true ) {
-						// var owned = false;
-				    	// var image = 'images/download@2x.png';
-					// } 
-					// row_object.row.children[2].owned = owned;
-				 	// row_object.row.children[2].image = image;
-				// } else {	
-					// updateCache();			
-					// if (Ti.App.Properties.getBool('download_educated') != true) {
-						// Ti.App.tabGroup.setActiveTab(0);						
-						// Ti.App.Properties.setBool('download_educated', true);
-						// // Ti.App.fireEvent('updateEggs');
-					// }
-				// }
-			// }
-		// };	
+		// xhr.onerror = function() {
+		// 	alert("Could not add that egg!");	
+		// 	if ( row_object.row.children[2].owned == true ) {
+		// 		var owned = false;
+		//     	var image = 'images/download@2x.png';
+		// 	} 
+		// 	row_object.row.children[2].owned = owned;
+		//  	row_object.row.children[2].image = image;			
+		// };
+		// xhr.onload = function() {
+		// 	updateCache();			
+		// 	if (Ti.App.Properties.getBool('download_educated') != true) {
+		// 		Ti.App.tabGroup.setActiveTab(0);						
+		// 		Ti.App.Properties.setBool('download_educated', true);
+		// 	}			
+		// };
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status != 200) {	
+					alert("Could not add that egg!");	
+					if ( row_object.row.children[2].owned == true ) {
+						var owned = false;
+				    	var image = 'images/download@2x.png';
+					} 
+					row_object.row.children[2].owned = owned;
+				 	row_object.row.children[2].image = image;
+				} else {	
+					updateCache();			
+					if (Ti.App.Properties.getBool('download_educated') != true) {
+						Ti.App.tabGroup.setActiveTab(0);						
+						Ti.App.Properties.setBool('download_educated', true);
+						// Ti.App.fireEvent('updateEggs');
+					}
+				}
+			}
+		};	
 		xhr.send();
 	}	
 }
@@ -518,16 +518,16 @@ function retrieveAllNotifications() {
 		};
 		xhr.onload = function() {
 			data = JSON.parse(this.responseText);
-			if (data.cards.length < 1) {
+			if (data.terms.length < 1) {
 				Titanium.UI.iPhone.appBadge = 0;
 				alert('You have no pending notifications!'); 
 			} else {
-				Titanium.UI.iPhone.appBadge = data.cards.length;
+				Titanium.UI.iPhone.appBadge = data.terms.length;
 				var new_win = Ti.UI.createWindow({
 					url : "updated_review.js",
 					backgroundColor : '#dfdacd',
 					navBarHidden : false,
-					cards : data.cards,
+					cards : data,
 					_parent : Titanium.UI.currentWindow,
 					_context : "push",
 					orientationModes : [
