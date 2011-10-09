@@ -63,7 +63,20 @@ function renderRecent(){
 	});
 	recentList.addEventListener('click', function(e){
 		if (e.source.id == "label") {
-			getLines(e.row.id, "normal", recentList);
+			var reviewAlert = Ti.UI.createAlertDialog({
+			    title : 'Select a review mode!',
+			    message : "Choose whether to show only cards you need to review or all cards.",
+			    buttonNames : ["All", "Adaptive"],
+			    cancel : 0
+			});
+			reviewAlert.addEventListener('click', function(f) {
+				if (f.index == 1) { 
+					createReviewSession({"method" : "review_adaptive_cards", "docId" : e.row.id, "listView" : recentList, "activityIndicator" : activityIndicator});
+				} else if (f.index == 0) {
+					createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : recentList, "activityIndicator" : activityIndicator});
+				}			
+			});
+			reviewAlert.show();	
 		} else if (e.source.id == "doc") {
 			if ( e.row.children[0].push == true ) {
 				var push = false;
@@ -114,11 +127,11 @@ function updateRecent() {
 }
 
 win.addEventListener('focus', function() {
+	updateLogo();
 	if ( Ti.App.recentDirty == true ) {
 		updateRecent();
 		Ti.App.recentDirty = false;
-	}
-	updateLogo();
+	}	
 });
 
 initialize();

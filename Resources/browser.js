@@ -143,17 +143,12 @@ function registerForPush() {
 		],
 		success : function(e) {
 			registerDevice(e.deviceToken);
-			// Ti.App.Properties.setString("token", e.deviceToken);
 		},
 		error : function(e) {
 			alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {	
 			Titanium.UI.iPhone.appBadge = e.data.badge;	
-			// Ti.App.myEggsDirty = true;
-			// Ti.App.documentsDirty = true;
-			// Ti.App.popularDirty = true;
-			// Ti.App.searchDirty = true;	
 			if (Ti.App.Properties.getBool('foreground') == true) {
 				var reviewAlert = Ti.UI.createAlertDialog({
 				    title : 'You have new cards to review!',

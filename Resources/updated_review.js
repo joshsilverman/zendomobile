@@ -13,14 +13,14 @@ selectedColor = '3B5FD9';
 unselectedColor = 'gray';
 
 fadeInAnimation = Titanium.UI.createAnimation({
-	curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
-    opacity:1,
-    duration:250
+	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
+    opacity : 1,
+    duration : 250
 });
 fadeOutAnimation = Titanium.UI.createAnimation({
-	curve:Ti.UI.ANIMATION_CURVE_EASE_OUT,
-    opacity:0,
-    duration:250
+	curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
+    opacity : 0,
+    duration : 250
 });	
 flipAnimation = Ti.UI.createAnimation({
 	transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT,
@@ -30,27 +30,28 @@ flipAnimation = Ti.UI.createAnimation({
 shortSession = true;
 
 function renderReview() {
-	cards = win.cards;
+	cards = win.cards.terms;
 	cardViews = [];
 	count = 0;
 	if (cards.length <= 10) {
 		for ( i in cards ) {
 			cards[i].flipped = false;
-			cardViews.push(createCardView(cards[i], cards[i].answer, cards[i].mem));
+			cardViews.push(createCardView(cards[i], cards[i].term.name, cards[i].term.mem));
 		}	
 	} else {
 		shortSession = false;
 		while (count < 10 ) {
 			cards[count].flipped = false;
-			cardViews.push(createCardView(cards[count], cards[count].answer, cards[count].mem));
+			cardViews.push(createCardView(cards[count], cards[count].term.name, cards[count].term.mem));
 			count++;
 		}
 	}
+	
 	cardScrollableView = Titanium.UI.createScrollableView({
-		views:cardViews,
-		showPagingControl:false,
-		clipViews:false,
-		left:0
+		views : cardViews,
+		showPagingControl : false,
+		clipViews : false,
+		left : 0
 	});
 		
 	buttonView = Ti.UI.createView({
@@ -106,9 +107,9 @@ function renderReview() {
 		left : 20
 	});
 	closeButton.addEventListener('click', function() {
-		if (win._context == "push") {
+		// if (win._context == "push") {
 			// Ti.App.fireEvent('updateNavBar');
-		}
+		// }
 		cleanLoadingState();		
 		Ti.App.tabGroup.show();
 		win.close();
@@ -147,10 +148,10 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		width : 350,
 		height : 450
 	});
-	
-	if ( cardObject.prompt.length < 300 ) {
+		
+	if ( cardObject.term.name.length < 300 ) {
 		var prompt_text = Ti.UI.createLabel({
-			text : cardObject.prompt,
+			text : cardObject.term.name,
 			height : 300,
 			textAlign : 'center',
 			verticalAlign : 'center',
@@ -167,7 +168,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		});		
 	} else {
 		var prompt_text = Ti.UI.createLabel({
-			text : cardObject.prompt,
+			text : cardObject.term.name,
 			height : 'auto',
 			textAlign : 'center',
 			verticalAlign : 'center',
@@ -189,13 +190,6 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	
 	prompt.add(prompt_text);
 	
-	// var prompt = Ti.UI.createLabel({
-		// text : cardObject.prompt,
-		// textAlign : 'center',
-		// width : 280,
-		// font:{fontSize:20,fontFamily:'Arial'}
-	// });
-	
 	var answer = Titanium.UI.createScrollView({
 		contentWidth : 'auto',
 		contentHeight : 'auto',
@@ -208,9 +202,9 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		layout : 'vertical'
 	});
 	
-	if ( cardObject.answer.length < 300 ) {
+	if ( cardObject.term.definition.length < 300 ) {
 		var text = Titanium.UI.createLabel({
-			text : cardObject.answer,
+			text : cardObject.term.definition,
 			height : 300,
 			textAlign : 'center',
 			verticalAlign : 'center',
@@ -220,7 +214,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 		});		
 	} else {
 		var text = Titanium.UI.createLabel({
-			text : cardObject.answer,
+			text : cardObject.term.definition,
 			height : 'auto',
 			textAlign : 'center',
 			verticalAlign : 'center',
@@ -248,7 +242,7 @@ function createCardView(cardObject, cardNumber, totalCards) {
 	cardView.addEventListener('singletap', function(e) {
 		if (e.source.action == "skip") {
 			cleanLoadingState();
-			reportGrade(cards[cardScrollableView.currentPage].mem, 4);
+			reportGrade(cards[cardScrollableView.currentPage].term.mem, 4);
 			if ( ( cardScrollableView.views.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 				cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 			} else {
@@ -298,13 +292,12 @@ function buttonClicked(button) {
 	cleanLoadingState();
 	cardGraded = true;
 	cards[cardScrollableView.currentPage].grade = button.source.grade;
-	reportGrade(cards[cardScrollableView.currentPage].mem, button.source.grade);
+	reportGrade(cards[cardScrollableView.currentPage].term.mem, button.source.grade);
 	buttonView.animate(fadeOutAnimation);
 	if ( ( cardScrollableView.views.length - 1 ) >= ( cardScrollableView.currentPage + 1 ) ) {
 		cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
 	} else {
 		if (win._context == "push") {
-			// Ti.App.fireEvent('updateNavBar');
 			Ti.App.tabGroup.show();
 			win.close();
 		} else {
@@ -340,10 +333,7 @@ function reportGrade(memID, confidence) {
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.setRequestHeader('Cookie', Ti.App.Properties.getString('cookie'));
 	xhr.onload = function() {
-		// Ti.API.debug('Posted confidence ' + gradeValues[confidence] + ' to ' + memID);
-		if (win._context == "push") {
-			Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1;	
-		}
+		if (win._context == "push") { Titanium.UI.iPhone.appBadge = Titanium.UI.iPhone.appBadge - 1; }
 		Ti.App.fireEvent('updateNavBar');
 		Ti.App.recentDirty = true;
 	};
@@ -357,17 +347,4 @@ function cleanLoadingState() {
 	}
 }
 
-
 renderReview();
-
-// function loadCard() {
-	// if (shortSession == false){
-		// if (cards.length > count) {
-			// cardScrollableView.addView(createCardView(cards[count], cards[count].answer, cards[count].mem));
-			// count++;		
-		// } else {
-			// clearInterval(run);
-		// }
-	// }
-// }
-// run = setInterval(loadCard, 500);

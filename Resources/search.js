@@ -77,7 +77,20 @@ function renderSearch() {
 	searchList.addEventListener('click', function(e) {
 		search.blur();
 		if (e.source.id == "label") {
-			getLines(e.row.id, "normal", searchList);
+			var reviewAlert = Ti.UI.createAlertDialog({
+			    title : 'Select a review mode!',
+			    message : "Choose whether to show only cards you need to review or all cards.",
+			    buttonNames : ["All", "Adaptive"],
+			    cancel : 0
+			});
+			reviewAlert.addEventListener('click', function(f) {
+				if (f.index == 1) { 
+					createReviewSession({"method" : "review_adaptive_cards", "docId" : e.row.id, "listView" : searchList, "activityIndicator" : activityIndicator});
+				} else if (f.index == 0) {
+					createReviewSession({"method" : "review_all_cards", "docId" : e.row.id, "listView" : searchList, "activityIndicator" : activityIndicator});
+				}			
+			});
+			reviewAlert.show();		
 		} else if (e.source.id == "add") {
 			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
 				alert("Could not complete your request. Check your connection and try again.");	

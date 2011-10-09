@@ -56,7 +56,7 @@ function renderPopular(){
 		backgroundColor : '#dfdacd'
 	});
 	popularList.addEventListener('click', function(e){
-		if (e.source.id == "add") {
+		// if (e.source.id == "add") {
 			if ( Titanium.Network.networkType == Titanium.Network.NETWORK_NONE && Ti.App.data == null ) {
 				alert("Could not complete your request. Check your connection and try again.");	
 			} else {	
@@ -64,7 +64,7 @@ function renderPopular(){
 				e.row.children[2].owned = true;
 				addEgg(e.row.id, e, "popular");
 			}
-		} 
+		// } 
 	});
 	win.add(popularList);
 }
