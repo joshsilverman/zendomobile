@@ -19,12 +19,12 @@ function renderNavBar() {
 		});
 		newWin.open();
 	});	
-	var refreshButton = Titanium.UI.createButton({
-		systemButton : Titanium.UI.iPhone.SystemButton.REFRESH
-	})
-	refreshButton.addEventListener('click', function() {
-		updateDocuments("refresh");
-	});	
+	// var refreshButton = Titanium.UI.createButton({
+	// 	systemButton : Titanium.UI.iPhone.SystemButton.REFRESH
+	// })
+	// refreshButton.addEventListener('click', function() {
+	// 	updateDocuments("refresh");
+	// });	
 	if (Titanium.UI.iPhone.appBadge == 0) {
 		var image = 'images/logo@2x.png'
 	} else {
@@ -41,7 +41,7 @@ function renderNavBar() {
 		}
 		retrieveAllNotifications();
 	});	
-	win.rightNavButton = refreshButton;
+	// win.rightNavButton = refreshButton;
 	win.titleControl = logo;
 }
 
@@ -94,7 +94,104 @@ function renderDocuments(){
 			}
 		}	
 	});
-	win.add(documentList);
+
+	pulling = false;
+	reloading = false;
+	arrow = Ti.UI.createView({
+		backgroundImage:"images/whiteArrow.png",
+		width:23,
+		height:60,
+		bottom:10,
+		left:20
+	});
+	 
+	statusLabel = Ti.UI.createLabel({
+		text:"Pull to reload",
+		left:55,
+		width:200,
+		bottom:30,
+		height:"auto",
+		color:"#576c89",
+		textAlign:"center",
+		font:{fontSize:13,fontWeight:"bold"},
+		shadowColor:"#999",
+		shadowOffset:{x:0,y:1}
+	});
+	 
+	actInd = Titanium.UI.createActivityIndicator({
+		left:20,
+		bottom:13,
+		width:30,
+		height:30
+	});
+	tableHeader = Ti.UI.createView({
+		backgroundColor:"#000",
+		width:320,
+		height:60
+	});
+	border = Ti.UI.createView({
+		backgroundColor:"#576c89",
+		height:2,
+		bottom:0
+	});
+	tableHeader.add(actInd);
+	tableHeader.add(statusLabel);
+	tableHeader.add(arrow);
+	tableHeader.add(border);
+
+	documentList.headerPullView = tableHeader;
+	
+	documentList.addEventListener('scroll',function(e) {
+		var offset = e.contentOffset.y;
+		if (offset <= -65.0 && !pulling) {
+			var t = Ti.UI.create2DMatrix();
+			t = t.rotate(-180);
+			pulling = true;
+			arrow.animate({transform:t,duration:180});
+			statusLabel.text = "Release to refresh...";
+		}
+		else if (pulling && offset > -65.0 && offset < 0) {
+			pulling = false;
+			var t = Ti.UI.create2DMatrix();
+			arrow.animate({transform:t,duration:180});
+			statusLabel.text = "Pull down to refresh...";
+		}
+	});
+	documentList.addEventListener('scrollEnd',function(e) {
+		if (pulling && !reloading && e.contentOffset.y <= -65.0) {
+			reloading = true;
+			pulling = false;
+			arrow.hide();
+			actInd.show();
+			statusLabel.text = "Reloading...";
+			documentList.setContentInsets({top:60},{animated:true});
+			arrow.transform=Ti.UI.create2DMatrix();
+			updateDocuments('refresh');
+		}
+	});
+
+	scroll = Titanium.UI.createScrollableView({
+		views : [],
+		showPagingControl : false,
+		clipViews : true,
+		left : 0
+	});	
+
+	scroll.addEventListener('scroll', function(e) {
+		if (e.currentPage == 0) {
+			Ti.App.tabGroup.setActiveTab(3);
+		} else if (e.currentPage == 2) {
+			Ti.App.tabGroup.setActiveTab(1);
+		}
+		scroll.scrollToView(1);
+	});
+
+	scroll.addView(Ti.UI.createView());
+	scroll.addView(documentList);
+	scroll.addView(Ti.UI.createView());
+	scroll.scrollToView(1);
+		
+	win.add(scroll);
 	updateDocuments();
 	if (Ti.App.Properties.getBool('educated') != true) {
 		var pushReminderAlert = Ti.UI.createAlertDialog({
@@ -137,6 +234,12 @@ function updateDocuments(context) {
 			xhr.onerror = function() {
 				loadingComplete(documentList, win);
 				alert("Could not complete your request. Please try again later.");
+				documentList.setContentInsets({top:0},{animated:true});
+				reloading = false;
+				// lastUpdatedLabel.text = "Last Updated: "+formatDate();
+				statusLabel.text = "Pull down to refresh...";
+				actInd.hide();
+				arrow.show();				
 			};
 			xhr.onload = function() {
 				foldersData = eval(this.responseText);
@@ -149,6 +252,12 @@ function updateDocuments(context) {
 				}
 				documentList.setData(notesRows);
 				loadingComplete(documentList, win);
+				documentList.setContentInsets({top:0},{animated:true});
+				reloading = false;
+				// lastUpdatedLabel.text = "Last Updated: "+formatDate();
+				statusLabel.text = "Pull down to refresh...";
+				actInd.hide();
+				arrow.show();				
 			}	
 			xhr.send();		
 		}	

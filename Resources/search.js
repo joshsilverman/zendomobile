@@ -123,7 +123,28 @@ function renderSearch() {
 		}			
 	});
 	win.add(search);
-	win.add(searchList);
+	scroll = Titanium.UI.createScrollableView({
+		views : [],
+		showPagingControl : false,
+		clipViews : true,
+		left : 0
+	});	
+
+	scroll.addEventListener('scroll', function(e) {
+		if (e.currentPage == 0) {
+			Ti.App.tabGroup.setActiveTab(2);
+		} else if (e.currentPage == 2) {
+			Ti.App.tabGroup.setActiveTab(0);
+		}
+		scroll.scrollToView(1);
+	});
+
+	scroll.addView(Ti.UI.createView());
+	scroll.addView(searchList);
+	scroll.addView(Ti.UI.createView());
+	scroll.scrollToView(1);
+		
+	win.add(scroll);
 }
 
 function setSearchResults(results) {	

@@ -66,7 +66,28 @@ function renderPopular(){
 			}
 		// } 
 	});
-	win.add(popularList);
+	scroll = Titanium.UI.createScrollableView({
+		views : [],
+		showPagingControl : false,
+		clipViews : true,
+		left : 0
+	});	
+
+	scroll.addEventListener('scroll', function(e) {
+		if (e.currentPage == 0) {
+			Ti.App.tabGroup.setActiveTab(1);
+		} else if (e.currentPage == 2) {
+			Ti.App.tabGroup.setActiveTab(3);
+		}
+		scroll.scrollToView(1);
+	});
+
+	scroll.addView(Ti.UI.createView());
+	scroll.addView(popularList);
+	scroll.addView(Ti.UI.createView());
+	scroll.scrollToView(1);
+		
+	win.add(scroll);
 }
 
 function updatePopular() {

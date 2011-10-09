@@ -130,7 +130,12 @@ function renderReview() {
 
 	win.add(cardScrollableView);
 	win.add(buttonView);	
-	win.add(closeButton);	
+	win.add(closeButton);
+
+	Ti.Gesture.addEventListener('shake',function(e) {
+	    cardScrollableView.scrollToView( cardScrollableView.currentPage + 1 );
+	});
+
 }
 
 function createCardView(cardObject, cardNumber, totalCards) {
