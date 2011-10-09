@@ -145,7 +145,7 @@ function registerForPush() {
 			registerDevice(e.deviceToken);
 		},
 		error : function(e) {
-			alert("Error during registration: " + e.error);
+			// alert("Error during registration: " + e.error);
 		},
 		callback : function(e) {	
 			Titanium.UI.iPhone.appBadge = e.data.badge;	
